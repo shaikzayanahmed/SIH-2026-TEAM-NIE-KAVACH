@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.*
+.mcp.json
+.agents/
+dist/
+build/
+.system_generated/
+*.log

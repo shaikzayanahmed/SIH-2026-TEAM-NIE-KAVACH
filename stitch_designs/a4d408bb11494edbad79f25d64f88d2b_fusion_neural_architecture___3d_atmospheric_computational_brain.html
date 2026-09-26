@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-tint":"#7bd0ff","on-error-container":"#ffdad6","on-secondary-container":"#002c47","surface-variant":"#32353b","on-tertiary-fixed-variant":"#005048","on-primary-container":"#004965","primary":"#8ed5ff","on-background":"#e1e2ea","on-secondary-fixed-variant":"#004b73","on-tertiary":"#003731","on-secondary-fixed":"#001d31","surface-container-low":"#191c21","inverse-on-surface":"#2d3036","inverse-surface":"#e1e2ea","primary-fixed":"#c4e7ff","surface-container-high":"#272a30","primary-container":"#38bdf8","on-secondary":"#003351","error":"#ffb4ab","on-tertiary-fixed":"#00201c","tertiary":"#57e1ce","tertiary-fixed-dim":"#4fdbc8","on-surface":"#e1e2ea","secondary-fixed":"#cce5ff","tertiary-fixed":"#71f8e4","on-primary-fixed-variant":"#004c69","surface-container-lowest":"#0b0e13","on-surface-variant":"#bdc8d1","background":"#101319","secondary":"#93ccff","secondary-container":"#3198dc","primary-fixed-dim":"#7bd0ff","surface-container-highest":"#32353b","surface":"#101319","surface-container":"#1d2025","surface-bright":"#36393f","on-primary-fixed":"#001e2c","secondary-fixed-dim":"#93ccff","inverse-primary":"#00668a","error-container":"#93000a","on-primary":"#00354a","surface-dim":"#101319","outline":"#87929a","on-error":"#690005","on-tertiary-container":"#004d44","tertiary-container":"#30c5b3","outline-variant":"#3e484f"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"gutter-desktop":"1rem","space-md":"0.75rem","space-xs":"0.25rem","margin":"1rem","space-sm":"0.5rem","gutter":"0.75rem","space-lg":"1rem","space-xl":"1.5rem","margin-desktop":"1.5rem"},fontFamily:{"display-lg":["Inter"],"headline-xl":["Inter"],"label-caps":["JetBrains Mono"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"data-mono-sm":["JetBrains Mono"],"body-md":["Inter"],"data-mono-lg":["JetBrains Mono"],"body-lg":["Inter"],"data-mono-md":["JetBrains Mono"],"body-sm":["Inter"],"headline-sm":["Inter"]},fontSize:{"display-lg":["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-xl":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"600"}],"label-caps":["10px",{lineHeight:"12px",letterSpacing:"0.08em",fontWeight:"600"}],"headline-lg":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.01em",fontWeight:"600"}],"data-mono-sm":["11px",{lineHeight:"14px",letterSpacing:"0.02em",fontWeight:"400"}],"body-md":["13px",{lineHeight:"18px",letterSpacing:"0em",fontWeight:"400"}],"data-mono-lg":["18px",{lineHeight:"24px",letterSpacing:"-0.02em",fontWeight:"500"}],"body-lg":["15px",{lineHeight:"22px",letterSpacing:"0em",fontWeight:"400"}],"data-mono-md":["13px",{lineHeight:"18px",letterSpacing:"-0.01em",fontWeight:"400"}],"body-sm":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"400"}],"headline-sm":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"500"}]}}}};</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-20 bg-surface-container-lowest/85 backdrop-blur-xl z-50 flex flex-col items-center py-4 shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="mb-6 flex flex-col items-center justify-center"><div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_4px_12px_rgba(0,0,0,0.5)]"><span class="material-symbols-outlined text-[22px]">satellite_alt</span></div><span class="font-label-caps text-label-caps text-outline text-[9px] uppercase tracking-widest mt-1">ORBIT</span></div><nav class="flex-1 w-full px-2 flex flex-col items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-medium shadow-[0_0_16px_rgba(56,189,248,0.35)]"><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="overview" href="#" title="Overview"><span class="font-label-caps text-[9px]">GEO</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="forecast-explorer" href="#" title="Forecast Explorer"><span class="font-label-caps text-[9px]">RUNS</span></a><a aria-current="page" class="w-12 h-12 rounded-xl flex flex-col items-center justify-center transition-all bg-primary-container text-on-primary-container font-medium shadow-[0_0_16px_rgba(56,189,248,0.35)]" data-path="fusion-architecture" href="#" title="Fusion Architecture 3D Network"><span class="font-label-caps text-[9px]">NEURAL</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="weights" href="#" title="Neural Weights Orchestration"><span class="font-label-caps text-[9px]">WEIGHT</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="extremes" href="#" title="Extreme Weather Events"><span class="font-label-caps text-[9px]">ALERT</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="verification" href="#" title="Deterministic NWP Verification"><span class="font-label-caps text-[9px]">VERIF</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="geospatial-layers" href="#" title="Spatial Isobaric Analysis"><span class="font-label-caps text-[9px]">LAYERS</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="history" href="#" title="Historical Archive Soundings"><span class="font-label-caps text-[9px]">ARCH</span></a><a class="w-12 h-12 rounded-xl flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="system-health" href="#" title="Engine Telemetry &amp; Health"><span class="font-label-caps text-[9px]">HPC</span></a></nav><div class="flex flex-col items-center gap-space-sm pb-2"><button class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">hub</span></button><button class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">terminal</span></button></div></aside><div class="pl-20"><header class="fixed top-0 left-20 right-0 z-40 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="h-16 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0 flex-1"><div class="flex items-center gap-space-sm shrink-0"><div class="h-7 px-2 rounded-lg bg-surface-container-high flex items-center gap-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)]"><span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-label-caps text-label-caps uppercase text-primary tracking-wider">SIH26081 • ORBITAL COMMAND</span></div></div><div class="h-4 w-px bg-outline-variant/40 shrink-0"></div><div class="truncate"><p class="font-label-caps text-label-caps text-outline uppercase tracking-wider truncate">NATIONAL NWP &amp; AI HYBRID GEOSPATIAL FUSION ENGINE</p><p class="font-body-sm text-body-sm text-on-surface font-medium truncate">Planetary Ensemble Synthesis &amp; Atmospheric Dynamics</p></div></div><div class="hidden xl:flex items-center gap-space-md shrink-0 bg-surface-container/60 px-space-md py-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]"><div class="flex items-center gap-2"><span class="font-label-caps text-label-caps text-outline uppercase">RUN</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface font-semibold">24 SEP 2026 · 00 UTC</span></div><div class="h-3 w-px bg-outline-variant/40"></div><div class="flex items-center gap-2"><span class="font-label-caps text-label-caps text-primary uppercase">LEAD</span><span class="font-data-mono-sm text-data-mono-sm text-primary font-semibold">VALID +48H 26 SEP 00:00 UTC</span></div><div class="h-3 w-px bg-outline-variant/40"></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-[14px]">schedule</span><span class="font-data-mono-sm text-data-mono-sm text-tertiary font-semibold">12:44:09 UTC</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="hidden 2xl:flex items-center gap-2"><div class="h-6 px-2 rounded bg-surface-container flex items-center gap-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.6)]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="font-label-caps text-label-caps text-on-surface">DATA SYNCHRONIZED</span></div><div class="h-6 px-2 rounded bg-surface-container flex items-center gap-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.6)]"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span class="font-label-caps text-label-caps text-on-surface">MODELS 6/6 ACTIVE</span></div><div class="h-6 px-2 rounded bg-surface-container flex items-center gap-1.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.6)]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span><span class="font-label-caps text-label-caps text-on-surface">FUSION ENGINE OPERATIONAL</span></div></div><div class="hidden lg:flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-lg text-outline font-data-mono-sm text-data-mono-sm shadow-[inset_0_1px_2px_rgba(0,0,0,0.6)]"><span class="material-symbols-outlined text-[14px]">videocam</span><span>Tilt 28°</span><span class="text-outline-variant">·</span><span>Az 0°</span><span class="text-outline-variant">·</span><span class="text-primary">1.4x zoom</span></div><button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">fullscreen</span></button><button class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full min-h-screen bg-surface-container-lowest overflow-hidden"><div class="flex flex-col w-full relative select-none">
+<!-- Interactive Canvas Viewport -->
+<div class="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-surface-container-lowest">
+<!-- Atmospheric Underlay & Subtle Glows -->
+<div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_60%_at_50%_45%,rgba(14,27,45,0.85)_0%,rgba(11,14,19,0.98)_75%,rgba(7,9,14,1)_100%)]"></div>
+<div class="absolute w-[600px] h-[600px] -left-40 top-1/4 rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+<div class="absolute w-[500px] h-[500px] -right-32 top-1/3 rounded-full bg-tertiary-container/5 blur-[140px] pointer-events-none"></div>
+<div class="absolute w-[700px] h-[700px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rounded-full bg-surface-tint/5 blur-[160px] pointer-events-none"></div>
+<!-- WebGL/2D Simulation Canvas -->
+<canvas class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-0" id="neural-canvas"></canvas>
+<!-- Top Left HUD: Architecture Identifier & Regime Switchers -->
+<div class="absolute top-4 left-6 z-20 flex flex-col gap-space-sm max-w-xl pointer-events-auto">
+<div class="flex items-center gap-space-sm">
+<div class="h-6 px-2 rounded-lg bg-surface-container-high/90 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">GRAPH TOPOLOGY V4.2</span>
+</div>
+<div class="h-6 px-2.5 rounded-lg bg-surface-container/70 backdrop-blur-md flex items-center gap-1.5 shadow-sm">
+<span class="font-label-caps text-label-caps text-tertiary uppercase tracking-widest">MONSOON CONVECTIVE REGIME</span>
+</div>
+</div>
+<div class="bg-surface-container/85 backdrop-blur-xl p-space-md rounded-xl shadow-xl flex flex-col gap-space-sm">
+<div class="flex items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">FUSION NEURAL ARCHITECTURE</h1>
+<p class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Multi-Model Simplex Weight Blending · IMD/NCMRWF/AI Tensor Subgraph</p>
+</div>
+<div class="flex items-center bg-surface-container-lowest/80 p-0.5 rounded-lg shadow-inner">
+<button class="px-2.5 py-1 rounded text-primary bg-surface-container-high font-label-caps text-label-caps shadow-sm" id="mode-live">LIVE STREAM</button>
+<button class="px-2.5 py-1 rounded text-outline hover:text-on-surface font-label-caps text-label-caps transition-colors" id="mode-demo">DEMO SIM</button>
+</div>
+</div>
+<!-- Inline Pills for Operational Filters -->
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<div class="relative flex items-center bg-surface-container-high/70 hover:bg-surface-container-high rounded-lg px-2.5 py-1 text-on-surface shadow-sm transition-all">
+<span class="font-label-caps text-label-caps text-outline mr-1.5">REGIME:</span>
+<select class="bg-transparent font-data-mono-sm text-data-mono-sm text-primary focus:outline-none cursor-pointer pr-4 uppercase" id="regime-select">
+<option class="bg-surface-container-high text-on-surface" value="convective">Convective Storms (West Coast)</option>
+<option class="bg-surface-container-high text-on-surface" value="cyclone">Severe Cyclonic Depr. (Bay of Bengal)</option>
+<option class="bg-surface-container-high text-on-surface" value="orographic">Orographic Ghats Heavy Rain</option>
+<option class="bg-surface-container-high text-on-surface" value="heatwave">Pre-Monsoon Extreme Thermal</option>
+</select>
+</div>
+<div class="relative flex items-center bg-surface-container-high/70 hover:bg-surface-container-high rounded-lg px-2.5 py-1 text-on-surface shadow-sm transition-all">
+<span class="font-label-caps text-label-caps text-outline mr-1.5">DOMAIN:</span>
+<select class="bg-transparent font-data-mono-sm text-data-mono-sm text-on-surface focus:outline-none cursor-pointer pr-3 uppercase" id="domain-select">
+<option class="bg-surface-container-high text-on-surface" value="india-west">West Coast / Peninsular India</option>
+<option class="bg-surface-container-high text-on-surface" value="all-india">National Mosaic (All India 4km)</option>
+<option class="bg-surface-container-high text-on-surface" value="himalayan">Western Himalayan Rim</option>
+</select>
+</div>
+<div class="relative flex items-center bg-surface-container-high/70 hover:bg-surface-container-high rounded-lg px-2.5 py-1 text-on-surface shadow-sm transition-all">
+<span class="font-label-caps text-label-caps text-outline mr-1.5">PREDICTOR:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-tertiary uppercase">Precip Acc (mm/24h)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Right Telemetry & Simplex Summary -->
+<div class="absolute top-4 right-6 z-20 flex flex-col items-end gap-space-sm pointer-events-auto">
+<div class="flex items-center gap-space-sm">
+<div class="h-6 px-2.5 rounded-lg bg-surface-container-high/90 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface font-semibold">Σw_i = 100.0%</span>
+<span class="font-label-caps text-label-caps text-outline ml-1">SIMPLEX ACTIVE</span>
+</div>
+<div class="h-6 px-2.5 rounded-lg bg-surface-container-high/90 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+<span class="font-label-caps text-label-caps text-outline">EDGES:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-primary">412</span>
+<span class="text-outline-variant">·</span>
+<span class="font-label-caps text-label-caps text-outline">NODES:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-primary">248</span>
+<span class="text-outline-variant">·</span>
+<span class="font-data-mono-sm text-data-mono-sm text-tertiary">59.8 FPS</span>
+</div>
+</div>
+<!-- Live Mini Weight Distribution Strip -->
+<div class="bg-surface-container/85 backdrop-blur-xl p-space-sm rounded-xl shadow-xl w-80 flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-on-surface">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Dynamic Weight Partitioning</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">t = +48H</span>
+</div>
+<div class="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden flex shadow-inner">
+<div class="h-full bg-primary transition-all duration-500" id="bar-ncum" style="width: 31%;" title="NCUM (31%)"></div>
+<div class="h-full bg-secondary transition-all duration-500" id="bar-neps" style="width: 24%;" title="NEPS (24%)"></div>
+<div class="h-full bg-secondary-container transition-all duration-500" id="bar-bharat" style="width: 18%;" title="BharatFS (18%)"></div>
+<div class="h-full bg-tertiary transition-all duration-500" id="bar-graph" style="width: 15%;" title="GraphCast (15%)"></div>
+<div class="h-full bg-tertiary-container transition-all duration-500" id="bar-gen" style="width: 12%;" title="GenCast (12%)"></div>
+</div>
+<div class="flex justify-between font-data-mono-sm text-[10px] text-on-surface-variant pt-0.5">
+<span class="text-primary font-medium">NCUM 31%</span>
+<span class="text-secondary font-medium">NEPS 24%</span>
+<span class="text-secondary-container font-medium">BFS 18%</span>
+<span class="text-tertiary font-medium">GC 15%</span>
+<span class="text-tertiary-container font-medium">GEN 12%</span>
+</div>
+</div>
+</div>
+<!-- Right Floating Detailed Inspector HUD -->
+<div class="absolute top-28 right-6 bottom-32 w-80 z-20 flex flex-col gap-space-sm transition-all duration-300 pointer-events-auto" id="inspector-dock">
+<div class="h-full bg-surface-container/90 backdrop-blur-xl rounded-xl shadow-2xl p-space-md flex flex-col justify-between overflow-y-auto">
+<div class="flex flex-col gap-space-md">
+<!-- Dock Header -->
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">hub</span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Node Telemetry Inspector</span>
+</div>
+<button class="w-6 h-6 rounded bg-surface-container-high flex items-center justify-center text-outline hover:text-on-surface transition-colors" id="toggle-dock-btn">
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+<!-- Active Selected Node Details Card -->
+<div class="bg-surface-container-high/60 p-space-sm rounded-lg flex flex-col gap-1.5 shadow-sm" id="inspected-card">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-tertiary uppercase">CORE ENGINE</span>
+<span class="font-data-mono-sm text-data-mono-sm text-primary font-semibold">TENSOR 0x48A</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight" id="inspected-title">ADAPTIVE FUSION ENGINE</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed" id="inspected-desc">
+              Attentional cross-mesh spatial-temporal pooling core. Merges physical hydrostatic atmospheric balance with non-linear neural priors.
+            </p>
+</div>
+<!-- Mathematical Formulation Display -->
+<div class="bg-surface-container-lowest/90 p-space-sm rounded-lg shadow-inner flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Blending Formulation</span>
+<div class="font-data-mono-sm text-data-mono-sm text-primary-fixed bg-surface-container/40 p-2 rounded tracking-tight overflow-x-auto">
+              Ŷ<sub>blend</sub>(x,t) = Σ<sub>i=1..5</sub> [w<sub>i</sub>(x,t,ℜ) · M<sub>i</sub>(x,t)]
+            </div>
+<div class="flex items-center justify-between text-[11px] font-data-mono-sm text-outline pt-0.5">
+<span>Constrained Simplex:</span>
+<span class="text-tertiary">∑ w<sub>i</sub> = 1.0, w<sub>i</sub> ≥ 0</span>
+</div>
+</div>
+<!-- Model Live Weight Allocation Table -->
+<div class="flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Live Model Matrix (+48H Lead)</span>
+<div class="flex flex-col gap-1 text-body-sm">
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-high/40 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-medium text-on-surface">NCUM (Global 12km)</span>
+</div>
+<div class="flex items-center gap-2 font-data-mono-sm">
+<span class="text-tertiary">+3.8%</span>
+<span class="text-primary font-semibold">31.0%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-high/40 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-medium text-on-surface">NEPS Ensemble (11M)</span>
+</div>
+<div class="flex items-center gap-2 font-data-mono-sm">
+<span class="text-outline">-1.4%</span>
+<span class="text-secondary font-semibold">24.0%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-high/40 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-medium text-on-surface">BharatFS (High-Res 4km)</span>
+</div>
+<div class="flex items-center gap-2 font-data-mono-sm">
+<span class="text-tertiary">+0.9%</span>
+<span class="text-secondary-container font-semibold">18.0%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-high/40 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-medium text-on-surface">GraphCast GNN (0.25°)</span>
+</div>
+<div class="flex items-center gap-2 font-data-mono-sm">
+<span class="text-tertiary">+1.5%</span>
+<span class="text-tertiary font-semibold">15.0%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-1.5 rounded bg-surface-container-high/40 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-medium text-on-surface">GenCast Diffusion Ens</span>
+</div>
+<div class="flex items-center gap-2 font-data-mono-sm">
+<span class="text-outline">-0.8%</span>
+<span class="text-tertiary-container font-semibold">12.0%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Convergence and Verification Scalars -->
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-high/40 p-2 rounded flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">CONTINUOUS RPS</span>
+<span class="font-data-mono-md text-data-mono-md text-tertiary font-medium">0.742 mm</span>
+</div>
+<div class="bg-surface-container-high/40 p-2 rounded flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">ENSEMBLE SPREAD</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-medium">±13.6 mm</span>
+</div>
+<div class="bg-surface-container-high/40 p-2 rounded flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">GRID RESOLUTION</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-medium">0.05° (~5km)</span>
+</div>
+<div class="bg-surface-container-high/40 p-2 rounded flex flex-col">
+<span class="font-label-caps text-label-caps text-outline">LOSS BIAS Δ</span>
+<span class="font-data-mono-md text-data-mono-md text-tertiary font-medium">-0.0028</span>
+</div>
+</div>
+</div>
+<!-- Camera / Node Focus Quick Actions -->
+<div class="flex flex-col gap-1.5 pt- space-sm">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Cluster Navigation</span>
+<div class="grid grid-cols-2 gap-1.5">
+<button class="px-2 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-caps text-[10px] text-center uppercase tracking-wider transition-colors shadow-sm" id="btn-focus-core">
+              Focus Fusion Hub
+            </button>
+<button class="px-2 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-label-caps text-[10px] text-center uppercase tracking-wider transition-colors shadow-sm" id="btn-focus-nwp">
+              NWP Physical
+            </button>
+<button class="px-2 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-tertiary font-label-caps text-[10px] text-center uppercase tracking-wider transition-colors shadow-sm" id="btn-focus-ai">
+              AI Latent Flow
+            </button>
+<button class="px-2 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-outline hover:text-on-surface font-label-caps text-[10px] text-center uppercase tracking-wider transition-colors shadow-sm" id="btn-reset-cam">
+              Reset Camera
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Canvas Instructions & Spatial Coordinate Overlay -->
+<div class="absolute bottom-28 left-6 z-20 flex items-center gap-space-md pointer-events-none">
+<div class="bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center gap-3 text-outline font-data-mono-sm text-data-mono-sm shadow-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">pan_tool</span> Pan/Rotate Drag</span>
+<span class="text-outline-variant">·</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">mouse</span> Scroll to Zoom</span>
+<span class="text-outline-variant">·</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">ads_click</span> Click Node to Inspect</span>
+</div>
+<div class="hidden bg-primary-container text-on-primary-container font-label-caps text-label-caps px-2 py-1 rounded shadow-lg" id="hover-node-tag">
+        HOVER
+      </div>
+</div>
+<!-- Bottom Timeline & Evolution Deck -->
+<div class="absolute bottom-4 left-6 right-6 z-20 pointer-events-auto">
+<div class="bg-surface-container/90 backdrop-blur-xl p-space-md rounded-xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Lead Time Progression Stepper -->
+<div class="flex items-center gap-2 w-full md:w-auto">
+<button class="h-9 px-3 rounded-lg bg-primary text-on-primary font-body-sm font-semibold flex items-center gap-1.5 shadow-md hover:bg-primary-fixed transition-colors" id="btn-play-sim">
+<span class="material-symbols-outlined text-[18px]" id="play-icon">play_arrow</span>
+<span id="play-label">EVOLUTION</span>
+</button>
+<div class="h-5 w-px bg-outline-variant/40 mx-1 hidden sm:block"></div>
+<div class="flex items-center bg-surface-container-lowest/80 p-1 rounded-lg gap-1 overflow-x-auto max-w-full">
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="0">NOW</button>
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="12">+12H</button>
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="24">+24H</button>
+<button class="lead-btn active px-2.5 py-1 rounded bg-surface-container-high text-primary font-data-mono-sm text-data-mono-sm font-semibold shadow-sm transition-all" data-lead="48">+48H</button>
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="72">+72H</button>
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="96">+96H</button>
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="120">+120H</button>
+<button class="lead-btn px-2.5 py-1 rounded text-outline hover:text-on-surface font-data-mono-sm text-data-mono-sm transition-all" data-lead="240">+240H</button>
+</div>
+</div>
+<!-- Blended State Metrics Summary -->
+<div class="flex items-center gap-4 text-on-surface">
+<div class="hidden xl:flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-outline uppercase">ENS BLEND PRECIP:</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">68.4 mm</span>
+</div>
+<div class="hidden xl:flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-outline uppercase">SPREAD CONFIDENCE:</span>
+<span class="font-data-mono-md text-data-mono-md text-tertiary font-bold">HIGH (0.88)</span>
+</div>
+<div class="h-4 w-px bg-outline-variant/40 hidden xl:block"></div>
+<a class="h-9 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm font-medium flex items-center gap-1.5 transition-colors shadow-sm" href="#">
+<span>Spatial Analysis View</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // High DPI Canvas resize
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+      width = canvas.parentElement.clientWidth;
+      height = canvas.parentElement.clientHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Camera State for interactive 3D Pan/Orbit
+    let cam = {
+      x: 0,
+      y: -20,
+      zoom: 1.0,
+      targetZoom: 1.0,
+      rotX: 0.28,
+      rotY: 0,
+      targetRotX: 0.28,
+      targetRotY: 0,
+      isDragging: false,
+      lastMouseX: 0,
+      lastMouseY: 0
+    };
+
+    // Cluster types and styling palettes
+    const CLUSTER_CONTEXT = 'context';
+    const CLUSTER_NWP = 'nwp';
+    const CLUSTER_AI = 'ai';
+    const CLUSTER_CORE = 'core';
+    const CLUSTER_OUTPUT = 'output';
+
+    const COLOR_PALETTE = {
+      [CLUSTER_CONTEXT]: { fill: '#7bd0ff', glow: 'rgba(123, 208, 255, 0.4)', text: '#c4e7ff' },
+      [CLUSTER_NWP]: { fill: '#38bdf8', glow: 'rgba(56, 189, 248, 0.45)', text: '#93ccff' },
+      [CLUSTER_AI]: { fill: '#71f8e4', glow: 'rgba(113, 248, 228, 0.45)', text: '#57e1ce' },
+      [CLUSTER_CORE]: { fill: '#8ed5ff', glow: 'rgba(142, 213, 255, 0.8)', text: '#e1e2ea' },
+      [CLUSTER_OUTPUT]: { fill: '#30c5b3', glow: 'rgba(48, 197, 179, 0.5)', text: '#71f8e4' }
+    };
+
+    // Node Definitions
+    const nodes = [];
+    const edges = [];
+    const particles = [];
+
+    // Helper: Add Node
+    function addNode(id, label, cluster, x, y, z, baseRadius, weight = 1, desc = '') {
+      nodes.push({
+        id,
+        label,
+        cluster,
+        baseX: x,
+        baseY: y,
+        baseZ: z,
+        x: x,
+        y: y,
+        z: z,
+        vx: 0,
+        vy: 0,
+        vz: 0,
+        baseRadius,
+        radius: baseRadius,
+        weight,
+        desc,
+        hovered: false,
+        pulseOffset: Math.random() * Math.PI * 2
+      });
+    }
+
+    // Helper: Add Edge
+    function addEdge(sourceId, targetId, baseStrength = 1.0, colorKey = CLUSTER_NWP) {
+      edges.push({
+        sourceId,
+        targetId,
+        strength: baseStrength,
+        colorKey
+      });
+    }
+
+    // 1. CONTEXT NODES (Top / Outer Arc)
+    addNode('ctx-regime', 'Weather Regime: Convective', CLUSTER_CONTEXT, 0, -220, -50, 10, 1.0, 'Detected active high-cape deep convective conditions along Western Ghats.');
+    addNode('ctx-season', 'Season: SW Monsoon (Active)', CLUSTER_CONTEXT, -180, -200, -30, 8, 1.0, 'Southwest Monsoon trough orientation with prominent Arabian Sea moisture flux.');
+    addNode('ctx-lead', 'Forecast Lead: +48H', CLUSTER_CONTEXT, 180, -200, -30, 8, 1.0, 'Medium-range mesoscale transition window favoring physics-AI consensus.');
+    addNode('ctx-error', 'Recent Rolling RMSE (3.8mm)', CLUSTER_CONTEXT, -90, -260, 20, 7, 0.9, 'Spatial historical cross-validation score over recent 72h cycles.');
+    addNode('ctx-skill', 'Spatial Anomaly Correlation', CLUSTER_CONTEXT, 90, -260, 20, 7, 0.9, 'High baseline skill factor observed in zonal wind shear fields.');
+    addNode('ctx-domain', 'Domain: West Coast 4km', CLUSTER_CONTEXT, -260, -150, 0, 7, 0.8, 'Regional bounded high-density mesh with steep elevation gradients.');
+    addNode('ctx-spread', 'Model Agreement Index: 0.84', CLUSTER_CONTEXT, 260, -150, 0, 7, 0.8, 'Inter-model variance within normal tolerance envelope.');
+
+    // 2. NWP PHYSICAL MODELS (Left Orbit)
+    addNode('model-ncum', 'NCUM Global (12km)', CLUSTER_NWP, -240, -40, 20, 18, 1.35, 'MoES NCMRWF Unified Model. Strong synoptic baseline & pressure gradient fidelity.');
+    addNode('ncum-dyn', 'Dynamical Core (ENDGame)', CLUSTER_NWP, -330, -90, 50, 6, 0.8, 'Semi-implicit semi-Lagrangian non-hydrostatic formulation.');
+    addNode('ncum-conv', 'Convective Parameterization', CLUSTER_NWP, -340, -10, 30, 6, 0.8, 'Mass-flux deep convection scheme calibrated for tropical regimes.');
+
+    addNode('model-neps', 'NEPS Ens (11-Member)', CLUSTER_NWP, -210, 70, -20, 15, 1.22, 'NCMRWF Ensemble Prediction System capturing synoptic uncertainty spread.');
+    addNode('neps-ic', 'SVT Perturbations', CLUSTER_NWP, -310, 90, -10, 6, 0.7, 'Singular Vector Trajectories on initial state perturbations.');
+    addNode('neps-spread', 'Probabilistic Spread Filter', CLUSTER_NWP, -290, 150, -40, 5, 0.7, 'Variance bounds on precipitation intensity threshold.');
+
+    addNode('model-bharat', 'BharatFS Mesoscale (4km)', CLUSTER_NWP, -130, 140, 40, 13, 1.12, 'High-resolution regional NWP capturing complex topography & land-sea breezes.');
+    addNode('bharat-topo', 'Orographic Drag', CLUSTER_NWP, -180, 210, 60, 5, 0.6, 'Resolved boundary layer friction along Western Ghat escarpments.');
+
+    // 3. AI FORECAST MODELS (Right Orbit)
+    addNode('model-graphcast', 'GraphCast GNN (0.25°)', CLUSTER_AI, 230, -30, 20, 14, 1.05, 'DeepMind multi-mesh spherical graph neural network. Exceptional global wave dynamics.');
+    addNode('gc-multimesh', 'Spherical Icosahedral Mesh', CLUSTER_AI, 320, -80, 40, 6, 0.8, '6-level hierarchical graph structure spanning 40,962 nodes.');
+    addNode('gc-latent', '16-Step Autoregressive', CLUSTER_AI, 340, 10, 10, 6, 0.8, 'Temporal recursive latent space rollouts with message-passing.');
+
+    addNode('model-gencast', 'GenCast Diffusion (Ens)', CLUSTER_AI, 210, 90, -20, 12, 0.98, 'Stochastic score-based diffusion model generating 50 realistic weather ensembles.');
+    addNode('gen-denoise', 'Latent Diffusion Prior', CLUSTER_AI, 310, 110, -10, 6, 0.7, 'Denoising score-matching across continuous probability distributions.');
+    addNode('gen-extremes', 'Tail Risk Heavy Tails', CLUSTER_AI, 280, 170, -30, 5, 0.7, 'Accurate calibration of extreme heavy precipitation percentiles (>99th).');
+
+    // 4. ADAPTIVE FUSION ENGINE (Center Core)
+    addNode('core-fusion', 'ADAPTIVE FUSION CORE', CLUSTER_CORE, 0, 0, 0, 26, 2.0, 'Central Cross-Attentive Simplex Blending Tensor Core. Real-time dynamic weighting engine.');
+    addNode('core-simplex', 'Simplex Normalizer Σw_i=1.0', CLUSTER_CORE, 0, -80, 30, 9, 1.1, 'Ensures convex combination and strictly non-negative model weights.');
+    addNode('core-regime', 'Regime-Conditioned Prior', CLUSTER_CORE, -60, -60, -20, 8, 1.0, 'Modulates model priors based on convective vs stratiform state.');
+    addNode('core-bias', 'Spatial Bias Correction', CLUSTER_CORE, 60, -60, -20, 8, 1.0, 'Neural calibration of systematic local orographic precipitation bias.');
+    addNode('core-uncertainty', 'Epistemic Loss Gate', CLUSTER_CORE, 0, 70, 20, 8, 1.0, 'Evaluates ensemble disagreement and widens probabilistic bounds.');
+
+    // 5. OUTPUT SYNTHESIS NODES (Bottom Forward)
+    addNode('out-blend', 'Blended Ensemble Mosaic', CLUSTER_OUTPUT, 0, 170, 40, 14, 1.4, 'Final synthesized gridded operational product for national forecasters.');
+    addNode('out-precip', 'Precipitation: 68.4mm / 24h', CLUSTER_OUTPUT, -110, 240, 50, 10, 1.2, 'Optimal weighted spatial precipitation accumulation field.');
+    addNode('out-temp', '2m Temp: 27.4°C', CLUSTER_OUTPUT, -40, 270, 30, 8, 1.0, 'Calibrated planetary boundary layer surface temperature.');
+    addNode('out-wind', '10m Wind: 28 km/h SW', CLUSTER_OUTPUT, 40, 270, 30, 8, 1.0, 'Blended vector wind components with realistic gust envelope.');
+    addNode('out-halo', 'Probabilistic Spread: ±13.6mm', CLUSTER_OUTPUT, 120, 240, 50, 9, 1.1, '90% prediction interval derived from blended physical & diffusion dispersion.');
+
+    // Context connections
+    addEdge('ctx-regime', 'core-regime', 0.8, CLUSTER_CONTEXT);
+    addEdge('ctx-season', 'core-regime', 0.6, CLUSTER_CONTEXT);
+    addEdge('ctx-lead', 'core-fusion', 1.0, CLUSTER_CONTEXT);
+    addEdge('ctx-error', 'core-simplex', 0.7, CLUSTER_CONTEXT);
+    addEdge('ctx-skill', 'core-simplex', 0.7, CLUSTER_CONTEXT);
+    addEdge('ctx-domain', 'model-bharat', 0.6, CLUSTER_CONTEXT);
+    addEdge('ctx-spread', 'core-uncertainty', 0.8, CLUSTER_CONTEXT);
+
+    // NWP Model Hierarchy & Links to Fusion Core
+    addEdge('ncum-dyn', 'model-ncum', 0.7, CLUSTER_NWP);
+    addEdge('ncum-conv', 'model-ncum', 0.7, CLUSTER_NWP);
+    addEdge('model-ncum', 'core-simplex', 1.4, CLUSTER_NWP);
+    addEdge('model-ncum', 'core-fusion', 1.5, CLUSTER_NWP);
+
+    addEdge('neps-ic', 'model-neps', 0.7, CLUSTER_NWP);
+    addEdge('neps-spread', 'model-neps', 0.7, CLUSTER_NWP);
+    addEdge('model-neps', 'core-uncertainty', 1.2, CLUSTER_NWP);
+    addEdge('model-neps', 'core-fusion', 1.2, CLUSTER_NWP);
+
+    addEdge('bharat-topo', 'model-bharat', 0.7, CLUSTER_NWP);
+    addEdge('model-bharat', 'core-bias', 1.0, CLUSTER_NWP);
+    addEdge('model-bharat', 'core-fusion', 1.1, CLUSTER_NWP);
+
+    // AI Model Hierarchy & Links to Fusion Core
+    addEdge('gc-multimesh', 'model-graphcast', 0.7, CLUSTER_AI);
+    addEdge('gc-latent', 'model-graphcast', 0.7, CLUSTER_AI);
+    addEdge('model-graphcast', 'core-fusion', 1.1, CLUSTER_AI);
+    addEdge('model-graphcast', 'core-bias', 0.9, CLUSTER_AI);
+
+    addEdge('gen-denoise', 'model-gencast', 0.7, CLUSTER_AI);
+    addEdge('gen-extremes', 'model-gencast', 0.7, CLUSTER_AI);
+    addEdge('model-gencast', 'core-fusion', 1.0, CLUSTER_AI);
+    addEdge('model-gencast', 'core-uncertainty', 1.0, CLUSTER_AI);
+
+    // Core Internal Transformers
+    addEdge('core-simplex', 'core-fusion', 1.6, CLUSTER_CORE);
+    addEdge('core-regime', 'core-fusion', 1.3, CLUSTER_CORE);
+    addEdge('core-bias', 'core-fusion', 1.3, CLUSTER_CORE);
+    addEdge('core-uncertainty', 'core-fusion', 1.3, CLUSTER_CORE);
+
+    // Core to Outputs
+    addEdge('core-fusion', 'out-blend', 2.0, CLUSTER_CORE);
+    addEdge('out-blend', 'out-precip', 1.4, CLUSTER_OUTPUT);
+    addEdge('out-blend', 'out-temp', 1.0, CLUSTER_OUTPUT);
+    addEdge('out-blend', 'out-wind', 1.0, CLUSTER_OUTPUT);
+    addEdge('out-blend', 'out-halo', 1.3, CLUSTER_OUTPUT);
+
+    // Streaming Particles along Edges
+    const PARTICLE_COUNT = 90;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const edge = edges[Math.floor(Math.random() * edges.length)];
+      particles.push({
+        edge,
+        progress: Math.random(),
+        speed: 0.004 + Math.random() * 0.008,
+        size: 1.5 + Math.random() * 1.5
+      });
+    }
+
+    // Helper: 3D Projection
+    function project3D(x, y, z) {
+      // Rotate Y
+      const cosY = Math.cos(cam.rotY);
+      const sinY = Math.sin(cam.rotY);
+      let x1 = x * cosY + z * sinY;
+      let z1 = -x * sinY + z * cosY;
+
+      // Rotate X
+      const cosX = Math.cos(cam.rotX);
+      const sinX = Math.sin(cam.rotX);
+      let y2 = y * cosX - z1 * sinX;
+      let z2 = y * sinX + z1 * cosX;
+
+      // Perspective projection
+      const cameraDistance = 680;
+      const fov = cameraDistance / (cameraDistance + z2);
+      
+      const screenX = width / 2 + (x1 + cam.x) * fov * cam.zoom;
+      const screenY = height / 2 + (y2 + cam.y) * fov * cam.zoom;
+
+      return {
+        x: screenX,
+        y: screenY,
+        scale: fov * cam.zoom,
+        depth: z2
+      };
+    }
+
+    // Interactive Drag & Pan
+    canvas.addEventListener('mousedown', (e) => {
+      cam.isDragging = true;
+      cam.lastMouseX = e.clientX;
+      cam.lastMouseY = e.clientY;
+    });
+
+    window.addEventListener('mouseup', () => {
+      cam.isDragging = false;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (cam.isDragging) {
+        const dx = e.clientX - cam.lastMouseX;
+        const dy = e.clientY - cam.lastMouseY;
+        cam.targetRotY += dx * 0.006;
+        cam.targetRotX += dy * 0.006;
+        // Clamp pitch to avoid inversion
+        cam.targetRotX = Math.max(-0.4, Math.min(1.1, cam.targetRotX));
+        cam.lastMouseX = e.clientX;
+        cam.lastMouseY = e.clientY;
+      }
+
+      // Check hover for node highlighting
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      let foundHover = null;
+      for (const node of nodes) {
+        const proj = project3D(node.x, node.y, node.z);
+        const dist = Math.hypot(proj.x - mouseX, proj.y - mouseY);
+        const hitRadius = node.radius * proj.scale * 1.5 + 8;
+        if (dist < hitRadius) {
+          foundHover = node;
+          node.hovered = true;
+        } else {
+          node.hovered = false;
+        }
+      }
+
+      const tag = document.getElementById('hover-node-tag');
+      if (foundHover) {
+        tag.classList.remove('hidden');
+        tag.textContent = foundHover.label;
+      } else {
+        tag.classList.add('hidden');
+      }
+    });
+
+    // Zoom wheel
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY > 0 ? 0.92 : 1.08;
+      cam.targetZoom = Math.max(0.6, Math.min(2.4, cam.targetZoom * zoomFactor));
+    }, { passive: false });
+
+    // Node selection / click inspection
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      for (const node of nodes) {
+        const proj = project3D(node.x, node.y, node.z);
+        const dist = Math.hypot(proj.x - mouseX, proj.y - mouseY);
+        if (dist < (node.radius * proj.scale * 1.5 + 10)) {
+          inspectNode(node);
+          break;
+        }
+      }
+    });
+
+    function inspectNode(node) {
+      document.getElementById('inspected-title').textContent = node.label;
+      document.getElementById('inspected-desc').textContent = node.desc || 'Active tensor module in neural forecast blending pipeline.';
+      
+      // Pulse animation
+      node.pulseOffset = 0;
+    }
+
+    // Lead Time Weights State Evolution
+    const leadConfigs = {
+      0: { ncum: 34, neps: 26, bharat: 24, graph: 10, gen: 6 },
+      12: { ncum: 33, neps: 25, bharat: 21, graph: 12, gen: 9 },
+      24: { ncum: 33, neps: 24, bharat: 20, graph: 13, gen: 10 },
+      48: { ncum: 31, neps: 24, bharat: 18, graph: 15, gen: 12 },
+      72: { ncum: 27, neps: 23, bharat: 14, graph: 20, gen: 16 },
+      96: { ncum: 22, neps: 22, bharat: 10, graph: 26, gen: 20 },
+      120: { ncum: 18, neps: 21, bharat: 7, graph: 30, gen: 24 },
+      240: { ncum: 12, neps: 18, bharat: 4, graph: 36, gen: 30 }
+    };
+
+    function updateWeights(lead) {
+      const cfg = leadConfigs[lead] || leadConfigs[48];
+      document.getElementById('bar-ncum').style.width = cfg.ncum + '%';
+      document.getElementById('bar-neps').style.width = cfg.neps + '%';
+      document.getElementById('bar-bharat').style.width = cfg.bharat + '%';
+      document.getElementById('bar-graph').style.width = cfg.graph + '%';
+      document.getElementById('bar-gen').style.width = cfg.gen + '%';
+
+      // Update Node Scales
+      const ncumNode = nodes.find(n => n.id === 'model-ncum');
+      const nepsNode = nodes.find(n => n.id === 'model-neps');
+      const bharatNode = nodes.find(n => n.id === 'model-bharat');
+      const graphNode = nodes.find(n => n.id === 'model-graphcast');
+      const genNode = nodes.find(n => n.id === 'model-gencast');
+
+      if (ncumNode) ncumNode.weight = cfg.ncum / 25;
+      if (nepsNode) nepsNode.weight = cfg.neps / 22;
+      if (bharatNode) bharatNode.weight = cfg.bharat / 18;
+      if (graphNode) graphNode.weight = cfg.graph / 15;
+      if (genNode) genNode.weight = cfg.gen / 12;
+    }
+
+    // Lead Time Button triggers
+    const leadBtns = document.querySelectorAll('.lead-btn');
+    leadBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        leadBtns.forEach(b => {
+          b.classList.remove('bg-surface-container-high', 'text-primary', 'font-semibold', 'shadow-sm');
+          b.classList.add('text-outline');
+        });
+        btn.classList.add('bg-surface-container-high', 'text-primary', 'font-semibold', 'shadow-sm');
+        btn.classList.remove('text-outline');
+
+        const lead = parseInt(btn.getAttribute('data-lead'), 10);
+        updateWeights(lead);
+      });
+    });
+
+    // Auto Playback Evolution
+    let isPlaying = false;
+    let playInterval = null;
+    let currentPlayIndex = 3; // starts at 48h
+    const leadSteps = [0, 12, 24, 48, 72, 96, 120, 240];
+
+    const playBtn = document.getElementById('btn-play-sim');
+    const playIcon = document.getElementById('play-icon');
+    const playLabel = document.getElementById('play-label');
+
+    playBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playIcon.textContent = 'pause';
+        playLabel.textContent = 'STOPPING';
+        playBtn.classList.replace('bg-primary', 'bg-tertiary');
+        playInterval = setInterval(() => {
+          currentPlayIndex = (currentPlayIndex + 1) % leadSteps.length;
+          const step = leadSteps[currentPlayIndex];
+          leadBtns.forEach(b => {
+            if (parseInt(b.getAttribute('data-lead'), 10) === step) {
+              b.click();
+            }
+          });
+        }, 1800);
+      } else {
+        playIcon.textContent = 'play_arrow';
+        playLabel.textContent = 'EVOLUTION';
+        playBtn.classList.replace('bg-tertiary', 'bg-primary');
+        clearInterval(playInterval);
+      }
+    });
+
+    // Quick camera controls
+    document.getElementById('btn-focus-core').addEventListener('click', () => {
+      cam.targetRotX = 0.25;
+      cam.targetRotY = 0;
+      cam.targetZoom = 1.35;
+      cam.x = 0;
+      cam.y = 0;
+      inspectNode(nodes.find(n => n.id === 'core-fusion'));
+    });
+
+    document.getElementById('btn-focus-nwp').addEventListener('click', () => {
+      cam.targetRotX = 0.15;
+      cam.targetRotY = 0.55;
+      cam.targetZoom = 1.45;
+      cam.x = 180;
+      cam.y = 0;
+      inspectNode(nodes.find(n => n.id === 'model-ncum'));
+    });
+
+    document.getElementById('btn-focus-ai').addEventListener('click', () => {
+      cam.targetRotX = 0.15;
+      cam.targetRotY = -0.55;
+      cam.targetZoom = 1.45;
+      cam.x = -180;
+      cam.y = 0;
+      inspectNode(nodes.find(n => n.id === 'model-graphcast'));
+    });
+
+    document.getElementById('btn-reset-cam').addEventListener('click', () => {
+      cam.targetRotX = 0.28;
+      cam.targetRotY = 0;
+      cam.targetZoom = 1.0;
+      cam.x = 0;
+      cam.y = -20;
+    });
+
+    // Toggle Dock Button
+    let dockCollapsed = false;
+    const toggleDockBtn = document.getElementById('toggle-dock-btn');
+    const dock = document.getElementById('inspector-dock');
+    toggleDockBtn.addEventListener('click', () => {
+      dockCollapsed = !dockCollapsed;
+      if (dockCollapsed) {
+        dock.classList.add('translate-x-[92%]');
+        toggleDockBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">chevron_left</span>';
+      } else {
+        dock.classList.remove('translate-x-[92%]');
+        toggleDockBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">chevron_right</span>';
+      }
+    });
+
+    // Mode Switcher live/demo
+    const modeLive = document.getElementById('mode-live');
+    const modeDemo = document.getElementById('mode-demo');
+    modeLive.addEventListener('click', () => {
+      modeLive.classList.add('bg-surface-container-high', 'text-primary');
+      modeLive.classList.remove('text-outline');
+      modeDemo.classList.remove('bg-surface-container-high', 'text-primary');
+      modeDemo.classList.add('text-outline');
+    });
+    modeDemo.addEventListener('click', () => {
+      modeDemo.classList.add('bg-surface-container-high', 'text-primary');
+      modeDemo.classList.remove('text-outline');
+      modeLive.classList.remove('bg-surface-container-high', 'text-primary');
+      modeLive.classList.add('text-outline');
+    });
+
+    // Main 60FPS Physics and Render Loop
+    let time = 0;
+    function render() {
+      time += 0.02;
+
+      // Smooth camera interpolation
+      cam.rotX += (cam.targetRotX - cam.rotX) * 0.08;
+      cam.rotY += (cam.targetRotY - cam.rotY) * 0.08;
+      cam.zoom += (cam.targetZoom - cam.zoom) * 0.08;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Draw subtle background coordinate grid graticule
+      ctx.save();
+      const gridSpacing = 48;
+      const numLines = 9;
+      ctx.strokeStyle = 'rgba(62, 72, 79, 0.12)';
+      ctx.lineWidth = 1;
+      
+      for (let i = -numLines; i <= numLines; i++) {
+        const p1 = project3D(i * gridSpacing, 280, -numLines * gridSpacing);
+        const p2 = project3D(i * gridSpacing, 280, numLines * gridSpacing);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+
+        const p3 = project3D(-numLines * gridSpacing, 280, i * gridSpacing);
+        const p4 = project3D(numLines * gridSpacing, 280, i * gridSpacing);
+        ctx.beginPath();
+        ctx.moveTo(p3.x, p3.y);
+        ctx.lineTo(p4.x, p4.y);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // 2. Physics & Node Floating
+      for (const node of nodes) {
+        // Natural subtle atmospheric breathing motion
+        const floatY = Math.sin(time + node.pulseOffset) * 3.5;
+        const floatX = Math.cos(time * 0.7 + node.pulseOffset) * 2.0;
+        node.x = node.baseX + floatX;
+        node.y = node.baseY + floatY;
+        node.z = node.baseZ;
+
+        // Dynamic radius responding to model weight
+        node.radius = node.baseRadius * (0.85 + (node.weight * 0.2));
+      }
+
+      // Map lookup
+      const nodeMap = new Map();
+      nodes.forEach(n => nodeMap.set(n.id, n));
+
+      // 3. Draw Edges / Luminous Tensor Filaments
+      for (const edge of edges) {
+        const src = nodeMap.get(edge.sourceId);
+        const tgt = nodeMap.get(edge.targetId);
+        if (!src || !tgt) continue;
+
+        const pSrc = project3D(src.x, src.y, src.z);
+        const pTgt = project3D(tgt.x, tgt.y, tgt.z);
+
+        // Control point for subtle bezier curvature
+        const midX = (pSrc.x + pTgt.x) / 2;
+        const midY = (pSrc.y + pTgt.y) / 2 - (20 * cam.zoom);
+
+        const palette = COLOR_PALETTE[edge.colorKey] || COLOR_PALETTE[CLUSTER_NWP];
+        const isHighlighted = src.hovered || tgt.hovered;
+
+        // Outer glow
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(pSrc.x, pSrc.y);
+        ctx.quadraticCurveTo(midX, midY, pTgt.x, pTgt.y);
+        ctx.strokeStyle = isHighlighted ? 'rgba(142, 213, 255, 0.7)' : palette.glow;
+        ctx.lineWidth = (isHighlighted ? 3.0 : 1.2 * edge.strength) * cam.zoom;
+        ctx.stroke();
+
+        // Inner beam
+        ctx.beginPath();
+        ctx.moveTo(pSrc.x, pSrc.y);
+        ctx.quadraticCurveTo(midX, midY, pTgt.x, pTgt.y);
+        ctx.strokeStyle = isHighlighted ? '#ffffff' : palette.fill;
+        ctx.lineWidth = (isHighlighted ? 1.5 : 0.6) * cam.zoom;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // 4. Draw Animated Stream Particles
+      for (const p of particles) {
+        p.progress += p.speed;
+        if (p.progress > 1.0) p.progress = 0;
+
+        const src = nodeMap.get(p.edge.sourceId);
+        const tgt = nodeMap.get(p.edge.targetId);
+        if (!src || !tgt) continue;
+
+        const pSrc = project3D(src.x, src.y, src.z);
+        const pTgt = project3D(tgt.x, tgt.y, tgt.z);
+
+        const midX = (pSrc.x + pTgt.x) / 2;
+        const midY = (pSrc.y + pTgt.y) / 2 - (20 * cam.zoom);
+
+        // Quadratic Bezier formulation
+        const t = p.progress;
+        const invT = 1 - t;
+        const px = invT * invT * pSrc.x + 2 * invT * t * midX + t * t * pTgt.x;
+        const py = invT * invT * pSrc.y + 2 * invT * t * midY + t * t * pTgt.y;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(px, py, p.size * cam.zoom, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#7bd0ff';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 5. Draw Nodes (Sorted by depth for proper z-layer rendering)
+      const sortedNodes = [...nodes].sort((a, b) => {
+        const pA = project3D(a.x, a.y, a.z);
+        const pB = project3D(b.x, b.y, b.z);
+        return pB.depth - pA.depth;
+      });
+
+      for (const node of sortedNodes) {
+        const proj = project3D(node.x, node.y, node.z);
+        const palette = COLOR_PALETTE[node.cluster] || COLOR_PALETTE[CLUSTER_CORE];
+        const rad = node.radius * proj.scale;
+
+        ctx.save();
+
+        // Pulsing rings for Central Core or Hovered Nodes
+        if (node.cluster === CLUSTER_CORE || node.hovered) {
+          const pulse = (Math.sin(time * 3 + node.pulseOffset) + 1) / 2;
+          const outerRad = rad + (8 + pulse * 14) * proj.scale;
+          
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, outerRad, 0, Math.PI * 2);
+          ctx.strokeStyle = node.hovered ? 'rgba(255, 255, 255, 0.4)' : palette.glow;
+          ctx.lineWidth = 1.5 * proj.scale;
+          ctx.stroke();
+
+          // Double ring for Fusion Core Hub
+          if (node.id === 'core-fusion') {
+            ctx.beginPath();
+            ctx.arc(proj.x, proj.y, outerRad * 1.35, 0, Math.PI * 2);
+            ctx.setLineDash([4, 6]);
+            ctx.strokeStyle = 'rgba(142, 213, 255, 0.35)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+        }
+
+        // Outer Glow Sphere
+        ctx.beginPath();
+        ctx.arc(proj.x, proj.y, rad * 1.5, 0, Math.PI * 2);
+        const glowGrad = ctx.createRadialGradient(proj.x, proj.y, rad * 0.4, proj.x, proj.y, rad * 1.5);
+        glowGrad.addColorStop(0, palette.glow);
+        glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = glowGrad;
+        ctx.fill();
+
+        // Node Body (Tactile Glass Circle)
+        ctx.beginPath();
+        ctx.arc(proj.x, proj.y, rad, 0, Math.PI * 2);
+        const bodyGrad = ctx.createRadialGradient(proj.x - rad * 0.3, proj.y - rad * 0.3, rad * 0.1, proj.x, proj.y, rad);
+        bodyGrad.addColorStop(0, '#ffffff');
+        bodyGrad.addColorStop(0.3, palette.fill);
+        bodyGrad.addColorStop(1, '#0b0e13');
+        ctx.fillStyle = bodyGrad;
+        ctx.fill();
+
+        // Rim stroke
+        ctx.strokeStyle = node.hovered ? '#ffffff' : palette.text;
+        ctx.lineWidth = (node.hovered ? 2 : 1) * proj.scale;
+        ctx.stroke();
+
+        // Text Labels for Major Nodes or Zoomed View
+        if (proj.scale > 0.75 || node.cluster === CLUSTER_CORE || node.cluster === CLUSTER_NWP || node.cluster === CLUSTER_AI || node.hovered) {
+          ctx.font = `${Math.round(11 * proj.scale)}px "JetBrains Mono", monospace`;
+          ctx.fillStyle = node.hovered ? '#ffffff' : palette.text;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(node.label, proj.x, proj.y + rad + (12 * proj.scale));
+        }
+
+        ctx.restore();
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    render();
+  })();
+</script></main></div></body></html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<title>SIH26081 · God's-Eye Geospatial Forecast Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#8ed5ff",
+            "primary-container": "#38bdf8",
+            "on-primary": "#00354a",
+            "on-primary-container": "#004965",
+            "secondary": "#93ccff",
+            "secondary-container": "#3198dc",
+            "tertiary": "#57e1ce",
+            "tertiary-container": "#30c5b3",
+            "tertiary-fixed": "#71f8e4",
+            "surface": "#101319",
+            "surface-container-lowest": "#07090d",
+            "surface-container-low": "#0e1218",
+            "surface-container": "#151a22",
+            "surface-container-high": "#1d232e",
+            "surface-container-highest": "#28303e",
+            "outline": "#87929a",
+            "outline-variant": "#3e484f",
+            "on-surface": "#e1e2ea",
+            "on-surface-variant": "#9cb1c2",
+            "error": "#ffb4ab"
+          },
+          fontFamily: {
+            "label-caps": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "data-mono-lg": ["JetBrains Mono"],
+            "data-mono-md": ["JetBrains Mono"],
+            "data-mono-sm": ["JetBrains Mono"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        background-color: #040609;
+        font-family: 'Inter', sans-serif;
+        color: #e1e2ea;
+      }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .glass-pill {
+      background: rgba(11, 15, 22, 0.68);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    .glass-card {
+      background: rgba(10, 14, 20, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(142, 213, 255, 0.12);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+    .perspective-canvas {
+      perspective: 1200px;
+      perspective-origin: 50% 38%;
+    }
+    .tilted-globe {
+      transform: rotateX(25deg) scale(1.08) translateY(-30px);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .radar-pulse {
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.8; filter: drop-shadow(0 0 12px rgba(48,197,179,0.3)); }
+      100% { opacity: 0.95; filter: drop-shadow(0 0 24px rgba(236,72,153,0.5)); }
+    }
+    .stream-anim {
+      stroke-dasharray: 8, 6;
+      animation: dashStream 6s linear infinite;
+    }
+    @keyframes dashStream {
+      to { stroke-dashoffset: -140; }
+    }
+  </style>
+</head>
+<body class="relative w-screen h-screen select-none overflow-hidden bg-[#040609]">
+<!-- ===================================================================== -->
+<!-- HERO: 100% FULL-VIEWPORT ORBITAL GOD'S-EYE SATELLITE CANVAS (~85% OPEN) -->
+<!-- ===================================================================== -->
+<div class="absolute inset-0 w-full h-full perspective-canvas pointer-events-none z-0 overflow-hidden">
+<!-- Starfield Deep Space Background -->
+<div class="absolute inset-0 bg-radial from-[#0c1422] via-[#05080f] to-[#020306]"></div>
+<!-- Tilted 3D Satellite Earth Disc with Curvature and Atmospheric Horizon Limb -->
+<div class="absolute -inset-[15%] tilted-globe flex items-center justify-center">
+<svg class="w-full h-full" fill="none" preserveaspectratio="xMidYMid slice" viewbox="0 0 1920 1180" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Earth Curvature Atmospheric Limb Glow -->
+<radialgradient cx="50%" cy="58%" id="earthLimbGlow" r="62%">
+<stop offset="68%" stop-color="#050a14" stop-opacity="0"></stop>
+<stop offset="85%" stop-color="#1b4965" stop-opacity="0.25"></stop>
+<stop offset="93%" stop-color="#38bdf8" stop-opacity="0.45"></stop>
+<stop offset="97%" stop-color="#71f8e4" stop-opacity="0.85"></stop>
+<stop offset="100%" stop-color="#020408" stop-opacity="1"></stop>
+</radialgradient>
+<!-- Deep Ocean Depths Gradient (Arabian Sea & Bay of Bengal) -->
+<radialgradient cx="50%" cy="65%" id="oceanGradient" r="55%">
+<stop offset="0%" stop-color="#071828"></stop>
+<stop offset="35%" stop-color="#05121f"></stop>
+<stop offset="70%" stop-color="#030c14"></stop>
+<stop offset="100%" stop-color="#02060b"></stop>
+</radialgradient>
+<!-- Satellite Landmass Elevation & Foliage Gradient -->
+<lineargradient id="subcontinentTexture" x1="30%" x2="60%" y1="10%" y2="90%">
+<stop offset="0%" stop-color="#2a3028"></stop> <!-- NW Arid/Thar -->
+<stop offset="18%" stop-color="#3c4333"></stop> <!-- Indo-Gangetic Plains -->
+<stop offset="42%" stop-color="#222b22"></stop> <!-- Central Deccan Forest -->
+<stop offset="65%" stop-color="#1b3021"></stop> <!-- Western Ghats Lush Green -->
+<stop offset="85%" stop-color="#253528"></stop> <!-- Coromandel & Southern Tip -->
+</lineargradient>
+<!-- Himalayas Snowline Gradient -->
+<lineargradient id="himalayasSnow" x1="0%" x2="100%" y1="0%" y2="50%">
+<stop offset="0%" stop-color="#a8c5da" stop-opacity="0.85"></stop>
+<stop offset="50%" stop-color="#d9eafd" stop-opacity="0.95"></stop>
+<stop offset="100%" stop-color="#80a4be" stop-opacity="0.7"></stop>
+</lineargradient>
+<!-- Multiscale Precipitation Blend (Scientific Reflectivity Scale) -->
+<radialgradient cx="42%" cy="46%" id="precipCoreKonkan" r="50%">
+<stop offset="0%" stop-color="#ec4899" stop-opacity="0.95"></stop> <!-- Convective Pink-Red -->
+<stop offset="18%" stop-color="#f59e0b" stop-opacity="0.9"></stop> <!-- Amber Severe -->
+<stop offset="40%" stop-color="#71f8e4" stop-opacity="0.75"></stop> <!-- Moderate Emerald-Cyan -->
+<stop offset="68%" stop-color="#0284c7" stop-opacity="0.45"></stop> <!-- Light Rain -->
+<stop offset="100%" stop-color="#0284c7" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="48%" cy="48%" id="cyclone02B" r="52%">
+<stop offset="0%" stop-color="#f43f5e" stop-opacity="0.92"></stop>
+<stop offset="25%" stop-color="#fb923c" stop-opacity="0.8"></stop>
+<stop offset="52%" stop-color="#30c5b3" stop-opacity="0.55"></stop>
+<stop offset="80%" stop-color="#0369a1" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#082f49" stop-opacity="0"></stop>
+</radialgradient>
+<!-- Graticule Pattern -->
+<pattern height="90" id="orbitalGraticule" patternunits="userSpaceOnUse" width="90">
+<path d="M 90 0 L 0 0 0 90" fill="none" opacity="0.45" stroke="#253545" stroke-dasharray="2 3" stroke-width="0.55"></path>
+</pattern>
+<!-- Cloud & Atmosphere Filter -->
+<filter height="140%" id="atmosphericMist" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="22"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Curved Horizon Earth Disc -->
+<ellipse cx="960" cy="880" fill="url(#oceanGradient)" rx="1040" ry="760" stroke="#1a3550" stroke-width="1.5"></ellipse>
+<!-- Atmospheric Edge Horizon Glow -->
+<ellipse cx="960" cy="880" fill="url(#earthLimbGlow)" rx="1040" ry="760"></ellipse>
+<!-- Orbital Coordinate Graticule Grid Arc -->
+<ellipse cx="960" cy="880" fill="url(#orbitalGraticule)" opacity="0.75" rx="1030" ry="750"></ellipse>
+<!-- Realistically Contoured Indian Subcontinent & Surrounding Landmasses -->
+<!-- Pakistan / Indus Basin -->
+<path d="M 590 320 Q 640 360 670 410 L 690 490 L 650 510 L 580 470 L 540 430 Z" fill="#2d3329" opacity="0.75" stroke="#3d493a" stroke-width="0.8"></path>
+<!-- Main Indian Peninsula & Ghats -->
+<path d="M 720 280 
+                 L 810 295 L 910 320 L 1030 360 L 1150 420 L 1220 440 L 1260 480 L 1230 520 L 1170 530 L 1120 560 L 1060 610 L 1020 690 L 980 780 L 930 890 L 890 950 
+                 L 870 955 L 850 880 L 830 760 L 810 650 L 760 560 L 690 530 L 650 490 L 670 410 L 700 340 Z" fill="url(#subcontinentTexture)" filter="drop-shadow(0 4px 18px rgba(0,0,0,0.8))" stroke="#4a5d4a" stroke-width="1.2"></path>
+<!-- Himalayas Arc & Tibetan Plateau Snowcaps -->
+<path d="M 740 270 Q 880 290 1020 320 Q 1160 370 1260 440 L 1250 465 Q 1140 400 1010 345 Q 870 315 730 295 Z" fill="url(#himalayasSnow)" filter="url(#atmosphericMist)" opacity="0.9"></path>
+<!-- Sri Lanka Island -->
+<ellipse cx="935" cy="1005" fill="#1e2c1e" rx="28" ry="46" stroke="#3d4e3d" stroke-width="0.9"></ellipse>
+<!-- Bangladesh / Delta -->
+<path d="M 1120 530 L 1180 540 L 1170 590 L 1110 580 Z" fill="#213a29" stroke="#3a5940" stroke-width="0.8"></path>
+<!-- Myanmar / Southeast Asia Edge -->
+<path d="M 1240 540 Q 1280 640 1310 760 L 1260 790 Q 1220 670 1190 580 Z" fill="#263324" opacity="0.7"></path>
+<!-- Synoptic Isobars (Atmospheric Pressure Fields) -->
+<g fill="none" opacity="0.32" stroke="#57e1ce" stroke-width="1">
+<path d="M 440 820 C 640 760, 880 840, 1100 750 C 1300 670, 1460 740, 1620 680" stroke-dasharray="6 3"></path>
+<path d="M 460 710 C 680 650, 920 720, 1150 630 C 1340 560, 1490 610, 1660 550"></path>
+<path d="M 520 600 C 720 540, 950 590, 1190 510 C 1380 450, 1530 490, 1700 420" stroke-dasharray="4 2"></path>
+<path d="M 580 480 C 760 420, 1000 460, 1220 390 C 1400 330, 1580 370, 1740 310"></path>
+</g>
+<!-- Dynamic Wind Particle Stream Vectors (Arabian Sea to Bay of Bengal Flow) -->
+<g opacity="0.55" stroke="#93ccff" stroke-linecap="round" stroke-width="1.4">
+<path class="stream-anim" d="M 510 880 C 630 810, 740 760, 810 680"></path>
+<path class="stream-anim" d="M 560 780 C 670 710, 770 680, 820 620"></path>
+<path class="stream-anim" d="M 600 920 C 710 860, 800 810, 850 740"></path>
+<path class="stream-anim" d="M 660 730 C 750 670, 810 630, 830 580"></path>
+<!-- Crossing Peninsula toward Deep Bay System -->
+<path class="stream-anim" d="M 870 660 C 960 670, 1040 680, 1110 660"></path>
+<path class="stream-anim" d="M 910 740 C 990 750, 1070 740, 1130 700"></path>
+<path class="stream-anim" d="M 1200 850 C 1170 760, 1150 710, 1160 640"></path>
+<path class="stream-anim" d="M 1260 720 C 1220 660, 1180 630, 1140 620"></path>
+</g>
+<!-- RADAR / PRECIPITATION LAYER 1: Konkan Coast Intense Orographic Convective Surge -->
+<g class="radar-pulse">
+<path d="M 760 520 Q 850 560 830 720 Q 790 790 850 870 Q 800 840 770 740 Q 740 640 760 520 Z" fill="url(#precipCoreKonkan)" filter="url(#atmosphericMist)"></path>
+<!-- Convective Extreme Hotspot (Konkan Peak 68.4mm) -->
+<ellipse cx="808" cy="650" fill="#f59e0b" filter="url(#atmosphericMist)" opacity="0.75" rx="34" ry="72"></ellipse>
+<ellipse cx="806" cy="645" fill="#f43f5e" filter="url(#atmosphericMist)" opacity="0.88" rx="16" ry="40"></ellipse>
+</g>
+<!-- RADAR / PRECIPITATION LAYER 2: Bay of Bengal Cyclone Track & Deep-02B Vortex -->
+<g class="radar-pulse">
+<circle cx="1140" cy="650" fill="url(#cyclone02B)" filter="url(#atmosphericMist)" r="120"></circle>
+<!-- Cyclone Eye & Spiraling Arms -->
+<path d="M 1220 650 A 80 80 0 0 1 1080 710 A 50 50 0 0 1 1120 610 A 25 25 0 0 1 1150 645" fill="none" opacity="0.85" stroke="#71f8e4" stroke-dasharray="6 3" stroke-width="2.8"></path>
+<circle cx="1142" cy="648" fill="#0b1726" r="7" stroke="#ec4899" stroke-width="1.8"></circle>
+</g>
+<!-- Cyclone Predicted Cone of Uncertainty & Trajectory Vector -->
+<path d="M 1260 770 Q 1200 700 1140 650 T 1050 570" fill="none" stroke="#f43f5e" stroke-dasharray="5 4" stroke-width="2"></path>
+<polygon fill="#f43f5e" opacity="0.09" points="1140,650 1020,530 1080,520"></polygon>
+<!-- Atmospheric Cirrus Wisps & Cloud Swirls Over Oceans -->
+<path d="M 520 620 Q 640 590 730 670 Q 820 750 920 690" fill="none" filter="url(#atmosphericMist)" opacity="0.08" stroke="#ffffff" stroke-width="22"></path>
+<path d="M 1030 760 Q 1160 820 1310 740 Q 1420 680 1560 720" fill="none" filter="url(#atmosphericMist)" opacity="0.07" stroke="#ffffff" stroke-width="32"></path>
+<!-- Lat/Lon Ticks & Coordinates across Orbit Grid -->
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="380" y="380">30°N</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="440" y="590">20°N</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="510" y="800">10°N</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="590" y="990">00°N (EQUATOR)</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="660" y="1070">65°E</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="910" y="1080">75°E</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="1170" y="1050">85°E</text>
+<text class="font-label-caps" fill="#4e657c" font-size="11" letter-spacing="1" x="1410" y="980">95°E</text>
+<!-- Oceanic Basin Geodesic Watermarks -->
+<text class="font-label-caps" fill="#203d58" font-size="15" font-weight="600" letter-spacing="4" opacity="0.7" x="580" y="770">ARABIAN SEA BASIN</text>
+<text class="font-label-caps" fill="#203d58" font-size="15" font-weight="600" letter-spacing="4" opacity="0.7" x="1220" y="730">BAY OF BENGAL</text>
+<text class="font-label-caps" fill="#1a3147" font-size="13" font-weight="600" letter-spacing="3" opacity="0.6" x="830" y="1050">EQUATORIAL INDIAN OCEAN</text>
+</svg>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- HERO INTERACTIVE PROBE NODE: KONKAN COAST (Lat 18.92°N, Lon 72.83°E)   -->
+<!-- ===================================================================== -->
+<div class="absolute top-[49%] left-[40.5%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto">
+<!-- Targeting Crosshair & Concentric Beacons -->
+<div class="relative flex items-center justify-center cursor-pointer group">
+<div class="w-14 h-14 rounded-full border border-primary/40 animate-ping absolute"></div>
+<div class="w-8 h-8 rounded-full border border-primary/80 bg-primary/10 backdrop-blur-sm flex items-center justify-center shadow-[0_0_20px_rgba(56,189,248,0.7)]">
+<div class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_10px_#8ed5ff]"></div>
+</div>
+<!-- Spatial Tether Line -->
+<div class="absolute left-6 bottom-6 w-10 h-10 border-l border-t border-primary/60 pointer-events-none transform -rotate-12"></div>
+<!-- Floating Geospatial Micro-Card Attached to Probe -->
+<div class="absolute left-12 -top-16 glass-card p-3 rounded-xl min-w-[240px] shadow-2xl transition-all group-hover:scale-105 duration-200">
+<div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-white/10">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-[10px] text-primary tracking-wider uppercase font-semibold">TARGET NODE · KONKAN</span>
+</div>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant">18.92°N 72.83°E</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-left">
+<div>
+<div class="font-label-caps text-[9px] text-outline uppercase">PRECIP RATE</div>
+<div class="font-data-mono-lg text-lg text-primary font-bold">68.4 <span class="text-xs font-normal text-on-surface-variant">mm</span></div>
+</div>
+<div>
+<div class="font-label-caps text-[9px] text-outline uppercase">SURFACE TEMP</div>
+<div class="font-data-mono-lg text-lg text-amber-300 font-bold">27.4 <span class="text-xs font-normal text-on-surface-variant">°C</span></div>
+</div>
+</div>
+<div class="mt-2 pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px]">
+<span class="text-on-surface-variant">Model Consensus:</span>
+<span class="text-tertiary font-data-mono-sm font-semibold">NCUM + BharatFS (74%)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Deep Depression 02-B Cyclone Floating Target Tag in Bay of Bengal -->
+<div class="absolute top-[48%] left-[62%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto">
+<div class="glass-pill px-3 py-1.5 rounded-lg flex items-center gap-2.5 border border-pink-500/30 hover:border-pink-500/60 shadow-lg cursor-pointer transition-all">
+<span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-[9px] text-pink-400 font-bold uppercase tracking-wider">DEEP DEPRESSION 02-B</span>
+<span class="font-data-mono-sm text-[9px] px-1 rounded bg-pink-500/20 text-pink-300">VORTEX</span>
+</div>
+<span class="font-data-mono-sm text-[11px] text-on-surface font-medium">996 hPa · Central Wind 52 kt (Gale)</span>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- 1. TOP BAR: SLEEK FLOATING GLASS CAPSULE (<3% FOOTPRINT)              -->
+<!-- ===================================================================== -->
+<header class="fixed top-3 left-4 right-4 z-40 flex items-center justify-between glass-pill px-4 py-2 rounded-2xl">
+<!-- Left: Project Identity & Live Beacon -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-[inset_0_0_12px_rgba(56,189,248,0.25)]">
+<span class="material-symbols-outlined text-[18px]">satellite_alt</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-xs tracking-widest text-primary font-bold">SIH26081</span>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-caps text-[10px] text-tertiary tracking-wider font-semibold">ORBITAL COMMAND</span>
+</div>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant uppercase tracking-tight">National NWP &amp; AI Hybrid Geospatial Fusion Engine</span>
+</div>
+</div>
+<!-- Center: Forecast Run & Valid Epoch Pill -->
+<div class="hidden md:flex items-center gap-2.5 bg-surface-container-lowest/80 px-3.5 py-1 rounded-xl border border-white/10 text-xs">
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-[9px] text-outline uppercase tracking-wider">RUN</span>
+<span class="font-data-mono-sm text-primary font-medium">24 SEP 2026 · 00 UTC</span>
+</div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-[9px] text-tertiary uppercase tracking-wider">VALID +48H</span>
+<span class="font-data-mono-sm text-on-surface font-semibold">26 SEP 00:00 UTC</span>
+</div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1 font-data-mono-sm text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>12:44:09 UTC</span>
+</div>
+</div>
+<!-- Right: Telemetry Health Indicators & Camera Perspective Controls -->
+<div class="flex items-center gap-3">
+<div class="hidden lg:flex items-center gap-3 font-data-mono-sm text-[10px] bg-surface-container-lowest/50 px-2.5 py-1 rounded-lg border border-white/5">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-on-surface-variant">DATA</span>
+<span class="text-tertiary font-semibold">SYNCHRONIZED</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-on-surface-variant">MODELS</span>
+<span class="text-primary font-semibold">6/6 ACTIVE</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-tertiary font-semibold">SYSTEM OPERATIONAL</span>
+</div>
+</div>
+<!-- 3D Camera Controls -->
+<div class="flex items-center gap-1 bg-surface-container-lowest/70 p-0.5 rounded-lg border border-white/10 font-data-mono-sm text-[10px]">
+<div class="px-2 py-0.5 text-on-surface-variant flex items-center gap-1" title="3D Orbital Tilt">
+<span class="material-symbols-outlined text-[13px] text-primary">screen_rotation</span>
+<span>Tilt 28°</span>
+</div>
+<div class="px-2 py-0.5 text-on-surface-variant border-l border-white/10 flex items-center gap-1" title="Orbital Azimuth">
+<span class="material-symbols-outlined text-[13px] text-primary">explore</span>
+<span>Az 0°</span>
+</div>
+<div class="px-2 py-0.5 text-on-surface-variant border-l border-white/10 flex items-center gap-1" title="Zoom Level">
+<span class="material-symbols-outlined text-[13px] text-primary">zoom_in</span>
+<span>1.4x</span>
+</div>
+</div>
+<!-- Quick Export / Sync Buttons -->
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Export NetCDF / GeoTIFF">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+<!-- Chief Meteorologist Avatar -->
+<div class="w-7 h-7 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-primary font-bold text-xs" title="Dr. A. Verma · IMD-ESSO Ops Chief">
+        AV
+      </div>
+</div>
+</header>
+<!-- ===================================================================== -->
+<!-- 2. LEFT FLOATING CONTROL PILL: SLEEK FROSTED GLASS RAIL DOCK         -->
+<!-- ===================================================================== -->
+<aside class="fixed left-4 top-20 bottom-24 z-30 flex flex-col items-center justify-between glass-pill py-3 px-2 rounded-2xl w-14 group hover:w-44 transition-all duration-300 shadow-2xl">
+<div class="flex flex-col items-start w-full gap-1.5">
+<!-- Active Overview -->
+<a class="w-full flex items-center gap-3 px-2 py-2 rounded-xl bg-primary-container/20 border border-primary/40 text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0">space_dashboard</span>
+<span class="font-body-md text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Overview</span>
+</a>
+<a class="w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0">explore</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Forecast</span>
+</a>
+<a class="w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0">tune</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Weights</span>
+</a>
+<a class="relative w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0 text-amber-400">warning</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Extremes</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-amber-400 group-hover:static shrink-0"></span>
+</a>
+<a class="w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0">verified</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Verify</span>
+</a>
+<a class="w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0">vital_signs</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Health</span>
+</a>
+<a class="w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] shrink-0">history</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Runs</span>
+</a>
+</div>
+<!-- Bottom Rail Controls -->
+<div class="flex flex-col items-start w-full gap-1.5 pt-2 border-t border-white/10">
+<button class="w-full flex items-center gap-3 px-2 py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all" title="Settings">
+<span class="material-symbols-outlined text-[20px] shrink-0">settings</span>
+<span class="font-body-md text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">Settings</span>
+</button>
+<div class="w-full flex items-center justify-center p-1 text-tertiary" title="Core Status: Running">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-ping"></span>
+</div>
+</div>
+</aside>
+<!-- ===================================================================== -->
+<!-- 3. UPPER-LEFT MAP CONTROL: SEGMENTED GLASS PILLS DIRECTLY ON MAP      -->
+<!-- ===================================================================== -->
+<div class="fixed top-20 left-20 z-30 flex flex-col gap-2 pointer-events-auto">
+<!-- Variables Segmented Pill -->
+<div class="glass-pill p-1 rounded-xl flex items-center gap-1 shadow-xl">
+<span class="font-label-caps text-[9px] text-outline uppercase px-2 tracking-wider">VARIABLE</span>
+<div class="flex items-center bg-black/40 p-0.5 rounded-lg border border-white/5 font-data-mono-sm text-xs">
+<button class="px-2.5 py-1 rounded bg-primary-container text-on-primary-container font-semibold shadow-sm transition-all">Precipitation</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">Temp 2m</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">Wind 850hPa</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors">MSLP</button>
+</div>
+</div>
+<!-- Model Layer Selector & Forecast Lead -->
+<div class="glass-pill p-1 rounded-xl flex items-center gap-2 shadow-xl">
+<span class="font-label-caps text-[9px] text-outline uppercase px-2 tracking-wider">MODEL LAYER</span>
+<div class="flex items-center bg-black/40 p-0.5 rounded-lg border border-white/5 font-label-caps text-[10px]">
+<button class="px-2 py-1 rounded bg-surface-container-highest text-primary font-bold">BLENDED</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">NCUM</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">NEPS</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">BharatFS</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">GraphCast</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">GenCast</button>
+</div>
+<!-- Lead Pill -->
+<div class="flex items-center gap-1 bg-primary/20 text-primary border border-primary/40 px-2 py-1 rounded-lg font-data-mono-sm text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">timelapse</span>
+<span>+48h</span>
+</div>
+</div>
+<!-- Active Layers Checkbox Matrix -->
+<div class="glass-pill px-3 py-1.5 rounded-xl flex items-center gap-3 text-xs text-on-surface-variant font-data-mono-sm shadow-xl">
+<label class="flex items-center gap-1.5 cursor-pointer hover:text-on-surface">
+<input checked="" class="accent-primary rounded-sm bg-black/50" type="checkbox"/>
+<span>Forecast Raster</span>
+</label>
+<span class="text-outline-variant">·</span>
+<label class="flex items-center gap-1.5 cursor-pointer hover:text-on-surface">
+<input checked="" class="accent-primary rounded-sm bg-black/50" type="checkbox"/>
+<span>Isobar Contours</span>
+</label>
+<span class="text-outline-variant">·</span>
+<label class="flex items-center gap-1.5 cursor-pointer hover:text-on-surface">
+<input checked="" class="accent-primary rounded-sm bg-black/50" type="checkbox"/>
+<span>Wind Stream Vectors</span>
+</label>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- 4. RIGHT FLOATING INTELLIGENCE PANELS (< 20% OCCUPANCY HUD STACK)     -->
+<!-- ===================================================================== -->
+<aside class="fixed right-4 top-20 bottom-24 w-80 lg:w-88 z-30 flex flex-col gap-2.5 overflow-y-auto pointer-events-auto pr-0.5">
+<!-- Card 1: Blended Forecast Intelligence -->
+<div class="glass-card p-3.5 rounded-2xl flex flex-col gap-2.5">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-[9px] text-primary tracking-wider uppercase font-semibold">BLENDED FORECAST INTELLIGENCE</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary/10 text-tertiary font-data-mono-sm text-[9px] border border-tertiary/30">FUSED</span>
+</div>
+<h3 class="font-headline-sm text-sm font-semibold text-on-surface mt-0.5">Konkan Coast &amp; Central Peninsula</h3>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant">Grid Cell: 18.92°N, 72.83°E · High Lead Precision</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono-lg text-primary font-bold text-sm">+48 h</span>
+<span class="font-label-caps text-[8px] text-outline">LEAD EPOCH</span>
+</div>
+</div>
+<!-- Telemetry 4-Metric Grid -->
+<div class="grid grid-cols-2 gap-2 mt-0.5">
+<!-- Precipitation -->
+<div class="bg-surface-container-lowest/70 p-2.5 rounded-xl border border-white/5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-[9px] uppercase">PRECIPITATION</span>
+<span class="material-symbols-outlined text-[14px] text-primary">rainy</span>
+</div>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-data-mono-lg text-xl text-primary font-bold">68.4</span>
+<span class="font-data-mono-sm text-xs text-on-surface-variant">mm</span>
+</div>
+<div class="font-data-mono-sm text-[9px] text-tertiary">Δ +14.2mm vs Normal</div>
+</div>
+<!-- Surface Temp -->
+<div class="bg-surface-container-lowest/70 p-2.5 rounded-xl border border-white/5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-[9px] uppercase">SURFACE TEMP</span>
+<span class="material-symbols-outlined text-[14px] text-amber-300">device_thermostat</span>
+</div>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-data-mono-lg text-xl text-on-surface font-bold">27.4</span>
+<span class="font-data-mono-sm text-xs text-on-surface-variant">°C</span>
+</div>
+<div class="font-data-mono-sm text-[9px] text-on-surface-variant">Dew Pt: 25.1 °C</div>
+</div>
+<!-- Wind 10m -->
+<div class="bg-surface-container-lowest/70 p-2.5 rounded-xl border border-white/5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-[9px] uppercase">WIND (10M)</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">air</span>
+</div>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-data-mono-lg text-xl text-on-surface font-bold">28</span>
+<span class="font-data-mono-sm text-xs text-on-surface-variant">km/h</span>
+</div>
+<div class="font-data-mono-sm text-[9px] text-on-surface-variant">WSW · Gust 42 km/h</div>
+</div>
+<!-- Ensemble Spread -->
+<div class="bg-surface-container-lowest/70 p-2.5 rounded-xl border border-white/5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-caps text-[9px] uppercase">ENSEMBLE SPREAD</span>
+<span class="material-symbols-outlined text-[14px] text-secondary-container">analytics</span>
+</div>
+<div class="flex items-baseline gap-1 my-1">
+<span class="font-data-mono-lg text-xl text-secondary font-bold">±11.2</span>
+<span class="font-data-mono-sm text-xs text-on-surface-variant">mm</span>
+</div>
+<div class="font-data-mono-sm text-[9px] text-secondary">Moderate IQR Dispersal</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Adaptive Model Fusion & Weights -->
+<div class="glass-card p-3.5 rounded-2xl flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[9px] text-primary tracking-wider uppercase font-semibold">ADAPTIVE MODEL FUSION &amp; WEIGHTS</span>
+<span class="text-[10px] text-on-surface-variant">Tuned via regime error covariance</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">tune</span>
+</div>
+<!-- Regime note -->
+<div class="bg-surface-container-lowest/60 px-2 py-1 rounded-lg border border-white/5 text-[10px] text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-primary">storm</span>
+<span class="truncate">Convective Surge &amp; Orographic Lift</span>
+</div>
+<!-- Horizontal Dynamic Bars -->
+<div class="flex flex-col gap-2 pt-1">
+<!-- NCUM -->
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between text-[11px] font-data-mono-sm">
+<span class="text-on-surface font-medium">NCUM (MoES NWP)</span>
+<span class="text-primary font-bold">31%</span>
+</div>
+<div class="w-full bg-black/40 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 31%;"></div>
+</div>
+</div>
+<!-- NEPS -->
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between text-[11px] font-data-mono-sm">
+<span class="text-on-surface font-medium">NEPS (Ensemble)</span>
+<span class="text-tertiary font-bold">24%</span>
+</div>
+<div class="w-full bg-black/40 h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 24%;"></div>
+</div>
+</div>
+<!-- BharatFS -->
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between text-[11px] font-data-mono-sm">
+<span class="text-on-surface font-medium">BharatFS (Regional)</span>
+<span class="text-secondary font-bold">18%</span>
+</div>
+<div class="w-full bg-black/40 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 18%;"></div>
+</div>
+</div>
+<!-- GraphCast -->
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between text-[11px] font-data-mono-sm">
+<span class="text-on-surface font-medium">GraphCast AI</span>
+<span class="text-primary font-bold">15%</span>
+</div>
+<div class="w-full bg-black/40 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 15%;"></div>
+</div>
+</div>
+<!-- GenCast -->
+<div class="flex flex-col gap-0.5">
+<div class="flex justify-between text-[11px] font-data-mono-sm">
+<span class="text-on-surface font-medium">GenCast AI (Diffusion)</span>
+<span class="text-secondary-fixed font-bold">12%</span>
+</div>
+<div class="w-full bg-black/40 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 12%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[9px] font-data-mono-sm text-outline pt-1 border-t border-white/5">
+<span>RATIO: 27% AI / 73% NWP</span>
+<span class="text-tertiary">MSE Regulated</span>
+</div>
+</div>
+<!-- Card 3: Model Agreement & Extreme Watch -->
+<div class="glass-card p-3.5 rounded-2xl flex flex-col gap-2 border-amber-500/30 bg-amber-950/15">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-amber-300">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span class="font-label-caps text-[9px] font-bold uppercase tracking-wider">HEAVY RAINFALL WATCH</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-data-mono-sm text-[9px] font-bold border border-amber-500/30">
+          CONVECTIVE SURGE
+        </span>
+</div>
+<div class="flex items-baseline justify-between text-xs">
+<span class="text-on-surface-variant">Probability (≥65mm/24h):</span>
+<span class="font-data-mono-sm text-amber-300 font-bold text-sm">72% (Elevated)</span>
+</div>
+<p class="text-[11px] text-on-surface-variant leading-relaxed">
+        High-resolution BharatFS &amp; NCUM concur on intense convective rainfall bands crossing the North Konkan strip over the next 48h. Advisory protocol active.
+      </p>
+<div class="flex items-center justify-between pt-1.5 border-t border-amber-500/20 text-[10px]">
+<span class="font-data-mono-sm text-amber-200/70">Severity: C-3 (Warning)</span>
+<span class="font-data-mono-sm text-tertiary">Agreement: 74% (Mod-High)</span>
+</div>
+</div>
+</aside>
+<!-- ===================================================================== -->
+<!-- 5. LOWER-LEFT FLOATING LEGEND & TELEMETRY BAR                         -->
+<!-- ===================================================================== -->
+<div class="fixed bottom-4 left-20 z-30 flex flex-col gap-2 pointer-events-auto">
+<!-- Scientific Legend Pill -->
+<div class="glass-pill px-3.5 py-2.5 rounded-2xl flex flex-col gap-1.5 w-76 shadow-2xl">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase tracking-wider">PRECIP ACCUMULATION (mm / 24h)</span>
+<span class="font-data-mono-sm text-[9px] text-primary">IMD / ECMWF Standard</span>
+</div>
+<!-- Continuous Spectral Gradient Bar -->
+<div class="relative h-2 w-full rounded-full bg-gradient-to-r from-sky-950 via-teal-400 via-emerald-400 via-amber-400 to-pink-500 shadow-inner"></div>
+<div class="flex justify-between font-data-mono-sm text-[9px] text-on-surface-variant">
+<span>0</span>
+<span>10</span>
+<span>25</span>
+<span>50</span>
+<span>100</span>
+<span class="text-pink-400 font-semibold">&gt;150 mm</span>
+</div>
+</div>
+<!-- Diagnostic Health Strip Pill -->
+<div class="glass-pill px-3 py-1.5 rounded-xl flex items-center gap-3 font-data-mono-sm text-[10px] text-on-surface-variant shadow-xl">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>MODEL AGREEMENT:</span>
+<span class="text-primary font-bold">74% (MODERATE)</span>
+</div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-tertiary">radar</span>
+<span>DWR RADAR IN-SITU:</span>
+<span class="text-on-surface font-medium">38 STATIONS SYNCED</span>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- 6. BOTTOM FLOATING FORECAST TIMELINE CONTROL DECK                     -->
+<!-- ===================================================================== -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 glass-pill px-4 py-2 rounded-2xl flex flex-col gap-1.5 shadow-2xl max-w-2xl w-[92vw] md:w-auto pointer-events-auto">
+<!-- Playback Transport Row & Step Buttons -->
+<div class="flex items-center justify-between gap-3">
+<!-- Play / Pause & Steps -->
+<div class="flex items-center gap-1 bg-black/40 p-0.5 rounded-lg border border-white/5">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors" title="Previous 6h Step">
+<span class="material-symbols-outlined text-[16px]">skip_previous</span>
+</button>
+<button class="px-2.5 py-0.5 rounded bg-primary text-on-primary hover:bg-primary-container font-data-mono-sm text-[11px] font-bold flex items-center gap-1 transition-all" id="playbackToggle">
+<span class="material-symbols-outlined text-[15px]">play_arrow</span>
+<span>PLAY</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface transition-colors" title="Next 6h Step">
+<span class="material-symbols-outlined text-[16px]">skip_next</span>
+</button>
+<span class="px-1.5 text-[10px] font-data-mono-sm text-outline border-l border-white/10">1.0x</span>
+</div>
+<!-- Lead Time Step Chips -->
+<div class="flex items-center gap-1 font-data-mono-sm text-[11px] overflow-x-auto">
+<button class="px-2 py-0.5 rounded text-outline hover:text-on-surface">NOW</button>
+<button class="px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface">+12H</button>
+<button class="px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface">+24H</button>
+<button class="px-2.5 py-0.5 rounded bg-primary text-on-primary font-bold shadow-md ring-1 ring-primary/50">+48H</button>
+<button class="px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface">+72H</button>
+<button class="px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface">+96H</button>
+<button class="px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface">+120H</button>
+<button class="px-2 py-0.5 rounded text-outline hover:text-on-surface">+240H</button>
+</div>
+<!-- Epoch Timestamp -->
+<div class="hidden sm:flex items-center gap-1 font-data-mono-sm text-[10px] text-on-surface-variant bg-black/40 px-2 py-1 rounded-lg border border-white/5">
+<span class="text-outline">INIT:</span>
+<span class="text-primary font-semibold">24 SEP 00Z</span>
+<span class="text-outline">→</span>
+<span class="text-on-surface font-semibold">26 SEP 00Z</span>
+</div>
+</div>
+<!-- Scrubbable Tactical Time Rail Slider -->
+<div class="relative w-full h-2 bg-black/60 rounded-full overflow-hidden flex items-center shadow-inner cursor-pointer">
+<div class="h-full bg-gradient-to-r from-primary via-tertiary-container to-secondary" style="width: 38%;"></div>
+<!-- Needle Head -->
+<div class="absolute h-3 w-1 bg-white rounded-full shadow-[0_0_8px_#ffffff] left-[38%] -translate-x-1/2 z-10"></div>
+<!-- Uncertainty Expansion Envelope -->
+<div class="absolute right-0 h-full bg-white/5" style="width: 62%;"></div>
+</div>
+</div>
+<!-- Interactive Toggle Logic -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const playBtn = document.getElementById('playbackToggle');
+      let isPlaying = false;
+      if (playBtn) {
+        playBtn.addEventListener('click', () => {
+          isPlaying = !isPlaying;
+          if (isPlaying) {
+            playBtn.classList.remove('bg-primary', 'text-on-primary');
+            playBtn.classList.add('bg-tertiary', 'text-black');
+            playBtn.innerHTML = '<span class="material-symbols-outlined text-[15px]">pause</span><span>PAUSE</span>';
+          } else {
+            playBtn.classList.remove('bg-tertiary', 'text-black');
+            playBtn.classList.add('bg-primary', 'text-on-primary');
+            playBtn.innerHTML = '<span class="material-symbols-outlined text-[15px]">play_arrow</span><span>PLAY</span>';
+          }
+        });
+      }
+    });
+  </script>
+</body></html>

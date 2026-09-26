@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meteorological Forecast Fusion Platform · UI Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              900: '#0c4a6e',
+              950: '#040609'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { background-color: #040609; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+    .glass-card {
+      background: rgba(14, 18, 27, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      transition: all 0.25s ease;
+    }
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px -4px rgba(14, 165, 233, 0.2);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#040609]">
+  <!-- Top Bar -->
+  <header class="border-b border-sky-900/40 bg-[#070b12]/90 sticky top-0 z-50 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="h-9 w-9 rounded-lg bg-sky-500/20 border border-sky-400/30 flex items-center justify-center text-sky-400 font-bold">
+        🛰️
+      </div>
+      <div>
+        <h1 class="text-lg font-bold text-white tracking-wide">Meteorological Forecast Fusion Platform</h1>
+        <p class="text-xs font-mono text-sky-400/80">SIH Winning Edition · Project ID: 14662388768399450705</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span>
+        Stitch Connected (11 Screens)
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main class="flex-1 p-6 max-w-7xl mx-auto w-full">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-100">Frontend Design System & Screens</h2>
+        <p class="text-sm text-slate-400 mt-1">Live synchronized screens from Google Stitch design project.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="screen-grid">
+      <!-- Cards rendered via JavaScript -->
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-800/80 py-4 px-6 text-center text-xs text-slate-500 font-mono">
+    Synced via Stitch MCP Server · Google Stitch Integration
+  </footer>
+
+  <script>
+    const screens = [
+      {
+        title: "God's-Eye Geospatial Command Center",
+        file: "stitch_designs/7f1caac4af9144bb8e23a6d9ef3580bb_god_s-eye_geospatial_command_center.html",
+        badge: "Main Command Hub",
+        desc: "3D Tilted atmospheric canvas, radar pulse & live stream layers."
+      },
+      {
+        title: "Orbital Weather Command & AI Geospatial Fusion Engine",
+        file: "stitch_designs/9c0aafdbb285443f89b575eb86d301bb_orbital_weather_command___ai_geospatial_fusion_engine.html",
+        badge: "Orbital Core",
+        desc: "High-level orbital command overview and satellite telemetry."
+      },
+      {
+        title: "Extreme Weather Intelligence — Decision Support Terminal",
+        file: "stitch_designs/7f93265c00a14d4fa517c93765417355_extreme_weather_intelligence___decision_support_terminal.html",
+        badge: "Critical Alert",
+        desc: "Early warning, impact forecasting and rapid decision support."
+      },
+      {
+        title: "Adaptive Model Weights — Dynamic Fusion Architecture",
+        file: "stitch_designs/3a158caaa05a4160af2d8e279bf71a38_adaptive_model_weights___dynamic_fusion_architecture.html",
+        badge: "Fusion Weights",
+        desc: "Dynamic weighting algorithm matrix across forecast models."
+      },
+      {
+        title: "Fusion Neural Architecture — 3D Atmospheric Brain",
+        file: "stitch_designs/a4d408bb11494edbad79f25d64f88d2b_fusion_neural_architecture___3d_atmospheric_computational_brain.html",
+        badge: "AI Brain",
+        desc: "Deep neural network topological layers for weather tensor processing."
+      },
+      {
+        title: "Geospatial Layers — Multi-Source Atmospheric Stack",
+        file: "stitch_designs/ba508183c7494b96ae22eb723397e027_geospatial_layers___multi-source_atmospheric_stack_manager.html",
+        badge: "GIS Stack",
+        desc: "Multi-layer atmospheric stack manager with ECMWF, GFS, radar overlays."
+      },
+      {
+        title: "Forecast Explorer — Hybrid Model Comparison",
+        file: "stitch_designs/b50bd5cc573047d79857ea61beb64746_forecast_explorer___hybrid_model_comparison.html",
+        badge: "Model Explorer",
+        desc: "Side-by-side comparative analytics for ensemble forecasts."
+      },
+      {
+        title: "Location Analysis — Konkan Coast Point Inspection",
+        file: "stitch_designs/3bad00a8696e4eefbc29f93713a517a9_location_analysis___konkan_coast_point_inspection.html",
+        badge: "Point Analysis",
+        desc: "Granular micro-climate and coastal storm surge analysis."
+      },
+      {
+        title: "Data & Model Health — Pipeline Telemetry & Source Matrix",
+        file: "stitch_designs/e7813bd7fb0340ecbf9fbc92eadaf56c_data___model_health___pipeline_telemetry___source_matrix.html",
+        badge: "Telemetry & Health",
+        desc: "Ingestion latency, satellite feed health, and API uptime matrix."
+      },
+      {
+        title: "Verification Lab — Multi-Model Skill & Fusion Evaluation",
+        file: "stitch_designs/8af2a5fe3fc54a428c5a9d19fe346ec7_verification_lab___multi-model_skill___fusion_evaluation.html",
+        badge: "Verification Lab",
+        desc: "Skill score benchmarks, RMSE, CRPS and ETS metrics."
+      },
+      {
+        title: "Forecast Run Details — Historical Archive & Provenance",
+        file: "stitch_designs/eb782249117f447a8a848c0bff4e8bed_forecast_run___execution_details___historical_archive___pipeline_provenance.html",
+        badge: "Provenance Archive",
+        desc: "Historical model runs, hyperparameter state and pipeline reproducibility."
+      }
+    ];
+
+    const grid = document.getElementById('screen-grid');
+    grid.innerHTML = screens.map((s, idx) => `
+      <div class="glass-card rounded-xl p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-sky-500/10 text-sky-300 border border-sky-500/20">${s.badge}</span>
+            <span class="text-xs font-mono text-slate-500">#0${idx + 1}</span>
+          </div>
+          <h3 class="text-base font-semibold text-slate-100 mb-2 leading-snug">${s.title}</h3>
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">${s.desc}</p>
+        </div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+          <a href="${s.file}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400 hover:text-sky-300 hover:underline">
+            Launch Screen
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+          <span class="text-[11px] font-mono text-slate-500">HTML / Tailwind</span>
+        </div>
+      </div>
+    `).join('');
+  </script>
+</body>
+</html>

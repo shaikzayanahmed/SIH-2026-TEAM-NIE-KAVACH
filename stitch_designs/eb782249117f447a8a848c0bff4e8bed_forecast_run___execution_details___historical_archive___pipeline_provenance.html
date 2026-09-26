@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed-variant": "#005048", "on-background": "#e1e2ea", "outline": "#87929a", "secondary-container": "#3198dc", "primary": "#8ed5ff", "on-primary": "#00354a", "inverse-primary": "#00668a", "surface-dim": "#101319", "on-error-container": "#ffdad6", "secondary-fixed": "#cce5ff", "error": "#ffb4ab", "surface-tint": "#7bd0ff", "on-primary-container": "#004965", "secondary": "#93ccff", "on-tertiary": "#003731", "on-secondary-container": "#002c47", "tertiary-fixed-dim": "#4fdbc8", "on-primary-fixed-variant": "#004c69", "on-tertiary-fixed": "#00201c", "tertiary-fixed": "#71f8e4", "surface-container-highest": "#32353b", "tertiary": "#57e1ce", "surface-container-low": "#191c21", "secondary-fixed-dim": "#93ccff", "on-surface-variant": "#bdc8d1", "background": "#101319", "outline-variant": "#3e484f", "surface-container": "#1d2025", "primary-fixed": "#c4e7ff", "surface-variant": "#32353b", "on-surface": "#e1e2ea", "surface-bright": "#36393f", "tertiary-container": "#30c5b3", "on-error": "#690005", "on-tertiary-container": "#004d44", "on-secondary": "#003351", "primary-fixed-dim": "#7bd0ff", "inverse-on-surface": "#2d3036", "on-secondary-fixed-variant": "#004b73", "on-primary-fixed": "#001e2c", "inverse-surface": "#e1e2ea", "error-container": "#93000a", "primary-container": "#38bdf8", "surface": "#101319", "surface-container-high": "#272a30", "on-secondary-fixed": "#001d31", "surface-container-lowest": "#0b0e13" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xl": "1.5rem", "gutter": "0.75rem", "gutter-desktop": "1rem", "space-md": "0.75rem", "margin-desktop": "1.5rem", "margin": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "body-lg": ["Inter"], "data-mono-lg": ["JetBrains Mono"], "headline-lg": ["Inter"], "display-lg": ["Inter"], "display-lg-mobile": ["Inter"], "headline-xl": ["Inter"], "data-mono-sm": ["JetBrains Mono"], "body-md": ["Inter"], "headline-sm": ["Inter"], "label-caps": ["JetBrains Mono"], "data-mono-md": ["JetBrains Mono"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "data-mono-lg": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "headline-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "data-mono-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "400" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "data-mono-md": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 h-14 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.6)]"><div class="h-14 w-full px-gutter-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-gutter"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-primary text-[20px]">radar</span><span class="font-label-caps text-label-caps uppercase tracking-wider text-primary">SIH26081</span><span class="text-outline-variant font-data-mono-sm text-data-mono-sm">/</span><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-semibold">ORBITAL COMMAND</span></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"><span class="material-symbols-outlined text-on-surface-variant text-[14px]">schedule</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant uppercase">RUN 24 SEP 2026 · 00 UTC</span></div></div><div class="hidden md:flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"><span class="text-tertiary font-data-mono-sm text-data-mono-sm">●</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant uppercase">STATUS</span><span class="font-data-mono-sm text-data-mono-sm text-tertiary font-medium">COMPLETED</span></div><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"><span class="text-secondary font-data-mono-sm text-data-mono-sm">●</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant uppercase">DATA</span><span class="font-data-mono-sm text-data-mono-sm text-secondary font-medium">SYNCHRONIZED</span></div><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"><span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant uppercase">MODELS</span><span class="font-data-mono-sm text-data-mono-sm text-primary font-medium">6/6</span></div><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-space-xs rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"><span class="text-tertiary font-data-mono-sm text-data-mono-sm">●</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant uppercase">SYSTEM</span><span class="font-data-mono-sm text-data-mono-sm text-tertiary font-medium">OPERATIONAL</span></div><div class="hidden 2xl:flex items-center gap-space-xs font-data-mono-sm text-data-mono-sm text-on-surface-variant"><span class="text-outline">GEO:</span><span>44.20° N 12.38° E</span><span class="text-outline ml-space-xs">TILT:</span><span>-14.8°</span><span class="text-outline ml-space-xs">ALT:</span><span>780KM</span></div></div><div class="flex items-center gap-gutter"><div class="flex items-center bg-surface-container-low p-space-xs rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"><button class="p-space-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Split Quad View" type="button"><span class="material-symbols-outlined text-[16px]">grid_view</span></button><button class="p-space-xs rounded text-primary hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Single Earth Projection" type="button"><span class="material-symbols-outlined text-[16px]">public</span></button><button class="p-space-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Orthographic Projection" type="button"><span class="material-symbols-outlined text-[16px]">layers</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-14 bottom-10 w-16 z-40 bg-surface-container-lowest/85 backdrop-blur-xl flex flex-col items-center justify-between py-space-md shadow-[4px_0_24px_rgba(0,0,0,0.6)]"><nav class="flex flex-col items-center gap-space-xs w-full px-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(56,189,248,0.35)]"><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="overview" href="#" title="Overview"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Overview</span></a><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="forecast" href="#" title="Forecast"><span class="material-symbols-outlined text-[20px]">airwave</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Forecast</span></a><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="weights" href="#" title="Weights"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Weights</span></a><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="alert" href="#" title="Alert"><span class="material-symbols-outlined text-[20px]">warning</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Alert</span></a><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="verify" href="#" title="Verify"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Verify</span></a><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="data" href="#" title="Data"><span class="material-symbols-outlined text-[20px]">database</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Data</span></a><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="layers" href="#" title="Layers"><span class="material-symbols-outlined text-[20px]">stacked_line_chart</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Layers</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-12 h-12 rounded transition-colors bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(56,189,248,0.35)]" data-path="archive" href="#" title="Archive"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight font-semibold">Archive</span></a></nav><div class="flex flex-col items-center gap-space-xs w-full px-space-xs"><a class="flex flex-col items-center justify-center w-12 h-12 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-caps text-[9px] uppercase mt-0.5 tracking-tight">Settings</span></a></div></aside><div class="pl-16"><main class="relative pt-14 pb-10 min-h-screen bg-surface-container-lowest bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(56,189,248,0.12),rgba(11,14,19,0.95))] text-on-surface"><div class="flex flex-col w-full">
+<!-- Subtle Background Geospatial Aura Container -->
+<div class="relative w-full px-gutter-desktop py-space-md flex flex-col gap-space-md overflow-hidden">
+<!-- Background Geospatial Earth Arc Visual Placeholder -->
+<div class="absolute -top-32 right-0 w-[680px] h-[680px] rounded-full pointer-events-none opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25)_0%,rgba(14,165,233,0.08)_45%,transparent_75%)] blur-2xl"></div>
+<div class="absolute -top-12 right-20 w-96 h-96 rounded-full pointer-events-none opacity-10 border border-primary/20"></div>
+<!-- 1. TOP HEADER STRIP & RUN NAVIGATOR -->
+<section class="relative z-10 w-full bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+<!-- Run Identity & Metas -->
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-wider">EXECUTION ARCHIVE</span>
+<span class="text-outline-variant font-data-mono-sm text-data-mono-sm">/</span>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-on-surface font-semibold">RUN ID: FR-2026-09-24-00</h1>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded bg-tertiary-container/20 text-tertiary font-data-mono-sm text-data-mono-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(87,225,206,0.8)]"></span>
+            COMPLETED (ALL STAGES VERIFIED)
+          </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 font-data-mono-sm text-data-mono-sm text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="text-outline">INIT:</span>
+<span class="text-on-surface">24 SEP 2026 · 00:00 UTC</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-outline">COMPLETED:</span>
+<span class="text-on-surface">24 SEP 2026 · 00:08:14 UTC</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-outline">DURATION:</span>
+<span class="text-primary font-medium">08m 14s</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-outline">HORIZON:</span>
+<span class="text-secondary font-medium">240H</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-outline">GRID:</span>
+<span class="text-on-surface">UNIFIED (0.05° ~5km)</span>
+</div>
+</div>
+</div>
+<!-- Historical Run Navigator & Filters -->
+<div class="flex flex-col items-start xl:items-end gap-space-xs w-full xl:w-auto">
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-low p-1 rounded-lg shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]">
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-data-mono-sm text-data-mono-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+<span>23 SEP · 12 UTC</span>
+</button>
+<span class="px-space-sm py-1 rounded bg-surface-container-highest text-primary font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock</span>
+<span>24 SEP · 00 UTC</span>
+</span>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-data-mono-sm text-data-mono-sm flex items-center gap-1" type="button">
+<span>24 SEP · 06 UTC</span>
+<span class="text-outline font-normal">(EST. 05h 46m)</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+<button class="ml-space-xs px-space-sm py-1 rounded bg-secondary-container/20 text-secondary hover:bg-secondary-container/30 transition-colors font-data-mono-sm text-data-mono-sm font-medium flex items-center gap-1" type="button">
+<span>COMPARE</span>
+<span class="material-symbols-outlined text-[14px]">compare_arrows</span>
+</button>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-space-xs font-label-caps text-label-caps">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-semibold">ALL RUNS (842)</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-tertiary">OPERATIONAL (836)</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-secondary">PARTIAL/FALLBACK (5)</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-error">FAILED (1)</span>
+</div>
+</div>
+</section>
+<!-- 2. MAIN OPERATIONAL PIPELINE VISUALIZATION (Hero Node Graph) -->
+<section class="relative z-10 w-full bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-md">
+<!-- Section Header -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+<h2 class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-semibold uppercase">END-TO-END FORECAST PIPELINE EXECUTION</h2>
+</div>
+<div class="flex items-center gap-space-md font-data-mono-sm text-data-mono-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="text-outline">EXECUTION CLOCK:</span>
+<span class="text-primary font-medium">T+08m 14s TOTAL</span>
+</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-tertiary">100% REPRODUCIBLE HASH #8f2a9c1e</span>
+</div>
+</div>
+<!-- Node Horizontal Track -->
+<div class="w-full overflow-x-auto pb-2 scrollbar-none">
+<div class="min-w-[1260px] flex items-center justify-between relative py-2">
+<!-- Continuous Connection Wire Behind Nodes -->
+<div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-0.5 bg-gradient-to-r from-primary-container via-tertiary to-primary-container opacity-40 z-0"></div>
+<!-- Step 1: Data Sources -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shadow-[0_0_12px_rgba(56,189,248,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">input</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">DATA SOURCES</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">6/6 Active</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 12s</span>
+</div>
+<!-- Step 2: Ingestion -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shadow-[0_0_12px_rgba(56,189,248,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">INGESTION</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">18,420 Chunks</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">02m 14s</span>
+</div>
+<!-- Step 3: Validation -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-tertiary flex items-center justify-center shadow-[0_0_12px_rgba(87,225,206,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">VALIDATION</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">Unit/Range Check</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 31s</span>
+</div>
+<!-- Step 4: Normalization -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shadow-[0_0_12px_rgba(56,189,248,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">balance</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">NORMALIZATION</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">SI Base Units</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 21s</span>
+</div>
+<!-- Step 5: Regridding -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shadow-[0_0_12px_rgba(147,204,255,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">grid_goldenratio</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">REGRIDDING</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">xESMF Bilinear</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">01m 12s</span>
+</div>
+<!-- Step 6: Feature Eng. -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shadow-[0_0_12px_rgba(56,189,248,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">terrain</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">FEATURE ENG.</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">Orographic/Synoptic</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 42s</span>
+</div>
+<!-- Step 7: Model Inference -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-[0_0_16px_rgba(56,189,248,0.5)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">memory</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">INFERENCE</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">NWP + GNN AI</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">01m 38s</span>
+</div>
+<!-- Step 8: Adaptive Fusion -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-tertiary flex items-center justify-center shadow-[0_0_12px_rgba(87,225,206,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">FUSION</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">Dynamic Simplex</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 48s</span>
+</div>
+<!-- Step 9: Uncertainty -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shadow-[0_0_12px_rgba(56,189,248,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">blur_on</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">UNCERTAINTY</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">CRPS / Spread</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 21s</span>
+</div>
+<!-- Step 10: Verification -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shadow-[0_0_12px_rgba(147,204,255,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">VERIFICATION</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">AWS/Radar Ground</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 31s</span>
+</div>
+<!-- Step 11: Publishing -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer w-24">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-tertiary flex items-center justify-center shadow-[0_0_12px_rgba(87,225,206,0.25)] transition-transform group-hover:scale-105">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mt-2 text-center">PUBLISHING</span>
+<span class="font-data-mono-sm text-[10px] text-on-surface-variant text-center">Zarr / Cache</span>
+<span class="font-data-mono-sm text-[10px] text-tertiary mt-0.5">00m 17s</span>
+</div>
+</div>
+</div>
+<!-- Proportional Latency Progression Strip -->
+<div class="w-full flex flex-col gap-1">
+<div class="w-full h-2 rounded-full bg-surface-container-low overflow-hidden flex shadow-[inset_0_1px_3px_rgba(0,0,0,0.8)]">
+<div class="h-full bg-secondary-container" style="width: 2.4%" title="Data Sources: 12s"></div>
+<div class="h-full bg-primary-container" style="width: 27.1%" title="Ingestion: 134s"></div>
+<div class="h-full bg-tertiary" style="width: 6.3%" title="Validation: 31s"></div>
+<div class="h-full bg-primary" style="width: 4.2%" title="Normalization: 21s"></div>
+<div class="h-full bg-secondary" style="width: 14.6%" title="Regridding: 72s"></div>
+<div class="h-full bg-primary-fixed-dim" style="width: 8.5%" title="Feature Eng: 42s"></div>
+<div class="h-full bg-primary-container shadow-[0_0_8px_rgba(56,189,248,0.6)]" style="width: 19.8%" title="Inference: 98s"></div>
+<div class="h-full bg-tertiary-container" style="width: 9.7%" title="Fusion: 48s"></div>
+<div class="h-full bg-primary" style="width: 4.2%" title="Uncertainty: 21s"></div>
+<div class="h-full bg-secondary" style="width: 6.3%" title="Verification: 31s"></div>
+<div class="h-full bg-tertiary" style="width: 3.4%" title="Publishing: 17s"></div>
+</div>
+<div class="flex items-center justify-between font-data-mono-sm text-[10px] text-on-surface-variant">
+<span>T+00m 00s [CYCLE START]</span>
+<span class="text-tertiary">11/11 PIPELINE STAGES VERIFIED · REPRODUCIBILITY 100%</span>
+<span>T+08m 14s [PUBLISHED TO EDGES]</span>
+</div>
+</div>
+</section>
+<!-- 3. THREE-COLUMN OPERATIONAL TELEMETRY DECK -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- ================= LEFT COLUMN (4 COLS) ================= -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card A: Active Forecast Sources & Ingestion Metadata -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">satellite_alt</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-semibold tracking-tight">DATA SOURCES &amp; INGESTION</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-tertiary">6/6 ONLINE</span>
+</div>
+<!-- Compact Sources Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left font-data-mono-sm text-data-mono-sm">
+<thead>
+<tr class="text-outline font-label-caps text-label-caps uppercase bg-surface-container-low/60">
+<th class="py-1 px-1.5 rounded-l">SOURCE</th>
+<th class="py-1 px-1.5">TYPE</th>
+<th class="py-1 px-1.5">VERSION</th>
+<th class="py-1 px-1.5">LATENCY</th>
+<th class="py-1 px-1.5 rounded-r text-right">STATUS</th>
+</tr>
+</thead>
+<tbody class="text-on-surface-variant divide-y-0">
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-1 px-1.5 font-medium text-on-surface">NCUM (12km)</td>
+<td class="py-1 px-1.5 text-outline">Physics</td>
+<td class="py-1 px-1.5 text-on-surface">v4.2.1-moes</td>
+<td class="py-1 px-1.5 text-secondary">03m 12s</td>
+<td class="py-1 px-1.5 text-right text-tertiary">100%</td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-1 px-1.5 font-medium text-on-surface">NEPS (11-Mem)</td>
+<td class="py-1 px-1.5 text-outline">Ens NWP</td>
+<td class="py-1 px-1.5 text-on-surface">v3.8-pert</td>
+<td class="py-1 px-1.5 text-secondary">04m 08s</td>
+<td class="py-1 px-1.5 text-right text-tertiary">100%</td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-1 px-1.5 font-medium text-on-surface">BharatFS (4km)</td>
+<td class="py-1 px-1.5 text-outline">Hi-Res</td>
+<td class="py-1 px-1.5 text-on-surface">v2.1-km4</td>
+<td class="py-1 px-1.5 text-secondary">05m 31s</td>
+<td class="py-1 px-1.5 text-right text-tertiary">99.6%</td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-1 px-1.5 font-medium text-primary">GraphCast</td>
+<td class="py-1 px-1.5 text-outline">GNN AI</td>
+<td class="py-1 px-1.5 text-on-surface">gc-0.25-oper</td>
+<td class="py-1 px-1.5 text-secondary">External</td>
+<td class="py-1 px-1.5 text-right text-tertiary">READY</td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-1 px-1.5 font-medium text-primary">GenCast</td>
+<td class="py-1 px-1.5 text-outline">Diff Ens</td>
+<td class="py-1 px-1.5 text-on-surface">diff-50ens</td>
+<td class="py-1 px-1.5 text-secondary">External</td>
+<td class="py-1 px-1.5 text-right text-tertiary">READY</td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-1 px-1.5 font-medium text-on-surface">IMD AWS/Radar</td>
+<td class="py-1 px-1.5 text-outline">In-Situ</td>
+<td class="py-1 px-1.5 text-on-surface">aws-dwr-hub</td>
+<td class="py-1 px-1.5 text-secondary">Stream</td>
+<td class="py-1 px-1.5 text-right text-tertiary">SYNCED</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Card B: Data Processed & Storage Footprint -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">storage</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-semibold tracking-tight">STORAGE FOOTPRINT</span>
+</div>
+<span class="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-surface-container-low text-primary uppercase">ZARR COMPRESSED</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs font-data-mono-sm text-data-mono-sm">
+<div class="bg-surface-container-low p-2 rounded flex flex-col shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<span class="text-outline text-[10px]">OBJECT CHUNKS</span>
+<span class="text-on-surface font-data-mono-lg text-data-mono-lg font-semibold">18,420</span>
+<span class="text-tertiary text-[10px]">100% verified</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded flex flex-col shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<span class="text-outline text-[10px]">OBSERVATIONS</span>
+<span class="text-on-surface font-data-mono-lg text-data-mono-lg font-semibold">2.84M</span>
+<span class="text-secondary text-[10px]">12,400 AWS stns</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded flex flex-col shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<span class="text-outline text-[10px]">GRID CELLS</span>
+<span class="text-on-surface font-data-mono-lg text-data-mono-lg font-semibold">1.42M</span>
+<span class="text-outline text-[10px]">0.05° spatial res</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded flex flex-col shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<span class="text-outline text-[10px]">VOLUME (COMPR)</span>
+<span class="text-primary font-data-mono-lg text-data-mono-lg font-semibold">142.8 GB</span>
+<span class="text-tertiary text-[10px]">zstd level 4</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-body-sm text-on-surface-variant pt-1">
+<span>Atmospheric Variables:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface">4 Core (Precip, Temp, Wind, MSLP)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm text-body-sm text-on-surface-variant">
+<span>Lead Steps:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface">10 Timesteps (NOW → +240H)</span>
+</div>
+</div>
+<!-- Operational Health Badge Mini -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[24px]">task_alt</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">RUN QUALITY AUDIT</span>
+<span class="font-data-mono-sm text-data-mono-sm text-tertiary">STATUS: CERTIFIED OPERATIONAL</span>
+</div>
+</div>
+<div class="text-right font-data-mono-sm text-data-mono-sm">
+<span class="text-primary font-bold">99.8%</span>
+<div class="text-outline text-[10px]">COHERENCE</div>
+</div>
+</div>
+</div>
+<!-- ================= CENTER COLUMN (4 COLS) ================= -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card C: Fusion Configuration & Weight Allocation -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">hub</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-semibold tracking-tight">FUSION WEIGHT ALLOCATION</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-tertiary font-semibold">100.0% SIMPLEX</span>
+</div>
+<!-- Configuration Tags -->
+<div class="flex flex-wrap gap-1">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-caps text-label-caps">VAR: PRECIP</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-caps text-label-caps">DOMAIN: ALL INDIA</span>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-low text-secondary font-label-caps text-label-caps">REGIME: CONVECTIVE SURGE</span>
+</div>
+<!-- Horizontal Weight Distribution Bars -->
+<div class="flex flex-col gap-space-xs pt-1">
+<!-- NCUM -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-data-mono-sm text-data-mono-sm">
+<span class="text-on-surface font-medium">NCUM (Physics NWP)</span>
+<div class="flex items-center gap-1.5">
+<span class="text-primary font-semibold">31.0%</span>
+<span class="text-tertiary text-[10px]">(+4% delta)</span>
+</div>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-low overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.7)]">
+<div class="h-full bg-primary" style="width: 31%"></div>
+</div>
+</div>
+<!-- NEPS -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-data-mono-sm text-data-mono-sm">
+<span class="text-on-surface font-medium">NEPS (Ensemble Core)</span>
+<div class="flex items-center gap-1.5">
+<span class="text-secondary font-semibold">24.0%</span>
+<span class="text-outline text-[10px]">(-2% delta)</span>
+</div>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-low overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.7)]">
+<div class="h-full bg-secondary" style="width: 24%"></div>
+</div>
+</div>
+<!-- BharatFS -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-data-mono-sm text-data-mono-sm">
+<span class="text-on-surface font-medium">BharatFS (4km Regional)</span>
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface font-semibold">18.0%</span>
+<span class="text-outline text-[10px]">(-1% delta)</span>
+</div>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-low overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.7)]">
+<div class="h-full bg-on-surface-variant" style="width: 18%"></div>
+</div>
+</div>
+<!-- GraphCast -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-data-mono-sm text-data-mono-sm">
+<span class="text-primary font-medium">GraphCast (DeepMind GNN)</span>
+<div class="flex items-center gap-1.5">
+<span class="text-tertiary font-semibold">15.0%</span>
+<span class="text-tertiary text-[10px]">(+2% delta)</span>
+</div>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-low overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.7)]">
+<div class="h-full bg-tertiary" style="width: 15%"></div>
+</div>
+</div>
+<!-- GenCast -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-data-mono-sm text-data-mono-sm">
+<span class="text-primary font-medium">GenCast (Diffusion Ens AI)</span>
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface font-semibold">12.0%</span>
+<span class="text-outline text-[10px]">(-3% delta)</span>
+</div>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-low overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.7)]">
+<div class="h-full bg-secondary-fixed-dim" style="width: 12%"></div>
+</div>
+</div>
+</div>
+<div class="p-2 rounded bg-surface-container-low font-data-mono-sm text-[11px] text-on-surface-variant leading-relaxed shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<span class="text-primary font-medium">ADAPTIVE NOTE:</span> Dynamic weights automatically rebalanced for the <span class="text-on-surface font-semibold">+48H lead window</span> over West Coast orographic shear zone with high convective uncertainty.
+          </div>
+</div>
+<!-- Card D: Run Execution Profile & Stage Latencies -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">timer</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-semibold tracking-tight">STAGE LATENCIES</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">TOTAL: 494s</span>
+</div>
+<!-- Stage Latency Comparison Bars -->
+<div class="flex flex-col gap-2 font-data-mono-sm text-data-mono-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline w-28">Ingestion</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 27%"></div>
+</div>
+<span class="text-on-surface w-14 text-right">02m 14s</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline w-28">Validation</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 6%"></div>
+</div>
+<span class="text-on-surface w-14 text-right">00m 31s</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline w-28">Regridding</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-secondary" style="width: 15%"></div>
+</div>
+<span class="text-on-surface w-14 text-right">01m 12s</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline w-28 font-medium text-primary">Inference</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-primary" style="width: 20%"></div>
+</div>
+<span class="text-primary w-14 text-right font-medium">01m 38s</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline w-28">Fusion Opt</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 10%"></div>
+</div>
+<span class="text-on-surface w-14 text-right">00m 48s</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline w-28">Verification</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-secondary" style="width: 6%"></div>
+</div>
+<span class="text-on-surface w-14 text-right">00m 31s</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline w-28">Publishing</span>
+<div class="flex-1 mx-2 h-2 rounded bg-surface-container-low overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 4%"></div>
+</div>
+<span class="text-on-surface w-14 text-right">00m 17s</span>
+</div>
+</div>
+<!-- Lead-Horizon Selector Scrubber -->
+<div class="flex flex-col gap-1 pt-1">
+<span class="font-label-caps text-label-caps uppercase text-outline">FOCUSED LEAD STEP INSPECTION</span>
+<div class="flex flex-wrap gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">NOW</button>
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">+12H</button>
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">+24H</button>
+<button class="px-2 py-1 rounded bg-primary-container text-on-primary-container font-semibold font-data-mono-sm text-[11px] shadow-[0_0_8px_rgba(56,189,248,0.4)]" type="button">+48H</button>
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">+72H</button>
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">+96H</button>
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">+120H</button>
+<button class="px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]" type="button">+240H</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= RIGHT COLUMN (4 COLS) ================= -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card E: Run Reproducibility & Audit Trail -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">fingerprint</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-semibold tracking-tight">REPRODUCIBILITY MANIFEST</span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col gap-1 font-data-mono-sm text-data-mono-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-low/40 px-2 rounded">
+<span class="text-outline">DETERMINISTIC HASH</span>
+<span class="text-primary font-mono select-all">sha256:8f2a9c1e...4b92</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<span class="text-outline">CONFIG SNAPSHOT</span>
+<span class="text-on-surface">YAML v4.2 (Locked)</span>
+</div>
+<div class="flex items-center justify-between py-1 bg-surface-container-low/40 px-2 rounded">
+<span class="text-outline">RANDOM SEED / RNG</span>
+<span class="text-secondary font-mono">420914</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2">
+<span class="text-outline">WEIGHT TENSORS</span>
+<span class="text-on-surface">Stored (Zarr chunk #2340)</span>
+</div>
+<div class="flex items-center justify-between py-1 bg-surface-container-low/40 px-2 rounded">
+<span class="text-outline">EXECUTION TARGET</span>
+<span class="text-tertiary">Local HPC + A100 SXM4</span>
+</div>
+</div>
+<!-- Compute Telemetry Gauges -->
+<div class="grid grid-cols-4 gap-1 pt-1 text-center font-data-mono-sm">
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col items-center">
+<span class="text-outline text-[9px]">CPU HOST</span>
+<span class="text-on-surface font-semibold text-[13px]">42%</span>
+<span class="text-outline text-[8px]">64 CORES</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col items-center">
+<span class="text-outline text-[9px]">RAM</span>
+<span class="text-on-surface font-semibold text-[13px]">61%</span>
+<span class="text-outline text-[8px]">156 GB</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col items-center">
+<span class="text-outline text-[9px]">GPU COMP</span>
+<span class="text-primary font-semibold text-[13px]">68%</span>
+<span class="text-outline text-[8px]">A100 SXM</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col items-center">
+<span class="text-outline text-[9px]">VRAM</span>
+<span class="text-secondary font-semibold text-[13px]">74%</span>
+<span class="text-outline text-[8px]">59.2 GB</span>
+</div>
+</div>
+</div>
+<!-- Card G: Terminal Run Log (Audit Stream) -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-outline text-[18px]">terminal</span>
+<span class="font-headline-sm text-headline-sm uppercase text-on-surface font-semibold tracking-tight">TERMINAL RUN LOG</span>
+</div>
+<span class="font-data-mono-sm text-[10px] text-tertiary">LIVE STREAM RECORD</span>
+</div>
+<div class="w-full bg-surface-container-low rounded p-space-sm font-data-mono-sm text-[11px] leading-relaxed text-on-surface-variant flex flex-col gap-1 max-h-44 overflow-y-auto shadow-[inset_0_2px_6px_rgba(0,0,0,0.8)]">
+<div><span class="text-outline">[00:00:02]</span> <span class="text-primary">[INIT]</span> Cycle FR-2026-09-24-00 init via cron runner.</div>
+<div><span class="text-outline">[00:01:14]</span> <span class="text-secondary">[INGEST]</span> Workers (01-04) spawned; 18,420 chunks fetched.</div>
+<div><span class="text-outline">[00:02:16]</span> <span class="text-tertiary">[VALID]</span> Range &amp; SI conversions verified (K -&gt; °C, Pa -&gt; hPa).</div>
+<div><span class="text-outline">[00:03:28]</span> <span class="text-secondary">[REGRID]</span> xESMF bilinear applied over 1.42M grid points.</div>
+<div><span class="text-outline">[00:05:06]</span> <span class="text-primary">[INFER]</span> AI external inference batch fetched; latent tensors synced.</div>
+<div><span class="text-outline">[00:06:54]</span> <span class="text-tertiary">[FUSION]</span> Simplex solver converged in 48 iter (loss: 0.0018).</div>
+<div><span class="text-outline">[00:07:42]</span> <span class="text-primary">[UNCERT]</span> CRPS spread distribution envelopes computed.</div>
+<div><span class="text-outline">[00:08:14]</span> <span class="text-tertiary font-medium">[PUBLISH]</span> Run published to MinIO edge lake &amp; Redis cache.</div>
+</div>
+</div>
+<!-- Card H: Cross-Module Navigation & Export Actions -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col gap-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-outline font-semibold">CROSS-MODULE SHORTCUTS</span>
+<div class="grid grid-cols-2 gap-space-xs">
+<a class="p-2 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between text-body-sm text-body-sm text-on-surface" href="#">
+<span>EXPLORER</span>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward</span>
+</a>
+<a class="p-2 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between text-body-sm text-body-sm text-on-surface" href="#">
+<span>WEIGHTS</span>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward</span>
+</a>
+<a class="p-2 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between text-body-sm text-body-sm text-on-surface" href="#">
+<span>EXTREME WX</span>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward</span>
+</a>
+<a class="p-2 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between text-body-sm text-body-sm text-on-surface" href="#">
+<span>VERIFY LAB</span>
+<span class="material-symbols-outlined text-[16px] text-primary">arrow_forward</span>
+</a>
+</div>
+<button class="w-full mt-1 py-1.5 px-space-sm rounded bg-primary-container text-on-primary-container font-headline-sm text-[12px] font-semibold flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(56,189,248,0.3)] hover:opacity-90 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>DOWNLOAD RUN AUDIT (JSON)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4. BOTTOM COMMAND & ARCHIVE TELEMETRY RIBBON -->
+<section class="relative z-10 w-full bg-surface-container-lowest/85 backdrop-blur-xl rounded-xl p-space-md shadow-[0_12px_32px_-4px_rgba(0,0,0,0.7)] flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 font-data-mono-sm text-data-mono-sm">
+<div class="flex items-center gap-1">
+<span class="text-outline">ARCHIVED CYCLE:</span>
+<span class="text-on-surface font-semibold">24 SEP 2026 · 00:00 UTC</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-tertiary">●</span>
+<span class="text-tertiary">COMPLETED (08m 14s)</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-outline">OUTPUT:</span>
+<span class="text-on-surface">6 ARTIFACTS PUBLISHED</span>
+</div>
+<span class="text-outline-variant">·</span>
+<div class="flex items-center gap-1">
+<span class="text-outline">NEXT SCHEDULED:</span>
+<span class="text-secondary font-medium">06:00 UTC (IN 05h 46m)</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-data-mono-sm text-data-mono-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">account_tree</span>
+<span>VIEW DAG</span>
+</button>
+<button class="px-space-sm py-1.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-data-mono-sm text-data-mono-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">archive</span>
+<span>EXPORT BUNDLE</span>
+</button>
+<button class="px-space-sm py-1.5 rounded bg-error-container text-on-error-container hover:bg-error-container/80 transition-colors font-data-mono-sm text-data-mono-sm font-semibold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]">replay</span>
+<span>RE-EXECUTE</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Simple interactive highlight for lead step selection
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      if (this.innerText.includes('H') || this.innerText === 'NOW') {
+        const parent = this.parentElement;
+        parent.querySelectorAll('button').forEach(b => {
+          b.className = 'px-2 py-1 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface font-data-mono-sm text-[11px]';
+        });
+        this.className = 'px-2 py-1 rounded bg-primary-container text-on-primary-container font-semibold font-data-mono-sm text-[11px] shadow-[0_0_8px_rgba(56,189,248,0.4)]';
+      }
+    });
+  });
+</script></main></div><footer class="fixed bottom-0 left-0 right-0 h-10 z-40 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.6)]"><div class="h-10 w-full px-gutter-desktop flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-sm pl-16"><div class="flex items-center gap-space-xs"><button class="p-1 text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">skip_previous</span></button><button class="p-1 text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">play_arrow</span></button><button class="p-1 text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">skip_next</span></button></div><div class="h-3 w-px bg-outline-variant"></div><span class="font-data-mono-sm text-data-mono-sm text-primary">T+048H</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">26 SEP 00:00 UTC</span></div><div class="flex-1 max-w-xl mx-gutter"><div class="w-full h-1.5 bg-surface-container-low rounded-full shadow-[inset_0_1px_3px_rgba(0,0,0,0.8)] relative overflow-hidden"><div class="absolute left-0 top-0 bottom-0 w-[42%] bg-gradient-to-r from-secondary-container to-primary-container rounded-full"></div><div class="absolute left-[42%] top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-[0_0_8px_rgba(56,189,248,0.8)]"></div></div></div><div class="flex items-center gap-gutter"><div class="flex items-center gap-space-xs"><span class="font-label-caps text-label-caps uppercase text-on-surface-variant">ENSEMBLE BLEND:</span><span class="font-data-mono-sm text-data-mono-sm text-tertiary">40% ECMWF / 35% GFS / 25% GRAPHCAST</span></div><div class="h-3 w-px bg-outline-variant"></div><div class="flex items-center gap-space-xs"><span class="font-label-caps text-label-caps uppercase text-on-surface-variant">LATENCY:</span><span class="font-data-mono-sm text-data-mono-sm text-on-surface">142MS</span></div></div></div></footer></body></html>

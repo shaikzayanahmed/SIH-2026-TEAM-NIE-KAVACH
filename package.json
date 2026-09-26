@@ -1,0 +1,20 @@
+{
+  "name": "meteorological-forecast-fusion-platform",
+  "version": "1.0.0",
+  "description": "Meteorological Forecast Fusion Platform - SIH Edition connected with Google Stitch",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-stitch.js",
+    "dev": "npx -y serve . -p 3000",
+    "start": "npx -y serve . -p 3000"
+  },
+  "keywords": [
+    "stitch",
+    "meteorology",
+    "forecast",
+    "geospatial",
+    "sih"
+  ],
+  "author": "",
+  "license": "ISC"
+}
