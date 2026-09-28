@@ -7,12 +7,9 @@
 import { appStore } from './src/state/store.js';
 import { Actions } from './src/state/actions.js';
 import { GlobeController } from './src/globe/globe-controller.js';
-import { AtmosphericParticleEngine } from './src/weather/particle-engine.js';
 import { HeaderController } from './src/ui/header-controller.js';
 import { SearchController } from './src/ui/search-controller.js';
-import { TimelineController } from './src/ui/timeline-controller.js';
-import { LegendController } from './src/ui/legend-controller.js';
-import { DevInspectorController } from './src/ui/dev-inspector.js';
+import { UnifiedViewController } from './src/ui/unified-view-controller.js';
 import { checkBackendHealth } from './src/services/api.js';
 
 class SamvayaApplication {
@@ -23,154 +20,50 @@ class SamvayaApplication {
   async init() {
     console.log('Initializing SAMVAYA Atmospheric Platform...');
 
-    // 1. Initialize Atmospheric Particle Engine
-    this.particleEngine = new AtmosphericParticleEngine('atmosphericOverlayCanvas');
-
-    // 2. Initialize 3D Globe Controller
+    // 1. Initialize 3D Globe Controller (Cesium)
     this.globe = new GlobeController('cesiumContainer');
 
-    // 3. Initialize UI Components
+    // 2. Initialize UI Controllers
     this.header = new HeaderController();
-    this.search = new SearchController();
-    this.timeline = new TimelineController();
-    this.legend = new LegendController(this.globe.layerManager, this.globe);
-    this.devInspector = new DevInspectorController();
+    this.search = new SearchController(this.globe);
+    this.unifiedView = new UnifiedViewController(this.globe);
 
-    // 4. Bind Secondary UI Controls
-    this.bindLayerSelector();
-    this.bindFloatingControls();
-    this.bindTelemetryHUD();
+    // 3. Handle Hash Routing
+    this.initRouting();
 
-    // 5. Connect Atmospheric Particle Engine to State
-    appStore.select(state => state.atmospheric, (atmo) => {
-      if (!atmo || !atmo.visualProfile) return;
-      this.particleEngine.setProfile(atmo.visualProfile, atmo.weatherState);
-    });
-
-    // 6. Check Backend Health & Fetch Initial Location Data
+    // 4. Check Backend Health & Fetch Initial Location Data
     this.checkHealth();
     Actions.setLocation(appStore.getState().location);
   }
 
+  initRouting() {
+    const handleHash = () => {
+      const hash = window.location.hash.replace(/^#/, '');
+      if (['explore', 'forecast', 'intelligence', 'history'].includes(hash)) {
+        Actions.setNavigation(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHash);
+    if (window.location.hash) {
+      handleHash();
+    }
+  }
+
   async checkHealth() {
     const health = await checkBackendHealth();
+    const statusText = document.getElementById('headerEngineStatus');
     if (health.status === 'ok') {
       console.log('Backend connected:', health);
+      if (statusText) statusText.textContent = 'ENGINE READY';
     } else {
-      console.warn('Backend operating in degraded/offline mode:', health.error);
+      console.warn('Backend operating in offline fallback mode:', health.error);
+      if (statusText) statusText.textContent = 'OFFLINE CACHE';
     }
-  }
-
-  bindLayerSelector() {
-    const tabAtmosphere = document.getElementById('tabAtmosphereLayers');
-    const tabIntelligence = document.getElementById('tabIntelligenceLayers');
-    const groupAtmosphere = document.getElementById('groupAtmosphere');
-    const groupIntelligence = document.getElementById('groupIntelligence');
-
-    if (tabAtmosphere && tabIntelligence) {
-      tabAtmosphere.addEventListener('click', () => {
-        tabAtmosphere.classList.add('active');
-        tabIntelligence.classList.remove('active');
-        if (groupAtmosphere) groupAtmosphere.style.display = 'grid';
-        if (groupIntelligence) groupIntelligence.style.display = 'none';
-      });
-
-      tabIntelligence.addEventListener('click', () => {
-        tabIntelligence.classList.add('active');
-        tabAtmosphere.classList.remove('active');
-        if (groupIntelligence) groupIntelligence.style.display = 'grid';
-        if (groupAtmosphere) groupAtmosphere.style.display = 'none';
-      });
-    }
-
-    const paramPills = document.querySelectorAll('.atmospheric-param-dock .param-pill');
-    paramPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        paramPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        const param = pill.getAttribute('data-param');
-        Actions.setActiveLayerParam(param);
-      });
-    });
-  }
-
-  bindFloatingControls() {
-    const homeBtn = document.getElementById('homeBtn');
-    const zoomInBtn = document.getElementById('zoomInBtn');
-    const zoomOutBtn = document.getElementById('zoomOutBtn');
-    const layerToggleBtn = document.getElementById('layerToggleBtn');
-    const layerMenu = document.getElementById('layerMenu');
-
-    if (homeBtn) {
-      homeBtn.addEventListener('click', () => this.globe.flyHome());
-    }
-
-    if (zoomInBtn) {
-      zoomInBtn.addEventListener('click', () => this.globe.zoomIn());
-    }
-
-    if (zoomOutBtn) {
-      zoomOutBtn.addEventListener('click', () => this.globe.zoomOut());
-    }
-
-    if (layerToggleBtn && layerMenu) {
-      layerToggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        layerMenu.style.display = layerMenu.style.display === 'none' ? 'flex' : 'none';
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!layerMenu.contains(e.target) && e.target !== layerToggleBtn) {
-          layerMenu.style.display = 'none';
-        }
-      });
-    }
-
-    // Basemap & Shader Toggles
-    document.querySelectorAll('.layer-select-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const basemap = btn.getAttribute('data-type');
-        const shader = btn.getAttribute('data-shader');
-
-        if (basemap) {
-          document.querySelectorAll('[data-type]').forEach(el => el.classList.remove('active'));
-          btn.classList.add('active');
-          Actions.setBasemap(basemap);
-        } else if (shader) {
-          document.querySelectorAll('[data-shader]').forEach(el => el.classList.remove('active'));
-          btn.classList.add('active');
-          Actions.setShaderMode(shader);
-        }
-        if (layerMenu) layerMenu.style.display = 'none';
-      });
-    });
-  }
-
-  bindTelemetryHUD() {
-    const coordsDisplay = document.getElementById('coordsDisplay');
-    const altDisplay = document.getElementById('altDisplay');
-
-    appStore.select(state => state.location, (loc) => {
-      if (coordsDisplay && loc) {
-        coordsDisplay.textContent = `${loc.latitude.toFixed(4)}° N, ${loc.longitude.toFixed(4)}° E`;
-      }
-    });
-
-    appStore.select(state => state.globe.cameraAltitude, (alt) => {
-      if (altDisplay && alt !== undefined) {
-        if (alt > 1000) {
-          altDisplay.textContent = `${(alt / 1000).toLocaleString(undefined, { maximumFractionDigits: 0 })} km`;
-        } else {
-          altDisplay.textContent = `${alt} m`;
-        }
-      }
-    });
   }
 }
 
-// Bootstrap Application on DOM Ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new SamvayaApplication());
-} else {
-  new SamvayaApplication();
-}
+// Bootstrap on DOM Content Loaded
+document.addEventListener('DOMContentLoaded', () => {
+  window.samvayaApp = new SamvayaApplication();
+});

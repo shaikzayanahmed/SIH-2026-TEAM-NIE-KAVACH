@@ -5,13 +5,15 @@
 
 import { appStore } from '../state/store.js';
 import { Actions } from '../state/actions.js';
+import { reverseGeocodeApi } from '../services/api.js';
 
 export class SearchController {
-  constructor() {
+  constructor(globeController) {
+    this.globe = globeController;
     this.searchInput = document.getElementById('searchInput');
     this.searchResults = document.getElementById('searchResults');
     this.clearSearchBtn = document.getElementById('clearSearchBtn');
-    this.presetChips = document.querySelectorAll('.preset-chip');
+    this.btnMyLocation = document.getElementById('btnMyLocation');
     this.debounceTimeout = null;
 
     this.initEvents();
@@ -19,10 +21,24 @@ export class SearchController {
   }
 
   initEvents() {
+    // ⌘K / Ctrl+K Shortcut to focus search
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (this.searchInput) {
+          this.searchInput.focus();
+          this.searchInput.select();
+        }
+      }
+    });
+
     if (this.searchInput) {
       this.searchInput.addEventListener('input', (e) => {
         const query = e.target.value;
-        if (this.clearSearchBtn) this.clearSearchBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+        if (this.clearSearchBtn) {
+          if (query.length > 0) this.clearSearchBtn.classList.remove('hidden');
+          else this.clearSearchBtn.classList.add('hidden');
+        }
 
         clearTimeout(this.debounceTimeout);
         this.debounceTimeout = setTimeout(() => this.executeSearch(query), 300);
@@ -30,7 +46,7 @@ export class SearchController {
 
       this.searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && this.searchResults) {
-          this.searchResults.style.display = 'none';
+          this.searchResults.classList.add('hidden');
         }
       });
     }
@@ -38,42 +54,72 @@ export class SearchController {
     if (this.clearSearchBtn) {
       this.clearSearchBtn.addEventListener('click', () => {
         if (this.searchInput) this.searchInput.value = '';
-        this.clearSearchBtn.style.display = 'none';
-        if (this.searchResults) this.searchResults.style.display = 'none';
+        this.clearSearchBtn.classList.add('hidden');
+        if (this.searchResults) this.searchResults.classList.add('hidden');
       });
     }
 
-    // Preset Chips
-    this.presetChips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const lat = parseFloat(chip.getAttribute('data-lat'));
-        const lon = parseFloat(chip.getAttribute('data-lon'));
-        const name = chip.getAttribute('data-name');
+    if (this.btnMyLocation) {
+      this.btnMyLocation.addEventListener('click', () => this.handleUseMyLocation());
+    }
 
-        Actions.setLocation({
-          latitude: lat,
-          longitude: lon,
-          name: name,
-          region: 'Preset Location',
-          country: 'India',
-          source: 'PRESET'
-        });
-
-        if (this.searchResults) this.searchResults.style.display = 'none';
-      });
-    });
-
-    // Close on click outside
+    // Close results when clicking outside
     document.addEventListener('click', (e) => {
-      if (this.searchResults && !e.target.closest('.search-box-card')) {
-        this.searchResults.style.display = 'none';
+      if (this.searchResults && !e.target.closest('#searchInput') && !e.target.closest('#searchResults')) {
+        this.searchResults.classList.add('hidden');
       }
     });
   }
 
+  async handleUseMyLocation() {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    this.btnMyLocation.innerHTML = `
+      <span class="material-symbols-outlined text-[16px] animate-spin">sync</span>
+      <span>Locating...</span>
+    `;
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        const geoInfo = await reverseGeocodeApi(lat, lon);
+
+        Actions.setLocation({
+          latitude: lat,
+          longitude: lon,
+          name: geoInfo.name || 'My Location',
+          region: geoInfo.region || 'Local Domain',
+          country: 'India',
+          source: 'GPS'
+        });
+
+        if (this.globe) {
+          this.globe.flyToLocation(lat, lon, 350000);
+        }
+
+        this.btnMyLocation.innerHTML = `
+          <span class="material-symbols-outlined text-[16px]">my_location</span>
+          <span>Use My Location</span>
+        `;
+      },
+      (err) => {
+        console.warn('Geolocation failed:', err.message);
+        this.btnMyLocation.innerHTML = `
+          <span class="material-symbols-outlined text-[16px]">my_location</span>
+          <span>Use My Location</span>
+        `;
+      },
+      { timeout: 8000, enableHighAccuracy: true }
+    );
+  }
+
   async executeSearch(query) {
     if (!query || query.trim().length < 2) {
-      if (this.searchResults) this.searchResults.style.display = 'none';
+      if (this.searchResults) this.searchResults.classList.add('hidden');
       return;
     }
 
@@ -106,24 +152,24 @@ export class SearchController {
   renderResults(items) {
     if (!this.searchResults) return;
     if (!items || items.length === 0) {
-      this.searchResults.innerHTML = '<div style="padding: 10px 14px; font-size: 12px; color: var(--samvaya-sand-400);">No results found.</div>';
-      this.searchResults.style.display = 'block';
+      this.searchResults.innerHTML = '<div class="p-3 text-xs text-on-surface-variant font-body-sm">No observatory locations found.</div>';
+      this.searchResults.classList.remove('hidden');
       return;
     }
 
     this.searchResults.innerHTML = items.map((item, idx) => `
-      <div class="search-result-item" data-idx="${idx}">
-        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--samvaya-saffron-400);">location_on</span>
-        <div>
-          <div class="search-result-name">${item.name || item.display_name.split(',')[0]}</div>
-          <div class="search-result-sub">${item.display_name}</div>
+      <div class="search-item px-3 py-2 hover:bg-surface-container flex items-center gap-2 cursor-pointer transition-colors border-b border-surface-container-high last:border-0" data-idx="${idx}">
+        <span class="material-symbols-outlined text-[18px] text-primary">pin_drop</span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-bold text-sm text-on-surface truncate">${item.name || item.display_name.split(',')[0]}</span>
+          <span class="text-[11px] text-on-surface-variant truncate">${item.display_name}</span>
         </div>
       </div>
     `).join('');
 
-    this.searchResults.style.display = 'block';
+    this.searchResults.classList.remove('hidden');
 
-    this.searchResults.querySelectorAll('.search-result-item').forEach(el => {
+    this.searchResults.querySelectorAll('.search-item').forEach(el => {
       el.addEventListener('click', () => {
         const idx = parseInt(el.getAttribute('data-idx'), 10);
         const selected = items[idx];
@@ -141,18 +187,21 @@ export class SearchController {
             source: 'SEARCH'
           });
 
-          this.searchResults.style.display = 'none';
+          if (this.globe) {
+            this.globe.flyToLocation(lat, lon, 400000);
+          }
+
+          this.searchResults.classList.add('hidden');
+          if (this.searchInput) this.searchInput.value = name;
         }
       });
     });
   }
 
   initSubscriptions() {
-    // Keep search input synced with location name
-    appStore.select(state => state.location.name, (name) => {
-      if (this.searchInput && name && document.activeElement !== this.searchInput) {
-        this.searchInput.value = name;
-        if (this.clearSearchBtn) this.clearSearchBtn.style.display = 'inline-flex';
+    appStore.select(state => state.location, (loc) => {
+      if (loc && loc.source === 'GLOBE_CLICK' && this.searchInput) {
+        this.searchInput.value = loc.name;
       }
     });
   }
