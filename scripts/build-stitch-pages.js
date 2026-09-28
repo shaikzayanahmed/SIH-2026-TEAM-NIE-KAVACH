@@ -1,5 +1,5 @@
 /**
- * Build Script: Reconcile All 35 Stitch Screens 1:1 with Dedicated Pages & Global Screen Switcher
+ * Build Script: Reconcile All 35 Stitch Screens with Cesium 3D Globe & Complete Inter-Navigation
  * Project SIH26081 • Team NIE KAVACH
  */
 
@@ -56,8 +56,8 @@ const screenCategories = {
     { id: 'samvaya_forecast_operations_system_status_center', name: 'Operations System Status' }
   ],
   'LANDINGS & ATMOSPHERIC STATES': [
-    { id: 'samvaya_atmospheric_intelligence_landing', name: 'Atmospheric Intelligence Landing' },
     { id: 'samvaya_atmospheric_intelligence_desktop_landing', name: 'Desktop Landing Experience' },
+    { id: 'samvaya_atmospheric_intelligence_landing', name: 'Atmospheric Intelligence Landing' },
     { id: 'samvaya_clear_sunny_atmospheric_state', name: 'Clear / Sunny Atmospheric State' },
     { id: 'samvaya_cloudy_overcast_atmospheric_state', name: 'Cloudy / Overcast Atmospheric State' },
     { id: 'samvaya_rain_precipitation_atmospheric_state', name: 'Rain / Precipitation State' },
@@ -103,6 +103,40 @@ function generateSwitcherHtml(currentScreenId, isRoot = false) {
 `;
 }
 
+// Replace Three.js with Cesium 3D Globe
+function replaceThreeJsWithCesium(html, isRoot = false) {
+  let updated = html;
+
+  // 1. Inject Cesium CSS & JS in <head>
+  const cesiumHeadTags = `
+  <!-- CesiumJS 1.124 Atmospheric Engine -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+  <style>
+    .cesium-viewer-bottom, .cesium-widget-credits { display: none !important; }
+  </style>
+  `;
+  if (!updated.includes('cesium.com')) {
+    updated = updated.replace('</head>', `${cesiumHeadTags}</head>`);
+  }
+
+  // 2. Replace STITCH_THREEJS blocks with Cesium container
+  const cesiumContainerHtml = `<div id="cesiumContainer" class="w-full h-full min-h-[420px] rounded-xl overflow-hidden relative shadow-inner" style="display:block;"></div>`;
+  updated = updated.replace(/<!-- STITCH_THREEJS_START:[\s\S]*?<!-- STITCH_THREEJS_END:[^>]*-->/g, cesiumContainerHtml);
+
+  // 3. Remove raw Three.js CDN script tags
+  updated = updated.replace(/<script src="https:\/\/ajax\.googleapis\.com\/ajax\/libs\/threejs\/[^"]*"><\/script>/g, '');
+
+  // 4. Inject global Cesium bootstrapper
+  const scriptPath = isRoot ? 'src/globe/embed-cesium.js' : '../src/globe/embed-cesium.js';
+  const bootstrapperScript = `<script type="module" src="${scriptPath}"></script>`;
+  if (!updated.includes('embed-cesium.js')) {
+    updated = updated.replace('</body>', `${bootstrapperScript}</body>`);
+  }
+
+  return updated;
+}
+
 // Link Replacer for inter-page navigation
 function replaceInterPageLinks(html, isRoot = false) {
   const p = isRoot ? 'pages/' : '';
@@ -117,7 +151,7 @@ function replaceInterPageLinks(html, isRoot = false) {
   return updated;
 }
 
-console.log('Reconciling all 35 Stitch screens into dedicated pages...');
+console.log('Reconciling all 35 Stitch screens with Cesium 3D Globe...');
 
 let builtCount = 0;
 for (const [catName, screens] of Object.entries(screenCategories)) {
@@ -132,6 +166,7 @@ for (const [catName, screens] of Object.entries(screenCategories)) {
 
     // Process for standalone page in pages/
     let pageHtml = replaceInterPageLinks(codeHtml, false);
+    pageHtml = replaceThreeJsWithCesium(pageHtml, false);
     const switcherHtml = generateSwitcherHtml(s.id, false);
     pageHtml = pageHtml.replace('</body>', `${switcherHtml}</body>`);
 
@@ -142,12 +177,13 @@ for (const [catName, screens] of Object.entries(screenCategories)) {
     // If this is the unified atmospheric home, also update root index.html
     if (s.id === 'samvaya_unified_atmospheric_home') {
       let rootHtml = replaceInterPageLinks(codeHtml, true);
+      rootHtml = replaceThreeJsWithCesium(rootHtml, true);
       const rootSwitcher = generateSwitcherHtml(s.id, true);
       rootHtml = rootHtml.replace('</body>', `${rootSwitcher}</body>`);
       fs.writeFileSync(ROOT_INDEX, rootHtml, 'utf8');
-      console.log('✓ Reconciled root index.html with samvaya_unified_atmospheric_home');
+      console.log('✓ Reconciled root index.html with Cesium-powered samvaya_unified_atmospheric_home');
     }
   }
 }
 
-console.log(`Successfully built ${builtCount} dedicated Stitch pages in frontend/pages/ and updated root index.html!`);
+console.log(`Successfully built ${builtCount} dedicated Stitch pages with Cesium 3D Globe integration!`);
