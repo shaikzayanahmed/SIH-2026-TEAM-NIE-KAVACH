@@ -13,7 +13,6 @@ import { SearchController } from './src/ui/search-controller.js';
 import { TimelineController } from './src/ui/timeline-controller.js';
 import { LegendController } from './src/ui/legend-controller.js';
 import { DevInspectorController } from './src/ui/dev-inspector.js';
-import { IntelligenceLabController } from './src/ui/intelligence-lab.js';
 import { checkBackendHealth } from './src/services/api.js';
 
 class SamvayaApplication {
@@ -35,7 +34,6 @@ class SamvayaApplication {
     this.search = new SearchController();
     this.timeline = new TimelineController();
     this.legend = new LegendController(this.globe.layerManager, this.globe);
-    this.intelligenceLab = new IntelligenceLabController(this.globe);
     this.devInspector = new DevInspectorController();
 
     // 4. Bind Secondary UI Controls
