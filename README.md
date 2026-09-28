@@ -42,7 +42,26 @@ All interface modules are high-fidelity UI systems designed in Google Stitch and
 # Serve the portal and explore all screens
 npm run dev
 ```
-Then open `http://localhost:3000` in your browser.
+Then open `http://localhost:8085` in your browser.
+
+### 2. Start the live forecast API
+In a second terminal:
+```bash
+npm run api
+```
+The live API runs at `http://localhost:8000` and exposes:
+
+```text
+GET /health
+GET /api/v1/snapshot
+GET /api/v1/overview
+GET /api/v1/forecast/blended
+GET /api/v1/weights/map
+```
+
+The current live slice fetches four public model forecasts through Open-Meteo: ECMWF IFS, GFS, ICON, and GEM. It uses equal-weight blending until historical observation data is connected. NCUM, NEPS, BharatFS, and GraphCast remain separate adapter targets because their operational outputs are not exposed as one stable unauthenticated API.
+
+See [docs/implementation-plan.md](docs/implementation-plan.md) for the phased build plan and scientific constraints.
 
 ### 2. Synchronize Designs from Google Stitch
 ```bash

@@ -23,7 +23,9 @@ if (fs.existsSync(envPath)) {
 
 const apiKey = process.env.STITCH_API_KEY;
 const projectId = process.argv[2] || "14662388768399450705";
-const outDir = path.join(rootDir, "stitch_designs");
+
+// Save to frontend/stitch_designs/
+const outDir = path.join(rootDir, "frontend", "stitch_designs");
 
 if (!apiKey) {
   console.error("Error: STITCH_API_KEY environment variable is required.");

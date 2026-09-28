@@ -1,20 +1,23 @@
 {
-  "name": "meteorological-forecast-fusion-platform",
+  "name": "bird-view-platform",
   "version": "1.0.0",
-  "description": "Meteorological Forecast Fusion Platform - SIH Edition connected with Google Stitch",
+  "description": "Bird View - Hybrid AI-NWP Meteorological Forecast Fusion Platform | SIH 2026 TEAM NIE KAVACH",
   "type": "module",
   "scripts": {
     "sync": "node scripts/sync-stitch.js",
-    "dev": "npx -y serve . -p 3000",
-    "start": "npx -y serve . -p 3000"
+    "dev": "python3 -m http.server 8085 --directory frontend",
+    "api": "python3 backend/server.py",
+    "check:python": "python3 -m py_compile backend/server.py packages/data_pipeline/*.py packages/fusion_engine/*.py packages/verification/*.py"
   },
   "keywords": [
-    "stitch",
+    "bird-view",
     "meteorology",
-    "forecast",
-    "geospatial",
-    "sih"
+    "forecast-fusion",
+    "cesium",
+    "3d-globe",
+    "sih26081",
+    "nie-kavach"
   ],
-  "author": "",
+  "author": "Team NIE KAVACH",
   "license": "ISC"
 }

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Globe & Location Search Demo</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet" />
+
+  <!-- CesiumJS CSS & JS -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 3D Globe Container -->
+  <div id="cesiumContainer"></div>
+
+  <!-- Unified Stitch operations shell -->
+  <aside class="command-rail" aria-label="Platform sections">
+    <div class="brand-lockup">
+      <span class="brand-mark">B</span>
+      <div>
+        <strong>BIRD VIEW</strong>
+        <span>FUSION PLATFORM</span>
+      </div>
+    </div>
+    <div class="rail-status"><span class="status-dot"></span> SYSTEM NOMINAL</div>
+    <nav class="page-nav">
+      <button class="page-nav-item active" data-page="command"><span class="material-symbols-outlined">public</span><span>Command Center</span></button>
+      <button class="page-nav-item" data-page="intelligence"><span class="material-symbols-outlined">warning</span><span>Weather Intelligence</span></button>
+      <button class="page-nav-item" data-page="forecast"><span class="material-symbols-outlined">compare_arrows</span><span>Forecast Explorer</span></button>
+      <button class="page-nav-item" data-page="location"><span class="material-symbols-outlined">location_on</span><span>Location Analysis</span></button>
+      <button class="page-nav-item" data-page="layers"><span class="material-symbols-outlined">layers</span><span>Geospatial Layers</span></button>
+      <button class="page-nav-item" data-page="weights"><span class="material-symbols-outlined">hub</span><span>Model Weights</span></button>
+      <button class="page-nav-item" data-page="health"><span class="material-symbols-outlined">monitoring</span><span>Data &amp; Model Health</span></button>
+      <button class="page-nav-item" data-page="archive"><span class="material-symbols-outlined">inventory_2</span><span>Run Archive</span></button>
+      <button class="page-nav-item" data-page="verification"><span class="material-symbols-outlined">fact_check</span><span>Verification Lab</span></button>
+      <button class="page-nav-item" data-page="configuration"><span class="material-symbols-outlined">tune</span><span>System Configuration</span></button>
+    </nav>
+    <div class="rail-footer"><span class="material-symbols-outlined">memory</span><span>FUSION ENGINE<br><b>v2.4.1 ONLINE</b></span></div>
+  </aside>
+
+  <section class="intel-panel" aria-live="polite">
+    <div class="panel-heading">
+      <div><span class="eyebrow" id="pageEyebrow">LIVE OVERVIEW</span><h1 id="pageTitle">Orbital Weather Command</h1></div>
+      <button id="closePanelBtn" class="panel-close" title="Close section"><span class="material-symbols-outlined">close</span></button>
+    </div>
+    <div id="pageContent" class="page-content"></div>
+  </section>
+
+  <!-- Search & Navigation HUD -->
+  <div class="search-overlay">
+    <!-- Main Search Card -->
+    <div class="search-card">
+      <div class="search-input-wrapper">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Search city, landmark, country, or lat,lon..." 
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="clearSearchBtn" class="icon-btn" title="Clear search" style="display: none;">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        <div id="searchSpinner" class="spinner" style="display: none;"></div>
+      </div>
+
+      <!-- Live Search Results Dropdown -->
+      <div id="searchResults" class="search-results" style="display: none;"></div>
+    </div>
+
+    <!-- Quick Location Presets -->
+    <div class="preset-chips">
+      <button class="chip" data-lat="28.6139" data-lon="77.2090" data-name="New Delhi, India">📍 New Delhi</button>
+      <button class="chip" data-lat="19.0760" data-lon="72.8777" data-name="Mumbai, India">📍 Mumbai</button>
+      <button class="chip" data-lat="12.9716" data-lon="77.5946" data-name="Bengaluru, India">📍 Bengaluru</button>
+      <button class="chip" data-lat="35.6762" data-lon="139.6503" data-name="Tokyo, Japan">📍 Tokyo</button>
+      <button class="chip" data-lat="51.5074" data-lon="-0.1278" data-name="London, UK">📍 London</button>
+      <button class="chip" data-lat="40.7128" data-lon="-74.0060" data-name="New York, USA">📍 New York</button>
+      <button class="chip" data-lat="27.9881" data-lon="86.9250" data-name="Mount Everest">🏔️ Mt Everest</button>
+    </div>
+  </div>
+
+  <!-- Quick Floating Map Layer & Controls -->
+  <div class="floating-controls">
+    <button id="homeBtn" class="hud-btn" title="Reset View to India">
+      <span class="material-symbols-outlined">home</span>
+    </button>
+    <button id="layerToggleBtn" class="hud-btn" title="Change Basemap Style">
+      <span class="material-symbols-outlined">layers</span>
+    </button>
+    <button id="zoomInBtn" class="hud-btn" title="Zoom In">
+      <span class="material-symbols-outlined">add</span>
+    </button>
+    <button id="zoomOutBtn" class="hud-btn" title="Zoom Out">
+      <span class="material-symbols-outlined">remove</span>
+    </button>
+  </div>
+
+  <!-- Basemap Switcher Menu -->
+  <div id="layerMenu" class="layer-menu" style="display: none;">
+    <div class="layer-menu-title">Basemap Imagery</div>
+    <button class="layer-option active" data-type="hybrid-satellite">
+      <span class="indicator"></span> Satellite + Labels
+    </button>
+    <button class="layer-option" data-type="osm">
+      <span class="indicator"></span> OpenStreetMap
+    </button>
+    <button class="layer-option" data-type="carto-dark">
+      <span class="indicator"></span> Dark Tactical
+    </button>
+    <button class="layer-option" data-type="opentopo">
+      <span class="indicator"></span> Topo & Terrain
+    </button>
+  </div>
+
+  <!-- Live cursor location readout for map analysis -->
+  <div id="cursorReadout" class="cursor-readout" aria-live="polite">
+    <div class="cursor-readout-heading"><span class="material-symbols-outlined">my_location</span> CURSOR POSITION</div>
+    <div id="cursorPlace" class="cursor-place">MOVE OVER THE GLOBE</div>
+    <div id="cursorCoordinates" class="cursor-coordinates">--° N, --° E</div>
+    <div class="cursor-context"><span id="cursorDomain">WAITING FOR GLOBE</span><span id="cursorGrid">GRID --</span></div>
+  </div>
+
+  <!-- Bottom Telemetry HUD Bar -->
+  <div class="telemetry-bar">
+    <div class="telemetry-item">
+      <span class="label">LAT/LON:</span>
+      <span id="coordsDisplay" class="value">--° N, --° E</span>
+    </div>
+    <div class="telemetry-item">
+      <span class="label">ALTITUDE:</span>
+      <span id="altDisplay" class="value">-- km</span>
+    </div>
+    <div class="telemetry-item">
+      <span class="label">STATUS:</span>
+      <span id="statusDisplay" class="value text-emerald">READY</span>
+    </div>
+  </div>
+
+  <!-- Globe Application Logic -->
+  <script src="old%20globe.js"></script>
+</body>
+</html>

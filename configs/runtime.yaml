@@ -1,0 +1,42 @@
+domain:
+  lat_min: 5.0
+  lat_max: 38.0
+  lon_min: 66.0
+  lon_max: 100.0
+  local_resolution_deg: 0.5
+  validation_resolution_deg: 0.25
+variables:
+  - id: 2t
+    name: 2m temperature
+    unit: K
+  - id: tp
+    name: total precipitation
+    unit: mm
+  - id: 10u
+    name: 10m u wind
+    unit: m/s
+  - id: 10v
+    name: 10m v wind
+    unit: m/s
+lead_hours: [6, 12, 24, 48, 72, 96, 120]
+models:
+  - id: ncum_g
+    name: NCUM-G
+    enabled: true
+  - id: neps_g
+    name: NEPS-G
+    enabled: true
+  - id: bharatfs
+    name: BharatFS
+    enabled: true
+  - id: graphcast
+    name: GraphCast
+    enabled: true
+  - id: aifs_single
+    name: AIFS Single
+    enabled: false
+thresholds:
+  heavy_rain_mm_24h: 64.0
+  heatwave_temperature_k: 313.15
+  high_wind_ms: 17.0
+mode: live
