@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-lowest":"#ffffff","surface-container-highest":"#eae1da","error-container":"#ffdad6","on-secondary-fixed-variant":"#424a2a","outline-variant":"#ddc1b3","surface-variant":"#eae1da","on-error":"#ffffff","tertiary-fixed":"#ffdcc3","on-primary":"#ffffff","inverse-surface":"#342f2b","surface-bright":"#fff8f5","secondary-fixed-dim":"#c2cba1","on-tertiary":"#ffffff","outline":"#897267","on-secondary-container":"#5e6644","on-secondary-fixed":"#181e04","surface":"#fff8f5","tertiary":"#8d4b00","primary":"#984300","background":"#fff8f5","surface-container-low":"#fcf2eb","secondary-container":"#dce4b9","on-secondary":"#ffffff","on-error-container":"#93000a","surface-dim":"#e2d8d2","on-tertiary-container":"#fffbff","secondary":"#5a6240","surface-tint":"#9c4400","secondary-fixed":"#dee7bc","tertiary-fixed-dim":"#ffb77d","on-tertiary-fixed":"#2f1500","on-background":"#1f1b17","primary-container":"#ba5814","surface-container":"#f6ece6","on-tertiary-fixed-variant":"#6e3900","inverse-primary":"#ffb68e","primary-fixed":"#ffdbca","primary-fixed-dim":"#ffb68e","surface-container-high":"#f0e6e0","on-primary-container":"#fffbff","on-primary-fixed-variant":"#773300","on-surface-variant":"#564339","tertiary-container":"#b15f00","on-primary-fixed":"#331200","on-surface":"#1f1b17","inverse-on-surface":"#f9efe8","error":"#ba1a1a"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{gutter:"1.5rem",margin:"2.5rem","space-sm":"0.5rem","space-xs":"0.25rem","space-xl":"2.5rem","space-lg":"1.5rem","space-md":"1rem","gutter-mobile":"0.75rem","margin-mobile":"1rem"},fontFamily:{"headline-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"telemetry-num":["Inter"],"headline-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"label-caps":["Inter"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-sm":["Plus Jakarta Sans"],"body-sm":["Inter"]},fontSize:{"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"500"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"22px",letterSpacing:"0.005em",fontWeight:"400"}],"telemetry-num":["15px",{lineHeight:"20px",letterSpacing:"-0.01em",fontWeight:"500"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-lg-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"600"}],"label-caps":["11px",{lineHeight:"16px",letterSpacing:"0.08em",fontWeight:"600"}],"display-lg":["52px",{lineHeight:"60px",letterSpacing:"-0.03em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",letterSpacing:"0em",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",letterSpacing:"0em",fontWeight:"500"}],"body-sm":["12px",{lineHeight:"18px",letterSpacing:"0.01em",fontWeight:"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(74,53,37,0.06)]"><div class="h-20 w-full px-gutter flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #c25e1a - Font: plusJakartaSans - Mode: light - Roundness: rounded-md" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UWFR1a4S47oYqTf1v7pg-EXwzUFc8rc04O8IMwl34muaDWvjTKSmTp8wwdlirCJcB6Ko4Od-Ylr9KscOPRgpfsI8QeTw-FtfMhKeBPeiZTQrnAFZQ9szLX2jPVhAAfQXYEOGpGi5I44vlOcIY6WoUlnH8H4JsU1VzQEWxO3VfJ5eZLyaLCCFYrb4Ilmh_VVhCom_8TSx2HH2VAQF1m4yepvCU3b-Xxqe6RGNr1QSEk0fdfq6JBvWGyBdF4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface leading-none">SAMVAYA</span><span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider mt-space-xs">Adaptive Atmospheric Forecast Engine</span></div></div><nav class="hidden lg:flex items-center gap-space-xs ml-space-md p-space-xs bg-surface-container rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg shadow-[inset_0_1px_1px_rgba(255,255,255,0.35)]"><a class="px-space-md py-space-xs font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors rounded-lg" data-path="explore" href="#">Explore</a><a class="px-space-md py-space-xs font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors rounded-lg" data-path="forecast" href="#">Forecast</a><a class="px-space-md py-space-xs font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors rounded-lg" data-path="temporal-intelligence" href="#">Intelligence</a><a class="px-space-md py-space-xs font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors rounded-lg" data-path="history" href="#">History</a></nav></div><div class="flex items-center gap-space-sm"><div class="hidden md:flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-high rounded-xl text-on-surface-variant hover:text-on-surface transition-all shadow-[inset_0_1px_2px_rgba(43,30,22,0.06)] cursor-text"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Search city, region or coordinates...</span><kbd class="px-space-xs py-0.5 bg-surface-container-lowest rounded text-on-surface-variant font-label-caps text-label-caps uppercase shadow-sm">⌘K</kbd></div><button class="hidden sm:flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-[18px]">my_location</span><span>Use My Location</span></button><button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm" type="button"><span class="material-symbols-outlined text-[18px]">bookmark_border</span><span class="hidden xl:inline">Saved Observatories</span><span class="font-telemetry-num text-telemetry-num font-semibold text-primary">(4)</span></button><button aria-label="Instrument Settings" class="p-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">tune</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_6px_rgba(152,67,0,0.3)] ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="flex flex-col w-full relative min-h-[calc(100vh-5rem)] overflow-hidden">
+<!-- 3D GLOBE DIGITAL CANVAS CONTAINER -->
+<div class="absolute inset-0 w-full h-full overflow-hidden bg-surface-container-low/60 pointer-events-none">
+
+<!-- Synoptic Graticule & Ambient Terracotta Vapor Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-surface/70 via-transparent to-surface/90 pointer-events-none"></div>
+<div class="absolute top-1/4 left-1/3 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none animate-pulse"></div>
+<div class="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-secondary-fixed/30 blur-2xl pointer-events-none"></div>
+</div>
+<!-- INTERACTIVE OVERLAY MATRIX -->
+<div class="relative z-10 flex flex-col w-full px-gutter py-space-sm gap-space-md">
+<!-- SUB-BAR: GEO SYNOPTIC DIAGNOSTICS & QUICK SEARCH BAR -->
+<div class="w-full flex flex-col md:flex-row items-center justify-between gap-space-md bg-surface/90 backdrop-blur-md p-space-sm px-space-md rounded-xl shadow-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+<span>Earth Explorer Active</span>
+</div>
+<span class="text-outline-variant text-body-sm">•</span>
+<div class="flex items-center gap-space-xs font-telemetry-num text-body-sm text-on-surface-variant">
+<span class="font-label-caps text-label-caps text-outline uppercase">Spatial Datum:</span>
+<span class="font-medium text-on-surface">WGS-84 (EPSG:4326)</span>
+</div>
+<span class="text-outline-variant text-body-sm">•</span>
+<div class="flex items-center gap-space-xs font-telemetry-num text-body-sm text-on-surface-variant">
+<span class="font-label-caps text-label-caps text-outline uppercase">Projection:</span>
+<span class="font-medium text-primary">Orthographic 3D Mesh</span>
+</div>
+</div>
+<!-- Quick Context Location Coordinates & Suggestion Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto max-w-full py-0.5 scrollbar-none">
+<span class="font-label-caps text-label-caps text-outline uppercase whitespace-nowrap mr-space-xs">Jump to:</span>
+<button class="px-space-sm py-0.5 bg-primary-fixed text-on-primary-fixed font-telemetry-num text-body-sm rounded-lg shadow-sm hover:bg-primary hover:text-on-primary transition-all" type="button">Mysuru</button>
+<button class="px-space-sm py-0.5 bg-surface-container text-on-surface-variant font-telemetry-num text-body-sm rounded-lg hover:bg-surface-container-high transition-all" type="button">Bengaluru</button>
+<button class="px-space-sm py-0.5 bg-surface-container text-on-surface-variant font-telemetry-num text-body-sm rounded-lg hover:bg-surface-container-high transition-all" type="button">Delhi</button>
+<button class="px-space-sm py-0.5 bg-surface-container text-on-surface-variant font-telemetry-num text-body-sm rounded-lg hover:bg-surface-container-high transition-all" type="button">Mumbai</button>
+<button class="px-space-sm py-0.5 bg-surface-container text-on-surface-variant font-telemetry-num text-body-sm rounded-lg hover:bg-surface-container-high transition-all" type="button">Tokyo</button>
+<button class="px-space-sm py-0.5 bg-surface-container text-on-surface-variant font-telemetry-num text-body-sm rounded-lg hover:bg-surface-container-high transition-all" type="button">12.2958°N, 76.6394°E</button>
+</div>
+</div>
+<!-- MAIN MIDDLE INTERACTION ROW: LEFT INSPECTOR POD & RIGHT SAVED OBSERVATORIES DOCK -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start pointer-events-none">
+<!-- LEFT POD: ACTIVE TARGET LOCATION CLAY-CARD -->
+<div class="lg:col-span-4 flex flex-col gap-space-md pointer-events-auto">
+<div class="bg-surface/90 backdrop-blur-xl p-space-lg rounded-xl shadow-md flex flex-col gap-space-md">
+<!-- Card Header & Badge -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-wider font-semibold">Active Focal Target</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-space-xs">Mysuru</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Karnataka, India · 12.2958° N, 76.6394° E</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-space-sm py-space-xs rounded-xl bg-secondary-fixed text-on-secondary-fixed font-telemetry-num text-body-sm font-semibold shadow-sm">
+                Elev 770m MSL
+              </span>
+<span class="font-label-caps text-label-caps text-outline uppercase mt-space-xs">South Plateau Hub</span>
+</div>
+</div>
+<!-- Primary Metric Strip -->
+<div class="flex items-baseline justify-between py-space-sm px-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-on-surface font-semibold tracking-tighter">28.1</span>
+<span class="font-headline-md text-headline-md text-primary font-medium">°C</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">Partly Cloudy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-telemetry-num">Feels like 30.0°C</span>
+</div>
+</div>
+<!-- Environmental Telemetry Matrix Chips -->
+<div class="grid grid-cols-2 gap-space-xs font-telemetry-num">
+<div class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Humidity</span>
+<span class="font-semibold text-on-surface text-body-md">74%</span>
+</div>
+<div class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Wind (WSW)</span>
+<span class="font-semibold text-on-surface text-body-md">11 km/h</span>
+</div>
+<div class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Pressure</span>
+<span class="font-semibold text-on-surface text-body-md">1009 hPa</span>
+</div>
+<div class="p-space-sm bg-surface-container rounded-lg flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Dew Point</span>
+<span class="font-semibold text-on-surface text-body-md">21.4°C</span>
+</div>
+</div>
+<!-- Samvaya NWP Confidence Meter -->
+<div class="p-space-sm bg-surface-container-high rounded-xl flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">auto_graph</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">SAMVAYA Forecast Trust Index</span>
+</div>
+<span class="font-telemetry-num text-body-sm font-semibold text-primary">87% · High Stability</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-dim overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-primary-container rounded-full" style="width: 87%"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+<span>74% Model Consensus (ECMWF + GFS + WRF-IN)</span>
+<span>σ = 0.42°C</span>
+</div>
+</div>
+<!-- Diurnal Horizon Sparkline: Next 24 Hours Mini Forecast -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Synoptic Diurnal Curve (24h)</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">IST +05:30</span>
+</div>
+<div class="grid grid-cols-4 gap-space-xs">
+<div class="p-space-xs bg-surface-container rounded-lg flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">06:00</span>
+<span class="font-telemetry-num text-body-md font-semibold text-on-surface">24°</span>
+<div class="flex items-center gap-0.5 mt-0.5">
+<span class="w-1 h-1 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-[9px] text-outline">10%</span>
+</div>
+</div>
+<div class="p-space-xs bg-surface-container rounded-lg flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">12:00</span>
+<span class="font-telemetry-num text-body-md font-semibold text-on-surface">28°</span>
+<div class="flex items-center gap-0.5 mt-0.5">
+<span class="w-1 h-1 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-[9px] text-outline">15%</span>
+</div>
+</div>
+<div class="p-space-xs bg-primary-fixed/60 rounded-lg flex flex-col items-center shadow-inner">
+<span class="font-label-caps text-label-caps text-primary font-semibold">18:00</span>
+<span class="font-telemetry-num text-body-md font-bold text-primary">27°</span>
+<div class="flex items-center gap-0.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-label-caps text-[9px] text-primary font-semibold">40% 🌧</span>
+</div>
+</div>
+<div class="p-space-xs bg-surface-container rounded-lg flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">00:00</span>
+<span class="font-telemetry-num text-body-md font-semibold text-on-surface">23°</span>
+<div class="flex items-center gap-0.5 mt-0.5">
+<span class="w-1 h-1 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-[9px] text-outline">20%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Deep-Link Quick Nav Action Buttons -->
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs">
+<a class="px-space-xs py-space-sm bg-primary-container text-on-primary-container font-headline-sm text-body-sm font-semibold rounded-xl text-center shadow-sm hover:bg-primary transition-all" href="#">
+              Forecast →
+            </a>
+<a class="px-space-xs py-space-sm bg-surface-container-high text-on-surface font-body-sm font-medium rounded-xl text-center hover:bg-surface-dim transition-all" href="#">
+              Model Lab →
+            </a>
+<a class="px-space-xs py-space-sm bg-tertiary-fixed text-on-tertiary-fixed font-body-sm font-medium rounded-xl text-center hover:bg-tertiary-fixed-dim transition-all" href="#">
+              Risk Ctr →
+            </a>
+</div>
+<!-- Saved Places Tagging Toggle -->
+<div class="flex items-center justify-between pt-space-xs">
+<button class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-xl bg-secondary-container text-on-secondary-container font-body-sm font-medium hover:opacity-90 transition-opacity" type="button">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Saved to My Places (Home)</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-1" type="button">
+<span>Change Tag</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CENTER SPACE (TRANSPARENT GLOBE VIEW WITH FLOATING HUD TOOLBAR) -->
+<div class="hidden lg:flex lg:col-span-4 flex-col items-center justify-start pointer-events-none pt-space-xl">
+<!-- Floating Globe Layer Selector HUD -->
+<div class="pointer-events-auto bg-surface/90 backdrop-blur-xl p-space-xs rounded-xl shadow-md flex items-center gap-1">
+<button class="px-space-sm py-space-xs rounded-lg bg-primary-container text-on-primary-container font-label-caps text-label-caps uppercase tracking-wider font-semibold shadow-sm" type="button">
+            Temp (°C)
+          </button>
+<button class="px-space-sm py-space-xs rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider" type="button">
+            Precip
+          </button>
+<button class="px-space-sm py-space-xs rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider" type="button">
+            Wind
+          </button>
+<button class="px-space-sm py-space-xs rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider" type="button">
+            Pressure
+          </button>
+<button class="px-space-sm py-space-xs rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider" type="button">
+            Clouds
+          </button>
+<button class="px-space-sm py-space-xs rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider" type="button">
+            Trust
+          </button>
+</div>
+<!-- 3D Navigation Controls HUD (Zoom, Reset, Tilt) -->
+<div class="pointer-events-auto mt-space-md flex items-center gap-space-xs bg-surface/85 backdrop-blur-md p-space-xs rounded-full shadow-sm">
+<button aria-label="Zoom in" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<button aria-label="Zoom out" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-px h-4 bg-outline-variant"></span>
+<button class="px-space-sm py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">navigation</span>
+<span>South India Focus</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors" title="Reset North" type="button">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+</button>
+</div>
+</div>
+<!-- RIGHT POD: SAVED OBSERVATORIES & MY PLACES GROUPING -->
+<div class="lg:col-span-4 flex flex-col gap-space-sm pointer-events-auto">
+<div class="bg-surface/90 backdrop-blur-xl p-space-md rounded-xl shadow-md flex flex-col gap-space-sm">
+<!-- Section Heading -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">bookmarks</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Saved Observatories</span>
+</div>
+<button class="p-space-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+<!-- Category Filter Tabs -->
+<div class="flex items-center gap-1 overflow-x-auto pb-space-xs scrollbar-none">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase font-semibold whitespace-nowrap" type="button">
+              All (4)
+            </button>
+<button class="px-space-sm py-1 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase whitespace-nowrap" type="button">
+              ★ Favorites (2)
+            </button>
+<button class="px-space-sm py-1 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase whitespace-nowrap" type="button">
+              Home (1)
+            </button>
+<button class="px-space-sm py-1 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase whitespace-nowrap" type="button">
+              Labs (1)
+            </button>
+<button class="px-space-sm py-1 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase whitespace-nowrap" type="button">
+              Missions
+            </button>
+</div>
+<!-- Saved Places Interactive List -->
+<div class="flex flex-col gap-space-xs">
+<!-- Item 1: Mysuru (Selected / Active) -->
+<div class="p-space-sm bg-primary-fixed/40 rounded-xl flex items-center justify-between cursor-pointer transition-all shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Mysuru</span>
+<span class="font-label-caps text-[10px] px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary font-bold">HOME</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Synoptic Hub · 87% Conf</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-telemetry-num text-body-lg font-bold text-primary">28.1°C</span>
+<span class="font-label-caps text-label-caps text-secondary font-medium">Partly Cloudy</span>
+</div>
+</div>
+<!-- Item 2: Bengaluru -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between hover:bg-surface-container-high cursor-pointer transition-all">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Bengaluru</span>
+<span class="font-label-caps text-[10px] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">RESEARCH LAB</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Overcast · 84% Conf</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-telemetry-num text-body-lg font-semibold text-on-surface">27.4°C</span>
+<span class="font-label-caps text-label-caps text-outline font-medium">-0.7°C vs Mysuru</span>
+</div>
+</div>
+<!-- Item 3: Delhi -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between hover:bg-surface-container-high cursor-pointer transition-all">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">star</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Delhi</span>
+<span class="font-label-caps text-[10px] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">NORTH REGIME</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Clear Sky · 91% Conf</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-telemetry-num text-body-lg font-semibold text-on-surface">31.8°C</span>
+<span class="font-label-caps text-label-caps text-tertiary font-medium">Dry Convective</span>
+</div>
+</div>
+<!-- Item 4: Mumbai -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between hover:bg-surface-container-high cursor-pointer transition-all">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">star</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Mumbai</span>
+<span class="font-label-caps text-[10px] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">COASTAL RADAR</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Light Squall · 79% Conf</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-telemetry-num text-body-lg font-semibold text-on-surface">29.6°C</span>
+<span class="font-label-caps text-label-caps text-primary-container font-medium">Marine Surge</span>
+</div>
+</div>
+</div>
+<!-- Add Location CTA -->
+<button class="w-full mt-space-xs py-space-sm px-space-md rounded-xl bg-surface-container-high hover:bg-surface-dim text-on-surface font-body-sm font-semibold flex items-center justify-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add_location_alt</span>
+<span>Add Location to My Places</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BOTTOM FLOATING COMPARISON COCKPIT DECK -->
+<div class="w-full mt-space-sm pb-space-sm">
+<div class="bg-surface/92 backdrop-blur-xl p-space-md rounded-xl shadow-lg flex flex-col gap-space-md">
+<!-- Deck Navigation and Mode Toggle -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-primary">difference</span>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Multi-Location Atmospheric Cockpit</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Simultaneous Synoptic State · 4 Active Observatories</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<!-- Mode Segmented Selector -->
+<div class="p-0.5 bg-surface-container rounded-xl flex items-center">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-lowest text-on-surface font-label-caps text-label-caps uppercase font-semibold shadow-sm" type="button">
+                Summary Deck
+              </button>
+<button class="px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase" type="button">
+                Atmospheric Delta Matrix
+              </button>
+</div>
+<button class="px-space-sm py-1.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">center_focus_strong</span>
+<span>Re-center Bounds</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Export Telemetry</span>
+</button>
+</div>
+</div>
+<!-- 4 Comparative Cards Mosaic -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-sm">
+<!-- Card 1: Mysuru -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-xs relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-primary"></div>
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">MYSURU</span>
+<span class="px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps font-bold">BASE</span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">28.1°C</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Partly Cloudy</span>
+</div>
+<div class="grid grid-cols-2 gap-1 pt-space-xs font-telemetry-num text-body-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>Rain Prob:</span>
+<span class="font-semibold text-on-surface">12%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Wind:</span>
+<span class="font-semibold text-on-surface">11 km/h</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Confidence:</span>
+<span class="font-semibold text-primary">87%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Regime:</span>
+<span class="font-semibold text-secondary">Transition</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Bengaluru -->
+<div class="p-space-md bg-surface-container rounded-xl flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">BENGALURU</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps">140 KM NE</span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">27.4°C</span>
+<span class="font-body-sm text-body-sm text-outline font-medium">Overcast</span>
+</div>
+<div class="grid grid-cols-2 gap-1 pt-space-xs font-telemetry-num text-body-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>Rain Prob:</span>
+<span class="font-semibold text-primary">34%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Wind:</span>
+<span class="font-semibold text-on-surface">14 km/h</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Confidence:</span>
+<span class="font-semibold text-on-surface">84%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Cloud Cover:</span>
+<span class="font-semibold text-on-surface">68%</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Delhi -->
+<div class="p-space-md bg-surface-container rounded-xl flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">DELHI</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps">1,820 KM N</span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">31.8°C</span>
+<span class="font-body-sm text-body-sm text-tertiary font-medium">Clear / Dry</span>
+</div>
+<div class="grid grid-cols-2 gap-1 pt-space-xs font-telemetry-num text-body-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>Rain Prob:</span>
+<span class="font-semibold text-on-surface">8%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Wind:</span>
+<span class="font-semibold text-on-surface">9 km/h</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Confidence:</span>
+<span class="font-semibold text-secondary">91%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Heat Status:</span>
+<span class="font-semibold text-tertiary">Elevated</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Mumbai -->
+<div class="p-space-md bg-surface-container rounded-xl flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">MUMBAI</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps">820 KM NW</span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">29.6°C</span>
+<span class="font-body-sm text-body-sm text-primary-container font-medium">Light Rain</span>
+</div>
+<div class="grid grid-cols-2 gap-1 pt-space-xs font-telemetry-num text-body-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>Rain Prob:</span>
+<span class="font-semibold text-primary">61%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Wind:</span>
+<span class="font-semibold text-on-surface">18 km/h</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Confidence:</span>
+<span class="font-semibold text-outline">79%</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Marine Risk:</span>
+<span class="font-semibold text-primary">Squall Alert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Atmospheric Difference Insight Banner: Mysuru vs Bengaluru Primary Gradient Strip -->
+<div class="p-space-sm bg-surface-container-high rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-xs text-body-sm font-telemetry-num">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-caps text-label-caps uppercase text-primary font-bold">Synoptic Gradient Insight (Mysuru ↔ Bengaluru):</span>
+<span class="text-on-surface font-medium">Temp: <strong class="text-primary">+0.7°C</strong> warmer in Mysuru</span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface font-medium">Precip: <strong class="text-secondary">-22%</strong> lower convective risk</span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface font-medium">Wind: <strong class="text-on-surface">-3 km/h</strong> lower shear</span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface font-medium">Consensus: <strong class="text-primary">+3%</strong> superior predictability</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-caps text-label-caps">
+<span>Inter-station Distance: 139.8 km</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_10px_rgba(74,53,37,0.03)] py-space-sm"><div class="w-full px-gutter flex flex-wrap items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-wrap"><div class="flex items-center gap-space-xs font-telemetry-num text-body-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-caps text-label-caps uppercase text-outline">Grid Mesh:</span><span>0.05° EPS Res (WGS-84)</span></div><div class="flex items-center gap-space-xs font-telemetry-num text-body-sm text-on-surface-variant"><span class="font-label-caps text-label-caps uppercase text-outline">Re-Init Cadence:</span><span>T+03h Synoptic Cycle</span></div><div class="flex items-center gap-space-xs font-telemetry-num text-body-sm text-on-surface-variant"><span class="font-label-caps text-label-caps uppercase text-outline">Hydrometeorological Stream:</span><span class="text-secondary font-medium">Online (14.2k active nodes)</span></div></div><div class="flex items-center gap-space-md"><span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase">© 2025 SAMVAYA SIH26081. Earth Observation Directorate.</span></div></div></footer></body></html>

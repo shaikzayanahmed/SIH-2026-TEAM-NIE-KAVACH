@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // SAMVAYA 3D Interactive Atmospheric Earth Globe
+// Focused on Indian Ocean / Indian Subcontinent with interactive rotation, atmospheric halo and procedural continents
+
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || 480;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+camera.position.set(0, 3, 14);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xfff5eb, 1.4);
+scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xffecd1, 2.8);
+sunLight.position.set(12, 10, 10);
+scene.add(sunLight);
+
+const warmFill = new THREE.DirectionalLight(0xe07a28, 0.9);
+warmFill.position.set(-10, -5, -8);
+scene.add(warmFill);
+
+// Earth Group
+const earthGroup = new THREE.Group();
+scene.add(earthGroup);
+
+// Generate procedural procedural satellite/terrain Earth texture on canvas
+const canvas = document.createElement('canvas');
+canvas.width = 1024;
+canvas.height = 512;
+const ctx = canvas.getContext('2d');
+
+// Deep oceanic blue-slate
+ctx.fillStyle = '#1e293b';
+ctx.fillRect(0, 0, 1024, 512);
+
+// Ocean bathymetry subtle texture
+const oceanGrad = ctx.createLinearGradient(0, 0, 0, 512);
+oceanGrad.addColorStop(0, '#0f172a');
+oceanGrad.addColorStop(0.5, '#1e293b');
+oceanGrad.addColorStop(1, '#0f172a');
+ctx.fillStyle = oceanGrad;
+ctx.fillRect(0, 0, 1024, 512);
+
+// Procedural landmass drawing for Earth with prominent Indian Subcontinent
+// Coordinates approx: lon -180..180 -> x 0..1024; lat 90..-90 -> y 0..512
+function toCanvasX(lon) { return ((lon + 180) / 360) * 1024; }
+function toCanvasY(lat) { return ((90 - lat) / 180) * 512; }
+
+// Draw Continents (warm earthy tones)
+ctx.fillStyle = '#4a3525';
+
+// Indian Subcontinent & South Asia
+ctx.beginPath();
+ctx.moveTo(toCanvasX(68), toCanvasY(24));
+ctx.lineTo(toCanvasX(73), toCanvasY(34)); // Himalayas north
+ctx.lineTo(toCanvasX(80), toCanvasY(32));
+ctx.lineTo(toCanvasX(88), toCanvasY(26)); // Bengal / Assam
+ctx.lineTo(toCanvasX(88), toCanvasY(21));
+ctx.lineTo(toCanvasX(80), toCanvasY(13)); // East Coast
+ctx.lineTo(toCanvasX(77.5), toCanvasY(8)); // Kanyakumari
+ctx.lineTo(toCanvasX(73), toCanvasY(16)); // West Coast / Mumbai
+ctx.lineTo(toCanvasX(68), toCanvasY(24));
+ctx.closePath();
+ctx.fill();
+
+// Highlight India with subtle terracotta/amber warmth
+ctx.fillStyle = '#8c4a26';
+ctx.beginPath();
+ctx.moveTo(toCanvasX(70), toCanvasY(23));
+ctx.lineTo(toCanvasX(74), toCanvasY(31));
+ctx.lineTo(toCanvasX(85), toCanvasY(26));
+ctx.lineTo(toCanvasX(79), toCanvasY(14));
+ctx.lineTo(toCanvasX(77.5), toCanvasY(9));
+ctx.lineTo(toCanvasX(74), toCanvasY(17));
+ctx.closePath();
+ctx.fill();
+
+// Sri Lanka
+ctx.beginPath();
+ctx.arc(toCanvasX(80.5), toCanvasY(7.5), 6, 0, Math.PI * 2);
+ctx.fill();
+
+// Arabian Peninsula & Middle East
+ctx.fillStyle = '#5c4331';
+ctx.beginPath();
+ctx.moveTo(toCanvasX(36), toCanvasY(32));
+ctx.lineTo(toCanvasX(55), toCanvasY(30));
+ctx.lineTo(toCanvasX(60), toCanvasY(24));
+ctx.lineTo(toCanvasX(54), toCanvasY(16));
+ctx.lineTo(toCanvasX(44), toCanvasY(12));
+ctx.lineTo(toCanvasX(43), toCanvasY(25));
+ctx.closePath();
+ctx.fill();
+
+// Africa
+ctx.beginPath();
+ctx.moveTo(toCanvasX(12), toCanvasY(36));
+ctx.lineTo(toCanvasX(32), toCanvasY(32));
+ctx.lineTo(toCanvasX(50), toCanvasY(12));
+ctx.lineTo(toCanvasX(40), toCanvasY(-10));
+ctx.lineTo(toCanvasX(30), toCanvasY(-34));
+ctx.lineTo(toCanvasX(18), toCanvasY(-34));
+ctx.lineTo(toCanvasX(8), toCanvasY(4));
+ctx.lineTo(toCanvasX(-16), toCanvasY(12));
+ctx.lineTo(toCanvasX(0), toCanvasY(35));
+ctx.closePath();
+ctx.fill();
+
+// Eurasia / Central Asia & Tibet
+ctx.beginPath();
+ctx.moveTo(toCanvasX(60), toCanvasY(35));
+ctx.lineTo(toCanvasX(120), toCanvasY(40));
+ctx.lineTo(toCanvasX(140), toCanvasY(60));
+ctx.lineTo(toCanvasX(60), toCanvasY(65));
+ctx.closePath();
+ctx.fill();
+
+// Southeast Asia / Sunda
+ctx.beginPath();
+ctx.moveTo(toCanvasX(96), toCanvasY(20));
+ctx.lineTo(toCanvasX(108), toCanvasY(12));
+ctx.lineTo(toCanvasX(102), toCanvasY(2));
+ctx.lineTo(toCanvasX(98), toCanvasY(10));
+ctx.closePath();
+ctx.fill();
+
+// Australia
+ctx.beginPath();
+ctx.ellipse(toCanvasX(134), toCanvasY(-25), 55, 38, 0, 0, Math.PI * 2);
+ctx.fill();
+
+// Cloud and Atmospheric Stream swirls (subtle ivory/warm white)
+ctx.strokeStyle = 'rgba(255, 248, 240, 0.4)';
+ctx.lineWidth = 14;
+ctx.beginPath();
+ctx.arc(toCanvasX(78), toCanvasY(6), 40, 0.2, 1.8);
+ctx.stroke();
+
+ctx.lineWidth = 8;
+ctx.beginPath();
+ctx.arc(toCanvasX(65), toCanvasY(14), 60, -0.5, 0.8);
+ctx.stroke();
+
+const earthTexture = new THREE.CanvasTexture(canvas);
+earthTexture.wrapS = THREE.RepeatWrapping;
+
+// Globe Geometry & Material
+const globeRadius = 5.2;
+const globeGeometry = new THREE.SphereGeometry(globeRadius, 64, 64);
+const globeMaterial = new THREE.MeshPhongMaterial({
+  map: earthTexture,
+  bumpScale: 0.05,
+  specular: new THREE.Color(0x334155),
+  shininess: 15,
+  emissive: new THREE.Color(0x18120c),
+  emissiveIntensity: 0.15
+});
+
+const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+earthGroup.add(globeMesh);
+
+// Cloud Layer (slightly larger radius, rotates independently)
+const cloudCanvas = document.createElement('canvas');
+cloudCanvas.width = 1024;
+cloudCanvas.height = 512;
+const cCtx = cloudCanvas.getContext('2d');
+cCtx.fillStyle = 'rgba(0,0,0,0)';
+cCtx.fillRect(0,0,1024,512);
+
+// Draw delicate atmospheric cloud bands
+cCtx.fillStyle = 'rgba(255, 252, 245, 0.42)';
+for (let i = 0; i < 28; i++) {
+  const cx = Math.random() * 1024;
+  const cy = 100 + Math.random() * 312;
+  const rx = 30 + Math.random() * 90;
+  const ry = 8 + Math.random() * 22;
+  cCtx.beginPath();
+  cCtx.ellipse(cx, cy, rx, ry, (Math.random() - 0.5) * 0.4, 0, Math.PI * 2);
+  cCtx.fill();
+}
+
+const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
+const cloudGeo = new THREE.SphereGeometry(globeRadius + 0.08, 64, 64);
+const cloudMat = new THREE.MeshLambertMaterial({
+  map: cloudTexture,
+  transparent: true,
+  opacity: 0.55,
+  blending: THREE.NormalBlending
+});
+const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+earthGroup.add(cloudMesh);
+
+// Atmospheric Halo (Outer glowing shell with saffron/amber/sky blend)
+const haloGeo = new THREE.SphereGeometry(globeRadius + 0.35, 48, 48);
+const haloMat = new THREE.ShaderMaterial({
+  vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying vec3 vNormal;
+    void main() {
+      float intensity = pow(0.68 - dot(vNormal, vec3(0, 0, 1.0)), 2.8);
+      vec3 atmosphericColor = mix(vec3(0.88, 0.48, 0.16), vec3(0.96, 0.88, 0.76), intensity * 0.6);
+      gl_FragColor = vec4(atmosphericColor, intensity * 0.7);
+    }
+  `,
+  blending: THREE.AdditiveBlending,
+  side: THREE.BackSide,
+  transparent: true
+});
+const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+scene.add(haloMesh);
+
+// India Location Pin (Bengaluru / Central India)
+// Lon ~78 deg, Lat ~15 deg
+const phi = (90 - 18) * (Math.PI / 180);
+const theta = (78 + 180) * (Math.PI / 180);
+const pinR = globeRadius + 0.12;
+
+const pinPos = new THREE.Vector3(
+  -pinR * Math.sin(phi) * Math.cos(theta),
+  pinR * Math.cos(phi),
+  pinR * Math.sin(phi) * Math.sin(theta)
+);
+
+// Target India initially: Rotate earth group so India faces the camera
+// India lon is 78 E, lat 18 N
+earthGroup.rotation.y = -1.82;
+earthGroup.rotation.x = 0.28;
+
+// Tactile Glowing Beacon Pin on Bengaluru
+const pinGroup = new THREE.Group();
+const beaconCoreGeo = new THREE.SphereGeometry(0.12, 16, 16);
+const beaconCoreMat = new THREE.MeshBasicMaterial({ color: 0xe07a28 });
+const beaconCore = new THREE.Mesh(beaconCoreGeo, beaconCoreMat);
+pinGroup.add(beaconCore);
+
+// Pulsing beacon ring
+const ringGeo = new THREE.RingGeometry(0.18, 0.26, 32);
+const ringMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
+const beaconRing = new THREE.Mesh(ringGeo, ringMat);
+beaconRing.lookAt(pinPos.clone().normalize());
+pinGroup.add(beaconRing);
+
+pinGroup.position.copy(pinPos);
+earthGroup.add(pinGroup);
+
+// Ambient floating particles (sunlight/atmospheric dust)
+const particleCount = 80;
+const particleGeo = new THREE.BufferGeometry();
+const particlePos = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i += 3) {
+  particlePos[i] = (Math.random() - 0.5) * 18;
+  particlePos[i+1] = (Math.random() - 0.5) * 14;
+  particlePos[i+2] = (Math.random() - 0.5) * 10;
+}
+particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+const particleMat = new THREE.PointsMaterial({
+  color: 0xf59e0b,
+  size: 0.08,
+  transparent: true,
+  opacity: 0.45
+});
+const particles = new THREE.Points(particleGeo, particleMat);
+scene.add(particles);
+
+// Interactive mouse drag / touch rotation
+let isDragging = false;
+let previousMousePosition = { x: 0, y: 0 };
+
+function onPointerDown(e) {
+  isDragging = true;
+  previousMousePosition = { x: e.clientX || (e.touches && e.touches[0].clientX), y: e.clientY || (e.touches && e.touches[0].clientY) };
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return;
+  const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+  const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+  const deltaX = clientX - previousMousePosition.x;
+  const deltaY = clientY - previousMousePosition.y;
+
+  earthGroup.rotation.y += deltaX * 0.005;
+  earthGroup.rotation.x += deltaY * 0.005;
+  // clamp x rotation
+  earthGroup.rotation.x = Math.max(-1.0, Math.min(1.0, earthGroup.rotation.x));
+
+  previousMousePosition = { x: clientX, y: clientY };
+}
+
+function onPointerUp() {
+  isDragging = false;
+}
+
+container.addEventListener('mousedown', onPointerDown);
+window.addEventListener('mousemove', onPointerMove);
+window.addEventListener('mouseup', onPointerUp);
+
+container.addEventListener('touchstart', onPointerDown, { passive: true });
+window.addEventListener('touchmove', onPointerMove, { passive: true });
+window.addEventListener('touchend', onPointerUp);
+
+// Responsive resize
+function handleResize() {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || 480;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', handleResize);
+
+// Render loop
+let clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const elapsedTime = clock.getElapsedTime();
+
+  // Gentle subtle Earth rotation when idle
+  if (!isDragging) {
+    earthGroup.rotation.y += 0.0012;
+  }
+  cloudMesh.rotation.y += 0.0018;
+
+  // Pulse location beacon
+  const s = 1.0 + Math.sin(elapsedTime * 3.5) * 0.3;
+  beaconRing.scale.set(s, s, s);
+  beaconRing.material.opacity = 0.85 - (s - 0.7) * 0.5;
+
+  // Slow particle drift
+  particles.rotation.y = elapsedTime * 0.03;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+</body>
+</html>

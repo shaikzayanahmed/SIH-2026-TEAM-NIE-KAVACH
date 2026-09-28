@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_6 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_6" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_6');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const container = document.getElementById('threejs-container-ANIMATION_3') || document.querySelector('threejs-scene') || document.body;
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+camera.position.set(2, 2.5, 12);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xfff8f2, 1.6);
+scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xffecd1, 2.8);
+sunLight.position.set(16, 12, 12);
+scene.add(sunLight);
+
+const warmFill = new THREE.DirectionalLight(0xe07a28, 1.1);
+warmFill.position.set(-12, -4, -6);
+scene.add(warmFill);
+
+// Earth Group
+const earthGroup = new THREE.Group();
+earthGroup.position.set(1.8, -0.2, 0); // Positioned slightly to the right for desktop hero composition
+scene.add(earthGroup);
+
+// Procedural procedural terrain / Earth texture on canvas
+const canvas = document.createElement('canvas');
+canvas.width = 2048;
+canvas.height = 1024;
+const ctx = canvas.getContext('2d');
+
+// Deep oceanic warm-slate
+ctx.fillStyle = '#182232';
+ctx.fillRect(0, 0, 2048, 1024);
+
+const oceanGrad = ctx.createLinearGradient(0, 0, 0, 1024);
+oceanGrad.addColorStop(0, '#0c131f');
+oceanGrad.addColorStop(0.5, '#1b2636');
+oceanGrad.addColorStop(1, '#0c131f');
+ctx.fillStyle = oceanGrad;
+ctx.fillRect(0, 0, 2048, 1024);
+
+function toCanvasX(lon) { return ((lon + 180) / 360) * 2048; }
+function toCanvasY(lat) { return ((90 - lat) / 180) * 1024; }
+
+// Landmass Base
+ctx.fillStyle = '#3f2d1e';
+
+// Indian Subcontinent & South Asia
+ctx.beginPath();
+ctx.moveTo(toCanvasX(68), toCanvasY(24));
+ctx.lineTo(toCanvasX(73), toCanvasY(35));
+ctx.lineTo(toCanvasX(80), toCanvasY(33));
+ctx.lineTo(toCanvasX(92), toCanvasY(27));
+ctx.lineTo(toCanvasX(91), toCanvasY(20));
+ctx.lineTo(toCanvasX(82), toCanvasY(13));
+ctx.lineTo(toCanvasX(77.5), toCanvasY(8));
+ctx.lineTo(toCanvasX(72.5), toCanvasY(16));
+ctx.lineTo(toCanvasX(68), toCanvasY(24));
+ctx.closePath();
+ctx.fill();
+
+// Highlight India with rich terracotta/saffron earthy warmth
+ctx.fillStyle = '#9c532b';
+ctx.beginPath();
+ctx.moveTo(toCanvasX(70), toCanvasY(23));
+ctx.lineTo(toCanvasX(74), toCanvasY(32));
+ctx.lineTo(toCanvasX(86), toCanvasY(27));
+ctx.lineTo(toCanvasX(80), toCanvasY(14));
+ctx.lineTo(toCanvasX(77.5), toCanvasY(9));
+ctx.lineTo(toCanvasX(74), toCanvasY(17));
+ctx.closePath();
+ctx.fill();
+
+// Sri Lanka
+ctx.beginPath();
+ctx.arc(toCanvasX(80.5), toCanvasY(7.5), 10, 0, Math.PI * 2);
+ctx.fill();
+
+// Arabian Peninsula & Middle East
+ctx.fillStyle = '#523a2a';
+ctx.beginPath();
+ctx.moveTo(toCanvasX(35), toCanvasY(32));
+ctx.lineTo(toCanvasX(55), toCanvasY(31));
+ctx.lineTo(toCanvasX(60), toCanvasY(24));
+ctx.lineTo(toCanvasX(54), toCanvasY(15));
+ctx.lineTo(toCanvasX(44), toCanvasY(12));
+ctx.lineTo(toCanvasX(42), toCanvasY(25));
+ctx.closePath();
+ctx.fill();
+
+// Africa
+ctx.beginPath();
+ctx.moveTo(toCanvasX(12), toCanvasY(36));
+ctx.lineTo(toCanvasX(32), toCanvasY(32));
+ctx.lineTo(toCanvasX(51), toCanvasY(12));
+ctx.lineTo(toCanvasX(42), toCanvasY(-10));
+ctx.lineTo(toCanvasX(30), toCanvasY(-34));
+ctx.lineTo(toCanvasX(17), toCanvasY(-34));
+ctx.lineTo(toCanvasX(8), toCanvasY(4));
+ctx.lineTo(toCanvasX(-16), toCanvasY(12));
+ctx.lineTo(toCanvasX(0), toCanvasY(35));
+ctx.closePath();
+ctx.fill();
+
+// Eurasia & Central Asia
+ctx.beginPath();
+ctx.moveTo(toCanvasX(60), toCanvasY(35));
+ctx.lineTo(toCanvasX(125), toCanvasY(42));
+ctx.lineTo(toCanvasX(145), toCanvasY(65));
+ctx.lineTo(toCanvasX(55), toCanvasY(68));
+ctx.closePath();
+ctx.fill();
+
+// Southeast Asia & Sunda
+ctx.beginPath();
+ctx.moveTo(toCanvasX(96), toCanvasY(20));
+ctx.lineTo(toCanvasX(108), toCanvasY(11));
+ctx.lineTo(toCanvasX(102), toCanvasY(1));
+ctx.lineTo(toCanvasX(98), toCanvasY(10));
+ctx.closePath();
+ctx.fill();
+
+// Australia
+ctx.beginPath();
+ctx.ellipse(toCanvasX(134), toCanvasY(-25), 110, 76, 0, 0, Math.PI * 2);
+ctx.fill();
+
+// Atmospheric synoptic flow streams (soft ivory/amber)
+ctx.strokeStyle = 'rgba(255, 248, 238, 0.45)';
+ctx.lineWidth = 22;
+ctx.beginPath();
+ctx.arc(toCanvasX(78), toCanvasY(6), 85, 0.2, 1.8);
+ctx.stroke();
+
+ctx.lineWidth = 14;
+ctx.beginPath();
+ctx.arc(toCanvasX(65), toCanvasY(14), 120, -0.5, 0.8);
+ctx.stroke();
+
+const earthTexture = new THREE.CanvasTexture(canvas);
+earthTexture.wrapS = THREE.RepeatWrapping;
+
+// Globe Geometry
+const globeRadius = 4.8;
+const globeGeometry = new THREE.SphereGeometry(globeRadius, 64, 64);
+const globeMaterial = new THREE.MeshPhongMaterial({
+  map: earthTexture,
+  bumpScale: 0.05,
+  specular: new THREE.Color(0x384556),
+  shininess: 18,
+  emissive: new THREE.Color(0x1a120b),
+  emissiveIntensity: 0.16
+});
+const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+earthGroup.add(globeMesh);
+
+// Cloud Layer
+const cloudCanvas = document.createElement('canvas');
+cloudCanvas.width = 1024;
+cloudCanvas.height = 512;
+const cCtx = cloudCanvas.getContext('2d');
+cCtx.fillStyle = 'rgba(0,0,0,0)';
+cCtx.fillRect(0,0,1024,512);
+
+cCtx.fillStyle = 'rgba(255, 252, 246, 0.44)';
+for (let i = 0; i < 35; i++) {
+  const cx = Math.random() * 1024;
+  const cy = 100 + Math.random() * 312;
+  const rx = 35 + Math.random() * 95;
+  const ry = 8 + Math.random() * 24;
+  cCtx.beginPath();
+  cCtx.ellipse(cx, cy, rx, ry, (Math.random() - 0.5) * 0.4, 0, Math.PI * 2);
+  cCtx.fill();
+}
+
+const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
+const cloudGeo = new THREE.SphereGeometry(globeRadius + 0.09, 64, 64);
+const cloudMat = new THREE.MeshLambertMaterial({
+  map: cloudTexture,
+  transparent: true,
+  opacity: 0.58,
+  blending: THREE.NormalBlending
+});
+const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+earthGroup.add(cloudMesh);
+
+// Atmospheric Scattering Outer Halo
+const haloGeo = new THREE.SphereGeometry(globeRadius + 0.42, 48, 48);
+const haloMat = new THREE.ShaderMaterial({
+  vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying vec3 vNormal;
+    void main() {
+      float intensity = pow(0.66 - dot(vNormal, vec3(0, 0, 1.0)), 2.6);
+      vec3 atmosphericColor = mix(vec3(0.88, 0.48, 0.16), vec3(0.98, 0.89, 0.78), intensity * 0.65);
+      gl_FragColor = vec4(atmosphericColor, intensity * 0.72);
+    }
+  `,
+  blending: THREE.AdditiveBlending,
+  side: THREE.BackSide,
+  transparent: true
+});
+const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+earthGroup.add(haloMesh);
+
+// Telemetry Pin on Bengaluru (Lat 13°N, Lon 77.5°E)
+const phi = (90 - 16) * (Math.PI / 180);
+const theta = (78 + 180) * (Math.PI / 180);
+const pinR = globeRadius + 0.12;
+
+const pinPos = new THREE.Vector3(
+  -pinR * Math.sin(phi) * Math.cos(theta),
+  pinR * Math.cos(phi),
+  pinR * Math.sin(phi) * Math.sin(theta)
+);
+
+// Target India initially
+earthGroup.rotation.y = -1.82;
+earthGroup.rotation.x = 0.22;
+
+const pinGroup = new THREE.Group();
+const beaconCoreGeo = new THREE.SphereGeometry(0.12, 16, 16);
+const beaconCoreMat = new THREE.MeshBasicMaterial({ color: 0xe07a28 });
+const beaconCore = new THREE.Mesh(beaconCoreGeo, beaconCoreMat);
+pinGroup.add(beaconCore);
+
+const ringGeo = new THREE.RingGeometry(0.18, 0.28, 32);
+const ringMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, side: THREE.DoubleSide, transparent: true, opacity: 0.85 });
+const beaconRing = new THREE.Mesh(ringGeo, ringMat);
+beaconRing.lookAt(pinPos.clone().normalize());
+pinGroup.add(beaconRing);
+
+pinGroup.position.copy(pinPos);
+earthGroup.add(pinGroup);
+
+// Ambient floating particles
+const particleCount = 100;
+const particleGeo = new THREE.BufferGeometry();
+const particlePos = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i += 3) {
+  particlePos[i] = (Math.random() - 0.5) * 26;
+  particlePos[i+1] = (Math.random() - 0.5) * 18;
+  particlePos[i+2] = (Math.random() - 0.5) * 14;
+}
+particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+const particleMat = new THREE.PointsMaterial({
+  color: 0xf59e0b,
+  size: 0.08,
+  transparent: true,
+  opacity: 0.4
+});
+const particles = new THREE.Points(particleGeo, particleMat);
+scene.add(particles);
+
+// Interactive mouse drag / orbit
+let isDragging = false;
+let previousMousePosition = { x: 0, y: 0 };
+
+function onPointerDown(e) {
+  isDragging = true;
+  previousMousePosition = { x: e.clientX || (e.touches && e.touches[0].clientX), y: e.clientY || (e.touches && e.touches[0].clientY) };
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return;
+  const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+  const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+  const deltaX = clientX - previousMousePosition.x;
+  const deltaY = clientY - previousMousePosition.y;
+
+  earthGroup.rotation.y += deltaX * 0.005;
+  earthGroup.rotation.x += deltaY * 0.005;
+  earthGroup.rotation.x = Math.max(-0.8, Math.min(0.8, earthGroup.rotation.x));
+
+  previousMousePosition = { x: clientX, y: clientY };
+}
+
+function onPointerUp() { isDragging = false; }
+
+window.addEventListener('mousedown', onPointerDown);
+window.addEventListener('mousemove', onPointerMove);
+window.addEventListener('mouseup', onPointerUp);
+
+window.addEventListener('touchstart', onPointerDown, { passive: true });
+window.addEventListener('touchmove', onPointerMove, { passive: true });
+window.addEventListener('touchend', onPointerUp);
+
+function handleResize() {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', handleResize);
+
+let clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const elapsedTime = clock.getElapsedTime();
+
+  if (!isDragging) {
+    earthGroup.rotation.y += 0.001;
+  }
+  cloudMesh.rotation.y += 0.0015;
+
+  const s = 1.0 + Math.sin(elapsedTime * 3.5) * 0.3;
+  beaconRing.scale.set(s, s, s);
+  beaconRing.material.opacity = 0.85 - (s - 0.7) * 0.5;
+
+  particles.rotation.y = elapsedTime * 0.02;
+
+  renderer.render(scene, camera);
+}
+animate();
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_6 -->
+</body>
+</html>

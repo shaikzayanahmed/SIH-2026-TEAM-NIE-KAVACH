@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed": "#331200", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "primary-fixed-dim": "#ffb68e", "primary-fixed": "#ffdbca", "tertiary": "#8d4b00", "primary-container": "#ba5814", "on-tertiary-container": "#fffbff", "secondary-fixed-dim": "#c2cba1", "on-surface-variant": "#564339", "on-error": "#ffffff", "surface-container-low": "#fcf2eb", "outline": "#897267", "surface-variant": "#eae1da", "on-secondary-fixed": "#181e04", "primary": "#984300", "tertiary-fixed-dim": "#ffb77d", "on-primary": "#ffffff", "on-error-container": "#93000a", "surface-container-highest": "#eae1da", "secondary-fixed": "#dee7bc", "surface-container-high": "#f0e6e0", "on-tertiary": "#ffffff", "on-tertiary-fixed": "#2f1500", "secondary": "#5a6240", "inverse-surface": "#342f2b", "surface-tint": "#9c4400", "background": "#fff8f5", "on-secondary": "#ffffff", "on-primary-container": "#fffbff", "on-tertiary-fixed-variant": "#6e3900", "on-secondary-fixed-variant": "#424a2a", "inverse-primary": "#ffb68e", "inverse-on-surface": "#f9efe8", "secondary-container": "#dce4b9", "on-secondary-container": "#5e6644", "on-background": "#1f1b17", "tertiary-container": "#b15f00", "surface": "#fff8f5", "surface-container": "#f6ece6", "surface-dim": "#e2d8d2", "outline-variant": "#ddc1b3", "error": "#ba1a1a", "tertiary-fixed": "#ffdcc3", "on-surface": "#1f1b17", "on-primary-fixed-variant": "#773300", "surface-bright": "#fff8f5" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "gutter": "1.5rem", "margin": "2.5rem", "space-sm": "0.5rem", "space-md": "1rem", "margin-mobile": "1rem", "gutter-mobile": "0.75rem", "space-lg": "1.5rem", "space-xl": "2.5rem" }, "fontFamily": { "label-caps": [ "Inter" ], "body-md": [ "Inter" ], "telemetry-num": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Inter" ], "body-sm": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "label-caps": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "telemetry-num": [ "15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "display-lg": [ "52px", { "lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "600" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" } ], "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "display-lg-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "500" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-md shadow-[0_1px_8px_rgba(43,30,22,0.05)]"><div class="h-20 w-full px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #c25e1a
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UWFR1a4S47oYqTf1v7pg-EXwzUFc8rc04O8IMwl34muaDWvjTKSmTp8wwdlirCJcB6Ko4Od-Ylr9KscOPRgpfsI8QeTw-FtfMhKeBPeiZTQrnAFZQ9szLX2jPVhAAfQXYEOGpGi5I44vlOcIY6WoUlnH8H4JsU1VzQEWxO3VfJ5eZLyaLCCFYrb4Ilmh_VVhCom_8TSx2HH2VAQF1m4yepvCU3b-Xxqe6RGNr1QSEk0fdfq6JBvWGyBdF4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">SAMVAYA</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Adaptive Atmospheric Forecast Engine</span></div></div><div class="h-6 w-px bg-surface-container-highest hidden xl:block"></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container rounded-lg"><a class="px-space-md py-space-sm font-body-md text-body-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="forecast" href="#">Forecast</a><a class="px-space-md py-space-sm font-body-md text-body-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="explore" href="#">Explore</a><a class="px-space-md py-space-sm font-body-md text-body-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="intelligence" href="#">Intelligence</a><a class="px-space-md py-space-sm font-body-md text-body-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded-lg" data-path="history" href="#">History</a></nav></div><div class="flex items-center gap-space-sm"><div class="hidden 2xl:flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container-low rounded-full shadow-[inset_0_1px_2px_rgba(43,30,22,0.04)]"><span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface uppercase">SIH26081 • HYBRID AI-NWP</span></div><button class="flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container rounded-xl text-on-surface hover:bg-surface-container-high hover:text-on-surface transition-all shadow-[0_1px_3px_rgba(43,30,22,0.04)]" type="button"><span class="material-symbols-outlined text-[16px] text-primary">location_on</span><span class="font-telemetry-num text-telemetry-num font-medium">Mysuru, Karnataka</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></button><button class="p-2 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Saved Observatories" type="button"><span class="material-symbols-outlined text-[20px]">bookmarks</span></button><button class="p-2 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors relative" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full"></span></button><a class="p-2 rounded-xl bg-primary-container text-on-primary-container shadow-[0_2px_8px_rgba(186,88,20,0.3)] transition-all" data-path="experience-control-center" href="#" title="Experience Control Center"><span class="material-symbols-outlined text-[20px]">settings</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_6px_rgba(152,67,0,0.25)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]"><div class="flex flex-col w-full">
+<!-- TOP CONTEXTUAL BANNER & PROTOTYPE DEMO STATE SELECTOR -->
+<section class="w-full px-margin py-space-lg bg-surface border-b border-surface-container-high/60">
+<div class="max-w-[1680px] mx-auto flex flex-col gap-space-md">
+<!-- Titles & Meta -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-1">
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-widest bg-primary-fixed/40 px-2 py-0.5 rounded-full">SYSTEM DIRECTIVE // SPEC-26081</span>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Meso-Scale Diagnostics</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-semibold tracking-tight text-on-surface">Experience Control Center</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mt-1">
+            Shape how SAMVAYA understands, explains, and presents atmospheric intelligence across models, uncertainty envelopes, and sensory displays.
+          </p>
+</div>
+<!-- Quick Sync Tag -->
+<div class="flex items-center gap-2 self-start lg:self-auto px-space-md py-1.5 bg-surface-container-low rounded-xl shadow-sm border border-outline-variant/30">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase">Live Instrument Bus: Synced</span>
+<span class="font-telemetry-num text-body-sm text-outline font-mono">06:00Z INGEST</span>
+</div>
+</div>
+<!-- Dynamic Status Strip -->
+<div class="w-full bg-surface-container-low rounded-xl px-space-md py-2.5 flex flex-wrap items-center justify-between gap-space-sm shadow-[inset_0_1px_2px_rgba(43,30,22,0.04)]">
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">my_location</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Anchor:</span>
+<span class="font-telemetry-num font-medium">Mysuru, Karnataka (12.2958° N, 76.6394° E)</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-tertiary">wb_sunny</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Weather:</span>
+<span class="font-telemetry-num font-medium" id="status-weather">28.1°C • Partly Cloudy</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Confidence:</span>
+<span class="font-telemetry-num font-medium text-secondary" id="status-confidence">82% Active</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary-container">timelapse</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Horizon:</span>
+<span class="font-telemetry-num font-medium">+48h Lead</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Grid Resolution:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-telemetry-num text-body-sm font-semibold">1.25 km Meso</span>
+</div>
+</div>
+<!-- Prototype Demo State Switcher -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm pt-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">tune</span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider font-semibold">Simulate Synoptic Scenarios:</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 w-full sm:w-auto" id="demo-state-group">
+<button class="demo-state-btn active-state flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg font-body-sm text-body-sm transition-all bg-primary-container text-on-primary-container shadow-[0_2px_6px_rgba(186,88,20,0.25)] font-medium" data-state="A" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-surface"></span>
+<span>State A: Calm (28°C)</span>
+</button>
+<button class="demo-state-btn flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg font-body-sm text-body-sm transition-all bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-state="B" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>State B: Rain (24°C)</span>
+</button>
+<button class="demo-state-btn flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg font-body-sm text-body-sm transition-all bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-state="C" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>State C: Heat (36°C)</span>
+</button>
+<button class="demo-state-btn flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg font-body-sm text-body-sm transition-all bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-state="D" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>State D: Spread Disagree</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- MAIN THREE-COLUMN WORKSPACE -->
+<div class="w-full px-margin py-space-lg">
+<div class="max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: NAVIGATION RAIL (Col span 3) -->
+<aside class="lg:col-span-3 flex flex-col gap-space-md sticky top-24">
+<!-- Clay Nav Pod -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/50">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest/70 mb-space-sm">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase">Configuration Rail</span>
+<span class="font-label-caps text-label-caps text-secondary bg-secondary-container/60 px-2 py-0.5 rounded-full">v4.8 REV</span>
+</div>
+<nav class="flex flex-col gap-1" id="nav-rail">
+<!-- Group: General -->
+<div class="pt-1 pb-1">
+<span class="font-label-caps text-label-caps uppercase text-outline text-[10px] tracking-wider px-2">Core Instrumentation</span>
+</div>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-primary-fixed/40 text-on-primary-fixed font-headline-sm text-body-sm font-medium transition-colors" href="#section-mood">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">filter_drama</span>
+                Atmospheric Mood
+              </span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-preferences">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+                Units &amp; Format
+              </span>
+<span class="font-label-caps text-[10px] text-outline">SI METRIC</span>
+</a>
+<!-- Group: Weather Intelligence -->
+<div class="pt-3 pb-1">
+<span class="font-label-caps text-label-caps uppercase text-outline text-[10px] tracking-wider px-2">Intelligence &amp; NWP</span>
+</div>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-intelligence">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+                Explanation &amp; Models
+              </span>
+<span class="font-label-caps text-[10px] bg-surface-container px-1.5 py-0.5 rounded text-on-surface-variant">5-NET</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-horizon">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">update</span>
+                Forecast Horizon
+              </span>
+<span class="font-telemetry-num text-body-sm font-medium text-primary">+48h</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-globe">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">public</span>
+                3D Earth &amp; Layers
+              </span>
+</a>
+<!-- Group: Operations -->
+<div class="pt-3 pb-1">
+<span class="font-label-caps text-label-caps uppercase text-outline text-[10px] tracking-wider px-2">Operational Nodes</span>
+</div>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-observatories">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">pin_drop</span>
+                Saved Observatories
+              </span>
+<span class="font-label-caps text-label-caps text-outline bg-surface-container px-1.5 py-0.5 rounded">5 NODES</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-alerts">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+                Extreme Alert Thresholds
+              </span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-headline-sm text-body-sm font-medium transition-colors" href="#section-performance">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">speed</span>
+                Performance &amp; Verification
+              </span>
+<span class="font-label-caps text-[10px] text-secondary">60 FPS</span>
+</a>
+</nav>
+</div>
+<!-- System Ingest Diagnostic Pill -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">Global Telemetry Sync</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Configuration preferences are dynamically compiled into the meso-scale inference pipeline every 15 minutes.
+          </p>
+<div class="flex items-center justify-between pt-1 font-body-sm text-body-sm text-outline border-t border-surface-container-highest">
+<span>Sync Latency:</span>
+<span class="font-telemetry-num text-on-surface font-medium">18.4 ms</span>
+</div>
+</div>
+</aside>
+<!-- CENTER COLUMN: MAIN CONFIGURATION WORKSPACE (Col span 6) -->
+<main class="lg:col-span-6 flex flex-col gap-space-lg">
+<!-- 1. ATMOSPHERIC MOOD & WEATHER-RESPONSIVE AMBIENCE -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-mood">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">filter_drama</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Atmospheric Mood &amp; Weather-Responsive Ambience</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                Control how strongly current weather conditions influence the visual atmosphere, illuminance tints, and depth layers.
+              </p>
+</div>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed/50 px-2 py-0.5 rounded-full uppercase">Signature Mode</span>
+</div>
+<!-- Tactile Three-Stage Slider -->
+<div class="flex flex-col gap-2">
+<div class="grid grid-cols-3 gap-2 bg-surface-container-low p-1.5 rounded-xl shadow-[inset_0_2px_4px_rgba(43,30,22,0.06)]" id="mood-selector">
+<button class="mood-btn flex flex-col items-center py-2.5 px-3 rounded-lg text-on-surface-variant hover:text-on-surface transition-all" data-mood="minimal" type="button">
+<span class="font-headline-sm text-body-sm font-semibold">Minimal</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Clean scientific canvas</span>
+</button>
+<button class="mood-btn active-mood flex flex-col items-center py-2.5 px-3 rounded-lg bg-surface-container-lowest text-primary font-semibold shadow-[0_2px_8px_rgba(43,30,22,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all" data-mood="balanced" type="button">
+<span class="font-headline-sm text-body-sm font-semibold">Balanced</span>
+<span class="font-body-sm text-[11px] text-primary/80 mt-0.5">Subtle atmospheric cues</span>
+</button>
+<button class="mood-btn flex flex-col items-center py-2.5 px-3 rounded-lg text-on-surface-variant hover:text-on-surface transition-all" data-mood="immersive" type="button">
+<span class="font-headline-sm text-body-sm font-semibold">Immersive</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Full weather illuminance</span>
+</button>
+</div>
+</div>
+<!-- Ambient Reactive State Legend -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low/70">
+<span class="w-3 h-3 rounded-full bg-[#f59e0b] shadow-[0_0_6px_rgba(245,158,11,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface font-semibold uppercase">Solar Warm</span>
+<span class="font-body-sm text-[11px] text-outline">Amber daylight</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low/70">
+<span class="w-3 h-3 rounded-full bg-[#64748b] shadow-[0_0_6px_rgba(100,116,139,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface font-semibold uppercase">Rain Slate</span>
+<span class="font-body-sm text-[11px] text-outline">Cool low-contrast</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low/70">
+<span class="w-3 h-3 rounded-full bg-[#475569] shadow-[0_0_6px_rgba(71,85,105,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface font-semibold uppercase">Convective</span>
+<span class="font-body-sm text-[11px] text-outline">Restrained depth</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low/70">
+<span class="w-3 h-3 rounded-full bg-[#ea580c] shadow-[0_0_6px_rgba(234,88,12,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface font-semibold uppercase">Thermal High</span>
+<span class="font-body-sm text-[11px] text-outline">Warm shimmer</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. GENERAL PREFERENCES (UNITS & DISPLAY) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-preferences">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">straighten</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">General Preferences (Units &amp; Formatting)</h2>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase">WMO Standard Compliance</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Temperature -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Temperature Scale</span>
+<div class="grid grid-cols-2 bg-surface-container-low p-1 rounded-lg">
+<button class="py-1.5 px-3 rounded-md bg-surface text-primary font-headline-sm text-body-sm font-semibold shadow-sm text-center" type="button">Celsius (°C)</button>
+<button class="py-1.5 px-3 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">Fahrenheit (°F)</button>
+</div>
+</div>
+<!-- Wind Velocity -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Wind Velocity Vector</span>
+<div class="grid grid-cols-3 bg-surface-container-low p-1 rounded-lg">
+<button class="py-1.5 px-2 rounded-md bg-surface text-primary font-headline-sm text-body-sm font-semibold shadow-sm text-center" type="button">km/h</button>
+<button class="py-1.5 px-2 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">m/s</button>
+<button class="py-1.5 px-2 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">knots</button>
+</div>
+</div>
+<!-- Precipitation Depth -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Precipitation Depth</span>
+<div class="grid grid-cols-2 bg-surface-container-low p-1 rounded-lg">
+<button class="py-1.5 px-3 rounded-md bg-surface text-primary font-headline-sm text-body-sm font-semibold shadow-sm text-center" type="button">Millimetres (mm)</button>
+<button class="py-1.5 px-3 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">Inches (in)</button>
+</div>
+</div>
+<!-- Atmospheric Pressure -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Atmospheric Pressure</span>
+<div class="grid grid-cols-2 bg-surface-container-low p-1 rounded-lg">
+<button class="py-1.5 px-3 rounded-md bg-surface text-primary font-headline-sm text-body-sm font-semibold shadow-sm text-center" type="button">Hectopascals (hPa)</button>
+<button class="py-1.5 px-3 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">inHg</button>
+</div>
+</div>
+<!-- Temporal Clock -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Synoptic Clock</span>
+<div class="grid grid-cols-2 bg-surface-container-low p-1 rounded-lg">
+<button class="py-1.5 px-3 rounded-md bg-surface text-primary font-headline-sm text-body-sm font-semibold shadow-sm text-center" type="button">24 Hour (18:00 IST)</button>
+<button class="py-1.5 px-3 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">12 Hour (6:00 PM)</button>
+</div>
+</div>
+<!-- Date Format -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Date Ephemeris</span>
+<div class="grid grid-cols-2 bg-surface-container-low p-1 rounded-lg">
+<button class="py-1.5 px-3 rounded-md bg-surface text-primary font-headline-sm text-body-sm font-semibold shadow-sm text-center" type="button">DD/MM/YYYY</button>
+<button class="py-1.5 px-3 rounded-md text-on-surface-variant hover:text-on-surface font-headline-sm text-body-sm text-center" type="button">MM/DD/YYYY</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. FORECAST INTELLIGENCE & EXPLANATION SETTINGS -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-intelligence">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Intelligence &amp; Model Explanation</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary font-semibold uppercase">Hybrid NWP + Neural Gating</span>
+</div>
+<!-- Explanation Level -->
+<div class="flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Explanation Depth</span>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+<label class="flex flex-col p-3 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-all border border-transparent">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-sm font-semibold text-on-surface">Simple</span>
+<input class="accent-primary" name="explanation" type="radio"/>
+</div>
+<span class="font-body-sm text-[12px] text-outline mt-1">"Give me the direct, essential answer without synoptic jargon."</span>
+</label>
+<label class="flex flex-col p-3 rounded-xl bg-primary-fixed/30 border border-primary/20 shadow-sm cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-sm font-semibold text-primary">Standard</span>
+<input checked="" class="accent-primary" name="explanation" type="radio"/>
+</div>
+<span class="font-body-sm text-[12px] text-on-surface-variant mt-1">"Explain the primary meteorological drivers and confidence envelopes."</span>
+</label>
+<label class="flex flex-col p-3 rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-all border border-transparent">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-sm font-semibold text-on-surface">Technical</span>
+<input class="accent-primary" name="explanation" type="radio"/>
+</div>
+<span class="font-body-sm text-[12px] text-outline mt-1">"Expose model divergence, CRPS error tensors &amp; parameterization schemes."</span>
+</label>
+</div>
+</div>
+<!-- Multi-Model Visibility -->
+<div class="flex flex-col gap-2 pt-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Multi-Model Ingest Visibility</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-surface-container-low p-1.5 rounded-xl">
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm text-center" type="button">Unified Consensus Only</button>
+<button class="py-2 px-3 rounded-lg bg-surface text-primary font-body-sm text-body-sm font-semibold shadow-sm text-center" type="button">Consensus + Key Models</button>
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm text-center" type="button">Full 5-Model Raw Stream</button>
+</div>
+</div>
+<!-- Confidence & Uncertainty Toggles -->
+<div class="flex flex-col gap-3 pt-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Confidence &amp; Uncertainty Envelopes</span>
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Always show confidence percentage (82% High)</span>
+<span class="font-body-sm text-body-sm text-outline">Calculated using ensemble spread and historical observational reliability</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Highlight model disagreement whenever temperature spread exceeds 1.5°C</span>
+<span class="font-body-sm text-body-sm text-outline">Triggers amber divergence indicator on the forecast timeline</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-medium text-on-surface">Adaptive Gating Weight Traceability Badge</span>
+<span class="font-body-sm text-body-sm text-outline">Displays dynamic weights (AIFS vs ECMWF vs GFS) inside every card footer</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- 4. FORECAST HORIZON PREFERENCES -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-horizon">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">timelapse</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Forecast Horizon &amp; Temporal Focus</h2>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Dynamic Meso Step</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Set your default prediction window. Longer horizons naturally exhibit greater multi-model dispersion; SAMVAYA adjusts model weights dynamically as synoptic regimes evolve.
+          </p>
+<!-- Horizon Selector Bar -->
+<div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5 bg-surface-container-low p-1.5 rounded-xl">
+<button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-telemetry-num text-body-sm text-center" type="button">Now (T-0)</button>
+<button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-telemetry-num text-body-sm text-center" type="button">+6h</button>
+<button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-telemetry-num text-body-sm text-center" type="button">+12h</button>
+<button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-telemetry-num text-body-sm text-center" type="button">+24h</button>
+<button class="py-2 rounded-lg bg-primary text-on-primary font-telemetry-num text-body-sm font-semibold shadow-sm text-center" type="button">+48h</button>
+<button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-telemetry-num text-body-sm text-center" type="button">+72h</button>
+<button class="py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-telemetry-num text-body-sm text-center" type="button">7 Days</button>
+</div>
+<!-- Micro-chart / Dispersion curve -->
+<div class="p-space-md bg-surface-container-low/40 rounded-xl flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-outline">Predictability Horizon Confidence Curve</span>
+<span class="font-body-sm text-body-sm text-on-surface mt-0.5">High Skill Retention across 0h - 48h (RMSE &lt; 0.72°C)</span>
+</div>
+<!-- Inline SVG Sparkline -->
+<svg class="w-32 h-8 text-primary overflow-visible" fill="none" viewbox="0 0 120 30">
+<path d="M0,8 Q30,10 60,16 T120,26" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="60" cy="16" fill="currentColor" r="3.5"></circle>
+</svg>
+</div>
+</section>
+<!-- 5. 3D EARTH & MAP SETTINGS -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-globe">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">public</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">3D Earth &amp; Synoptic Map Layers</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary font-semibold uppercase">WebGL GPU Accelerated</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Globe Cartography Mode</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-surface-container-low p-1.5 rounded-xl">
+<button class="py-2 px-3 rounded-lg bg-surface text-primary font-body-sm text-body-sm font-semibold shadow-sm text-center" type="button">Scientific NWP</button>
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm text-center" type="button">Atmospheric Photoreal</button>
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm text-center" type="button">Minimal Monochromatic</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 cursor-pointer">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Day/Night Dawn Terminator</span>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 cursor-pointer">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Rayleigh Scattering Halo</span>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 cursor-pointer">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Spherical Wind Particle Streamlines</span>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 cursor-pointer">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Topographic Relief Splines</span>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</label>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Particle Fluidity Target:</span>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-lg bg-surface-container text-outline font-body-sm text-body-sm">Static</span>
+<span class="px-3 py-1 rounded-lg bg-primary-fixed/40 text-primary font-body-sm text-body-sm font-semibold">Subtle Fluid</span>
+<span class="px-3 py-1 rounded-lg bg-surface-container text-outline font-body-sm text-body-sm">Full 60FPS</span>
+</div>
+</div>
+</section>
+<!-- 6. SAVED OBSERVATORIES & LOCATION PREFERENCES -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-observatories">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">pin_drop</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Saved Observatories &amp; Synop Anchors</h2>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add_location_alt</span>
+              Add Observatory
+            </button>
+</div>
+<!-- Primary Anchor Item -->
+<div class="p-3.5 rounded-xl bg-primary-fixed/20 border border-primary/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">home_pin</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Mysuru, Karnataka</span>
+<span class="font-label-caps text-[10px] text-primary bg-surface px-1.5 py-0.5 rounded font-bold uppercase">Default Anchor</span>
+</div>
+<span class="font-telemetry-num text-body-sm text-outline">12.2958° N, 76.6394° E • Elevation 770m</span>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end sm:self-center">
+<div class="text-right">
+<span class="font-telemetry-num text-headline-sm font-semibold text-on-surface">28.1°C</span>
+<span class="font-body-sm text-body-sm text-outline block">Partly Cloudy</span>
+</div>
+<button class="p-1.5 text-outline hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+</div>
+<!-- Other Nodes List -->
+<div class="flex flex-col gap-2">
+<!-- Node 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px]">drag_indicator</span>
+<div>
+<span class="font-headline-sm text-body-sm font-medium text-on-surface">Bengaluru Synoptic Lab</span>
+<span class="font-telemetry-num text-body-sm text-outline block">12.9716° N, 77.5946° E</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 rounded bg-surface font-telemetry-num text-body-sm text-on-surface">27.4°C · Rain 34%</span>
+<button class="p-1 text-outline hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">star</span></button>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px]">drag_indicator</span>
+<div>
+<span class="font-headline-sm text-body-sm font-medium text-on-surface">Balehonnur Coffee Agro-Synop</span>
+<span class="font-telemetry-num text-body-sm text-outline block">13.3524° N, 75.4665° E</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 rounded bg-surface font-telemetry-num text-body-sm text-on-surface">24.8°C · Mist</span>
+<button class="p-1 text-outline hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">star_border</span></button>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px]">drag_indicator</span>
+<div>
+<span class="font-headline-sm text-body-sm font-medium text-on-surface">New Delhi Synoptic Hub</span>
+<span class="font-telemetry-num text-body-sm text-outline block">28.6139° N, 77.2090° E</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 rounded bg-surface font-telemetry-num text-body-sm text-on-surface">31.2°C · Dry</span>
+<button class="p-1 text-outline hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">star_border</span></button>
+</div>
+</div>
+<!-- Node 4 -->
+<div class="p-3 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-[18px]">drag_indicator</span>
+<div>
+<span class="font-headline-sm text-body-sm font-medium text-on-surface">Mumbai Maritime Terminal</span>
+<span class="font-telemetry-num text-body-sm text-outline block">18.9220° N, 72.8346° E</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 rounded bg-surface font-telemetry-num text-body-sm text-on-surface">30.0°C · 82% Hum</span>
+<button class="p-1 text-outline hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">star_border</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. ATMOSPHERIC ALERTS & FORECAST CHANGE NOTIFICATIONS -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-alerts">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications_active</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Atmospheric Alerts &amp; Threshold Dispatches</h2>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary font-semibold uppercase">Synoptic Guardrails</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+            Alert thresholds control when SAMVAYA surfaces an operational advisory; they do not alter forward atmospheric physics or model weighting.
+          </p>
+<!-- Threshold Controls -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">Heavy Convective Rain</span>
+<div class="flex items-center justify-between">
+<span class="font-telemetry-num text-body-md font-medium text-primary">&gt; 70% Prob</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<input class="accent-primary w-full cursor-pointer" max="95" min="30" type="range" value="70"/>
+<span class="font-body-sm text-[11px] text-outline">Notify when confidence ≥ Medium</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">Extreme Thermal Peak</span>
+<div class="flex items-center justify-between">
+<span class="font-telemetry-num text-body-md font-medium text-primary">&gt; 40.0°C</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</div>
+<input class="accent-primary w-full cursor-pointer" max="48" min="32" type="range" value="40"/>
+<span class="font-body-sm text-[11px] text-outline">Heat index warning trigger</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">Severe Gust Velocity</span>
+<div class="flex items-center justify-between">
+<span class="font-telemetry-num text-body-md font-medium text-primary">&gt; 45 km/h</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<input class="accent-primary w-full cursor-pointer" max="90" min="20" type="range" value="45"/>
+<span class="font-body-sm text-[11px] text-outline">Surface AWS anemometer spike</span>
+</div>
+</div>
+<!-- Run Revision Toggles -->
+<div class="flex flex-col gap-2 pt-2">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 cursor-pointer">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Notify when model agreement drops significantly between 06:00Z and 12:00Z runs</span>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 cursor-pointer">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Notify when ground AWS observation detects &gt;1.0°C deviation from ensemble</span>
+<input checked="" class="w-4 h-4 accent-primary rounded" type="checkbox"/>
+</label>
+</div>
+</section>
+<!-- 8. PERFORMANCE & SCIENTIFIC TRANSPARENCY -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="section-performance">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">speed</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Performance &amp; Scientific Transparency</h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary font-semibold uppercase">Zero Black-Box</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-semibold uppercase">Compute Profile</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-surface-container-low p-1.5 rounded-xl">
+<button class="py-2 px-3 rounded-lg bg-surface text-primary font-body-sm text-body-sm font-semibold shadow-sm text-center" type="button">Balanced (60 FPS)</button>
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm text-center" type="button">Power Saver (2D Map)</button>
+<button class="py-2 px-3 rounded-lg text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm text-center" type="button">Ultra Raw Fidelity</button>
+</div>
+</div>
+<!-- Transparency Toggles -->
+<div class="flex flex-col gap-2 pt-2">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low/40">
+<span class="font-body-sm text-body-sm text-on-surface">Show Explicit NWP Model Tags (ECMWF, GFS, AIFS, NCMRWF)</span>
+<span class="font-label-caps text-[11px] text-secondary font-semibold uppercase">VISIBLE</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low/40">
+<span class="font-body-sm text-body-sm text-on-surface">Dynamic Adaptive Gating Weights Decomposition</span>
+<span class="font-label-caps text-[11px] text-secondary font-semibold uppercase">VISIBLE</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low/40">
+<span class="font-body-sm text-body-sm text-on-surface">Ground AWS Verification Telemetry Latency (124ms)</span>
+<span class="font-label-caps text-[11px] text-secondary font-semibold uppercase">ACTIVE</span>
+</div>
+</div>
+<div class="pt-2 flex justify-end">
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm font-semibold text-primary hover:text-tertiary transition-colors" href="#">
+              Open Data &amp; Model Transparency Whitepaper
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+</main>
+<!-- RIGHT COLUMN: LIVE EXPERIENCE PREVIEW DOCK (Col span 3) -->
+<aside class="lg:col-span-3 flex flex-col gap-space-md sticky top-24">
+<!-- Live Experience Preview Pod -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_16px_-2px_rgba(74,53,37,0.05),0_1px_3px_rgba(43,30,22,0.04)] border border-surface-container-highest/60 flex flex-col gap-space-md" id="preview-pod">
+<!-- Header -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+                LIVE PREVIEW DOCK
+              </span>
+<span class="font-label-caps text-[10px] text-outline font-mono">RENDER: 60FPS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Real-Time Atmosphere</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Simulating sensory layers based on your active preferences.
+            </p>
+</div>
+<!-- Embedded 3D Preview Scene -->
+<div class="relative w-full rounded-xl overflow-hidden bg-inverse-surface shadow-inner">
+<!-- STITCH_THREEJS_START:ANIMATION_45 class="w-full h-56 rounded-xl overflow-hidden relative border border-[#e2d8d2] shadow-inner bg-[#0a1018]" -->
+<div class="w-full h-56 rounded-xl overflow-hidden relative border border-[#e2d8d2] shadow-inner bg-[#0a1018]" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_45" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_45');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // SAMVAYA Settings & Personalization — 3D Earth Experience Control Center Preview
+// Features: Interactive Three.js 3D Earth embedded in the Live Experience Preview deck
+// Responsive to Atmospheric Mood (Minimal, Balanced, Immersive), weather regimes, layer toggles,
+// Rayleigh atmospheric glow, particle wind streamlines, and Mysuru focal pin.
+
+const container = document.getElementById('threejs-container-ANIMATION_SETTINGS') || document.querySelector('threejs-scene') || document.body;
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
+camera.position.set(-0.4, 0.6, 11.2);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Warm atmospheric scientific illumination
+const ambientLight = new THREE.AmbientLight(0xfff7ee, 1.6);
+scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xffeedb, 2.7);
+sunLight.position.set(16, 12, 14);
+scene.add(sunLight);
+
+const warmFill = new THREE.DirectionalLight(0xdf7a28, 1.1);
+warmFill.position.set(-14, -6, -8);
+scene.add(warmFill);
+
+// Main Planetary Group
+const earthGroup = new THREE.Group();
+earthGroup.position.set(-0.15, -0.1, 0);
+scene.add(earthGroup);
+
+// Canvas procedural texture for Earth & Custom Layer Preview
+const canvas = document.createElement('canvas');
+canvas.width = 2048;
+canvas.height = 1024;
+const ctx = canvas.getContext('2d');
+
+function toCanvasX(lon) { return ((lon + 180) / 360) * 2048; }
+function toCanvasY(lat) { return ((90 - lat) / 180) * 1024; }
+
+let currentPreviewLayer = 'temperature'; // 'temperature', 'precipitation', 'wind', 'pressure', 'confidence', 'extreme_risk'
+let currentPreviewMood = 'balanced';     // 'minimal', 'balanced', 'immersive'
+let currentWeatherCondition = 'calm';    // 'calm', 'rain', 'heat', 'disagreement'
+
+function drawSettingsEarth(layer, mood, condition) {
+  // Deep oceanic slate/navy
+  const oceanGrad = ctx.createLinearGradient(0, 0, 0, 1024);
+  oceanGrad.addColorStop(0, '#0a1018');
+  oceanGrad.addColorStop(0.5, '#131e2b');
+  oceanGrad.addColorStop(1, '#0a1018');
+  ctx.fillStyle = oceanGrad;
+  ctx.fillRect(0, 0, 2048, 1024);
+
+  // Continental landmasses
+  ctx.fillStyle = '#3a2d21';
+
+  // Indian Subcontinent & South Asia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(68), toCanvasY(24));
+  ctx.lineTo(toCanvasX(73), toCanvasY(35));
+  ctx.lineTo(toCanvasX(80), toCanvasY(33));
+  ctx.lineTo(toCanvasX(92), toCanvasY(27));
+  ctx.lineTo(toCanvasX(91), toCanvasY(20));
+  ctx.lineTo(toCanvasX(82), toCanvasY(13));
+  ctx.lineTo(toCanvasX(77.5), toCanvasY(8));
+  ctx.lineTo(toCanvasX(72.5), toCanvasY(16));
+  ctx.lineTo(toCanvasX(68), toCanvasY(24));
+  ctx.closePath();
+  ctx.fill();
+
+  // Highlight India
+  ctx.fillStyle = '#783c1c';
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(70), toCanvasY(23));
+  ctx.lineTo(toCanvasX(74), toCanvasY(32));
+  ctx.lineTo(toCanvasX(86), toCanvasY(27));
+  ctx.lineTo(toCanvasX(80), toCanvasY(14));
+  ctx.lineTo(toCanvasX(77.5), toCanvasY(9));
+  ctx.lineTo(toCanvasX(74), toCanvasY(17));
+  ctx.closePath();
+  ctx.fill();
+
+  // Sri Lanka
+  ctx.beginPath();
+  ctx.arc(toCanvasX(80.5), toCanvasY(7.5), 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Arabian Peninsula
+  ctx.fillStyle = '#4c3725';
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(35), toCanvasY(32));
+  ctx.lineTo(toCanvasX(55), toCanvasY(31));
+  ctx.lineTo(toCanvasX(60), toCanvasY(24));
+  ctx.lineTo(toCanvasX(54), toCanvasY(15));
+  ctx.lineTo(toCanvasX(44), toCanvasY(12));
+  ctx.lineTo(toCanvasX(42), toCanvasY(25));
+  ctx.closePath();
+  ctx.fill();
+
+  // Africa
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(12), toCanvasY(36));
+  ctx.lineTo(toCanvasX(32), toCanvasY(32));
+  ctx.lineTo(toCanvasX(51), toCanvasY(12));
+  ctx.lineTo(toCanvasX(42), toCanvasY(-10));
+  ctx.lineTo(toCanvasX(30), toCanvasY(-34));
+  ctx.lineTo(toCanvasX(17), toCanvasY(-34));
+  ctx.lineTo(toCanvasX(8), toCanvasY(4));
+  ctx.lineTo(toCanvasX(-16), toCanvasY(12));
+  ctx.lineTo(toCanvasX(0), toCanvasY(35));
+  ctx.closePath();
+  ctx.fill();
+
+  // Eurasia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(60), toCanvasY(35));
+  ctx.lineTo(toCanvasX(125), toCanvasY(42));
+  ctx.lineTo(toCanvasX(145), toCanvasY(65));
+  ctx.lineTo(toCanvasX(55), toCanvasY(68));
+  ctx.closePath();
+  ctx.fill();
+
+  // Southeast Asia & Australia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(96), toCanvasY(20));
+  ctx.lineTo(toCanvasX(108), toCanvasY(11));
+  ctx.lineTo(toCanvasX(102), toCanvasY(1));
+  ctx.lineTo(toCanvasX(98), toCanvasY(10));
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.ellipse(toCanvasX(134), toCanvasY(-25), 115, 78, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  const fX = toCanvasX(76.6394);
+  const fY = toCanvasY(12.2958);
+
+  const moodMult = mood === 'minimal' ? 0.35 : mood === 'balanced' ? 0.70 : 1.0;
+
+  if (layer === 'temperature') {
+    const tGrad = ctx.createLinearGradient(0, 0, 0, 1024);
+    tGrad.addColorStop(0, `rgba(100, 116, 139, ${0.30 * moodMult})`);
+    tGrad.addColorStop(0.42, `rgba(234, 179, 8, ${0.30 * moodMult})`);
+    tGrad.addColorStop(0.50, `rgba(217, 119, 6, ${0.45 * moodMult})`);
+    tGrad.addColorStop(0.80, `rgba(56, 189, 248, ${0.20 * moodMult})`);
+    ctx.fillStyle = tGrad;
+    ctx.fillRect(0, 0, 2048, 1024);
+
+    const deccanHeat = ctx.createRadialGradient(fX, fY, 15, fX, fY, 190);
+    deccanHeat.addColorStop(0, `rgba(217, 119, 6, ${0.60 * moodMult})`);
+    deccanHeat.addColorStop(0.6, `rgba(245, 158, 11, ${0.25 * moodMult})`);
+    deccanHeat.addColorStop(1, 'rgba(217, 119, 6, 0)');
+    ctx.fillStyle = deccanHeat;
+    ctx.beginPath();
+    ctx.arc(fX, fY, 190, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (layer === 'precipitation') {
+    const pGrad = ctx.createRadialGradient(fX, fY, 15, fX, fY, 230);
+    pGrad.addColorStop(0, `rgba(14, 165, 233, ${0.75 * moodMult})`);
+    pGrad.addColorStop(0.5, `rgba(56, 189, 248, ${0.35 * moodMult})`);
+    pGrad.addColorStop(1, 'rgba(14, 165, 233, 0)');
+    ctx.fillStyle = pGrad;
+    ctx.beginPath();
+    ctx.arc(fX, fY, 230, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (layer === 'confidence') {
+    const confGrad = ctx.createRadialGradient(fX, fY, 15, fX, fY, 220);
+    confGrad.addColorStop(0, `rgba(34, 197, 94, ${0.70 * moodMult})`);
+    confGrad.addColorStop(0.6, `rgba(101, 163, 13, ${0.30 * moodMult})`);
+    confGrad.addColorStop(1, 'rgba(34, 197, 94, 0)');
+    ctx.fillStyle = confGrad;
+    ctx.beginPath();
+    ctx.arc(fX, fY, 220, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (layer === 'extreme_risk') {
+    const riskGrad = ctx.createRadialGradient(fX, fY, 15, fX, fY, 240);
+    riskGrad.addColorStop(0, `rgba(225, 29, 72, ${0.80 * moodMult})`);
+    riskGrad.addColorStop(0.4, `rgba(217, 119, 6, ${0.50 * moodMult})`);
+    riskGrad.addColorStop(1, 'rgba(225, 29, 72, 0)');
+    ctx.fillStyle = riskGrad;
+    ctx.beginPath();
+    ctx.arc(fX, fY, 240, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Grid
+  ctx.strokeStyle = `rgba(255, 255, 255, ${0.07 * moodMult})`;
+  ctx.lineWidth = 1.1;
+  for (let lat = -80; lat <= 80; lat += 20) {
+    ctx.beginPath();
+    ctx.moveTo(0, toCanvasY(lat));
+    ctx.lineTo(2048, toCanvasY(lat));
+    ctx.stroke();
+  }
+  for (let lon = -180; lon <= 180; lon += 30) {
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(lon), 0);
+    ctx.lineTo(toCanvasX(lon), 1024);
+    ctx.stroke();
+  }
+}
+
+drawSettingsEarth(currentPreviewLayer, currentPreviewMood, currentWeatherCondition);
+const earthTexture = new THREE.CanvasTexture(canvas);
+earthTexture.wrapS = THREE.RepeatWrapping;
+
+// Globe Sphere Mesh
+const globeRadius = 4.65;
+const globeGeometry = new THREE.SphereGeometry(globeRadius, 64, 64);
+const globeMaterial = new THREE.MeshPhongMaterial({
+  map: earthTexture,
+  bumpScale: 0.06,
+  specular: new THREE.Color(0x384556),
+  shininess: 16,
+  emissive: new THREE.Color(0x161009),
+  emissiveIntensity: 0.18
+});
+const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+earthGroup.add(globeMesh);
+
+// Cloud Layer
+const cloudCanvas = document.createElement('canvas');
+cloudCanvas.width = 1024;
+cloudCanvas.height = 512;
+const cCtx = cloudCanvas.getContext('2d');
+cCtx.fillStyle = 'rgba(0,0,0,0)';
+cCtx.fillRect(0, 0, 1024, 512);
+cCtx.fillStyle = 'rgba(255, 250, 242, 0.44)';
+for (let i = 0; i < 36; i++) {
+  const cx = Math.random() * 1024;
+  const cy = 70 + Math.random() * 360;
+  const rx = 35 + Math.random() * 100;
+  const ry = 8 + Math.random() * 24;
+  cCtx.beginPath();
+  cCtx.ellipse(cx, cy, rx, ry, (Math.random() - 0.5) * 0.4, 0, Math.PI * 2);
+  cCtx.fill();
+}
+const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
+const cloudGeo = new THREE.SphereGeometry(globeRadius + 0.08, 64, 64);
+const cloudMat = new THREE.MeshLambertMaterial({
+  map: cloudTexture,
+  transparent: true,
+  opacity: 0.48,
+  blending: THREE.NormalBlending
+});
+const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+earthGroup.add(cloudMesh);
+
+// Rayleigh Halo
+const haloGeo = new THREE.SphereGeometry(globeRadius + 0.44, 48, 48);
+const haloMat = new THREE.ShaderMaterial({
+  vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying vec3 vNormal;
+    void main() {
+      float intensity = pow(0.66 - dot(vNormal, vec3(0, 0, 1.0)), 2.6);
+      vec3 atmosphericColor = mix(vec3(0.88, 0.48, 0.16), vec3(0.98, 0.89, 0.78), intensity * 0.65);
+      gl_FragColor = vec4(atmosphericColor, intensity * 0.76);
+    }
+  `,
+  blending: THREE.AdditiveBlending,
+  side: THREE.BackSide,
+  transparent: true
+});
+const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+earthGroup.add(haloMesh);
+
+// Mysuru Pin
+function calculatePinPos(lat, lon, rOffset = 0.12) {
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+  const pinR = globeRadius + rOffset;
+  return new THREE.Vector3(
+    -pinR * Math.sin(phi) * Math.cos(theta),
+    pinR * Math.cos(phi),
+    pinR * Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+const pinsGroup = new THREE.Group();
+earthGroup.add(pinsGroup);
+
+const posMysuru = calculatePinPos(12.2958, 76.6394);
+const pGroup = new THREE.Group();
+pGroup.position.copy(posMysuru);
+
+const cGeo = new THREE.SphereGeometry(0.12, 16, 16);
+const cMat = new THREE.MeshBasicMaterial({ color: 0xc25e1a });
+const cMesh = new THREE.Mesh(cGeo, cMat);
+pGroup.add(cMesh);
+
+const rGeo = new THREE.RingGeometry(0.18, 0.32, 32);
+const rMat = new THREE.MeshBasicMaterial({ color: 0xd97706, side: THREE.DoubleSide, transparent: true, opacity: 0.85 });
+const rMesh = new THREE.Mesh(rGeo, rMat);
+rMesh.lookAt(posMysuru.clone().normalize());
+pGroup.add(rMesh);
+
+pinsGroup.add(pGroup);
+
+earthGroup.rotation.y = -1.80;
+earthGroup.rotation.x = 0.20;
+
+let isDragging = false;
+let prevMouse = { x: 0, y: 0 };
+let targetRotY = earthGroup.rotation.y;
+let targetRotX = earthGroup.rotation.x;
+
+function onPointerDown(e) {
+  isDragging = true;
+  prevMouse = { x: e.clientX || (e.touches && e.touches[0].clientX), y: e.clientY || (e.touches && e.touches[0].clientY) };
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return;
+  const x = e.clientX || (e.touches && e.touches[0].clientX);
+  const y = e.clientY || (e.touches && e.touches[0].clientY);
+  const dx = x - prevMouse.x;
+  const dy = y - prevMouse.y;
+  targetRotY += dx * 0.005;
+  targetRotX += dy * 0.005;
+  targetRotX = Math.max(-0.85, Math.min(0.85, targetRotX));
+  prevMouse = { x, y };
+}
+
+function onPointerUp() { isDragging = false; }
+
+window.addEventListener('mousedown', onPointerDown);
+window.addEventListener('mousemove', onPointerMove);
+window.addEventListener('mouseup', onPointerUp);
+window.addEventListener('touchstart', onPointerDown, { passive: true });
+window.addEventListener('touchmove', onPointerMove, { passive: true });
+window.addEventListener('touchend', onPointerUp);
+
+// Public API hooks for Experience Control Center DOM communication
+window.samvayaSettingsSetLayer = function(layerName) {
+  currentPreviewLayer = layerName;
+  drawSettingsEarth(currentPreviewLayer, currentPreviewMood, currentWeatherCondition);
+  earthTexture.needsUpdate = true;
+};
+
+window.samvayaSettingsSetMood = function(moodLevel) {
+  currentPreviewMood = moodLevel;
+  drawSettingsEarth(currentPreviewLayer, currentPreviewMood, currentWeatherCondition);
+  earthTexture.needsUpdate = true;
+};
+
+window.samvayaSettingsSetState = function(stateName) {
+  currentWeatherCondition = stateName;
+  drawSettingsEarth(currentPreviewLayer, currentPreviewMood, currentWeatherCondition);
+  earthTexture.needsUpdate = true;
+};
+
+window.samvayaSettingsToggleClouds = function(visible) {
+  cloudMesh.visible = visible;
+};
+
+window.samvayaSettingsToggleGlow = function(visible) {
+  haloMesh.visible = visible;
+};
+
+function handleResize() {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', handleResize);
+
+let clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  earthGroup.rotation.y += (targetRotY - earthGroup.rotation.y) * 0.08;
+  earthGroup.rotation.x += (targetRotX - earthGroup.rotation.x) * 0.08;
+
+  cloudMesh.rotation.y += 0.0008;
+
+  const s = 1.0 + Math.sin(t * 3.2) * 0.28;
+  rMesh.scale.set(s, s, s);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_45 -->
+<!-- Overlay Badge -->
+<div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface font-label-caps text-[10px] uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>SYNOP 3D ISOBAR VIZ</span>
+</div>
+</div>
+<!-- Preview Telemetry Card -->
+<div class="bg-surface-container-low rounded-xl p-3 flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface" id="prev-station">Mysuru Station (12.2958° N)</span>
+<span class="font-label-caps text-[10px] bg-secondary-container text-on-secondary-container px-1.5 py-0.5 rounded font-medium" id="prev-condition-chip">BALANCED AMBIENCE</span>
+</div>
+<!-- Temperature & Consensus -->
+<div class="flex items-baseline justify-between pt-1">
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg-mobile font-semibold text-on-surface tracking-tight" id="prev-temp">28.1°</span>
+<span class="font-body-md text-body-md text-on-surface-variant">C</span>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-[10px] text-outline uppercase block">Consensus Modeled</span>
+<span class="font-telemetry-num text-body-sm font-semibold text-primary" id="prev-consensus">29.2°C (82% Conf)</span>
+</div>
+</div>
+<!-- Dynamic Model Weights Breakdown -->
+<div class="flex flex-col gap-1 pt-1 border-t border-surface-container-highest">
+<span class="font-label-caps text-[10px] text-outline uppercase">Adaptive Gating Weights</span>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden flex" id="weights-bar">
+<div class="bg-primary h-full" style="width: 41%;" title="AIFS 41%"></div>
+<div class="bg-secondary h-full" style="width: 32%;" title="ECMWF 32%"></div>
+<div class="bg-tertiary h-full" style="width: 18%;" title="GFS 18%"></div>
+<div class="bg-outline h-full" style="width: 9%;" title="GEFS 9%"></div>
+</div>
+<div class="flex justify-between font-label-caps text-[9px] text-outline">
+<span class="text-primary font-semibold">AIFS: 41%</span>
+<span class="text-secondary font-semibold">ECMWF: 32%</span>
+<span class="text-tertiary font-semibold">GFS: 18%</span>
+<span>GEFS: 9%</span>
+</div>
+</div>
+<!-- Explanation Box Preview -->
+<div class="p-2.5 rounded-lg bg-surface border border-surface-container-highest flex flex-col gap-1 mt-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[14px]">neurology</span>
+<span class="font-label-caps text-[10px] uppercase font-bold tracking-wide">Standard AI-NWP Explanation</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant leading-snug" id="prev-explanation">
+                Convective transition over Western Ghats; models show high agreement with minor afternoon thermal dispersion.
+              </p>
+</div>
+<!-- Atmosphere Status Pill -->
+<div class="flex items-center justify-between text-body-sm text-[11px] text-outline pt-1">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span>Warm Amber Illuminance</span>
+</span>
+<span>Grid: Temp (°C)</span>
+</div>
+</div>
+<!-- Fast Links -->
+<div class="flex flex-col gap-1.5 pt-1">
+<a class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-container text-body-sm font-medium text-on-surface transition-colors" href="#">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+                Open Synoptic Command Center
+              </span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-2 rounded-lg bg-surface hover:bg-surface-container text-body-sm font-medium text-on-surface transition-colors" href="#">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">science</span>
+                Multi-Model Verification Lab
+              </span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- BOTTOM PERSISTENT ACTION DOCK -->
+<aside class="sticky bottom-0 left-0 w-full z-40 bg-surface/90 backdrop-blur-md border-t border-surface-container-highest/80 shadow-[0_-4px_16px_rgba(43,30,22,0.06)] py-3 px-margin">
+<div class="max-w-[1680px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">All settings synchronized with local synoptic profile</span>
+<span class="text-outline hidden md:inline">•</span>
+<span class="font-label-caps text-label-caps text-outline hidden md:inline">NO PURGE NECESSARY</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="px-space-md py-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-headline-sm text-body-sm font-medium transition-colors" type="button">
+          Reset to Defaults
+        </button>
+<button class="flex items-center gap-1.5 px-space-lg py-2 rounded-xl bg-primary text-on-primary font-headline-sm text-body-sm font-semibold shadow-[0_4px_12px_rgba(152,67,0,0.25)] hover:bg-primary-container transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+          Save Preferences
+        </button>
+</div>
+</div>
+</aside>
+</div>
+<!-- CLIENT INTERACTIVITY SCRIPT -->
+<script>
+  (function initControlCenter() {
+    const states = {
+      A: {
+        temp: "28.1°",
+        weather: "28.1°C • Partly Cloudy",
+        confidence: "82% Active",
+        consensus: "29.2°C (82% Conf)",
+        station: "Mysuru Station (12.2958° N)",
+        explanation: "Convective transition over Western Ghats; models show high agreement with minor afternoon thermal dispersion.",
+        chip: "BALANCED AMBIENCE",
+        weights: [41, 32, 18, 9]
+      },
+      B: {
+        temp: "24.0°",
+        weather: "24.0°C • Rain Developing",
+        confidence: "74% Active",
+        consensus: "24.6°C (74% Conf)",
+        station: "Mysuru Station (12.2958° N)",
+        explanation: "Approaching monsoon trough with localized heavy moisture convergence; AIFS indicates sudden precipitation spike.",
+        chip: "RAIN SLATE AMBIENCE",
+        weights: [48, 28, 16, 8]
+      },
+      C: {
+        temp: "36.4°",
+        weather: "36.4°C • High Heat Anomaly",
+        confidence: "61% Active",
+        consensus: "37.1°C (61% Conf)",
+        station: "Mysuru Station (12.2958° N)",
+        explanation: "Significant surface anticyclone causing intense solar radiative flux and high subsidence heating anomaly.",
+        chip: "THERMAL HIGH SHIMMER",
+        weights: [35, 35, 20, 10]
+      },
+      D: {
+        temp: "29.8°",
+        weather: "29.8°C • Multi-Model Disagree",
+        confidence: "48% Uncertain",
+        consensus: "31.0°C (Ensemble Spread ±2.8°)",
+        station: "Mysuru Station (12.2958° N)",
+        explanation: "High model disagreement: ECMWF predicts coastal convective plume while GFS favors dry inland continental airmass.",
+        chip: "HIGH SPREAD ACTIVE",
+        weights: [26, 26, 26, 22]
+      }
+    };
+
+    const stateBtns = document.querySelectorAll('.demo-state-btn');
+    const statusWeather = document.getElementById('status-weather');
+    const statusConfidence = document.getElementById('status-confidence');
+    const prevTemp = document.getElementById('prev-temp');
+    const prevConsensus = document.getElementById('prev-consensus');
+    const prevExplanation = document.getElementById('prev-explanation');
+    const prevChip = document.getElementById('prev-condition-chip');
+
+    stateBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        stateBtns.forEach(b => {
+          b.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-[0_2px_6px_rgba(186,88,20,0.25)]');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        btn.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-[0_2px_6px_rgba(186,88,20,0.25)]');
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+        const stateKey = btn.getAttribute('data-state');
+        const s = states[stateKey];
+        if (s) {
+          if (statusWeather) statusWeather.textContent = s.weather;
+          if (statusConfidence) statusConfidence.textContent = s.confidence;
+          if (prevTemp) prevTemp.textContent = s.temp;
+          if (prevConsensus) prevConsensus.textContent = s.consensus;
+          if (prevExplanation) prevExplanation.textContent = s.explanation;
+          if (prevChip) prevChip.textContent = s.chip;
+        }
+      });
+    });
+
+    const moodBtns = document.querySelectorAll('.mood-btn');
+    moodBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        moodBtns.forEach(b => {
+          b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-[0_2px_8px_rgba(43,30,22,0.08),inset_0_1px_0_rgba(255,255,255,0.9)]');
+          b.classList.add('text-on-surface-variant');
+        });
+        btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-[0_2px_8px_rgba(43,30,22,0.08),inset_0_1px_0_rgba(255,255,255,0.9)]');
+        btn.classList.remove('text-on-surface-variant');
+      });
+    });
+  })();
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(43,30,22,0.03)]"><div class="w-full px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">SAMVAYA Synoptic Network</span><span class="text-outline-variant">•</span><span class="font-body-sm text-body-sm text-on-surface-variant">© 2025 SAMVAYA Atmospheric Labs. Autonomous Meso-Scale Weather Diagnostics.</span></div><div class="flex items-center gap-space-md"><span class="font-label-caps text-label-caps text-secondary font-medium tracking-wider uppercase bg-secondary-container/50 px-space-sm py-0.5 rounded-full">DATA PRECISION: GROUND SYNOP L4</span><span class="font-label-caps text-label-caps text-primary font-medium tracking-wider uppercase bg-primary-fixed/40 px-space-sm py-0.5 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>TELEMETRY ACTIVE</span></div></div></footer></body></html>

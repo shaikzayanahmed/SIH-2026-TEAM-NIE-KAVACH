@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_12 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_12" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_12');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // SAMVAYA 4D Interactive Atmospheric Earth Globe with Temporal Simulation Engine
+// Supports Past (Reanalysis) -> Now (Kalman radar/AWS blend) -> Future (Multi-model NWP & Graph AI)
+// Camera targeting (Mysuru, Bengaluru, Delhi, Mumbai), dynamic weather layers, cloud rotation, and timeline synchronization
+
+const container = document.getElementById('threejs-container-ANIMATION_TEMPORAL') || document.querySelector('threejs-scene') || document.body;
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+camera.position.set(0, 1.4, 11.2);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Lighting setup - sunlit Earth with atmospheric rim
+const ambientLight = new THREE.AmbientLight(0xfff6ed, 1.55);
+scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xffeedb, 2.7);
+sunLight.position.set(16, 12, 14);
+scene.add(sunLight);
+
+const warmFill = new THREE.DirectionalLight(0xe07a28, 1.05);
+warmFill.position.set(-14, -6, -8);
+scene.add(warmFill);
+
+// Main Earth Group
+const earthGroup = new THREE.Group();
+earthGroup.position.set(0, -0.15, 0);
+scene.add(earthGroup);
+
+// Procedural Canvas Texture for Earth & Multi-Layer Atmospheric Dynamics
+const canvas = document.createElement('canvas');
+canvas.width = 2048;
+canvas.height = 1024;
+const ctx = canvas.getContext('2d');
+
+function toCanvasX(lon) { return ((lon + 180) / 360) * 2048; }
+function toCanvasY(lat) { return ((90 - lat) / 180) * 1024; }
+
+let currentActiveLayer = 'precipitation';
+let currentTemporalPhase = 'forecast'; // 'past', 'now', 'forecast'
+let currentHorizonHours = 18; // -24 to +48
+
+function drawEarthMap(layer, horizon, phase) {
+  // Ocean Base
+  const oceanGrad = ctx.createLinearGradient(0, 0, 0, 1024);
+  oceanGrad.addColorStop(0, '#0c1420');
+  oceanGrad.addColorStop(0.5, '#172335');
+  oceanGrad.addColorStop(1, '#0c1420');
+  ctx.fillStyle = oceanGrad;
+  ctx.fillRect(0, 0, 2048, 1024);
+
+  // Continental landmasses
+  ctx.fillStyle = '#3a2d21';
+
+  // Indian Subcontinent & South Asia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(68), toCanvasY(24));
+  ctx.lineTo(toCanvasX(73), toCanvasY(35));
+  ctx.lineTo(toCanvasX(80), toCanvasY(33));
+  ctx.lineTo(toCanvasX(92), toCanvasY(27));
+  ctx.lineTo(toCanvasX(91), toCanvasY(20));
+  ctx.lineTo(toCanvasX(82), toCanvasY(13));
+  ctx.lineTo(toCanvasX(77.5), toCanvasY(8));
+  ctx.lineTo(toCanvasX(72.5), toCanvasY(16));
+  ctx.lineTo(toCanvasX(68), toCanvasY(24));
+  ctx.closePath();
+  ctx.fill();
+
+  // Highlight India
+  ctx.fillStyle = '#82431f';
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(70), toCanvasY(23));
+  ctx.lineTo(toCanvasX(74), toCanvasY(32));
+  ctx.lineTo(toCanvasX(86), toCanvasY(27));
+  ctx.lineTo(toCanvasX(80), toCanvasY(14));
+  ctx.lineTo(toCanvasX(77.5), toCanvasY(9));
+  ctx.lineTo(toCanvasX(74), toCanvasY(17));
+  ctx.closePath();
+  ctx.fill();
+
+  // Sri Lanka
+  ctx.beginPath();
+  ctx.arc(toCanvasX(80.5), toCanvasY(7.5), 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Arabian Peninsula
+  ctx.fillStyle = '#4e3725';
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(35), toCanvasY(32));
+  ctx.lineTo(toCanvasX(55), toCanvasY(31));
+  ctx.lineTo(toCanvasX(60), toCanvasY(24));
+  ctx.lineTo(toCanvasX(54), toCanvasY(15));
+  ctx.lineTo(toCanvasX(44), toCanvasY(12));
+  ctx.lineTo(toCanvasX(42), toCanvasY(25));
+  ctx.closePath();
+  ctx.fill();
+
+  // Africa
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(12), toCanvasY(36));
+  ctx.lineTo(toCanvasX(32), toCanvasY(32));
+  ctx.lineTo(toCanvasX(51), toCanvasY(12));
+  ctx.lineTo(toCanvasX(42), toCanvasY(-10));
+  ctx.lineTo(toCanvasX(30), toCanvasY(-34));
+  ctx.lineTo(toCanvasX(17), toCanvasY(-34));
+  ctx.lineTo(toCanvasX(8), toCanvasY(4));
+  ctx.lineTo(toCanvasX(-16), toCanvasY(12));
+  ctx.lineTo(toCanvasX(0), toCanvasY(35));
+  ctx.closePath();
+  ctx.fill();
+
+  // Eurasia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(60), toCanvasY(35));
+  ctx.lineTo(toCanvasX(125), toCanvasY(42));
+  ctx.lineTo(toCanvasX(145), toCanvasY(65));
+  ctx.lineTo(toCanvasX(55), toCanvasY(68));
+  ctx.closePath();
+  ctx.fill();
+
+  // Southeast Asia & Australia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(96), toCanvasY(20));
+  ctx.lineTo(toCanvasX(108), toCanvasY(11));
+  ctx.lineTo(toCanvasX(102), toCanvasY(1));
+  ctx.lineTo(toCanvasX(98), toCanvasY(10));
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.ellipse(toCanvasX(134), toCanvasY(-25), 110, 76, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Temporal Dynamic Layer Calculations
+  // Radius and position morph with temporal horizon
+  const shiftFactor = (horizon + 24) / 72; // 0 to 1
+  const rainX1 = 76 + Math.sin(shiftFactor * Math.PI) * 4;
+  const rainY1 = 12 + Math.cos(shiftFactor * Math.PI * 0.8) * 3;
+
+  if (layer === 'precipitation') {
+    // Dynamic rain bands
+    const rainGrad = ctx.createRadialGradient(toCanvasX(rainX1), toCanvasY(rainY1), 10, toCanvasX(rainX1), toCanvasY(rainY1), 180 + shiftFactor * 40);
+    rainGrad.addColorStop(0, 'rgba(56, 189, 248, 0.75)');
+    rainGrad.addColorStop(0.35, 'rgba(14, 165, 233, 0.55)');
+    rainGrad.addColorStop(0.7, 'rgba(2, 132, 199, 0.25)');
+    rainGrad.addColorStop(1, 'rgba(2, 132, 199, 0)');
+    ctx.fillStyle = rainGrad;
+    ctx.beginPath();
+    ctx.arc(toCanvasX(rainX1), toCanvasY(rainY1), 180 + shiftFactor * 40, 0, Math.PI * 2);
+    ctx.fill();
+
+    const rainGrad2 = ctx.createRadialGradient(toCanvasX(88), toCanvasY(19 - shiftFactor * 4), 10, toCanvasX(88), toCanvasY(19 - shiftFactor * 4), 210);
+    rainGrad2.addColorStop(0, 'rgba(168, 85, 247, 0.65)');
+    rainGrad2.addColorStop(0.4, 'rgba(56, 189, 248, 0.45)');
+    rainGrad2.addColorStop(1, 'rgba(2, 132, 199, 0)');
+    ctx.fillStyle = rainGrad2;
+    ctx.beginPath();
+    ctx.arc(toCanvasX(88), toCanvasY(19 - shiftFactor * 4), 210, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (layer === 'temperature') {
+    const tGrad = ctx.createLinearGradient(0, toCanvasY(60), 0, toCanvasY(-30));
+    tGrad.addColorStop(0, 'rgba(59, 130, 246, 0.35)');
+    tGrad.addColorStop(0.35, 'rgba(34, 197, 94, 0.3)');
+    tGrad.addColorStop(0.55, 'rgba(245, 158, 11, 0.45)');
+    tGrad.addColorStop(0.75, 'rgba(239, 68, 68, 0.5)');
+    tGrad.addColorStop(1, 'rgba(147, 51, 234, 0.3)');
+    ctx.fillStyle = tGrad;
+    ctx.fillRect(0, 0, 2048, 1024);
+  } else if (layer === 'wind') {
+    ctx.strokeStyle = 'rgba(245, 158, 11, 0.65)';
+    ctx.lineWidth = 14;
+    for (let r = 0; r < 6; r++) {
+      ctx.beginPath();
+      ctx.arc(toCanvasX(74 + r * 4), toCanvasY(10 + r * 3), 85 + r * 25 + shiftFactor * 20, 0.4, 1.9);
+      ctx.stroke();
+    }
+  } else if (layer === 'extreme_risk') {
+    const riskGrad = ctx.createRadialGradient(toCanvasX(76.5), toCanvasY(12.3), 5, toCanvasX(76.5), toCanvasY(12.3), 130);
+    riskGrad.addColorStop(0, 'rgba(225, 29, 72, 0.85)');
+    riskGrad.addColorStop(0.5, 'rgba(249, 115, 22, 0.55)');
+    riskGrad.addColorStop(1, 'rgba(239, 68, 68, 0)');
+    ctx.fillStyle = riskGrad;
+    ctx.beginPath();
+    ctx.arc(toCanvasX(76.5), toCanvasY(12.3), 130, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (layer === 'model_confidence') {
+    // High confidence in past/now, spread/lower in deep forecast
+    const confAlpha = phase === 'past' ? 0.65 : phase === 'now' ? 0.6 : Math.max(0.25, 0.55 - (horizon / 48) * 0.3);
+    const confGrad = ctx.createRadialGradient(toCanvasX(77), toCanvasY(13), 20, toCanvasX(77), toCanvasY(13), 220);
+    confGrad.addColorStop(0, `rgba(34, 197, 94, ${confAlpha})`);
+    confGrad.addColorStop(0.6, `rgba(132, 204, 22, ${confAlpha * 0.6})`);
+    confGrad.addColorStop(1, 'rgba(234, 179, 8, 0.05)');
+    ctx.fillStyle = confGrad;
+    ctx.beginPath();
+    ctx.arc(toCanvasX(77), toCanvasY(13), 220, 0, Math.PI * 2);
+    ctx.fill();
+  } else {
+    // Pressure isobars or cloud albedo
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 4;
+    for (let p = 0; p < 4; p++) {
+      ctx.beginPath();
+      ctx.ellipse(toCanvasX(76), toCanvasY(14), 140 + p * 40, 90 + p * 25, 0.2, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  // Lat / Lon scientific grid lines
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+  ctx.lineWidth = 1.2;
+  for (let lat = -80; lat <= 80; lat += 20) {
+    ctx.beginPath();
+    ctx.moveTo(0, toCanvasY(lat));
+    ctx.lineTo(2048, toCanvasY(lat));
+    ctx.stroke();
+  }
+  for (let lon = -180; lon <= 180; lon += 30) {
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(lon), 0);
+    ctx.lineTo(toCanvasX(lon), 1024);
+    ctx.stroke();
+  }
+}
+
+drawEarthMap(currentActiveLayer, currentHorizonHours, currentTemporalPhase);
+const earthTexture = new THREE.CanvasTexture(canvas);
+earthTexture.wrapS = THREE.RepeatWrapping;
+
+// Globe Sphere
+const globeRadius = 4.6;
+const globeGeometry = new THREE.SphereGeometry(globeRadius, 64, 64);
+const globeMaterial = new THREE.MeshPhongMaterial({
+  map: earthTexture,
+  bumpScale: 0.06,
+  specular: new THREE.Color(0x384556),
+  shininess: 16,
+  emissive: new THREE.Color(0x161009),
+  emissiveIntensity: 0.18
+});
+const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+earthGroup.add(globeMesh);
+
+// Cloud Layer
+const cloudCanvas = document.createElement('canvas');
+cloudCanvas.width = 1024;
+cloudCanvas.height = 512;
+const cCtx = cloudCanvas.getContext('2d');
+cCtx.fillStyle = 'rgba(0,0,0,0)';
+cCtx.fillRect(0, 0, 1024, 512);
+cCtx.fillStyle = 'rgba(255, 250, 242, 0.44)';
+for (let i = 0; i < 40; i++) {
+  const cx = Math.random() * 1024;
+  const cy = 80 + Math.random() * 340;
+  const rx = 35 + Math.random() * 110;
+  const ry = 8 + Math.random() * 26;
+  cCtx.beginPath();
+  cCtx.ellipse(cx, cy, rx, ry, (Math.random() - 0.5) * 0.4, 0, Math.PI * 2);
+  cCtx.fill();
+}
+const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
+const cloudGeo = new THREE.SphereGeometry(globeRadius + 0.08, 64, 64);
+const cloudMat = new THREE.MeshLambertMaterial({
+  map: cloudTexture,
+  transparent: true,
+  opacity: 0.55,
+  blending: THREE.NormalBlending
+});
+const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+earthGroup.add(cloudMesh);
+
+// Atmospheric Halo
+const haloGeo = new THREE.SphereGeometry(globeRadius + 0.44, 48, 48);
+const haloMat = new THREE.ShaderMaterial({
+  vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying vec3 vNormal;
+    void main() {
+      float intensity = pow(0.66 - dot(vNormal, vec3(0, 0, 1.0)), 2.6);
+      vec3 atmosphericColor = mix(vec3(0.88, 0.48, 0.16), vec3(0.98, 0.89, 0.78), intensity * 0.65);
+      gl_FragColor = vec4(atmosphericColor, intensity * 0.76);
+    }
+  `,
+  blending: THREE.AdditiveBlending,
+  side: THREE.BackSide,
+  transparent: true
+});
+const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+earthGroup.add(haloMesh);
+
+// Telemetry Marker for Mysuru (Lat 12.2958° N, Lon 76.6394° E)
+let currentLat = 12.2958;
+let currentLon = 76.6394;
+
+function calculatePinPos(lat, lon) {
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+  const pinR = globeRadius + 0.12;
+  return new THREE.Vector3(
+    -pinR * Math.sin(phi) * Math.cos(theta),
+    pinR * Math.cos(phi),
+    pinR * Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+const pinGroup = new THREE.Group();
+const coreGeo = new THREE.SphereGeometry(0.12, 16, 16);
+const coreMat = new THREE.MeshBasicMaterial({ color: 0xe07a28 });
+const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+pinGroup.add(coreMesh);
+
+const ringGeo = new THREE.RingGeometry(0.18, 0.3, 32);
+const ringMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, side: THREE.DoubleSide, transparent: true, opacity: 0.85 });
+const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+pinGroup.add(ringMesh);
+
+const initialPos = calculatePinPos(currentLat, currentLon);
+pinGroup.position.copy(initialPos);
+ringMesh.lookAt(initialPos.clone().normalize());
+earthGroup.add(pinGroup);
+
+// Initial focus on Southern India / Karnataka
+earthGroup.rotation.y = -1.80;
+earthGroup.rotation.x = 0.20;
+
+// Ambient atmospheric floating micro-particles
+const particleCount = 130;
+const particleGeo = new THREE.BufferGeometry();
+const particlePos = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i += 3) {
+  particlePos[i] = (Math.random() - 0.5) * 28;
+  particlePos[i+1] = (Math.random() - 0.5) * 20;
+  particlePos[i+2] = (Math.random() - 0.5) * 16;
+}
+particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+const particleMat = new THREE.PointsMaterial({
+  color: 0xf59e0b,
+  size: 0.08,
+  transparent: true,
+  opacity: 0.45
+});
+const particles = new THREE.Points(particleGeo, particleMat);
+scene.add(particles);
+
+// Interactive Drag Rotation
+let isDragging = false;
+let prevMouse = { x: 0, y: 0 };
+let targetRotY = earthGroup.rotation.y;
+let targetRotX = earthGroup.rotation.x;
+
+function onPointerDown(e) {
+  isDragging = true;
+  prevMouse = { x: e.clientX || (e.touches && e.touches[0].clientX), y: e.clientY || (e.touches && e.touches[0].clientY) };
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return;
+  const x = e.clientX || (e.touches && e.touches[0].clientX);
+  const y = e.clientY || (e.touches && e.touches[0].clientY);
+  const dx = x - prevMouse.x;
+  const dy = y - prevMouse.y;
+  targetRotY += dx * 0.005;
+  targetRotX += dy * 0.005;
+  targetRotX = Math.max(-0.85, Math.min(0.85, targetRotX));
+  prevMouse = { x, y };
+}
+
+function onPointerUp() { isDragging = false; }
+
+window.addEventListener('mousedown', onPointerDown);
+window.addEventListener('mousemove', onPointerMove);
+window.addEventListener('mouseup', onPointerUp);
+window.addEventListener('touchstart', onPointerDown, { passive: true });
+window.addEventListener('touchmove', onPointerMove, { passive: true });
+window.addEventListener('touchend', onPointerUp);
+
+// Public API Hooks for DOM Integration
+window.samvayaUpdateTemporalState = function(phase, hours, layer) {
+  currentTemporalPhase = phase;
+  currentHorizonHours = hours;
+  if (layer) currentActiveLayer = layer;
+  drawEarthMap(currentActiveLayer, currentHorizonHours, currentTemporalPhase);
+  earthTexture.needsUpdate = true;
+};
+
+window.samvayaFlyToLocation = function(lat, lon, name) {
+  currentLat = lat;
+  currentLon = lon;
+  const newPos = calculatePinPos(lat, lon);
+  pinGroup.position.copy(newPos);
+  ringMesh.lookAt(newPos.clone().normalize());
+
+  const tLon = (lon + 180) * (Math.PI / 180);
+  targetRotY = -tLon + Math.PI / 2;
+  targetRotX = lat * (Math.PI / 180);
+};
+
+window.samvayaZoom = function(delta) {
+  camera.position.z = Math.max(7.5, Math.min(18, camera.position.z + delta));
+};
+
+function handleResize() {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', handleResize);
+
+let clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Smooth damping rotation
+  earthGroup.rotation.y += (targetRotY - earthGroup.rotation.y) * 0.08;
+  earthGroup.rotation.x += (targetRotX - earthGroup.rotation.x) * 0.08;
+
+  cloudMesh.rotation.y += 0.001;
+
+  // Pulse telemetry beacon
+  const s = 1.0 + Math.sin(t * 3.5) * 0.35;
+  ringMesh.scale.set(s, s, s);
+  ringMesh.material.opacity = 0.85 - (s - 0.7) * 0.5;
+
+  particles.rotation.y = t * 0.015;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_12 -->
+</body>
+</html>
