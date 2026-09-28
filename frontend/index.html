@@ -71,35 +71,63 @@
   </header>
 
   <!-- Atmospheric Parameter Selector Dock (Top Left) -->
-  <aside class="atmospheric-param-dock card-translucent" aria-label="Atmospheric Parameters">
-    <div class="card-header">
-      <span class="card-title">Atmospheric Layer</span>
+  <aside class="atmospheric-param-dock card-translucent" aria-label="Atmospheric Layers & Intelligence">
+    <div class="card-header" style="margin-bottom: 6px;">
+      <span class="card-title">Scientific Layers</span>
       <span class="card-subtitle">Active Field</span>
     </div>
-    <div class="param-pill-group">
+
+    <!-- Category Tabs -->
+    <div style="display: flex; gap: 3px; margin-bottom: 6px;">
+      <button id="tabAtmosphereLayers" class="samvaya-btn btn-scientific active" style="flex: 1; padding: 3px 0; text-align: center;">ATMOSPHERE</button>
+      <button id="tabIntelligenceLayers" class="samvaya-btn btn-scientific" style="flex: 1; padding: 3px 0; text-align: center;">INTELLIGENCE</button>
+    </div>
+
+    <!-- Group 1: Atmosphere -->
+    <div class="param-pill-group" id="groupAtmosphere">
       <button class="param-pill active" data-param="radar">
-        <span class="material-symbols-outlined" style="font-size: 14px;">radar</span>
+        <span class="material-symbols-outlined" style="font-size: 13px;">radar</span>
         <span>Live Radar</span>
       </button>
       <button class="param-pill" data-param="temperature">
-        <span class="material-symbols-outlined" style="font-size: 14px;">thermostat</span>
+        <span class="material-symbols-outlined" style="font-size: 13px;">thermostat</span>
         <span>Temp (2m)</span>
       </button>
       <button class="param-pill" data-param="precipitation">
-        <span class="material-symbols-outlined" style="font-size: 14px;">rainy</span>
-        <span>Precip</span>
+        <span class="material-symbols-outlined" style="font-size: 13px;">rainy</span>
+        <span>Precipitation</span>
       </button>
       <button class="param-pill" data-param="wind">
-        <span class="material-symbols-outlined" style="font-size: 14px;">air</span>
+        <span class="material-symbols-outlined" style="font-size: 13px;">air</span>
         <span>Wind Flow</span>
       </button>
       <button class="param-pill" data-param="pressure">
-        <span class="material-symbols-outlined" style="font-size: 14px;">compress</span>
-        <span>Pressure</span>
+        <span class="material-symbols-outlined" style="font-size: 13px;">compress</span>
+        <span>Pressure (MSLP)</span>
       </button>
+      <button class="param-pill" data-param="clouds">
+        <span class="material-symbols-outlined" style="font-size: 13px;">cloud</span>
+        <span>Cloud Cover</span>
+      </button>
+    </div>
+
+    <!-- Group 2: Intelligence -->
+    <div class="param-pill-group" id="groupIntelligence" style="display: none;">
       <button class="param-pill" data-param="agreement">
-        <span class="material-symbols-outlined" style="font-size: 14px;">compare</span>
+        <span class="material-symbols-outlined" style="font-size: 13px;">compare</span>
         <span>Consensus</span>
+      </button>
+      <button class="param-pill" data-param="confidence">
+        <span class="material-symbols-outlined" style="font-size: 13px;">verified</span>
+        <span>Confidence</span>
+      </button>
+      <button class="param-pill" data-param="extreme_risk">
+        <span class="material-symbols-outlined" style="font-size: 13px;">warning</span>
+        <span>Extreme Risk</span>
+      </button>
+      <button class="param-pill" data-param="contribution">
+        <span class="material-symbols-outlined" style="font-size: 13px;">pie_chart</span>
+        <span>Model Weights</span>
       </button>
     </div>
   </aside>

@@ -11,6 +11,7 @@ import { AtmosphericParticleEngine } from './src/weather/particle-engine.js';
 import { HeaderController } from './src/ui/header-controller.js';
 import { SearchController } from './src/ui/search-controller.js';
 import { TimelineController } from './src/ui/timeline-controller.js';
+import { LegendController } from './src/ui/legend-controller.js';
 import { DevInspectorController } from './src/ui/dev-inspector.js';
 import { checkBackendHealth } from './src/services/api.js';
 
@@ -32,6 +33,7 @@ class SamvayaApplication {
     this.header = new HeaderController();
     this.search = new SearchController();
     this.timeline = new TimelineController();
+    this.legend = new LegendController(this.globe.layerManager, this.globe);
     this.devInspector = new DevInspectorController();
 
     // 4. Bind Secondary UI Controls
@@ -60,6 +62,27 @@ class SamvayaApplication {
   }
 
   bindLayerSelector() {
+    const tabAtmosphere = document.getElementById('tabAtmosphereLayers');
+    const tabIntelligence = document.getElementById('tabIntelligenceLayers');
+    const groupAtmosphere = document.getElementById('groupAtmosphere');
+    const groupIntelligence = document.getElementById('groupIntelligence');
+
+    if (tabAtmosphere && tabIntelligence) {
+      tabAtmosphere.addEventListener('click', () => {
+        tabAtmosphere.classList.add('active');
+        tabIntelligence.classList.remove('active');
+        if (groupAtmosphere) groupAtmosphere.style.display = 'grid';
+        if (groupIntelligence) groupIntelligence.style.display = 'none';
+      });
+
+      tabIntelligence.addEventListener('click', () => {
+        tabIntelligence.classList.add('active');
+        tabAtmosphere.classList.remove('active');
+        if (groupIntelligence) groupIntelligence.style.display = 'grid';
+        if (groupAtmosphere) groupAtmosphere.style.display = 'none';
+      });
+    }
+
     const paramPills = document.querySelectorAll('.atmospheric-param-dock .param-pill');
     paramPills.forEach(pill => {
       pill.addEventListener('click', () => {

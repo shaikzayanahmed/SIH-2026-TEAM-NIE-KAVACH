@@ -7,6 +7,7 @@
 import { appStore } from '../state/store.js';
 import { Actions } from '../state/actions.js';
 import { reverseGeocodeApi } from '../services/api.js';
+import { AtmosphericLayerManager } from './layer-manager.js';
 
 export class GlobeController {
   constructor(containerId = 'cesiumContainer') {
@@ -36,6 +37,10 @@ export class GlobeController {
     this.initLayers();
     this.initShaders();
     this.initInteractions();
+
+    // Initialize Atmospheric Layer Manager
+    this.layerManager = new AtmosphericLayerManager(this.viewer);
+
     this.initSubscriptions();
   }
 
@@ -131,33 +136,8 @@ export class GlobeController {
       }
     };
 
-    this.radarLayer = null;
     this.activePinEntity = null;
     this.applyMapStyle(appStore.getState().globe.basemap);
-    this.initRadar();
-  }
-
-  async initRadar() {
-    try {
-      const res = await fetch('https://api.rainviewer.com/public/weather-maps.json');
-      if (!res.ok) return;
-      const data = await res.json();
-      const frames = data.radar?.past || [];
-      if (!frames.length) return;
-      const latest = frames[frames.length - 1];
-
-      const radarProvider = new Cesium.UrlTemplateImageryProvider({
-        url: `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`,
-        maximumLevel: 10,
-        credit: '© RainViewer Radar Telemetry'
-      });
-
-      this.radarLayer = this.viewer.imageryLayers.addImageryProvider(radarProvider);
-      this.radarLayer.alpha = 0.75;
-      this.viewer.scene.requestRender();
-    } catch (err) {
-      console.info('RainViewer radar stream fallback:', err);
-    }
   }
 
   applyMapStyle(styleKey) {
@@ -174,8 +154,12 @@ export class GlobeController {
       const r = this.viewer.imageryLayers.addImageryProvider(config.roads);
       r.alpha = 0.8;
     }
-    if (this.radarLayer) {
-      this.viewer.imageryLayers.add(this.radarLayer);
+
+    if (this.layerManager) {
+      this.layerManager.radarImageryLayer = null;
+      if (this.layerManager.activeLayerId === 'radar') {
+        this.layerManager.showRadarLayer();
+      }
     }
     this.viewer.scene.requestRender();
   }
@@ -344,6 +328,22 @@ export class GlobeController {
     // Subscribe to Shader changes
     appStore.select(state => state.globe.shaderMode, (shader) => {
       if (shader) this.setShader(shader);
+    });
+
+    // Subscribe to Diurnal / Atmospheric state to tune globe lighting
+    appStore.select(state => state.atmospheric.timeOfDay, (timeOfDay) => {
+      if (this.viewer && this.viewer.scene.globe) {
+        if (timeOfDay === 'NIGHT') {
+          this.viewer.scene.globe.atmosphereBrightnessShift = -0.1;
+        } else if (timeOfDay === 'DAWN' || timeOfDay === 'DUSK') {
+          this.viewer.scene.globe.atmosphereBrightnessShift = 0.05;
+          this.viewer.scene.globe.atmosphereHueShift = 0.08;
+        } else {
+          this.viewer.scene.globe.atmosphereBrightnessShift = 0.15;
+          this.viewer.scene.globe.atmosphereHueShift = 0.05;
+        }
+        this.viewer.scene.requestRender();
+      }
     });
   }
 }
