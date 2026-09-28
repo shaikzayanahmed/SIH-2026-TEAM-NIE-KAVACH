@@ -77,6 +77,16 @@ export class DevInspectorController {
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 3px;">
+          <span style="color: var(--samvaya-sand-400); font-size: 10px;">MODEL AGREEMENT QA:</span>
+          <select id="devAgreementSelect" style="background: var(--samvaya-obs-surface-3); color: var(--samvaya-ivory-100); border: 1px solid var(--color-border-medium); border-radius: var(--radius-xs); padding: 3px 6px; font-family: var(--font-mono); font-size: 11px; outline: none;">
+            <option value="">⚡ Auto (Backend Live)</option>
+            <option value="HIGH">🟢 HIGH AGREEMENT</option>
+            <option value="MODERATE">🟡 MODERATE AGREEMENT</option>
+            <option value="DIVERGENT">🔴 DIVERGENT SPREAD</option>
+          </select>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 3px;">
           <span style="color: var(--samvaya-sand-400); font-size: 10px;">INTENSITY MODE:</span>
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px;">
             <button class="samvaya-btn btn-scientific dev-intensity-btn" data-int="minimal">MIN</button>
@@ -97,6 +107,7 @@ export class DevInspectorController {
   initEvents() {
     const weatherSelect = document.getElementById('devWeatherSelect');
     const timeSelect = document.getElementById('devTimeSelect');
+    const agreementSelect = document.getElementById('devAgreementSelect');
     const toggleBtn = document.getElementById('devToggleCollapse');
     const controlsBody = document.getElementById('devControlsBody');
     const intensityBtns = document.querySelectorAll('.dev-intensity-btn');
@@ -110,6 +121,20 @@ export class DevInspectorController {
     if (timeSelect) {
       timeSelect.addEventListener('change', (e) => {
         Actions.setDevTimeOfDayOverride(e.target.value || null);
+      });
+    }
+
+    if (agreementSelect) {
+      agreementSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val) {
+          appStore.setState({
+            models: {
+              agreement: val,
+              disagreement: val === 'DIVERGENT' ? 'HIGH' : 'LOW'
+            }
+          });
+        }
       });
     }
 
