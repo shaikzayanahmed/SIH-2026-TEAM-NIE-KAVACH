@@ -4,11 +4,9 @@
   "description": "Bird View - Hybrid AI-NWP Meteorological Forecast Fusion Platform | SIH 2026 TEAM NIE KAVACH",
   "type": "module",
   "scripts": {
-    "dev": "npm --prefix frontend run dev",
-    "build": "npm --prefix frontend run build",
-    "preview": "npm --prefix frontend run preview",
-    "api": "python3 backend/server.py",
-    "check:python": "python3 -m py_compile backend/server.py packages/data_pipeline/*.py packages/fusion_engine/*.py packages/verification/*.py"
+    "dev": "vite --port 5173 --host",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "bird-view",
