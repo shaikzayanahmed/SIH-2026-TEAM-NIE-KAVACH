@@ -4,8 +4,9 @@
   "description": "Bird View - Hybrid AI-NWP Meteorological Forecast Fusion Platform | SIH 2026 TEAM NIE KAVACH",
   "type": "module",
   "scripts": {
-    "sync": "node scripts/sync-stitch.js",
-    "dev": "python3 -m http.server 8085 --directory frontend",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "api": "python3 backend/server.py",
     "check:python": "python3 -m py_compile backend/server.py packages/data_pipeline/*.py packages/fusion_engine/*.py packages/verification/*.py"
   },
@@ -19,5 +20,19 @@
     "nie-kavach"
   ],
   "author": "Team NIE KAVACH",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.6.1",
+    "lucide-react": "^1.48.0",
+    "postcss": "^8.5.28",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.3"
+  }
 }

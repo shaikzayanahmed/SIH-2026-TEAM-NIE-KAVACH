@@ -1,176 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIH26081 · Bird View — Meteorological Forecast Fusion Platform | Team NIE KAVACH</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          },
-          colors: {
-            brand: {
-              cyan: '#38bdf8',
-              teal: '#57e1ce',
-              red: '#ffb4ab',
-              surface: '#040609'
-            }
-          }
-        }
-      }
-    };
-  </script>
+  <title>SAMVAYA — Atmospheric Intelligence Platform | SIH26081</title>
+
+  <!-- Typography & Material Symbols (Authoritative Stitch Specification) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <!-- CesiumJS 1.124 Atmospheric Engine -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+
   <style>
-    body { background-color: #040609; color: #e2e8f0; font-family: 'Inter', sans-serif; }
-    .glass-card {
-      background: rgba(11, 16, 26, 0.78);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(56, 189, 248, 0.16);
-      transition: all 0.25s ease;
-    }
-    .glass-card:hover {
-      border-color: rgba(56, 189, 248, 0.45);
-      transform: translateY(-2px);
-      box-shadow: 0 16px 36px -8px rgba(14, 165, 233, 0.25);
-    }
-    .hero-card {
-      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), rgba(4, 6, 9, 0.95) 70%), rgba(11, 16, 26, 0.85);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 24px 60px -12px rgba(14, 165, 233, 0.3);
-    }
+    .cesium-viewer-bottom, .cesium-widget-credits { display: none !important; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#040609]">
-  <!-- Top Bar -->
-  <header class="border-b border-sky-900/40 bg-[#070b12]/90 sticky top-0 z-50 backdrop-blur-md px-6 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="h-9 w-9 rounded-lg bg-sky-500/20 border border-sky-400/30 flex items-center justify-center text-sky-400 font-bold">
-        🛰️
-      </div>
-      <div>
-        <h1 class="text-lg font-bold text-white tracking-wide">SIH26081 · Bird View Fusion Platform</h1>
-        <p class="text-xs font-mono text-sky-400/80">MoES / NCMRWF · Team NIE KAVACH</p>
-      </div>
-    </div>
-    <div class="flex items-center gap-3">
-      <a href="command_center.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-sky-500/20 text-sky-300 border border-sky-400/50 hover:bg-sky-500/30 transition shadow-[0_0_12px_rgba(56,189,248,0.2)]">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        LAUNCH 3D GLOBE
-      </a>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-8">
-    
-    <!-- Hero Banner: God's-Eye 3D Photorealistic Command Center -->
-    <div class="hero-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="space-y-3 max-w-2xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-sky-500/10 text-sky-300 border border-sky-500/30">
-          <span>🌐</span>
-          <span>Photorealistic 3D Globe · CesiumJS + Tactical HUD</span>
-        </div>
-        <h2 class="text-3xl font-extrabold text-white tracking-tight">
-          God's-Eye 3D Meteorological Command Center
-        </h2>
-        <p class="text-sm text-slate-300 leading-relaxed">
-          Interactive full-globe orbital viewer focusing on the Indian Subcontinent ($5^\circ\text{N}–38^\circ\text{N}, 66^\circ\text{E}–100^\circ\text{E}$) with seamless zoom down to terrain level. Features GLSL Sensor Shaders (FLIR Thermal, NVG, CRT), live Doppler radar precipitation, animated wind streamlines, and the 5-mode adaptive fusion weighting matrix.
-        </p>
-        <div class="pt-2 flex flex-wrap items-center gap-3">
-          <a href="command_center.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-sm font-bold bg-gradient-to-r from-sky-500 to-teal-400 text-slate-950 hover:opacity-90 transition shadow-[0_0_20px_rgba(56,189,248,0.4)]">
-            <span>LAUNCH 3D COCKPIT</span>
-            <span class="material-symbols-outlined text-base">rocket_launch</span>
-          </a>
-          <span class="text-xs font-mono text-slate-400">Zero API key required · Live 60 FPS</span>
-        </div>
-      </div>
-      <div class="w-full md:w-80 h-48 rounded-xl border border-sky-500/30 bg-slate-950/80 p-4 flex flex-col justify-between font-mono text-xs">
-        <div class="flex justify-between text-slate-400 border-b border-slate-800 pb-2">
-          <span>TELEMETRY</span>
-          <span class="text-emerald-400">LIVE</span>
-        </div>
-        <div class="space-y-1.5 text-[11px]">
-          <div class="flex justify-between">
-            <span class="text-slate-500">Domain:</span>
-            <span class="text-sky-300">India & Global WGS84</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-slate-500">Sensor Modes:</span>
-            <span class="text-teal-300">True, FLIR, NVG, CRT</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-slate-500">Fusion Gating:</span>
-            <span class="text-purple-300">MLP 5-Mode Softmax</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-slate-500">Radar Ingestion:</span>
-            <span class="text-amber-300">RainViewer Real-time</span>
-          </div>
-        </div>
-        <div class="text-[10px] text-slate-500 pt-1 border-t border-slate-800">
-          NCMRWF · MoES Operational Node
-        </div>
-      </div>
-    </div>
-
-    <!-- Section Header: Scientific Modules & Screens -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 border-b border-slate-800/80 pb-4">
-      <div>
-        <h3 class="text-xl font-bold text-slate-100">SIH26081 Scientific Modules & Screens</h3>
-        <p class="text-xs text-slate-400 mt-0.5">High-fidelity UI and meteorological decision modules (Ready for new design import).</p>
-      </div>
-    </div>
-
-    <!-- Grid for Modules -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="screen-grid">
-      <!-- Ready for new imported screens -->
-    </div>
-  </main>
-
-  <footer class="border-t border-slate-800/80 py-4 px-6 text-center text-xs text-slate-500 font-mono">
-    SIH 2026 · TEAM NIE KAVACH · Meteorological Forecast Fusion Platform
-  </footer>
-
-  <script>
-    const screens = [];
-
-    const grid = document.getElementById('screen-grid');
-    if (screens.length === 0) {
-      grid.innerHTML = `
-        <div class="col-span-full border border-dashed border-slate-800 rounded-xl p-8 text-center bg-slate-950/40">
-          <p class="text-sm text-slate-400 font-mono">No external screens imported yet. Ready for new design import.</p>
-        </div>
-      `;
-    } else {
-      grid.innerHTML = screens.map((s, idx) => `
-        <div class="glass-card rounded-xl p-5 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-sky-500/10 text-sky-300 border border-sky-500/20">${s.badge || 'Module'}</span>
-              <span class="text-xs font-mono text-slate-500">#0${idx + 1}</span>
-            </div>
-            <h3 class="text-base font-semibold text-slate-100 mb-2 leading-snug">${s.title}</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">${s.desc}</p>
-          </div>
-          <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
-            <a href="${s.file}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400 hover:text-sky-300 hover:underline">
-              Launch Screen
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-            </a>
-            <span class="text-[11px] font-mono text-slate-500">UI Module</span>
-          </div>
-        </div>
-      `).join('');
-    }
-  </script>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
