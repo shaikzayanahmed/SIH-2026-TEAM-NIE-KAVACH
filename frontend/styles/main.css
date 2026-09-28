@@ -1,0 +1,80 @@
+/**
+ * SAMVAYA Design System — Master Stylesheet
+ * Project SIH26081 • Adaptive Atmospheric Forecast Engine
+ */
+
+@import './tokens.css';
+@import './base.css';
+@import './components.css';
+@import './atmospheric.css';
+
+/* Cesium Viewport Configuration */
+#cesiumContainer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Suppress Default Cesium Overlay Elements */
+.cesium-viewer-bottom,
+.cesium-viewer-animationContainer,
+.cesium-viewer-timelineContainer,
+.cesium-viewer-fullscreenContainer,
+.cesium-viewer-geocoderContainer,
+.cesium-viewer-toolbar,
+.cesium-widget-credits {
+  display: none !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT FOUNDATION
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .atmospheric-param-dock {
+    width: 200px;
+    top: 66px;
+  }
+  
+  .samvaya-timeline-dock {
+    width: 94%;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .samvaya-header {
+    padding: 0 var(--space-sm);
+  }
+  
+  .brand-descriptor {
+    display: none;
+  }
+
+  .atmospheric-param-dock {
+    display: none; /* Collapses into mobile drawer in later phases */
+  }
+
+  .samvaya-search-overlay {
+    width: 95%;
+    top: 64px;
+  }
+
+  .floating-controls-dock {
+    top: auto;
+    bottom: 90px;
+    right: var(--space-xs);
+  }
+
+  .samvaya-timeline-dock {
+    bottom: 38px;
+    width: 96%;
+    padding: 6px 10px;
+    gap: var(--space-xs);
+  }
+  
+  .telemetry-group.details {
+    display: none;
+  }
+}

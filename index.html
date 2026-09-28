@@ -122,21 +122,17 @@
       </div>
     </div>
 
-    <!-- Section Header: Stitch Synchronized Modules -->
+    <!-- Section Header: Scientific Modules & Screens -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 border-b border-slate-800/80 pb-4">
       <div>
         <h3 class="text-xl font-bold text-slate-100">SIH26081 Scientific Modules & Screens</h3>
-        <p class="text-xs text-slate-400 mt-0.5">High-fidelity screens generated from Google Stitch project (ID: 14662388768399450705).</p>
+        <p class="text-xs text-slate-400 mt-0.5">High-fidelity UI and meteorological decision modules (Ready for new design import).</p>
       </div>
-      <button onclick="syncStitchFromBrowser()" id="btnSync" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-900 border border-slate-700 text-sky-400 hover:text-sky-300 hover:border-sky-500 transition">
-        <span class="material-symbols-outlined text-sm">sync</span>
-        RE-SYNC STITCH
-      </button>
     </div>
 
-    <!-- Grid of Synchronized Screens -->
+    <!-- Grid for Modules -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="screen-grid">
-      <!-- Cards rendered via JavaScript -->
+      <!-- Ready for new imported screens -->
     </div>
   </main>
 
@@ -145,92 +141,35 @@
   </footer>
 
   <script>
-    const screens = [
-      {
-        title: "God's-Eye Geospatial Command Center",
-        file: "stitch_designs/7f1caac4af9144bb8e23a6d9ef3580bb_god_s-eye_geospatial_command_center.html",
-        badge: "Main Command Hub",
-        desc: "3D Tilted atmospheric canvas, radar pulse & live stream layers."
-      },
-      {
-        title: "Extreme Weather Intelligence — Decision Terminal",
-        file: "stitch_designs/7f93265c00a14d4fa517c93765417355_extreme_weather_intelligence___decision_support_terminal.html",
-        badge: "Critical Guidance",
-        desc: "Early warning, impact forecasting for heavy rain, heatwave & high wind."
-      },
-      {
-        title: "Adaptive Model Weights — Dynamic Fusion Architecture",
-        file: "stitch_designs/3a158caaa05a4160af2d8e279bf71a38_adaptive_model_weights___dynamic_fusion_architecture.html",
-        badge: "5-Mode Gating",
-        desc: "Dynamic weighting algorithm matrix across NWP & AI forecast models."
-      },
-      {
-        title: "Forecast Explorer — Hybrid Model Comparison",
-        file: "stitch_designs/b50bd5cc573047d79857ea61beb64746_forecast_explorer___hybrid_model_comparison.html",
-        badge: "Model Explorer",
-        desc: "Side-by-side comparative ensemble analytics (NCUM, BharatFS, GraphCast, AIFS)."
-      },
-      {
-        title: "Fusion Neural Architecture — 3D Atmospheric Brain",
-        file: "stitch_designs/a4d408bb11494edbad79f25d64f88d2b_fusion_neural_architecture___3d_atmospheric_computational_brain.html",
-        badge: "AI Brain",
-        desc: "Deep neural network topological layers for weather tensor processing."
-      },
-      {
-        title: "Geospatial Layers — Multi-Source Stack Manager",
-        file: "stitch_designs/ba508183c7494b96ae22eb723397e027_geospatial_layers___multi-source_atmospheric_stack_manager.html",
-        badge: "GIS Stack",
-        desc: "Multi-layer atmospheric stack manager with pressure slicing (SFC to 200 hPa)."
-      },
-      {
-        title: "Location Analysis — Konkan Coast Point Inspection",
-        file: "stitch_designs/3bad00a8696e4eefbc29f93713a517a9_location_analysis___konkan_coast_point_inspection.html",
-        badge: "Point Drilldown",
-        desc: "Granular micro-climate, storm surge, and localized coastal time-series."
-      },
-      {
-        title: "Verification Lab — Multi-Model Skill Evaluation",
-        file: "stitch_designs/8af2a5fe3fc54a428c5a9d19fe346ec7_verification_lab___multi-model_skill___fusion_evaluation.html",
-        badge: "Verification Lab",
-        desc: "Skill score benchmarks, RMSE, MAE, CRPS, Brier and ETS metrics."
-      },
-      {
-        title: "Data & Model Health — Pipeline Telemetry",
-        file: "stitch_designs/e7813bd7fb0340ecbf9fbc92eadaf56c_data___model_health___pipeline_telemetry___source_matrix.html",
-        badge: "Health Matrix",
-        desc: "Ingestion latency, satellite feed health, and API uptime matrix."
-      },
-      {
-        title: "Forecast Run Details — Pipeline Provenance",
-        file: "stitch_designs/eb782249117f447a8a848c0bff4e8bed_forecast_run___execution_details___historical_archive___pipeline_provenance.html",
-        badge: "Provenance Archive",
-        desc: "Historical model runs, hyperparameter state and pipeline reproducibility."
-      }
-    ];
+    const screens = [];
 
     const grid = document.getElementById('screen-grid');
-    grid.innerHTML = screens.map((s, idx) => `
-      <div class="glass-card rounded-xl p-5 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-sky-500/10 text-sky-300 border border-sky-500/20">${s.badge}</span>
-            <span class="text-xs font-mono text-slate-500">#0${idx + 1}</span>
+    if (screens.length === 0) {
+      grid.innerHTML = `
+        <div class="col-span-full border border-dashed border-slate-800 rounded-xl p-8 text-center bg-slate-950/40">
+          <p class="text-sm text-slate-400 font-mono">No external screens imported yet. Ready for new design import.</p>
+        </div>
+      `;
+    } else {
+      grid.innerHTML = screens.map((s, idx) => `
+        <div class="glass-card rounded-xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-sky-500/10 text-sky-300 border border-sky-500/20">${s.badge || 'Module'}</span>
+              <span class="text-xs font-mono text-slate-500">#0${idx + 1}</span>
+            </div>
+            <h3 class="text-base font-semibold text-slate-100 mb-2 leading-snug">${s.title}</h3>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">${s.desc}</p>
           </div>
-          <h3 class="text-base font-semibold text-slate-100 mb-2 leading-snug">${s.title}</h3>
-          <p class="text-xs text-slate-400 mb-4 leading-relaxed">${s.desc}</p>
+          <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+            <a href="${s.file}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400 hover:text-sky-300 hover:underline">
+              Launch Screen
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+            <span class="text-[11px] font-mono text-slate-500">UI Module</span>
+          </div>
         </div>
-        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
-          <a href="${s.file}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400 hover:text-sky-300 hover:underline">
-            Launch Screen
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-          </a>
-          <span class="text-[11px] font-mono text-slate-500">HTML / Tailwind</span>
-        </div>
-      </div>
-    `).join('');
-
-    function syncStitchFromBrowser() {
-      alert("To re-sync with latest Stitch edits, run: npm run sync in terminal.");
+      `).join('');
     }
   </script>
 </body>

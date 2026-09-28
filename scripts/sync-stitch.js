@@ -22,7 +22,7 @@ if (fs.existsSync(envPath)) {
 }
 
 const apiKey = process.env.STITCH_API_KEY;
-const projectId = process.argv[2] || "14662388768399450705";
+const projectId = process.argv[2] || process.env.STITCH_PROJECT_ID;
 
 // Save to frontend/stitch_designs/
 const outDir = path.join(rootDir, "frontend", "stitch_designs");

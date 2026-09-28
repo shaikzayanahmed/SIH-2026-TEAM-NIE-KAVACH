@@ -15,19 +15,39 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
   fullscreenButton: false,
   infoBox: false,
   selectionIndicator: false,
-  shadows: true,
+  shadows: false,
   skyAtmosphere: new Cesium.SkyAtmosphere(),
-  terrainProvider: new Cesium.EllipsoidTerrainProvider()
+  terrainProvider: new Cesium.EllipsoidTerrainProvider(),
+  imageryProvider: false,
+  requestRenderMode: true,
+  maximumRenderTimeChange: Number.POSITIVE_INFINITY
 });
+
+const pixelRatioLimit = Math.min(window.devicePixelRatio || 1, 1.5);
+viewer.resolutionScale = pixelRatioLimit;
+viewer.scene.globe.tileCacheSize = 160;
+viewer.scene.globe.preloadSiblings = true;
+viewer.scene.globe.maximumScreenSpaceError = 2;
+viewer.scene.globe.depthTestAgainstTerrain = false;
+viewer.scene.fog.enabled = false;
+viewer.scene.backgroundColor = Cesium.Color.fromCssColorString('#040609');
 
 // Configure Globe Atmosphere & Visuals
 viewer.scene.globe.enableLighting = false; // Keep globe illuminated and clear
-viewer.scene.globe.depthTestAgainstTerrain = false;
 viewer.scene.globe.atmosphereHueShift = 0.0;
-viewer.scene.globe.atmosphereSaturationShift = 0.1;
+viewer.scene.globe.atmosphereSaturationShift = 0.08;
 viewer.scene.globe.atmosphereBrightnessShift = 0.1;
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 150; // 150m
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 45000000; // 45,000km
+viewer.scene.screenSpaceCameraController.enableCollisionDetection = false;
+viewer.scene.screenSpaceCameraController.inertiaSpin = 0.35;
+viewer.scene.screenSpaceCameraController.inertiaTranslation = 0.35;
+viewer.scene.camera.constrainedAxis = Cesium.Cartesian3.UNIT_Z;
+viewer.scene.lowFrameRateMultiplier = 1;
+
+window.addEventListener('resize', () => {
+  viewer.resolutionScale = Math.min(window.devicePixelRatio || 1, 1.5);
+});
 
 // Map Layer Management
 let currentBaseLayer = null;
@@ -40,23 +60,31 @@ const mapConfigs = {
     name: 'Photorealistic Satellite + Labels',
     base: new Cesium.UrlTemplateImageryProvider({
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      maximumLevel: 19,
+      maximumLevel: 17,
+      tileWidth: 256,
+      tileHeight: 256,
       credit: '© Esri, Maxar, Earthstar Geographics'
     }),
     labels: new Cesium.UrlTemplateImageryProvider({
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-      maximumLevel: 19
+      maximumLevel: 17,
+      tileWidth: 256,
+      tileHeight: 256
     }),
     roads: new Cesium.UrlTemplateImageryProvider({
       url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}',
-      maximumLevel: 19
+      maximumLevel: 17,
+      tileWidth: 256,
+      tileHeight: 256
     })
   },
   'osm': {
     name: 'OpenStreetMap Standard',
     base: new Cesium.UrlTemplateImageryProvider({
       url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-      maximumLevel: 19,
+      maximumLevel: 17,
+      tileWidth: 256,
+      tileHeight: 256,
       credit: '© OpenStreetMap contributors'
     }),
     labels: null,
@@ -66,7 +94,9 @@ const mapConfigs = {
     name: 'CartoDB Dark Matter',
     base: new Cesium.UrlTemplateImageryProvider({
       url: 'https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-      maximumLevel: 19,
+      maximumLevel: 17,
+      tileWidth: 256,
+      tileHeight: 256,
       credit: '© CARTO, © OpenStreetMap'
     }),
     labels: null,
@@ -76,7 +106,9 @@ const mapConfigs = {
     name: 'Topographic & Terrain',
     base: new Cesium.UrlTemplateImageryProvider({
       url: 'https://a.tile.opentopomap.org/{z}/{x}/{y}.png',
-      maximumLevel: 17,
+      maximumLevel: 16,
+      tileWidth: 256,
+      tileHeight: 256,
       credit: '© OpenTopoMap, © OpenStreetMap'
     }),
     labels: null,
@@ -93,16 +125,22 @@ function applyMapStyle(styleKey) {
 
   // Add base layer
   currentBaseLayer = viewer.imageryLayers.addImageryProvider(config.base);
+  currentBaseLayer.alpha = 1.0;
 
   // Add reference labels and borders if satellite
   if (config.labels) {
     currentLabelsLayer = viewer.imageryLayers.addImageryProvider(config.labels);
-    currentLabelsLayer.alpha = 0.95;
+    currentLabelsLayer.alpha = 0.9;
+    currentLabelsLayer.minimumTerrainLevel = 0;
   }
   if (config.roads) {
     currentRoadsLayer = viewer.imageryLayers.addImageryProvider(config.roads);
-    currentRoadsLayer.alpha = 0.8;
+    currentRoadsLayer.alpha = 0.7;
+    currentRoadsLayer.minimumTerrainLevel = 0;
   }
+
+  // Pre-warm layer cache and trim repeated texture churn on high-DPI screens.
+  viewer.scene.requestRender();
 }
 
 // Set initial map style to Satellite + Labels

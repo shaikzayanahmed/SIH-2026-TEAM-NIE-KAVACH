@@ -16,8 +16,8 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
   infoBox: false,
   selectionIndicator: false,
   shadows: false,
-  requestRenderMode: true,
-  maximumRenderTimeChange: Infinity,
+  imageryProvider: false,
+  requestRenderMode: false,
   useBrowserRecommendedResolution: true,
   skyAtmosphere: new Cesium.SkyAtmosphere(),
   terrainProvider: new Cesium.EllipsoidTerrainProvider()
@@ -35,22 +35,10 @@ viewer.scene.globe.preloadAncestors = false;
 viewer.scene.fog.enabled = false;
 viewer.scene.screenSpaceCameraController.minimumZoomDistance = 150; // 150m
 viewer.scene.screenSpaceCameraController.maximumZoomDistance = 45000000; // 45,000km
-viewer.scene.screenSpaceCameraController.inertiaSpin = 0.9;
-viewer.scene.screenSpaceCameraController.inertiaTranslate = 0.9;
-viewer.scene.screenSpaceCameraController.inertiaZoom = 0.9;
+viewer.scene.screenSpaceCameraController.inertiaSpin = 0.85;
+viewer.scene.screenSpaceCameraController.inertiaTranslate = 0.85;
+viewer.scene.screenSpaceCameraController.inertiaZoom = 0.85;
 viewer.scene.screenSpaceCameraController.minimumPickingTerrainHeight = 150000;
-
-// Keep interaction responsive by using a coarser globe while the camera moves.
-const interactionScreenSpaceError = 8;
-const settledScreenSpaceError = viewer.scene.globe.maximumScreenSpaceError;
-viewer.camera.moveStart.addEventListener(() => {
-  viewer.scene.globe.maximumScreenSpaceError = interactionScreenSpaceError;
-  viewer.scene.requestRender();
-});
-viewer.camera.moveEnd.addEventListener(() => {
-  viewer.scene.globe.maximumScreenSpaceError = settledScreenSpaceError;
-  viewer.scene.requestRender();
-});
 
 // Map Layer Management
 let currentBaseLayer = null;
@@ -145,6 +133,7 @@ const HOME_LOCATION = {
 // Initial camera animation
 viewer.camera.flyTo(HOME_LOCATION);
 
+if (document.getElementById('searchInput')) {
 // Active Pin Marker Entity
 let activePinEntity = null;
 
@@ -725,3 +714,4 @@ async function loadFusionSnapshot() {
 loadFusionSnapshot();
 
 console.log('🌐 3D Globe & Location Search Demo Loaded with Full Imagery & Labels.');
+}
