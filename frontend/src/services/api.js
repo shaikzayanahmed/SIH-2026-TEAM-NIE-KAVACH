@@ -18,11 +18,12 @@ export async function checkBackendHealth() {
   }
 }
 
-export async function fetchLocationSnapshot(lat, lon, name = 'Selected Location') {
+export async function fetchLocationSnapshot(lat, lon, name = 'Selected Location', variable = '2t') {
   const query = new URLSearchParams({
     lat: lat.toString(),
     lon: lon.toString(),
-    name: name
+    name: name,
+    var: variable
   });
 
   try {
@@ -73,16 +74,26 @@ export async function reverseGeocodeApi(lat, lon) {
 function normalizeSnapshotResponse(raw, lat, lon, name) {
   return {
     mode: raw.mode || 'LIVE OPEN DATA',
-    provider: raw.provider || 'Open-Meteo multi-model blend',
+    provider: raw.provider || 'Open-Meteo multi-model forecast API',
     location: raw.location || { name, latitude: lat, longitude: lon },
     run_id: raw.run_id || `live_${Date.now()}`,
     variable: raw.variable || '2t',
+    unit: raw.unit || '°C',
     lead_hours: raw.lead_hours || 24,
     valid_time: raw.valid_time || new Date().toISOString(),
     forecast: Array.isArray(raw.forecast) ? raw.forecast : [28.0],
     uncertainty: Array.isArray(raw.uncertainty) ? raw.uncertainty : [1.2],
-    weights: raw.weights || { 'ECMWF': 0.35, 'GFS': 0.25, 'ICON': 0.20, 'GEM': 0.20 },
+    weights: raw.weights || { 'ECMWF IFS': 0.35, 'GFS': 0.25, 'ICON': 0.20, 'GEM': 0.20 },
     lineage: raw.lineage || {},
+    models_forecast: raw.models_forecast || {
+      'ECMWF IFS': [28.2],
+      'GFS': [29.1],
+      'ICON': [28.6],
+      'GEM': [29.4]
+    },
+    model_metadata: raw.model_metadata || {},
+    verification: raw.verification || {},
+    regime: raw.regime || {},
     extremes: raw.extremes || { heavy_rain: false, heatwave: false, high_wind: false }
   };
 }
@@ -94,12 +105,22 @@ function getFallbackSnapshot(lat, lon, name) {
     location: { name, latitude: lat, longitude: lon },
     run_id: 'cache_fallback',
     variable: '2t',
+    unit: '°C',
     lead_hours: 24,
     valid_time: new Date().toISOString(),
     forecast: [27.8],
     uncertainty: [1.5],
-    weights: { 'ECMWF': 0.35, 'GFS': 0.25, 'ICON': 0.20, 'GEM': 0.20 },
+    weights: { 'ECMWF IFS': 0.35, 'GFS': 0.25, 'ICON': 0.20, 'GEM': 0.20 },
     lineage: { fallback: true },
+    models_forecast: {
+      'ECMWF IFS': [27.5],
+      'GFS': [28.4],
+      'ICON': [27.8],
+      'GEM': [28.9]
+    },
+    model_metadata: {},
+    verification: {},
+    regime: {},
     extremes: { heavy_rain: false, heatwave: false, high_wind: false }
   };
 }
