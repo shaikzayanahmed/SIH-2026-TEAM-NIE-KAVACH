@@ -2,6 +2,7 @@
  * SAMVAYA Forecast Intelligence & Dynamic Model Fusion Lab
  * Explains and visualizes: Many Models → Adaptive Fusion → One Consensus
  * Project SIH26081 • Adaptive Atmospheric Forecast Engine
+ * Visual Identity: Stitch Atmospheric Observatory (Ivory, Saffron, Terracotta, Olive)
  */
 
 import { appStore } from '../state/store.js';
@@ -75,7 +76,7 @@ export class IntelligenceLabController {
         center: 'MoES / NCMRWF (India)',
         resolution: '0.10° (~10 km)',
         status: 'PLANNED',
-        color: '#C85A32',
+        color: '#E5A03A',
         description: 'NCMRWF Monsoonal Regional Neural Weather System.'
       }
     };
@@ -107,9 +108,10 @@ export class IntelligenceLabController {
       flex-direction: column;
       overflow: hidden;
       pointer-events: auto;
-      background: rgba(16, 20, 27, 0.95);
+      background: var(--glass-surface-elevated);
       border: 1px solid var(--color-border-medium);
       backdrop-filter: var(--glass-blur-lg);
+      -webkit-backdrop-filter: var(--glass-blur-lg);
     `;
 
     document.body.appendChild(panel);
@@ -182,32 +184,32 @@ export class IntelligenceLabController {
 
     const displayVal = this.blendMode === 'adaptive' ? consensusVal : staticVal;
 
-    // Spread Classification
+    // Spread Classification (Stitch Warm Semantics)
     const spreadLevel = uncertainty < 1.2 ? 'LOW SPREAD' : (uncertainty < 2.5 ? 'MODERATE SPREAD' : 'HIGH SPREAD');
-    const spreadColor = uncertainty < 1.2 ? '#86EFAC' : (uncertainty < 2.5 ? 'var(--samvaya-saffron-400)' : '#FCA5A5');
+    const spreadColor = uncertainty < 1.2 ? 'var(--samvaya-olive-300)' : (uncertainty < 2.5 ? 'var(--samvaya-saffron-300)' : 'var(--samvaya-terracotta-400)');
 
     // Agreement Level
     const agreementLevel = models.agreement || 'HIGH';
-    const agreementColor = agreementLevel === 'HIGH' ? '#86EFAC' : (agreementLevel === 'MODERATE' ? 'var(--samvaya-saffron-400)' : '#FCA5A5');
+    const agreementColor = agreementLevel === 'HIGH' ? 'var(--samvaya-olive-300)' : (agreementLevel === 'MODERATE' ? 'var(--samvaya-saffron-300)' : 'var(--samvaya-terracotta-400)');
 
     // Confidence Level
     const confidenceLevel = models.confidence || 'HIGH';
-    const confidenceColor = confidenceLevel === 'HIGH' ? '#86EFAC' : (confidenceLevel === 'MODERATE' ? 'var(--samvaya-saffron-400)' : '#FCA5A5');
+    const confidenceColor = confidenceLevel === 'HIGH' ? 'var(--samvaya-olive-300)' : (confidenceLevel === 'MODERATE' ? 'var(--samvaya-saffron-300)' : 'var(--samvaya-terracotta-400)');
 
     this.panel.innerHTML = `
       <!-- Panel Header -->
-      <div style="padding: 12px 16px; border-bottom: 1px solid var(--color-border-subtle); display: flex; justify-content: space-between; align-items: center; background: rgba(12, 14, 18, 0.65);">
+      <div style="padding: 12px 16px; border-bottom: 1px solid var(--color-border-subtle); display: flex; justify-content: space-between; align-items: center; background: var(--samvaya-obs-surface-0);">
         <div style="display: flex; align-items: center; gap: 8px;">
           <span class="material-symbols-outlined" style="color: var(--samvaya-saffron-400); font-size: 20px;">hub</span>
           <div>
             <h2 style="font-size: 13px; font-weight: 700; color: var(--samvaya-ivory-50); letter-spacing: 0.03em; margin: 0;">FORECAST INTELLIGENCE & MODEL FUSION LAB</h2>
             <div style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-sand-400);">
-              ${loc.name} · ${loc.latitude.toFixed(2)}°N, ${loc.longitude.toFixed(2)}°E · Provenance: <span style="color: #86EFAC;">LIVE OPEN DATA</span>
+              ${loc.name} · ${loc.latitude.toFixed(2)}°N, ${loc.longitude.toFixed(2)}°E · Provenance: <span style="color: var(--samvaya-olive-300);">LIVE OPEN DATA</span>
             </div>
           </div>
         </div>
         <button id="closeIntelligenceBtn" class="samvaya-btn btn-ghost" style="padding: 4px;" title="Close Lab">
-          <span class="material-symbols-outlined" style="font-size: 18px;">close</span>
+          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--samvaya-sand-400);">close</span>
         </button>
       </div>
 
@@ -347,7 +349,7 @@ export class IntelligenceLabController {
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; text-align: center; font-family: var(--font-mono); font-size: 11px;">
             <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid var(--color-border-subtle);">
               <span style="color: var(--samvaya-warmgrey-500); font-size: 10px; display: block;">MODEL MIN</span>
-              <span style="color: #5D9CBF; font-weight: bold;">${(consensusVal - uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
+              <span style="color: var(--samvaya-atmo-blue-400); font-weight: bold;">${(consensusVal - uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
             </div>
             <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid rgba(244, 168, 54, 0.3);">
               <span style="color: var(--samvaya-saffron-400); font-size: 10px; display: block;">CONSENSUS</span>
@@ -355,7 +357,7 @@ export class IntelligenceLabController {
             </div>
             <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid var(--color-border-subtle);">
               <span style="color: var(--samvaya-warmgrey-500); font-size: 10px; display: block;">MODEL MAX</span>
-              <span style="color: #E3785B; font-weight: bold;">${(consensusVal + uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
+              <span style="color: var(--samvaya-terracotta-400); font-weight: bold;">${(consensusVal + uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
             </div>
           </div>
 
@@ -369,13 +371,13 @@ export class IntelligenceLabController {
               <!-- Range Shaded Polygon -->
               <polygon points="10,40 90,32 170,25 250,30 330,45 410,55 410,75 330,68 250,55 170,48 90,58 10,65" fill="rgba(244, 168, 54, 0.12)" />
 
-              <!-- ECMWF IFS Line -->
+              <!-- ECMWF IFS Line (Olive) -->
               <polyline points="10,48 90,42 170,32 250,38 330,52 410,62" fill="none" stroke="#8CA372" stroke-width="1.8" />
 
-              <!-- GFS Line -->
+              <!-- GFS Line (Terracotta) -->
               <polyline points="10,55 90,48 170,40 250,46 330,60 410,70" fill="none" stroke="#E3785B" stroke-width="1.8" stroke-dasharray="3,2" />
 
-              <!-- ICON Line -->
+              <!-- ICON Line (Atmo Blue) -->
               <polyline points="10,44 90,36 170,28 250,34 330,48 410,58" fill="none" stroke="#5D9CBF" stroke-width="1.8" />
 
               <!-- SAMVAYA Consensus Line (Saffron) -->
@@ -415,31 +417,31 @@ export class IntelligenceLabController {
                 <td style="padding: 5px 2px;">⚡ SAMVAYA Adaptive Blend</td>
                 <td style="padding: 5px 2px; text-align: right;">1.22</td>
                 <td style="padding: 5px 2px; text-align: right;">1.65</td>
-                <td style="padding: 5px 2px; text-align: right; color: #86EFAC;">0.94</td>
+                <td style="padding: 5px 2px; text-align: right; color: var(--samvaya-olive-300);">0.94</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100); border-bottom: 1px solid var(--color-border-subtle);">
                 <td style="padding: 4px 2px;">ECMWF IFS</td>
                 <td style="padding: 4px 2px; text-align: right;">1.45</td>
                 <td style="padding: 4px 2px; text-align: right;">1.92</td>
-                <td style="padding: 4px 2px; text-align: right;">0.88</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.88</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100); border-bottom: 1px solid var(--color-border-subtle);">
                 <td style="padding: 4px 2px;">ICON (DWD)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.62</td>
                 <td style="padding: 4px 2px; text-align: right;">2.10</td>
-                <td style="padding: 4px 2px; text-align: right;">0.84</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.84</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100); border-bottom: 1px solid var(--color-border-subtle);">
                 <td style="padding: 4px 2px;">GFS (NCEP)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.78</td>
                 <td style="padding: 4px 2px; text-align: right;">2.34</td>
-                <td style="padding: 4px 2px; text-align: right;">0.81</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.81</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100);">
                 <td style="padding: 4px 2px;">GEM (ECCC)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.95</td>
                 <td style="padding: 4px 2px; text-align: right;">2.58</td>
-                <td style="padding: 4px 2px; text-align: right;">0.77</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.77</td>
               </tr>
             </tbody>
           </table>
@@ -448,7 +450,7 @@ export class IntelligenceLabController {
         <!-- 5. ATMOSPHERIC REGIME TELEMETRY -->
         <div style="padding: 8px 10px; border-radius: var(--radius-xs); background: var(--samvaya-obs-surface-0); border: 1px solid var(--color-border-subtle); font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-sand-400); display: flex; justify-content: space-between; align-items: center;">
           <span>REGIME: <b style="color: var(--samvaya-saffron-400);">MONSOONAL CONVECTIVE</b></span>
-          <span>NODE: <b style="color: #86EFAC;">LIVE 4-SOURCE</b></span>
+          <span>NODE: <b style="color: var(--samvaya-olive-300);">LIVE 4-SOURCE</b></span>
         </div>
 
       </div>

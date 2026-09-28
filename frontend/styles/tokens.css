@@ -2,6 +2,7 @@
  * SAMVAYA Design System — Tokens
  * Project SIH26081 • Adaptive Atmospheric Forecast Engine
  * Core Concept: One Earth. Many Models. One Adaptive Forecast.
+ * Stitch Atmospheric Observatory Visual Palette
  */
 
 :root {
@@ -9,7 +10,7 @@
      1. SAMVAYA COLOR PALETTE (Warm Earth, Saffron, Terracotta, Observatory Base)
      ========================================================================== */
 
-  /* Neutral Warm Foundations */
+  /* Neutral Warm Foundations (Ivory, Cream, Sand, Earth) */
   --samvaya-ivory-50: #FCFAF7;
   --samvaya-ivory-100: #F6F2EB;
   --samvaya-ivory-200: #EFE9DE;
@@ -21,13 +22,13 @@
   --samvaya-earth-800: #332B22;
   --samvaya-earth-900: #1F1914;
 
-  /* Observatory Dark Surfaces (Warm-Toned Deep Atmosphere) */
-  --samvaya-obs-bg: #0C0E12;
-  --samvaya-obs-surface-0: #10141B;
-  --samvaya-obs-surface-1: #161B24;
-  --samvaya-obs-surface-2: #1E2532;
-  --samvaya-obs-surface-3: #273040;
-  --samvaya-obs-surface-4: #323D52;
+  /* Observatory Deep Surfaces (Warm-Toned Charcoal Atmosphere) */
+  --samvaya-obs-bg: #0E1015;
+  --samvaya-obs-surface-0: #13171F;
+  --samvaya-obs-surface-1: #181D26;
+  --samvaya-obs-surface-2: #202633;
+  --samvaya-obs-surface-3: #2A3242;
+  --samvaya-obs-surface-4: #353F52;
 
   /* Accents & Scientific Semantics */
   /* Saffron / Amber — Primary Identity & Consensus Warmth */
@@ -37,27 +38,28 @@
   --samvaya-saffron-600: #B8650A;
   --samvaya-amber-glow: rgba(224, 133, 24, 0.22);
 
-  /* Terracotta / Heat Anomaly */
+  /* Terracotta / Heat Anomaly / Warning */
   --samvaya-terracotta-400: #E3785B;
   --samvaya-terracotta-500: #C25638;
   --samvaya-terracotta-600: #963D23;
 
-  /* Muted Olive / Stability & Positive Agreement */
+  /* Muted Olive & Sage / Agreement & Stability */
+  --samvaya-olive-300: #B4C69B;
   --samvaya-olive-400: #9BB07D;
   --samvaya-olive-500: #748A54;
   --samvaya-olive-600: #52633A;
 
-  /* Restrained Slate / Uncertainty & Technical Info */
+  /* Restrained Slate / Uncertainty & Technical Readouts */
   --samvaya-slate-400: #94A3B8;
   --samvaya-slate-500: #64748B;
   --samvaya-slate-600: #475569;
 
-  /* Atmospheric Supporting Blue (Restrained / Secondary) */
+  /* Atmospheric Supporting Blue (Restrained / Secondary Data Layer Only) */
   --samvaya-atmo-blue-400: #5D9CBF;
   --samvaya-atmo-blue-500: #3B7A9E;
   --samvaya-atmo-blue-600: #265570;
 
-  /* Scientific Severe Alert (Non-sensational, calibrated) */
+  /* Scientific Severe Alert (Restrained Terracotta-Red) */
   --samvaya-alert-red: #D94841;
 
   /* ==========================================================================
@@ -80,26 +82,28 @@
   --color-text-dim: #60574D;
   --color-text-accent: var(--samvaya-saffron-400);
 
-  /* Model Identifiers */
+  /* Model Identifiers (Warm Harmonious Spectrum) */
   --model-aifs-color: #F4A836;     /* Saffron-Amber */
   --model-ecmwf-color: #8CA372;    /* Olive-Sage */
   --model-gfs-color: #E3785B;      /* Terracotta */
+  --model-icon-color: #5D9CBF;     /* Atmospheric Blue */
+  --model-gem-color: #A39686;      /* Warm Sand-Grey */
   --model-gefs-color: #A39686;     /* Warm Sand-Grey */
   --model-ncum-color: #5D9CBF;     /* Atmospheric Blue */
   --model-bharatfs-color: #E5A03A; /* Indian Ochre */
-  --model-graphcast-color: #B584B8;/* Soft Amethyst */
+  --model-graphcast-color: #9C7A97;/* Soft Muted Heather */
 
-  /* Confidence Levels */
+  /* Confidence & Agreement Levels */
   --confidence-high: var(--samvaya-olive-400);
   --confidence-moderate: var(--samvaya-saffron-400);
-  --confidence-low: var(--samvaya-slate-400);
+  --confidence-low: var(--samvaya-terracotta-400);
 
-  /* Status Colors */
-  --status-live: #4ADE80;
+  /* Status Colors (Calibrated Warmth) */
+  --status-live: #9BB07D;
   --status-synced: #748A54;
   --status-processing: #F4A836;
   --status-uncertain: #E3785B;
-  --status-degraded: #F97316;
+  --status-degraded: #C25638;
   --status-offline: #64748B;
 
   /* ==========================================================================
@@ -179,8 +183,8 @@
   --glass-blur-sm: blur(12px);
   --glass-blur-md: blur(20px);
   --glass-blur-lg: blur(32px);
-  --glass-surface: rgba(16, 20, 27, 0.78);
-  --glass-surface-elevated: rgba(22, 27, 36, 0.88);
+  --glass-surface: rgba(18, 22, 30, 0.82);
+  --glass-surface-elevated: rgba(24, 29, 39, 0.92);
 
   /* ==========================================================================
      6. MOTION & TRANSITIONS
@@ -194,7 +198,7 @@
   --motion-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
 
   /* ==========================================================================
-     7. WEATHER-RESPONSIVE DYNAMIC MOOD VARIABLES (Centralized Defaults)
+     7. WEATHER-RESPONSIVE DYNAMIC MOOD VARIABLES
      ========================================================================== */
   --atmo-mood-tint: rgba(224, 133, 24, 0.04);
   --atmo-haze-opacity: 0.12;

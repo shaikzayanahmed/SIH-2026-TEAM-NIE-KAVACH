@@ -35,7 +35,7 @@ export class DevInspectorController {
       flex-direction: column;
       gap: 8px;
       border: 1px dashed rgba(244, 168, 54, 0.4);
-      background: rgba(16, 20, 27, 0.92);
+      background: var(--glass-surface-elevated);
       pointer-events: auto;
     `;
 

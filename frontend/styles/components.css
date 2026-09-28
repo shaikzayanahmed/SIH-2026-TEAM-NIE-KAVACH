@@ -355,22 +355,22 @@
   box-shadow: 0 0 8px var(--status-live);
   animation: pulse-live 2s infinite ease-in-out;
 }
-.status-live { color: #86EFAC; border-color: rgba(74, 222, 128, 0.25); }
+.status-live { color: var(--samvaya-olive-300); border-color: rgba(155, 176, 125, 0.3); }
 
 .status-synced .status-dot { background-color: var(--status-synced); }
-.status-synced { color: #BEF264; border-color: rgba(116, 138, 84, 0.25); }
+.status-synced { color: var(--samvaya-olive-400); border-color: rgba(116, 138, 84, 0.3); }
 
 .status-processing .status-dot { background-color: var(--status-processing); }
-.status-processing { color: #FCD34D; border-color: rgba(244, 168, 54, 0.25); }
+.status-processing { color: var(--samvaya-saffron-300); border-color: rgba(244, 168, 54, 0.3); }
 
 .status-uncertain .status-dot { background-color: var(--status-uncertain); }
-.status-uncertain { color: #FDBA74; border-color: rgba(227, 120, 91, 0.25); }
+.status-uncertain { color: var(--samvaya-terracotta-400); border-color: rgba(227, 120, 91, 0.3); }
 
 .status-degraded .status-dot { background-color: var(--status-degraded); }
-.status-degraded { color: #FB923C; border-color: rgba(249, 115, 22, 0.25); }
+.status-degraded { color: var(--samvaya-terracotta-500); border-color: rgba(194, 86, 56, 0.3); }
 
 .status-offline .status-dot { background-color: var(--status-offline); }
-.status-offline { color: var(--samvaya-slate-400); }
+.status-offline { color: var(--samvaya-slate-400); border-color: rgba(100, 116, 139, 0.3); }
 
 @keyframes pulse-live {
   0%, 100% { opacity: 1; transform: scale(1); }
