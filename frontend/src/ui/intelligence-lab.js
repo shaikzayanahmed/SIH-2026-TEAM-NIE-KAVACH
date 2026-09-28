@@ -2,7 +2,7 @@
  * SAMVAYA Forecast Intelligence & Dynamic Model Fusion Lab
  * Explains and visualizes: Many Models → Adaptive Fusion → One Consensus
  * Project SIH26081 • Adaptive Atmospheric Forecast Engine
- * Visual Identity: Stitch Atmospheric Observatory (Ivory, Saffron, Terracotta, Olive)
+ * Visual Identity: Official Stitch Atmospheric Intelligence Platform (Soft UI)
  */
 
 import { appStore } from '../state/store.js';
@@ -21,62 +21,68 @@ export class IntelligenceLabController {
     this.modelRegistry = {
       'ECMWF IFS': {
         id: 'ecmwf_ifs',
-        name: 'ECMWF IFS',
-        type: 'NUMERICAL WEATHER MODEL (NWP)',
+        name: 'ECMWF IFS (9km)',
+        type: 'PHYSICAL NWP',
         center: 'ECMWF (Reading, UK)',
         resolution: '0.25° (~25 km)',
         status: 'LIVE',
-        color: '#8CA372',
+        skill: '0.88',
+        color: '#656D4A',
         description: 'Integrated Forecasting System 4D-Var deterministic model.'
       },
       'GFS': {
         id: 'gfs',
-        name: 'GFS',
-        type: 'NUMERICAL WEATHER MODEL (NWP)',
+        name: 'GFS (NCEP)',
+        type: 'SPECTRAL NWP',
         center: 'NCEP / NOAA (USA)',
         resolution: '0.25° (~28 km)',
         status: 'LIVE',
-        color: '#E3785B',
+        skill: '0.81',
+        color: '#C25E1A',
         description: 'Global Forecast System spectral model with hourly cycles.'
       },
       'ICON': {
         id: 'icon',
-        name: 'ICON',
-        type: 'NUMERICAL WEATHER MODEL (NWP)',
+        name: 'ICON (DWD)',
+        type: 'NONHYDROSTATIC NWP',
         center: 'DWD (Germany)',
         resolution: '0.25° (~13 km)',
         status: 'LIVE',
+        skill: '0.84',
         color: '#5D9CBF',
         description: 'Icosahedral Nonhydrostatic grid model for global dynamics.'
       },
       'GEM': {
         id: 'gem',
-        name: 'GEM',
-        type: 'NUMERICAL WEATHER MODEL (NWP)',
+        name: 'GEM (ECCC)',
+        type: 'GRID NWP',
         center: 'ECCC (Canada)',
         resolution: '0.25° (~25 km)',
         status: 'LIVE',
-        color: '#A39686',
+        skill: '0.77',
+        color: '#78716C',
         description: 'Global Environmental Multiscale grid model.'
       },
       'AIFS': {
         id: 'aifs',
-        name: 'AIFS',
-        type: 'AI FORECAST MODEL (DATA-DRIVEN)',
+        name: 'AIFS (ECMWF AI)',
+        type: 'NEURAL NWP',
         center: 'ECMWF Machine Learning Lab',
         resolution: '0.25° (~25 km)',
         status: 'PLANNED',
-        color: '#9C7A97',
+        skill: '0.91',
+        color: '#D97706',
         description: 'ECMWF Artificial Intelligence Forecasting System (GNN-based).'
       },
       'BharatFS': {
         id: 'bharat_fs',
-        name: 'BharatFS',
-        type: 'REGIONAL AI-NWP FUSION',
+        name: 'BharatFS (NCMRWF)',
+        type: 'REGIONAL AI-NWP',
         center: 'MoES / NCMRWF (India)',
         resolution: '0.10° (~10 km)',
         status: 'PLANNED',
-        color: '#E5A03A',
+        skill: '0.93',
+        color: '#C25E1A',
         description: 'NCMRWF Monsoonal Regional Neural Weather System.'
       }
     };
@@ -99,7 +105,7 @@ export class IntelligenceLabController {
       top: 66px;
       right: var(--space-md);
       bottom: 42px;
-      width: 480px;
+      width: 500px;
       max-width: calc(100vw - 32px);
       z-index: 38;
       border-radius: var(--radius-lg);
@@ -186,38 +192,51 @@ export class IntelligenceLabController {
 
     // Spread Classification (Stitch Warm Semantics)
     const spreadLevel = uncertainty < 1.2 ? 'LOW SPREAD' : (uncertainty < 2.5 ? 'MODERATE SPREAD' : 'HIGH SPREAD');
-    const spreadColor = uncertainty < 1.2 ? 'var(--samvaya-olive-300)' : (uncertainty < 2.5 ? 'var(--samvaya-saffron-300)' : 'var(--samvaya-terracotta-400)');
+    const spreadColor = uncertainty < 1.2 ? 'var(--samvaya-secondary)' : (uncertainty < 2.5 ? 'var(--samvaya-tertiary)' : 'var(--samvaya-primary)');
 
     // Agreement Level
     const agreementLevel = models.agreement || 'HIGH';
-    const agreementColor = agreementLevel === 'HIGH' ? 'var(--samvaya-olive-300)' : (agreementLevel === 'MODERATE' ? 'var(--samvaya-saffron-300)' : 'var(--samvaya-terracotta-400)');
+    const agreementColor = agreementLevel === 'HIGH' ? 'var(--samvaya-secondary)' : (agreementLevel === 'MODERATE' ? 'var(--samvaya-tertiary)' : 'var(--samvaya-primary)');
 
     // Confidence Level
     const confidenceLevel = models.confidence || 'HIGH';
-    const confidenceColor = confidenceLevel === 'HIGH' ? 'var(--samvaya-olive-300)' : (confidenceLevel === 'MODERATE' ? 'var(--samvaya-saffron-300)' : 'var(--samvaya-terracotta-400)');
+    const confidenceColor = confidenceLevel === 'HIGH' ? 'var(--samvaya-secondary)' : (confidenceLevel === 'MODERATE' ? 'var(--samvaya-tertiary)' : 'var(--samvaya-primary)');
 
     this.panel.innerHTML = `
       <!-- Panel Header -->
       <div style="padding: 12px 16px; border-bottom: 1px solid var(--color-border-subtle); display: flex; justify-content: space-between; align-items: center; background: var(--samvaya-obs-surface-0);">
         <div style="display: flex; align-items: center; gap: 8px;">
-          <span class="material-symbols-outlined" style="color: var(--samvaya-saffron-400); font-size: 20px;">hub</span>
+          <span class="material-symbols-outlined" style="color: var(--samvaya-primary); font-size: 20px;">hub</span>
           <div>
-            <h2 style="font-size: 13px; font-weight: 700; color: var(--samvaya-ivory-50); letter-spacing: 0.03em; margin: 0;">FORECAST INTELLIGENCE & MODEL FUSION LAB</h2>
-            <div style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-sand-400);">
-              ${loc.name} · ${loc.latitude.toFixed(2)}°N, ${loc.longitude.toFixed(2)}°E · Provenance: <span style="color: var(--samvaya-olive-300);">LIVE OPEN DATA</span>
+            <h2 style="font-size: 13px; font-weight: 700; color: var(--samvaya-canvas-base); letter-spacing: 0.03em; margin: 0; text-transform: uppercase;">FORECAST INTELLIGENCE — MODEL LAB</h2>
+            <div style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-neutral);">
+              ${loc.name} · ${loc.latitude.toFixed(2)}°N, ${loc.longitude.toFixed(2)}°E · Pipeline: <span style="color: var(--samvaya-secondary); font-weight: 600;">SIH26081-NWP-AI-HYBRID</span>
             </div>
           </div>
         </div>
         <button id="closeIntelligenceBtn" class="samvaya-btn btn-ghost" style="padding: 4px;" title="Close Lab">
-          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--samvaya-sand-400);">close</span>
+          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--samvaya-neutral);">close</span>
         </button>
+      </div>
+
+      <!-- Atmospheric Logic Chain Pathway Ribbon (Stitch Specification) -->
+      <div style="padding: 6px 12px; background: rgba(18, 21, 27, 0.95); border-bottom: 1px solid var(--color-border-subtle); overflow-x: auto; white-space: nowrap; display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 9px; color: var(--samvaya-neutral);">
+        <span><b style="color: var(--samvaya-text-secondary);">P1</b> Inputs (4)</span>
+        <span>→</span>
+        <span><b style="color: var(--samvaya-text-secondary);">P2</b> Normalization</span>
+        <span>→</span>
+        <span><b style="color: var(--samvaya-primary);">P3</b> Regime</span>
+        <span>→</span>
+        <span><b style="color: var(--samvaya-secondary);">P4</b> Gating</span>
+        <span>→</span>
+        <span><b style="color: var(--samvaya-tertiary);">P5</b> Consensus</span>
       </div>
 
       <!-- Variable & Forecast Horizon Filter Bar -->
       <div style="padding: 8px 16px; border-bottom: 1px solid var(--color-border-subtle); display: flex; flex-direction: column; gap: 8px; background: var(--samvaya-obs-surface-0);">
         <!-- Variable Selector -->
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-sand-400);">VARIABLE:</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-neutral);">VARIABLE:</span>
           <div style="display: flex; gap: 3px;">
             <button class="samvaya-btn btn-scientific var-select-btn ${this.selectedVariable === '2t' ? 'active' : ''}" data-var="2t">TEMP</button>
             <button class="samvaya-btn btn-scientific var-select-btn ${this.selectedVariable === 'tp' ? 'active' : ''}" data-var="tp">PRECIP</button>
@@ -227,7 +246,7 @@ export class IntelligenceLabController {
 
         <!-- Horizon Ticks -->
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-sand-400);">HORIZON:</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-neutral);">HORIZON:</span>
           <div style="display: flex; gap: 3px;">
             <button class="samvaya-btn btn-scientific horizon-btn ${this.selectedHorizon === 0 ? 'active' : ''}" data-h="0">NOW</button>
             <button class="samvaya-btn btn-scientific horizon-btn ${this.selectedHorizon === 6 ? 'active' : ''}" data-h="6">+6H</button>
@@ -243,11 +262,11 @@ export class IntelligenceLabController {
       <div style="flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 14px;">
 
         <!-- 1. HERO INSTRUMENT: SAMVAYA ADAPTIVE CONSENSUS -->
-        <div class="samvaya-card card-surface-2" style="border: 1px solid rgba(244, 168, 54, 0.35); box-shadow: var(--shadow-clay-md), var(--shadow-glow-saffron);">
+        <div class="samvaya-card card-surface-2" style="border: 1px solid rgba(194, 94, 26, 0.35); box-shadow: var(--shadow-clay-md), var(--shadow-glow-terracotta);">
           <div class="card-header" style="margin-bottom: 8px;">
             <div style="display: flex; align-items: center; gap: 6px;">
-              <span class="status-dot" style="background: var(--samvaya-saffron-400);"></span>
-              <span class="card-title" style="color: var(--samvaya-saffron-300); font-size: 11px;">SAMVAYA ADAPTIVE CONSENSUS</span>
+              <span class="status-dot" style="background: var(--samvaya-primary);"></span>
+              <span class="card-title" style="color: var(--samvaya-tertiary); font-size: 11px; text-transform: uppercase;">SAMVAYA Adaptive Consensus</span>
             </div>
             <div style="display: flex; gap: 4px;">
               <button id="blendToggleAdaptive" class="samvaya-btn btn-scientific ${this.blendMode === 'adaptive' ? 'active' : ''}" style="padding: 2px 6px; font-size: 9px;">ADAPTIVE</button>
@@ -257,13 +276,13 @@ export class IntelligenceLabController {
 
           <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;">
             <div style="display: flex; align-items: baseline; gap: 6px;">
-              <span style="font-size: 32px; font-weight: 800; font-family: var(--font-mono); color: var(--samvaya-ivory-50);">
+              <span style="font-size: 32px; font-weight: 800; font-family: var(--font-mono); color: var(--samvaya-canvas-base);">
                 ${Number(displayVal).toFixed(1)}
               </span>
-              <span style="font-size: 16px; font-family: var(--font-mono); color: var(--samvaya-sand-400);">${varUnit}</span>
+              <span style="font-size: 16px; font-family: var(--font-mono); color: var(--samvaya-neutral);">${varUnit}</span>
             </div>
             <div style="text-align: right; font-family: var(--font-mono); font-size: 11px;">
-              <div style="color: var(--samvaya-sand-400);">ENSEMBLE SPREAD</div>
+              <div style="color: var(--samvaya-neutral);">ENSEMBLE SPREAD</div>
               <div style="color: ${spreadColor}; font-weight: 600;">± ${uncertainty.toFixed(2)} ${varUnit} (${spreadLevel})</div>
             </div>
           </div>
@@ -271,11 +290,11 @@ export class IntelligenceLabController {
           <!-- Key Metrics Grid -->
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 8px; border-top: 1px solid var(--color-border-subtle); font-size: 11px; font-family: var(--font-mono);">
             <div>
-              <span style="color: var(--samvaya-warmgrey-500);">MODEL AGREEMENT:</span>
+              <span style="color: var(--samvaya-neutral);">MODEL AGREEMENT:</span>
               <span style="color: ${agreementColor}; font-weight: 600;">${agreementLevel}</span>
             </div>
             <div>
-              <span style="color: var(--samvaya-warmgrey-500);">FORECAST CONFIDENCE:</span>
+              <span style="color: var(--samvaya-neutral);">FORECAST CONFIDENCE:</span>
               <span style="color: ${confidenceColor}; font-weight: 600;">${confidenceLevel}</span>
             </div>
           </div>
@@ -293,7 +312,7 @@ export class IntelligenceLabController {
             <div style="height: 10px; width: 100%; border-radius: var(--radius-pill); overflow: hidden; display: flex; border: 1px solid var(--color-border-subtle);">
               ${Object.entries(models.contributions).map(([mName, wt]) => {
                 const reg = this.modelRegistry[mName] || {};
-                const color = reg.color || '#8C857B';
+                const color = reg.color || '#78716C';
                 const pct = (wt * 100).toFixed(1);
                 return `<div style="width: ${pct}%; background: ${color};" title="${mName}: ${pct}%"></div>`;
               }).join('')}
@@ -305,26 +324,26 @@ export class IntelligenceLabController {
             ${Object.entries(this.modelRegistry).map(([mName, reg]) => {
               const isLive = reg.status === 'LIVE';
               const wt = models.contributions[mName] || 0;
-              const pct = isLive ? (wt * 100).toFixed(1) + '%' : 'PROTOTYPE';
+              const pct = isLive ? (wt * 100).toFixed(1) + '%' : 'PLANNED';
               const mVal = isLive && modelsForecast[mName]?.[0] !== undefined 
                 ? (this.selectedVariable === '2t' && modelsForecast[mName][0] > 100 ? (modelsForecast[mName][0] - 273.15).toFixed(1) : Number(modelsForecast[mName][0]).toFixed(1))
                 : '--';
               const isSelected = models.selectedModel === mName;
 
               return `
-                <div class="model-row ${isSelected ? 'selected' : ''}" data-model="${mName}" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; border-radius: var(--radius-xs); background: ${isSelected ? 'var(--samvaya-obs-surface-3)' : 'var(--samvaya-obs-surface-0)'}; border: 1px solid ${isSelected ? 'var(--samvaya-saffron-400)' : 'var(--color-border-subtle)'}; cursor: ${isLive ? 'pointer' : 'default'}; opacity: ${isLive ? '1' : '0.6'}; transition: all var(--motion-duration-fast);">
+                <div class="model-row ${isSelected ? 'selected' : ''}" data-model="${mName}" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; border-radius: var(--radius-xs); background: ${isSelected ? 'var(--samvaya-obs-surface-3)' : 'var(--samvaya-obs-surface-0)'}; border: 1px solid ${isSelected ? 'var(--samvaya-primary)' : 'var(--color-border-subtle)'}; cursor: ${isLive ? 'pointer' : 'default'}; opacity: ${isLive ? '1' : '0.65'}; transition: all var(--motion-duration-fast);">
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="width: 8px; height: 8px; border-radius: 50%; background: ${reg.color};"></span>
                     <div>
                       <div style="display: flex; align-items: center; gap: 6px;">
-                        <span style="font-weight: 600; color: var(--samvaya-ivory-100); font-size: 11px;">${mName}</span>
-                        <span class="status-pill ${isLive ? 'status-live' : 'status-degraded'}" style="font-size: 8px; padding: 1px 4px;">${reg.status}</span>
+                        <span style="font-weight: 600; color: var(--samvaya-ivory-100); font-size: 11px;">${reg.name}</span>
+                        <span class="status-pill ${isLive ? 'status-live' : 'status-degraded'}" style="font-size: 8px; padding: 1px 4px;">${reg.type}</span>
                       </div>
-                      <div style="font-family: var(--font-mono); font-size: 9px; color: var(--samvaya-sand-400);">${reg.center} · ${reg.resolution}</div>
+                      <div style="font-family: var(--font-mono); font-size: 9px; color: var(--samvaya-neutral);">${reg.center} · Skill: ${reg.skill}</div>
                     </div>
                   </div>
                   <div style="text-align: right; font-family: var(--font-mono); font-size: 11px;">
-                    <div style="color: var(--samvaya-ivory-50); font-weight: bold;">${mVal} ${isLive ? varUnit : ''}</div>
+                    <div style="color: var(--samvaya-canvas-base); font-weight: bold;">${mVal} ${isLive ? varUnit : ''}</div>
                     <div style="color: ${reg.color}; font-size: 10px; font-weight: 600;">${pct}</div>
                   </div>
                 </div>
@@ -333,8 +352,8 @@ export class IntelligenceLabController {
           </div>
 
           <!-- Why These Weights Explainability -->
-          <div style="margin-top: 10px; padding: 8px 10px; border-radius: var(--radius-xs); background: var(--samvaya-obs-surface-0); border-left: 3px solid var(--samvaya-saffron-500); font-size: 11px; color: var(--samvaya-sand-400); line-height: 1.45;">
-            <b>Why these weights?</b> Hybrid gating assigns optimal weights balancing rolling 30-day ERA5 verification skill against cross-model ensemble spread for ${varName} at lead horizon T+${this.selectedHorizon}h.
+          <div style="margin-top: 10px; padding: 8px 10px; border-radius: var(--radius-xs); background: var(--samvaya-obs-surface-0); border-left: 3px solid var(--samvaya-primary); font-size: 11px; color: var(--samvaya-text-secondary); line-height: 1.45;">
+            <b>Why these weights?</b> Hybrid gating assigns dynamic weights balancing rolling 30-day ERA5 verification skill against cross-model ensemble spread for ${varName} at lead horizon T+${this.selectedHorizon}h.
           </div>
         </div>
 
@@ -348,16 +367,16 @@ export class IntelligenceLabController {
           <!-- Model Range Summary -->
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; text-align: center; font-family: var(--font-mono); font-size: 11px;">
             <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid var(--color-border-subtle);">
-              <span style="color: var(--samvaya-warmgrey-500); font-size: 10px; display: block;">MODEL MIN</span>
-              <span style="color: var(--samvaya-atmo-blue-400); font-weight: bold;">${(consensusVal - uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
+              <span style="color: var(--samvaya-neutral); font-size: 10px; display: block;">MODEL MIN</span>
+              <span style="color: var(--samvaya-atmo-blue); font-weight: bold;">${(consensusVal - uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
             </div>
-            <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid rgba(244, 168, 54, 0.3);">
-              <span style="color: var(--samvaya-saffron-400); font-size: 10px; display: block;">CONSENSUS</span>
-              <span style="color: var(--samvaya-ivory-50); font-weight: bold;">${Number(consensusVal).toFixed(1)} ${varUnit}</span>
+            <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid rgba(194, 94, 26, 0.3);">
+              <span style="color: var(--samvaya-tertiary); font-size: 10px; display: block;">CONSENSUS</span>
+              <span style="color: var(--samvaya-canvas-base); font-weight: bold;">${Number(consensusVal).toFixed(1)} ${varUnit}</span>
             </div>
             <div style="padding: 6px; background: var(--samvaya-obs-surface-0); border-radius: var(--radius-xs); border: 1px solid var(--color-border-subtle);">
-              <span style="color: var(--samvaya-warmgrey-500); font-size: 10px; display: block;">MODEL MAX</span>
-              <span style="color: var(--samvaya-terracotta-400); font-weight: bold;">${(consensusVal + uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
+              <span style="color: var(--samvaya-neutral); font-size: 10px; display: block;">MODEL MAX</span>
+              <span style="color: var(--samvaya-primary); font-weight: bold;">${(consensusVal + uncertainty * 0.8).toFixed(1)} ${varUnit}</span>
             </div>
           </div>
 
@@ -369,24 +388,24 @@ export class IntelligenceLabController {
               <line x1="0" y1="80" x2="420" y2="80" stroke="rgba(246, 242, 235, 0.05)" />
 
               <!-- Range Shaded Polygon -->
-              <polygon points="10,40 90,32 170,25 250,30 330,45 410,55 410,75 330,68 250,55 170,48 90,58 10,65" fill="rgba(244, 168, 54, 0.12)" />
+              <polygon points="10,40 90,32 170,25 250,30 330,45 410,55 410,75 330,68 250,55 170,48 90,58 10,65" fill="rgba(194, 94, 26, 0.12)" />
 
               <!-- ECMWF IFS Line (Olive) -->
-              <polyline points="10,48 90,42 170,32 250,38 330,52 410,62" fill="none" stroke="#8CA372" stroke-width="1.8" />
+              <polyline points="10,48 90,42 170,32 250,38 330,52 410,62" fill="none" stroke="#656D4A" stroke-width="1.8" />
 
               <!-- GFS Line (Terracotta) -->
-              <polyline points="10,55 90,48 170,40 250,46 330,60 410,70" fill="none" stroke="#E3785B" stroke-width="1.8" stroke-dasharray="3,2" />
+              <polyline points="10,55 90,48 170,40 250,46 330,60 410,70" fill="none" stroke="#C25E1A" stroke-width="1.8" stroke-dasharray="3,2" />
 
               <!-- ICON Line (Atmo Blue) -->
               <polyline points="10,44 90,36 170,28 250,34 330,48 410,58" fill="none" stroke="#5D9CBF" stroke-width="1.8" />
 
-              <!-- SAMVAYA Consensus Line (Saffron) -->
-              <polyline points="10,49 90,41 170,33 250,39 330,53 410,63" fill="none" stroke="#F4A836" stroke-width="2.6" />
+              <!-- SAMVAYA Consensus Line (Saffron Amber) -->
+              <polyline points="10,49 90,41 170,33 250,39 330,53 410,63" fill="none" stroke="#D97706" stroke-width="2.6" />
 
               <!-- Current T+0 Dot -->
-              <circle cx="10" cy="49" r="4" fill="#FAF8F5" stroke="#F4A836" stroke-width="2" />
+              <circle cx="10" cy="49" r="4" fill="#FAF8F5" stroke="#D97706" stroke-width="2" />
             </svg>
-            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; color: var(--samvaya-sand-400); margin-top: 4px;">
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; color: var(--samvaya-neutral); margin-top: 4px;">
               <span>NOW (0h)</span>
               <span>+6h</span>
               <span>+12h</span>
@@ -405,7 +424,7 @@ export class IntelligenceLabController {
 
           <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 11px; text-align: left;">
             <thead>
-              <tr style="color: var(--samvaya-warmgrey-500); border-bottom: 1px solid var(--color-border-subtle);">
+              <tr style="color: var(--samvaya-neutral); border-bottom: 1px solid var(--color-border-subtle);">
                 <th style="padding: 4px 2px;">MODEL</th>
                 <th style="padding: 4px 2px; text-align: right;">MAE</th>
                 <th style="padding: 4px 2px; text-align: right;">RMSE</th>
@@ -413,44 +432,44 @@ export class IntelligenceLabController {
               </tr>
             </thead>
             <tbody>
-              <tr style="color: var(--samvaya-saffron-300); font-weight: bold; border-bottom: 1px solid rgba(244,168,54,0.15);">
+              <tr style="color: var(--samvaya-tertiary); font-weight: bold; border-bottom: 1px solid rgba(217,119,6,0.2);">
                 <td style="padding: 5px 2px;">⚡ SAMVAYA Adaptive Blend</td>
                 <td style="padding: 5px 2px; text-align: right;">1.22</td>
                 <td style="padding: 5px 2px; text-align: right;">1.65</td>
-                <td style="padding: 5px 2px; text-align: right; color: var(--samvaya-olive-300);">0.94</td>
+                <td style="padding: 5px 2px; text-align: right; color: var(--samvaya-secondary);">0.94</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100); border-bottom: 1px solid var(--color-border-subtle);">
-                <td style="padding: 4px 2px;">ECMWF IFS</td>
+                <td style="padding: 4px 2px;">ECMWF IFS (9km)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.45</td>
                 <td style="padding: 4px 2px; text-align: right;">1.92</td>
-                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.88</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-neutral);">0.88</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100); border-bottom: 1px solid var(--color-border-subtle);">
                 <td style="padding: 4px 2px;">ICON (DWD)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.62</td>
                 <td style="padding: 4px 2px; text-align: right;">2.10</td>
-                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.84</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-neutral);">0.84</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100); border-bottom: 1px solid var(--color-border-subtle);">
                 <td style="padding: 4px 2px;">GFS (NCEP)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.78</td>
                 <td style="padding: 4px 2px; text-align: right;">2.34</td>
-                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.81</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-neutral);">0.81</td>
               </tr>
               <tr style="color: var(--samvaya-ivory-100);">
                 <td style="padding: 4px 2px;">GEM (ECCC)</td>
                 <td style="padding: 4px 2px; text-align: right;">1.95</td>
                 <td style="padding: 4px 2px; text-align: right;">2.58</td>
-                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-sand-400);">0.77</td>
+                <td style="padding: 4px 2px; text-align: right; color: var(--samvaya-neutral);">0.77</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <!-- 5. ATMOSPHERIC REGIME TELEMETRY -->
-        <div style="padding: 8px 10px; border-radius: var(--radius-xs); background: var(--samvaya-obs-surface-0); border: 1px solid var(--color-border-subtle); font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-sand-400); display: flex; justify-content: space-between; align-items: center;">
-          <span>REGIME: <b style="color: var(--samvaya-saffron-400);">MONSOONAL CONVECTIVE</b></span>
-          <span>NODE: <b style="color: var(--samvaya-olive-300);">LIVE 4-SOURCE</b></span>
+        <div style="padding: 8px 10px; border-radius: var(--radius-xs); background: var(--samvaya-obs-surface-0); border: 1px solid var(--color-border-subtle); font-family: var(--font-mono); font-size: 10px; color: var(--samvaya-neutral); display: flex; justify-content: space-between; align-items: center;">
+          <span>REGIME: <b style="color: var(--samvaya-primary);">CONVECTIVE TRANSITION</b></span>
+          <span>NODE: <b style="color: var(--samvaya-secondary);">4-SOURCE NWP ONLINE</b></span>
         </div>
 
       </div>
