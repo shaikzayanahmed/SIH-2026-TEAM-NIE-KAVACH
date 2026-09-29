@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#5e6644","surface-container-high":"#f0e6e0","primary-fixed-dim":"#ffb68e","surface-container":"#f6ece6","secondary":"#5a6240","inverse-surface":"#342f2b","on-secondary-fixed-variant":"#424a2a","secondary-fixed-dim":"#c2cba1","surface-bright":"#fff8f5","tertiary-fixed-dim":"#ffb77d","inverse-primary":"#ffb68e","surface-container-lowest":"#ffffff","secondary-container":"#dce4b9","error-container":"#ffdad6","on-background":"#1f1b17","tertiary-container":"#b15f00","on-tertiary-container":"#fffbff","on-tertiary-fixed-variant":"#6e3900","background":"#fff8f5","inverse-on-surface":"#f9efe8","surface-tint":"#9c4400","surface-container-low":"#fcf2eb","on-error":"#ffffff","on-error-container":"#93000a","on-secondary-fixed":"#181e04","on-primary-container":"#fffbff","surface-container-highest":"#eae1da","surface-variant":"#eae1da","surface":"#fff8f5","on-primary":"#ffffff","secondary-fixed":"#dee7bc","tertiary-fixed":"#ffdcc3","on-surface-variant":"#564339","outline":"#897267","on-primary-fixed-variant":"#773300","on-surface":"#1f1b17","on-tertiary":"#ffffff","on-tertiary-fixed":"#2f1500","primary":"#984300","surface-dim":"#e2d8d2","primary-container":"#ba5814","on-secondary":"#ffffff","tertiary":"#8d4b00","on-primary-fixed":"#331200","error":"#ba1a1a","primary-fixed":"#ffdbca","outline-variant":"#ddc1b3"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-md":"1rem","margin":"2.5rem","space-lg":"1.5rem","gutter-mobile":"0.75rem","gutter":"1.5rem","margin-mobile":"1rem","space-xl":"2.5rem","space-sm":"0.5rem"},fontFamily:{"label-caps":["Inter"],"body-md":["Inter"],"body-lg":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"telemetry-num":["Inter"],"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Inter"]},fontSize:{"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0.005em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"600"}],"telemetry-num":["15px",{"lineHeight":"20px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"500"}],"display-lg":["52px",{"lineHeight":"60px","letterSpacing":"-0.03em","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}]}}}}</script>
+  <!-- CesiumJS 1.124 Atmospheric 3D Engine -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+
+  <!-- Leaflet 2D Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- SAMVAYA Engine Assets -->
+  <script src="../globe-map-engine.js"></script>
+  <script src="../globe-runtime.js"></script>
+  <style>
+    .cesium-viewer-bottom, .cesium-widget-credits { display: none !important; }
+    .cesium-viewer { width: 100% !important; height: 100% !important; }
+    * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+    *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+  </style>
+
+</head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(74,53,37,0.05)]"><div class="h-20 w-full px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-[#984300] to-[#C25E1A] flex items-center justify-center text-white shadow-md shrink-0 mr-1">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+        <path d="M2 12h20"></path>
+      </svg>
+    </div><a href="../index.html" class="flex flex-col hover:opacity-85 transition-opacity"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase font-bold leading-none">SAMVAYA</span><span class="font-label-caps text-label-caps uppercase text-outline">Forecast Engine</span></div></div><div class="hidden xl:flex items-center px-space-sm py-1 rounded-full bg-surface-container-high/80 text-on-surface-variant font-label-caps text-label-caps"><span class="w-2 h-2 rounded-full bg-secondary mr-space-xs"></span>Mysuru, Karnataka</div></div><nav class="hidden lg:flex items-center gap-1 bg-surface-container/70 p-1 rounded-xl shadow-[inset_0_1px_2px_rgba(43,30,22,0.04)]" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[inset_0_1px_1px_rgba(255,255,255,0.35)]"><a class="px-space-md py-1.5 rounded-lg text-primary font-bold hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="../cockpit.html">Cockpit</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="model_lab.html" data-path="forecast">Forecast</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="location_explorer.html" data-path="explore">Explore</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="extreme_weather.html" data-path="intelligence">Intelligence</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="forecast_replay.html" data-path="history">History</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="operations_status.html" data-path="operations">Operations</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="daily_briefing.html" data-path="briefing">Briefing</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="comparison.html" data-path="compare">Compare</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" href="temporal_intelligence.html" data-path="timeline">Timeline</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md" data-path="effects" href="#">Effects</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-secondary mr-space-xs animate-pulse"></span>L4 INGESTION ACTIVE</div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><a href="settings.html" class="w-9 h-9 rounded-xl flex items-center justify-center bg-surface-container-high/80 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]" title="Settings"><span class="material-symbols-outlined text-[20px]">settings</span></a></div><a href="settings.html" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:opacity-90 transition-opacity" title="Control Center & Personalization"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></header><main class="w-full pt-32 bg-surface min-h-[calc(100vh-140px)]"><div class="flex flex-col w-full">
+<!-- Top Synoptic State Ribbon & Dynamic Atmospheric HUD -->
+<section class="w-full px-margin py-space-sm bg-surface-container-high/60 backdrop-blur-md shadow-sm">
+<div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-space-md">
+<!-- Synoptic Mode Flag -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs px-3 py-1.5 rounded-full bg-surface-container-lowest shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">
+            Cloudy Atmosphere // Stratiform Cover [25.4°C]
+          </span>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs font-telemetry-num text-telemetry-num text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-tertiary">cloud</span>
+<span>78% MODERATE-OVERCAST // BASE: 1,180m AGL</span>
+</div>
+</div>
+<!-- Runtime Intensity Switches -->
+<div class="flex items-center gap-space-xs bg-surface-container p-1 rounded-xl shadow-inner">
+<button class="px-2.5 py-1 rounded-lg font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-all" onclick="setAtmosphericMode('minimal', this)">Minimal</button>
+<button class="px-2.5 py-1 rounded-lg font-label-caps text-label-caps bg-primary text-on-primary shadow-sm transition-all" onclick="setAtmosphericMode('balanced', this)">Balanced</button>
+<button class="px-2.5 py-1 rounded-lg font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-all" onclick="setAtmosphericMode('immersive', this)">Immersive</button>
+<button class="px-2.5 py-1 rounded-lg font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-all" onclick="setAtmosphericMode('static', this)">Static (Reduced)</button>
+</div>
+</div>
+</section>
+<!-- Main Synoptic Canvas: 3D Earth Globe Sandbox with Overcast Overlay -->
+<section class="w-full px-margin py-space-md">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-md">
+<!-- 3D Globe Atmospheric Pod -->
+<div class="relative w-full rounded-2xl bg-surface-container-low shadow-md overflow-hidden p-space-sm">
+<!-- Floating HUD Header -->
+<div class="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-space-sm pointer-events-none">
+<div class="flex items-center gap-space-xs px-3 py-1.5 rounded-xl bg-surface-container-lowest/90 backdrop-blur-md shadow-sm pointer-events-auto">
+<span class="material-symbols-outlined text-tertiary text-[18px]">wb_cloudy</span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase">
+              Atmospheric State: Diffuse Stratum // Western Ghats Lee-Shielding
+            </span>
+</div>
+<div class="flex items-center gap-space-xs px-3 py-1.5 rounded-xl bg-surface-container-lowest/90 backdrop-blur-md shadow-sm pointer-events-auto">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-telemetry-num text-telemetry-num text-on-surface">60 FPS · DUAL-STRATUM CLOUD DRIFT</span>
+</div>
+</div>
+<!-- Centerpiece Three.js Scene Sandbox -->
+<div class="relative w-full h-[460px] rounded-xl overflow-hidden bg-surface-container">
+
+        <div id="globe_viewport_ANIMATION_66" class="w-full h-full relative overflow-hidden bg-[#040609] select-none" data-globe-container="true" data-lat="20.5937" data-lon="78.9629" data-alt="5200000" data-location-name="INDIA • ATMOSPHERIC DOMAIN">
+          <!-- 3D Cesium Viewport -->
+          <div id="globe_viewport_ANIMATION_66-cesium" class="w-full h-full absolute inset-0 z-0"></div>
+          
+          <!-- 2D Leaflet Viewport -->
+          <div id="globe_viewport_ANIMATION_66-leaflet" class="w-full h-full absolute inset-0 z-0" style="display: none;"></div>
+
+          <!-- 3D Globe / 2D Map Toggle Button -->
+          <div id="globe_viewport_ANIMATION_66-mode-pill" class="absolute top-4 left-4 z-40 flex items-center bg-[#0B111B]/95 backdrop-blur-2xl border border-[#C25E1A]/40 p-1 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6)] pointer-events-auto">
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_66', '3d')" id="globe_viewport_ANIMATION_66-toggle-3d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all bg-[#C25E1A] text-white shadow-md">
+              <span>🌐</span><span>3D GLOBE</span>
+            </button>
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_66', '2d')" id="globe_viewport_ANIMATION_66-toggle-2d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold transition-all text-slate-300 hover:text-white">
+              <span>🗺️</span><span>2D MAP</span>
+            </button>
+          </div>
+        </div>
+        
+<!-- Cloud Strata Depth Shroud Overlay (Calm Diffuse Lighting) -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high/90 via-surface-container-high/30 to-transparent pointer-events-none"></div>
+<!-- Bottom Telemetry Pod Overlay -->
+<div class="absolute bottom-4 left-4 right-4 z-20 pointer-events-auto">
+<div class="p-space-md rounded-xl bg-surface-container-lowest/92 backdrop-blur-lg shadow-lg flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Mysuru Synoptic Station</span>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">12.2958° N, 76.6394° E</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Continuous sounding matrix · Low-stratum condensation plume · Calm diffuse ambient</p>
+</div>
+<!-- Key Sounding Telemetry Matrix -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-space-sm w-full lg:w-auto">
+<div class="flex flex-col p-2 rounded-lg bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline uppercase">Surface Temp</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">25.4°C</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Feels 26.2°C</span>
+</div>
+<div class="flex flex-col p-2 rounded-lg bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline uppercase">Dew Point</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">21.0°C</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">RH 76%</span>
+</div>
+<div class="flex flex-col p-2 rounded-lg bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline uppercase">Cloud Cover</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-tertiary">78%</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">6/8 Okta Stratocumulus</span>
+</div>
+<div class="flex flex-col p-2 rounded-lg bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline uppercase">Barometer</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">1009.6 hPa</span>
+<span class="font-body-sm text-[10px] text-secondary">Steady (±0.1)</span>
+</div>
+<div class="flex flex-col p-2 rounded-lg bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-outline uppercase">Solar Attenuation</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-primary">-42%</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">490 W/m² Diffused</span>
+</div>
+<div class="flex flex-col p-2 rounded-lg bg-tertiary-fixed/40">
+<span class="font-label-caps text-label-caps text-on-tertiary-fixed-variant uppercase">Confidence</span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-tertiary-fixed">86%</span>
+<span class="font-body-sm text-[10px] text-on-tertiary-fixed-variant">High Stability</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Diurnal Progression Timeline: Cloud Cover Through the Day -->
+<section class="w-full px-margin py-space-md">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-xs">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase">Temporal Horizon Dynamics</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Diurnal Cloud Progression &amp; Attenuation</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+          Scrub the synoptic timeline to evaluate solar scattering variance and stratiform cloud thickening across Mysuru district.
+        </p>
+</div>
+<!-- Scrubber Component Container -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-md flex flex-col gap-space-lg">
+<!-- Timeline Cards Matrix -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-md" id="diurnal-cards">
+<!-- 06:00 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex flex-col gap-space-xs" onclick="scrubTimeline('06:00', 32, 22.8, 720)">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">06:00 IST</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">light_mode</span>
+</div>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">32% Cover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Light Cirrus Veil</span>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 32%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline mt-1">22.8°C · 720 W/m²</span>
+</div>
+<!-- 09:00 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex flex-col gap-space-xs" onclick="scrubTimeline('09:00', 48, 24.5, 640)">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">09:00 IST</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">wb_cloudy</span>
+</div>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">48% Cover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Developing Cumulus</span>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 48%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline mt-1">24.5°C · 640 W/m²</span>
+</div>
+<!-- 12:00 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex flex-col gap-space-xs" onclick="scrubTimeline('12:00', 67, 26.8, 550)">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">12:00 IST</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">cloud</span>
+</div>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">67% Cover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stratocumulus Deck</span>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1">
+<div class="bg-primary h-1.5 rounded-full" style="width: 67%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline mt-1">26.8°C · 550 W/m²</span>
+</div>
+<!-- 15:00 ACTIVE -->
+<div class="p-space-md rounded-xl bg-surface-container-high shadow-sm relative flex flex-col gap-space-xs" onclick="scrubTimeline('15:00', 78, 27.2, 490)">
+<div class="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-caps text-[10px]">
+              SYNOPTIC NOW
+            </div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary font-bold">15:00 IST</span>
+<span class="material-symbols-outlined text-[18px] text-primary">filter_drama</span>
+</div>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">78% Cover</span>
+<span class="font-body-sm text-body-sm text-on-surface">Overcast Stratum</span>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1">
+<div class="bg-primary-container h-1.5 rounded-full" style="width: 78%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant font-medium mt-1">27.2°C · 490 W/m²</span>
+</div>
+<!-- 18:00 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex flex-col gap-space-xs" onclick="scrubTimeline('18:00', 82, 25.0, 310)">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">18:00 IST</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">cloud</span>
+</div>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">82% Cover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Low Cloud Plume</span>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1">
+<div class="bg-primary-container h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline mt-1">25.0°C · 310 W/m²</span>
+</div>
+<!-- 21:00 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer flex flex-col gap-space-xs" onclick="scrubTimeline('21:00', 74, 23.6, 0)">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">21:00 IST</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">nights_stay</span>
+</div>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">74% Cover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nocturnal Strata</span>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-1">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 74%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-outline mt-1">23.6°C · Longwave OLR</span>
+</div>
+</div>
+<!-- Interactive Scrub Gauge Indicator -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<span class="material-symbols-outlined text-primary text-[28px]">scatter_plot</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface" id="scrub-time-label">Current Scrub Horizon: 15:00 IST</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="scrub-physics-desc">
+                Stratiform scattering active. Diffuse irradiance factor: 0.58. High stability, zero vertical convective updraft.
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-outline">Direct Normal Irradiance</span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface" id="scrub-dni">490 W/m² (Subdued)</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-outline">Scattering Angle</span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-secondary">38.4° Forward Mie</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Sunlight Through Clouds: Solar Attenuation Continuum & Model Consensus -->
+<section class="w-full px-margin py-space-md">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left 7 Cols: Solar Attenuation Continuum -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase">Optical Strata Physics</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Sunlight Through Clouds (Solar Continuum)</h2>
+</div>
+<span class="px-3 py-1 rounded-full bg-surface-container font-label-caps text-label-caps text-on-surface-variant">Albedo Index: 0.44</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- 30% Low Cloud -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary font-semibold">30% LOW CLOUD</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">720 W/m²</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Direct Sun Dominant</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Crisp ground shadow profiles with warm specular reflections on ivory instrument casings. Minimal diffuse scatter.
+              </p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 85%"></div>
+</div>
+</div>
+<!-- 60% Moderate Stratum -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary font-semibold">60% MODERATE STRATUM</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">540 W/m²</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Soft Diffused Sunlight</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Subtle softening of ground gradients. Warm saffron hue emerges along edges. Shadow penumbra expands noticeably.
+              </p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 65%"></div>
+</div>
+</div>
+<!-- 80% Heavy Overcast (ACTIVE) -->
+<div class="p-space-md rounded-2xl bg-surface-container-high shadow-md flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary-container font-semibold">80% HEAVY OVERCAST [ACTIVE]</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">380 W/m²</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Low-Contrast Illumination</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Warm ivory substrate with soft ambient scatter. Highly diffused boundaries and zero harsh highlights on dials.
+              </p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 45%"></div>
+</div>
+</div>
+<!-- 95% Dense Overcast -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline font-semibold">95% DENSE OVERCAST</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">210 W/m²</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Continuous Overcast Veil</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Complete suppression of directional shadows. Muted ivory-grey calm with isotropic ambient luminosity.
+              </p>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-outline" style="width: 25%"></div>
+</div>
+</div>
+</div>
+<!-- Inline Visual: Solar Absorption Curve -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline uppercase">Stratospheric to Boundary-Layer Flux Attenuation</span>
+<span class="font-telemetry-num text-telemetry-num text-secondary">Broadband Radiometer Ingestion</span>
+</div>
+<div class="w-full h-24 flex items-end gap-1 pt-4">
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[92%] relative group" title="06:00 - 720W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">720W</span>
+</div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[86%] relative group" title="08:00 - 680W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">680W</span>
+</div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[78%] relative group" title="10:00 - 620W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">620W</span>
+</div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[66%] relative group" title="12:00 - 550W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">550W</span>
+</div>
+<div class="flex-1 bg-primary-container rounded-t h-[52%] relative group shadow-sm" title="14:00 - 490W (NOW)">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 block font-label-caps text-[9px] font-bold text-primary">490W</span>
+</div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[44%] relative group" title="16:00 - 410W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">410W</span>
+</div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[30%] relative group" title="18:00 - 310W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">310W</span>
+</div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/30 transition-all rounded-t h-[12%] relative group" title="20:00 - 90W">
+<span class="absolute -top-5 left-1/2 -translate-x-1/2 hidden group-hover:block font-label-caps text-[9px] text-on-surface">90W</span>
+</div>
+</div>
+<div class="flex justify-between font-label-caps text-[10px] text-outline">
+<span>06:00 Solar Dawn</span>
+<span>12:00 Solar Zenith</span>
+<span>18:00 Sunset</span>
+</div>
+</div>
+</div>
+<!-- Right 5 Cols: Model Consensus & Stable Convergence -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Hybrid AI-NWP Weights</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Ensemble Convergence</h2>
+</div>
+<div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            92.4% Consensus
+          </div>
+</div>
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-md flex flex-col gap-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            In stratiform regimes, atmospheric turbulence drops and neural predictability peaks. The four ingested cores show near-zero standard deviation (±0.45°C).
+          </p>
+<!-- Model Stack -->
+<div class="flex flex-col gap-space-sm">
+<!-- AIFS -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center font-label-caps text-[10px] font-bold text-primary">AI</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">ECMWF AIFS</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Neural Synoptic Graph Core</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">25.6°C</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-[10px]">41% Wt</span>
+</div>
+</div>
+<!-- ECMWF IFS -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center font-label-caps text-[10px] font-bold text-secondary">NWP</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">ECMWF IFS-HRES</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Hydrostatic Fluid Dynamics</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">25.1°C</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-caps text-[10px]">32% Wt</span>
+</div>
+</div>
+<!-- NOAA GFS -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center font-label-caps text-[10px] font-bold text-outline">NWP</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">NOAA GFS</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Finite-Volume Cubed Sphere</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">26.2°C</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-caps text-[10px]">18% Wt</span>
+</div>
+</div>
+<!-- NOAA GEFS -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center font-label-caps text-[10px] font-bold text-outline">ENS</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">NOAA GEFS</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">31-Member Stochastic Blend</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">25.3°C</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-caps text-[10px]">9% Wt</span>
+</div>
+</div>
+</div>
+<!-- Fusion Vector Callout -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Fused Consensus Output</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">SAMVAYA-Core: 25.4°C</span>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-secondary font-semibold">Low Spread (σ = 0.45)</span>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Stable Overcast Horizon</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Atmospheric Transition Engine Simulator -->
+<section class="w-full px-margin py-space-md">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-xs">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase">Dynamic State Modulator</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Atmospheric Transition Engine Simulator</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+          Explore reload-free visual adaptations. Interface mood shifts dynamically with real-time barometric &amp; cloud sounding inputs.
+        </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Transition 1: Rain Developing -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md cursor-pointer group" onclick="simulateAtmosphericShift('rain')">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-tertiary">RADAR REFLECTIVITY &gt; 35 dBZ</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">rainy</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Rain Developing</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Cloud density thickens, first micro-droplets condense on interactive buttons, and warm-grey tones deepen.
+            </p>
+</div>
+<button class="w-full py-2 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-caps text-label-caps group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+            Simulate Precipitation Shift
+          </button>
+</div>
+<!-- Transition 2: Clear / Sunny -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md cursor-pointer group" onclick="simulateAtmosphericShift('clear')">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary">CEILING &gt; 3,500m AGL</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">sunny</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Clear / Sunny</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Cloud layers thin, direct sunlight strengthens, shadows sharpen, and warm golden dust motes emerge.
+            </p>
+</div>
+<button class="w-full py-2 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-caps text-label-caps group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+            Simulate Clearing Sky
+          </button>
+</div>
+<!-- Transition 3: Mountain Fog -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md cursor-pointer group" onclick="simulateAtmosphericShift('fog')">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-outline">VISIBILITY &lt; 800m</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">foggy</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Mountain Fog</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Cloud strata descend to ground level, boundary contrast softens, and horizon lines haze gracefully.
+            </p>
+</div>
+<button class="w-full py-2 px-3 rounded-xl bg-surface-container-high text-on-surface font-label-caps text-label-caps group-hover:bg-primary-container group-hover:text-on-primary-container transition-all">
+            Simulate Ground Fog
+          </button>
+</div>
+<!-- Transition 4: Overcast Peak (CURRENT) -->
+<div class="p-space-lg rounded-2xl bg-surface-container-high shadow-md flex flex-col justify-between gap-space-md cursor-pointer group" onclick="simulateAtmosphericShift('overcast')">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary-container font-semibold">ACTIVE REGIME // OKTA 7-8</span>
+<span class="material-symbols-outlined text-primary">cloud</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Overcast Peak</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Continuous stratiform ceiling, deep diffuse quiet, stable barometric balance, and maximum thermal insulation.
+            </p>
+</div>
+<button class="w-full py-2 px-3 rounded-xl bg-primary text-on-primary font-label-caps text-label-caps shadow-sm">
+            Current Sustained State
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Reusable Cloudy Weather UI Component Library -->
+<section class="w-full px-margin py-space-md">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Design System Modular Spec</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Cloudy Atmosphere Component Library</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Component 01: Overcast Weather Card -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<span class="font-label-caps text-label-caps text-outline">COMP-01: OVERCAST WEATHER CARD</span>
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-inner flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-tertiary">STRATOCUMULUS</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface">1,180m</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Ceiling Stabilized</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Soft warm ivory surface, muted diffuse shadow, amber edge glow.</p>
+</div>
+<span class="font-body-sm text-[11px] text-outline">Token: Level 2 Tactile Clay Pod</span>
+</div>
+<!-- Component 02: Diffuse Confidence Anchor -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<span class="font-label-caps text-label-caps text-outline">COMP-02: CONFIDENCE ANCHOR</span>
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col items-center justify-center text-center gap-space-xs">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-secondary-container">86%</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface font-semibold">HIGH CONFIDENCE</span>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Distinct from precipitation probability. WCAG AAA contrast.</p>
+</div>
+<span class="font-body-sm text-[11px] text-outline">Token: Telemetry Pill / Substrate Ivory</span>
+</div>
+<!-- Component 03: Tactile Stratiform Trigger -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<span class="font-label-caps text-label-caps text-outline">COMP-03: STRATIFORM TRIGGER</span>
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm">
+<button class="w-full py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-caps text-label-caps shadow-sm hover:bg-primary-container active:scale-[0.98] transition-all">
+              ENGAGE CLOUD SOUNDING
+            </button>
+<button class="w-full py-2.5 px-4 rounded-xl bg-surface-container-high text-on-surface font-label-caps text-label-caps hover:bg-surface-container-highest active:scale-[0.98] transition-all">
+              ISOLATE CIRRUS LAYER
+            </button>
+</div>
+<span class="font-body-sm text-[11px] text-outline">Token: Claymorphic Terracotta / Ivory Pod</span>
+</div>
+<!-- Component 04: Cloud Base Ceilometer Pod -->
+<div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<span class="font-label-caps text-label-caps text-outline">COMP-04: CEILOMETER POD</span>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-on-surface">LASER LIDAR 905nm</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">1,180 m</span>
+<span class="font-label-caps text-label-caps text-secondary">AGL VALID</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-2">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 78%"></div>
+</div>
+<span class="font-body-sm text-[10px] text-outline mt-1">6/8 Okta Stratocumulus Deck</span>
+</div>
+<span class="font-body-sm text-[11px] text-outline">Token: Optical Ingest Ceilometer Well</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Architecture & Token Specifications (SIH26081) -->
+<section class="w-full px-margin py-space-lg mb-space-xl">
+<div class="max-w-[1440px] mx-auto p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">terminal</span>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">SIH26081 · Active Overcast Token Architecture</h3>
+</div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Neural Synoptic Engine Config</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-2 pr-4">Token Name</th>
+<th class="py-2 pr-4">Calibrated Value</th>
+<th class="py-2 pr-4">Physical Atmospheric Rationale</th>
+<th class="py-2">Subsystem Target</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/60 text-on-surface">
+<tr>
+<td class="py-3 pr-4 font-mono font-medium text-primary">substrate.diffuse.base</td>
+<td class="py-3 pr-4 font-telemetry-num text-telemetry-num">#F5F1EA (Ivory Porcelain)</td>
+<td class="py-3 pr-4 text-on-surface-variant">Absorbs direct specular glare; mimics unvarnished clay sensor enclosures.</td>
+<td class="py-3 font-label-caps text-label-caps text-secondary">Global Canvas Bed</td>
+</tr>
+<tr>
+<td class="py-3 pr-4 font-mono font-medium text-primary">lighting.attenuation.factor</td>
+<td class="py-3 pr-4 font-telemetry-num text-telemetry-num">0.58 (-42% Direct Radiance)</td>
+<td class="py-3 pr-4 text-on-surface-variant">Mie-scattering attenuation coefficient calculated from 1,180m stratiform cloud base.</td>
+<td class="py-3 font-label-caps text-label-caps text-secondary">3D Earth Shader Engine</td>
+</tr>
+<tr>
+<td class="py-3 pr-4 font-mono font-medium text-primary">shadow.softness.penumbra</td>
+<td class="py-3 pr-4 font-telemetry-num text-telemetry-num">rgba(40, 32, 24, 0.05) / 24px Blur</td>
+<td class="py-3 pr-4 text-on-surface-variant">Suppresses sharp directional penumbras in favor of soft ambient grounding.</td>
+<td class="py-3 font-label-caps text-label-caps text-secondary">Tactile Clay Cards</td>
+</tr>
+<tr>
+<td class="py-3 pr-4 font-mono font-medium text-primary">wind.azimuth.cloud_drift</td>
+<td class="py-3 pr-4 font-telemetry-num text-telemetry-num">260° WSW @ 14.2 km/h</td>
+<td class="py-3 pr-4 text-on-surface-variant">Western Ghats orographic shielding profile at 850 hPa pressure altitude.</td>
+<td class="py-3 font-label-caps text-label-caps text-secondary">Atmospheric Particle Matrix</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Interactive Logic for State Transitions & Timeline Scrubbing -->
+<script>
+    function scrubTimeline(time, cover, temp, dni) {
+      document.getElementById('scrub-time-label').innerText = 'Current Scrub Horizon: ' + time + ' IST';
+      document.getElementById('scrub-dni').innerText = dni > 0 ? (dni + ' W/m² (Attenuated)') : '0 W/m² (Nocturnal)';
+      document.getElementById('scrub-physics-desc').innerText = 
+        'Scrubbing to ' + time + ': Cloud cover at ' + cover + '%, ambient surface sounding temp at ' + temp + '°C. Stratocumulus attenuation recomputed.';
+    }
+
+    function setAtmosphericMode(mode, btn) {
+      const container = btn.parentElement;
+      const buttons = container.querySelectorAll('button');
+      buttons.forEach(b => {
+        b.className = 'px-2.5 py-1 rounded-lg font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-all';
+      });
+      btn.className = 'px-2.5 py-1 rounded-lg font-label-caps text-label-caps bg-primary text-on-primary shadow-sm transition-all';
+    }
+
+    function simulateAtmosphericShift(type) {
+      const label = document.getElementById('scrub-physics-desc');
+      if (type === 'rain') {
+        label.innerText = 'Transitioning to RAIN DEVELOPING: Cloud ceiling falling below 800m. Radar reflectivity building to 38 dBZ.';
+      } else if (type === 'clear') {
+        label.innerText = 'Transitioning to CLEAR / SUNNY: Stratum thinning, direct normal irradiance rising to 840 W/m².';
+      } else if (type === 'fog') {
+        label.innerText = 'Transitioning to MOUNTAIN FOG: Ground-level relative humidity reaches 98%. Horizon visibility drops below 600m.';
+      } else {
+        label.innerText = 'Sustaining OVERCAST PEAK: Stratocumulus ceiling stabilized at 1,180m AGL. High neural confidence.';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-lg shadow-[0_-1px_6px_rgba(74,53,37,0.03)]"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm font-semibold text-primary">SAMVAYA</span><span class="font-label-caps text-label-caps uppercase text-outline">System Core SIH26081</span></div><div class="flex items-center gap-space-lg font-telemetry-num text-telemetry-num text-outline"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary"></span>NWP Sync: 0.04s Lag</div><div>Ephemeris: Sol-24.8°N / Terrestrial Baro: 1013.8 hPa</div></div><div class="text-outline text-right font-body-sm text-body-sm">© 2025 SAMVAYA Atmospheric Intelligence. Continuous Neural NWP.</div></div></footer></body></html>

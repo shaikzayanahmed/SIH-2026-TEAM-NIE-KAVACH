@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary-fixed":"#331200","primary-fixed":"#ffdbca","tertiary-fixed":"#ffdcc3","surface":"#fff8f5","surface-container-highest":"#eae1da","on-tertiary-container":"#fffbff","secondary-fixed":"#dee7bc","on-tertiary-fixed-variant":"#6e3900","tertiary-fixed-dim":"#ffb77d","error-container":"#ffdad6","outline":"#897267","surface-container-low":"#fcf2eb","primary-container":"#ba5814","on-secondary-fixed-variant":"#424a2a","on-primary-container":"#fffbff","surface-tint":"#9c4400","on-secondary-fixed":"#181e04","primary":"#984300","on-error-container":"#93000a","secondary-fixed-dim":"#c2cba1","on-secondary-container":"#5e6644","tertiary-container":"#b15f00","error":"#ba1a1a","on-background":"#1f1b17","inverse-primary":"#ffb68e","surface-container-high":"#f0e6e0","on-primary-fixed-variant":"#773300","surface-bright":"#fff8f5","secondary-container":"#dce4b9","on-primary":"#ffffff","surface-dim":"#e2d8d2","surface-variant":"#eae1da","on-secondary":"#ffffff","surface-container":"#f6ece6","outline-variant":"#ddc1b3","inverse-on-surface":"#f9efe8","on-tertiary-fixed":"#2f1500","secondary":"#5a6240","on-surface":"#1f1b17","on-tertiary":"#ffffff","on-surface-variant":"#564339","surface-container-lowest":"#ffffff","inverse-surface":"#342f2b","tertiary":"#8d4b00","background":"#fff8f5","primary-fixed-dim":"#ffb68e","on-error":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xs":"0.25rem","margin":"2.5rem","gutter":"1.5rem","space-lg":"1.5rem","space-md":"1rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","space-xl":"2.5rem","margin-mobile":"1rem"},"fontFamily":{"telemetry-num":["Inter"],"body-sm":["Inter"],"label-caps":["Inter"],"body-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},"fontSize":{"telemetry-num":["15px",{"lineHeight":"20px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"500"}],"display-lg":["52px",{"lineHeight":"60px","letterSpacing":"-0.03em","fontWeight":"600"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}};</script>
+  <!-- CesiumJS 1.124 Atmospheric 3D Engine -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+
+  <!-- Leaflet 2D Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- SAMVAYA Engine Assets -->
+  <script src="../globe-map-engine.js"></script>
+  <script src="../globe-runtime.js"></script>
+  <style>
+    .cesium-viewer-bottom, .cesium-widget-credits { display: none !important; }
+    .cesium-viewer { width: 100% !important; height: 100% !important; }
+    * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+    *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+  </style>
+
+</head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(74,53,37,0.05)]"><div class="h-20 w-full px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md flex-shrink-0"><div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-[#984300] to-[#C25E1A] flex items-center justify-center text-white shadow-md shrink-0 mr-1">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+        <path d="M2 12h20"></path>
+      </svg>
+    </div><div class="flex flex-col"><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">SAMVAYA</span><span class="font-label-caps text-label-caps uppercase text-primary font-semibold">SIH26081</span></div><span class="font-label-caps text-label-caps uppercase text-on-surface-variant">ADAPTIVE ATMOSPHERIC FORECAST ENGINE</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container rounded-xl shadow-[inset_0_1px_3px_rgba(43,30,22,0.06)]" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-xl shadow-[0_2px_8px_rgba(186,88,20,0.2)]"><a class="px-space-md py-1.5 rounded-lg text-primary font-bold hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="../cockpit.html">Cockpit</a><a class="px-space-md py-1.5 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all" href="model_lab.html" data-path="forecast">Forecast</a><a class="px-space-md py-1.5 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all" href="location_explorer.html" data-path="explore">Explore</a><a class="px-space-md py-1.5 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all" href="extreme_weather.html" data-path="intelligence">Intelligence</a><a class="px-space-md py-1.5 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all" href="forecast_replay.html" data-path="history">History</a><a aria-current="page" class="px-space-md py-1.5 transition-all bg-primary-container text-on-primary-container font-medium rounded-xl shadow-[0_2px_8px_rgba(186,88,20,0.2)]" href="operations_status.html" data-path="operations">Operations</a></nav><div class="flex items-center gap-space-md flex-shrink-0"><div class="hidden xl:flex items-center gap-space-sm px-space-md py-1 bg-surface-container-high rounded-full shadow-[inset_0_1px_2px_rgba(43,30,22,0.04)]"><span class="material-symbols-outlined text-[16px] text-primary">location_on</span><span class="font-body-sm text-body-sm text-on-surface">Mysuru, Karnataka</span></div><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 bg-secondary-container text-on-secondary-container rounded-full"><span class="h-2 w-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-caps text-label-caps tracking-wider uppercase">SAMVAYA SYSTEMS OPERATIONAL</span></div><div class="flex items-center gap-space-xs"><button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-xl transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><a href="settings.html" class="w-9 h-9 rounded-xl flex items-center justify-center bg-surface-container-high/80 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]" title="Settings"><span class="material-symbols-outlined text-[20px]">settings</span></a></div><a href="settings.html" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:opacity-90 transition-opacity" title="Control Center & Personalization"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></header><main class="w-full pt-32 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Top Prototype Scenario Simulation Bar -->
+<section class="w-full bg-surface-container-high px-space-lg py-space-sm shadow-[inset_0_-1px_0_rgba(74,53,37,0.06)]">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">tune</span> SIMULATION BENCH:
+        </span>
+<button class="px-space-md py-1 rounded-full text-label-caps font-label-caps bg-primary text-on-primary shadow-sm transition-all hover:bg-primary/90 flex items-center gap-1" id="scenario-1">
+<span class="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span> State 1: Nominal Operations (4 Feeds)
+        </button>
+<button class="px-space-md py-1 rounded-full text-label-caps font-label-caps bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" id="scenario-2">
+          State 2: Degraded State (GEFS Partial)
+        </button>
+<button class="px-space-md py-1 rounded-full text-label-caps font-label-caps bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" id="scenario-3">
+          State 3: Data Quality Review (In-Situ Gap)
+        </button>
+</div>
+<button class="flex items-center gap-1 text-label-caps font-label-caps uppercase tracking-wider text-primary hover:text-primary-container transition-colors py-1 px-space-sm rounded-lg hover:bg-primary-fixed/30" id="open-explainer-btn">
+<span class="material-symbols-outlined text-[16px]">info</span>
+        Explain System Status
+      </button>
+</div>
+</section>
+<!-- Macro Telemetry Strip & Page Header -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-md">
+<!-- Title Pod -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-1">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase tracking-wider">
+              SYSTEM DIRECTIVE // SPEC-26081 · MESO-SCALE OPERATIONS
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+            Forecast Operations &amp; System Status Center
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mt-1">
+            Live product-level visibility into atmospheric data streams, multi-paradigm model availability, pipeline health, and forecast freshness behind SAMVAYA.
+          </p>
+</div>
+<!-- System Status Pill Macro -->
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-sm rounded-2xl shadow-[0_2px_12px_rgba(74,53,37,0.04)] flex-shrink-0">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant leading-none">System Status</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary leading-tight" id="system-status-indicator">● OPERATIONAL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Compact Metric Telemetry Strip -->
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1 -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-[0_2px_8px_rgba(74,53,37,0.03)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Data Freshness</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface mt-0.5">2 min ago</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">06:02 UTC ingest sync</span>
+</div>
+<div class="h-10 w-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-[0_2px_8px_rgba(74,53,37,0.03)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Forecast Run</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface mt-0.5">2026-09-28 • 22:20 IST</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">#RUN-26081-D (Verified)</span>
+</div>
+<div class="h-10 w-10 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-[0_2px_8px_rgba(74,53,37,0.03)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Model Availability</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface mt-0.5" id="model-avail-metric">4 / 4 Synced</span>
+<span class="font-body-sm text-body-sm text-secondary">100% Ingestion Nominal</span>
+</div>
+<div class="h-10 w-10 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-[0_2px_8px_rgba(74,53,37,0.03)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Global Mesh Coverage</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-on-surface mt-0.5">98.4% Spatial Mesh</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">0.05° Quad-spline Grid</span>
+</div>
+<div class="h-10 w-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[20px]">grid_4x4</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Atmospheric Operations Cockpit & System Health Ring (Hero Viewport) -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left/Center: 3D Earth Globe Viewport -->
+<div class="lg:col-span-8 bg-surface-container-low rounded-2xl shadow-[0_4px_20px_rgba(74,53,37,0.06)] relative overflow-hidden flex flex-col min-h-[480px]">
+<!-- 3D WebGL Scene Integration -->
+<div class="absolute inset-0 w-full h-full pointer-events-none opacity-90">
+
+        <div id="globe_viewport_ANIMATION_48" class="w-full h-full relative overflow-hidden bg-[#040609] select-none" data-globe-container="true" data-lat="20.5937" data-lon="78.9629" data-alt="5200000" data-location-name="INDIA • ATMOSPHERIC DOMAIN">
+          <!-- 3D Cesium Viewport -->
+          <div id="globe_viewport_ANIMATION_48-cesium" class="w-full h-full absolute inset-0 z-0"></div>
+          
+          <!-- 2D Leaflet Viewport -->
+          <div id="globe_viewport_ANIMATION_48-leaflet" class="w-full h-full absolute inset-0 z-0" style="display: none;"></div>
+
+          <!-- 3D Globe / 2D Map Toggle Button -->
+          <div id="globe_viewport_ANIMATION_48-mode-pill" class="absolute top-4 left-4 z-40 flex items-center bg-[#0B111B]/95 backdrop-blur-2xl border border-[#C25E1A]/40 p-1 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6)] pointer-events-auto">
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_48', '3d')" id="globe_viewport_ANIMATION_48-toggle-3d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all bg-[#C25E1A] text-white shadow-md">
+              <span>🌐</span><span>3D GLOBE</span>
+            </button>
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_48', '2d')" id="globe_viewport_ANIMATION_48-toggle-2d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold transition-all text-slate-300 hover:text-white">
+              <span>🗺️</span><span>2D MAP</span>
+            </button>
+          </div>
+        </div>
+        
+</div>
+<!-- Floating Atmospheric Controls Header -->
+<div class="relative z-10 p-space-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm bg-gradient-to-b from-surface/90 to-transparent">
+<div class="flex items-center gap-space-xs bg-surface-container/90 backdrop-blur-md px-space-sm py-1 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">public</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Atmospheric Telemetry Mesh</span>
+</div>
+<!-- Layer Switches -->
+<div class="flex items-center gap-1 bg-surface-container-high/90 backdrop-blur-md p-1 rounded-xl shadow-sm">
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps bg-surface text-primary shadow-xs">Operational Status</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface">Freshness Map</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface hidden md:block">Coverage Mesh</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface hidden md:block">Model Disagreement</button>
+</div>
+</div>
+<!-- Ambient Spacer -->
+<div class="flex-1 min-h-[220px]"></div>
+<!-- Floating Operational Status Pills & Focal Station Pin -->
+<div class="relative z-10 p-space-md flex flex-col gap-space-sm bg-gradient-to-t from-surface via-surface/80 to-transparent">
+<!-- Focal Station Bar -->
+<div class="bg-surface/90 backdrop-blur-md p-space-sm rounded-xl flex items-center justify-between flex-wrap gap-2 shadow-[0_2px_10px_rgba(74,53,37,0.06)]">
+<div class="flex items-center gap-space-sm">
+<span class="h-2 w-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Focal Synoptic Anchor:</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Mysuru Synop Hub (12.2958° N, 76.6394° E)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-num text-telemetry-num font-bold text-primary">28.1°C</span>
+<span class="text-on-surface-variant text-label-caps font-label-caps uppercase">Partly Cloudy · 1012 hPa</span>
+</div>
+</div>
+<!-- Stream Badges Row -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-space-sm py-1 rounded-lg bg-surface/90 backdrop-blur-md text-label-caps font-label-caps uppercase text-on-surface-variant flex items-center gap-1 shadow-xs">
+              DATA STREAMS: <strong class="text-secondary font-bold">● Available</strong>
+</span>
+<span class="px-space-sm py-1 rounded-lg bg-surface/90 backdrop-blur-md text-label-caps font-label-caps uppercase text-on-surface-variant flex items-center gap-1 shadow-xs">
+              MODEL INFERENCE: <strong class="text-secondary font-bold">● Synced</strong>
+</span>
+<span class="px-space-sm py-1 rounded-lg bg-surface/90 backdrop-blur-md text-label-caps font-label-caps uppercase text-on-surface-variant flex items-center gap-1 shadow-xs">
+              ADAPTIVE BLENDING: <strong class="text-primary font-bold">● Active</strong>
+</span>
+<span class="px-space-sm py-1 rounded-lg bg-surface/90 backdrop-blur-md text-label-caps font-label-caps uppercase text-on-surface-variant flex items-center gap-1 shadow-xs">
+              EXTREME ENGINE: <strong class="text-secondary font-bold">● Nominal</strong>
+</span>
+<span class="px-space-sm py-1 rounded-lg bg-surface/90 backdrop-blur-md text-label-caps font-label-caps uppercase text-on-surface-variant flex items-center gap-1 shadow-xs">
+              VERIFICATION: <strong class="text-secondary font-bold">● Updating</strong>
+</span>
+</div>
+</div>
+</div>
+<!-- Right: System Health Ring & Ingestion Vitality Deck -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Concentric Ring Pod -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_20px_rgba(74,53,37,0.06)] flex flex-col items-center justify-center text-center relative overflow-hidden">
+<div class="w-full flex items-center justify-between mb-space-md">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Concentric Health Ring</span>
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps">100% HEALTHY</span>
+</div>
+<!-- SVG Ring Graphic -->
+<div class="relative w-48 h-48 my-space-sm flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 160 160">
+<!-- Background Circles -->
+<circle class="text-surface-container" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-surface-container" cx="80" cy="80" fill="transparent" r="56" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-surface-container" cx="80" cy="80" fill="transparent" r="42" stroke="currentColor" stroke-width="6"></circle>
+<!-- Active Progress Arcs (All Nominal) -->
+<circle class="text-secondary" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="439.8" stroke-dashoffset="22" stroke-linecap="round" stroke-width="6"></circle>
+<circle class="text-primary" cx="80" cy="80" fill="transparent" r="56" stroke="currentColor" stroke-dasharray="351.8" stroke-dashoffset="18" stroke-linecap="round" stroke-width="6"></circle>
+<circle class="text-tertiary" cx="80" cy="80" fill="transparent" r="42" stroke="currentColor" stroke-dasharray="263.8" stroke-dashoffset="12" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant text-[10px]">SAMVAYA CORE</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">100%</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">HEALTHY</span>
+</div>
+</div>
+<!-- Ring Segment Labels -->
+<div class="w-full grid grid-cols-5 gap-1 pt-space-sm border-t-0 bg-surface-container/60 p-space-sm rounded-xl">
+<div class="flex flex-col items-center">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary mb-1"></span>
+<span class="font-label-caps text-[9px] uppercase text-on-surface-variant">INGEST</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="h-1.5 w-1.5 rounded-full bg-primary mb-1"></span>
+<span class="font-label-caps text-[9px] uppercase text-on-surface-variant">MODELS</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary mb-1"></span>
+<span class="font-label-caps text-[9px] uppercase text-on-surface-variant">ALIGN</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary mb-1"></span>
+<span class="font-label-caps text-[9px] uppercase text-on-surface-variant">BLEND</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary mb-1"></span>
+<span class="font-label-caps text-[9px] uppercase text-on-surface-variant">VERIF</span>
+</div>
+</div>
+<!-- Attention Notice Callout -->
+<div class="w-full mt-space-md p-space-sm bg-surface-container rounded-xl flex items-start gap-space-sm text-left">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold">Autonomous Ingestion Status</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                No Action Required — All primary model streams operational with nominal assimilation latency.
+              </span>
+</div>
+</div>
+</div>
+<!-- Ingestion Vitality Quick Stat -->
+<div class="bg-surface-container p-space-md rounded-2xl flex items-center justify-between shadow-[0_2px_8px_rgba(74,53,37,0.03)]">
+<div class="flex items-center gap-space-sm">
+<div class="h-9 w-9 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">speed</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Pipeline Throughput</span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">184.2 MB/s · Realtime</span>
+</div>
+</div>
+<span class="font-label-caps text-label-caps text-secondary font-medium">OPTIMAL</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Horizontal 8-Stage Output Pipeline -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.04)]">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">END-TO-END EXECUTION GRAPH</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Multi-Paradigm Atmospheric Pipeline</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-body-sm text-body-sm font-medium text-primary">Execution Cadence: Synchronous + Event Driven</span>
+</div>
+</div>
+<!-- Pipeline Track -->
+<div class="w-full overflow-x-auto pb-2">
+<div class="min-w-[860px] flex items-center justify-between relative py-2">
+<!-- Horizontal connector line -->
+<div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-1 bg-surface-container-highest rounded-full"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              01
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface mt-1.5 font-medium">Data Inputs</span>
+<span class="font-body-sm text-[10px] text-secondary">Complete</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              02
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface mt-1.5 font-medium">Agnostic Adapter</span>
+<span class="font-body-sm text-[10px] text-secondary">Complete</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              03
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface mt-1.5 font-medium">Spatial Alignment</span>
+<span class="font-body-sm text-[10px] text-secondary">Complete</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              04
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface mt-1.5 font-medium">Feature Extraction</span>
+<span class="font-body-sm text-[10px] text-secondary">Complete</span>
+</div>
+<!-- Step 5 (Active) -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer scale-105">
+<div class="h-10 w-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-caps text-label-caps font-bold shadow-md">
+              05
+            </div>
+<span class="font-label-caps text-[11px] uppercase text-primary mt-1 font-bold">Adaptive Gating</span>
+<span class="font-body-sm text-[10px] text-primary font-semibold">Active Run</span>
+</div>
+<!-- Step 6 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              06
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant mt-1.5">Consensus Synth</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Queued</span>
+</div>
+<!-- Step 7 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              07
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant mt-1.5">Extreme Engine</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Standby</span>
+</div>
+<!-- Step 8 -->
+<div class="relative z-10 flex flex-col items-center bg-surface-container-low px-2 group cursor-pointer">
+<div class="h-9 w-9 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps font-bold shadow-xs">
+              08
+            </div>
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant mt-1.5">Verification</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Scheduled</span>
+</div>
+</div>
+</div>
+<!-- Active Stage Explanatory Box -->
+<div class="mt-space-md p-space-md bg-surface-container rounded-xl flex items-start gap-space-md">
+<div class="h-8 w-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">memory</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-caps text-label-caps uppercase text-primary font-bold">STAGE 05 IN-FLIGHT COMPUTE:</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Dynamic Convective Gating Weight Normalization</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Stage 05 (Adaptive Gating) dynamically calculates regime-skill weights (<strong>AIFS 41%</strong>, <strong>ECMWF IFS 32%</strong>, <strong>GFS 18%</strong>, <strong>GEFS 9%</strong>) based on live convective instability signatures detected across the Deccan Plateau. Loss-adjusted weighting prioritizes graph neural tensors during transition hours.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Atmospheric Data Ingestion Streams (5 Source Cards) -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">UPSTREAM FEED SURVEILLANCE</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Atmospheric Ingestion Streams</h2>
+</div>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span> 5 Feeds Operational
+        </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- Feed 1: ERA5 -->
+<div class="bg-surface-container-low p-space-md rounded-2xl shadow-[0_2px_8px_rgba(74,53,37,0.04)] flex flex-col justify-between hover:bg-surface-container transition-all">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-caps text-[10px] uppercase text-on-surface-variant">REANALYSIS</span>
+<span class="flex items-center gap-1 text-[11px] font-semibold text-secondary">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">ERA5 Reanalysis</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Climate Benchmark &amp; Historical Reference</p>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0 bg-surface-container/40 p-space-xs rounded-xl flex flex-col gap-1">
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Sync Cadence:</span>
+<span class="text-on-surface font-medium">Today 18:00 UTC</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Freshness:</span>
+<span class="text-primary font-medium">12 min ago</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Mesh Grid:</span>
+<span class="text-on-surface font-medium">Global 0.25°</span>
+</div>
+</div>
+</div>
+<!-- Feed 2: ECMWF IFS (HRES) -->
+<div class="bg-surface-container-low p-space-md rounded-2xl shadow-[0_2px_8px_rgba(74,53,37,0.04)] flex flex-col justify-between hover:bg-surface-container transition-all">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-caps text-[10px] uppercase text-on-surface-variant">DETERMINISTIC NWP</span>
+<span class="flex items-center gap-1 text-[11px] font-semibold text-secondary">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">ECMWF IFS (HRES)</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">High-Resolution Physical NWP Forecast</p>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0 bg-surface-container/40 p-space-xs rounded-xl flex flex-col gap-1">
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Latest Run:</span>
+<span class="text-on-surface font-medium">18:00 UTC</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Freshness:</span>
+<span class="text-primary font-medium">14 min ago</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Mesh Grid:</span>
+<span class="text-on-surface font-medium">Global 9km</span>
+</div>
+</div>
+</div>
+<!-- Feed 3: NOAA GFS (FV3) -->
+<div class="bg-surface-container-low p-space-md rounded-2xl shadow-[0_2px_8px_rgba(74,53,37,0.04)] flex flex-col justify-between hover:bg-surface-container transition-all">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-caps text-[10px] uppercase text-on-surface-variant">GLOBAL NWP</span>
+<span class="flex items-center gap-1 text-[11px] font-semibold text-secondary">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">NOAA GFS (FV3)</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Finite-Volume Cubed-Sphere Core</p>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0 bg-surface-container/40 p-space-xs rounded-xl flex flex-col gap-1">
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Latest Run:</span>
+<span class="text-on-surface font-medium">18:00 UTC</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Freshness:</span>
+<span class="text-primary font-medium">18 min ago</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Mesh Grid:</span>
+<span class="text-on-surface font-medium">Global 13km</span>
+</div>
+</div>
+</div>
+<!-- Feed 4: NOAA GEFS -->
+<div class="bg-surface-container-low p-space-md rounded-2xl shadow-[0_2px_8px_rgba(74,53,37,0.04)] flex flex-col justify-between hover:bg-surface-container transition-all" id="gefs-feed-card">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-caps text-[10px] uppercase text-on-surface-variant">ENSEMBLE</span>
+<span class="flex items-center gap-1 text-[11px] font-semibold text-secondary" id="gefs-status-pill">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">NOAA GEFS</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">31-Member Stochastic Perturbation</p>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0 bg-surface-container/40 p-space-xs rounded-xl flex flex-col gap-1">
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Latest Run:</span>
+<span class="text-on-surface font-medium">18:00 UTC</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Freshness:</span>
+<span class="text-primary font-medium" id="gefs-freshness-val">22 min ago</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Mesh Grid:</span>
+<span class="text-on-surface font-medium">Global 25km</span>
+</div>
+</div>
+</div>
+<!-- Feed 5: ECMWF AIFS v1.2 -->
+<div class="bg-surface-container-low p-space-md rounded-2xl shadow-[0_2px_8px_rgba(74,53,37,0.04)] flex flex-col justify-between hover:bg-surface-container transition-all border-none">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-label-caps text-[10px] uppercase font-bold">AI NEURAL NWP</span>
+<span class="flex items-center gap-1 text-[11px] font-semibold text-secondary">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">ECMWF AIFS v1.2</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Spherical Graph Neural Forecasting</p>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0 bg-surface-container/40 p-space-xs rounded-xl flex flex-col gap-1">
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Latest Run:</span>
+<span class="text-on-surface font-medium">21:00 UTC</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Freshness:</span>
+<span class="text-primary font-bold">8 min ago</span>
+</div>
+<div class="flex justify-between text-body-sm text-[11px]">
+<span class="text-on-surface-variant">Mesh Grid:</span>
+<span class="text-on-surface font-medium">Latent Graph</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Forecast Model Output & Availability Cards (4 Deep Cards) -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-md">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">PREDICTIVE ENGINES</span>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Core Model Inference Diagnostics</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Deep Card 1: AIFS -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-[11px] font-bold">AI NEURAL NWP</span>
+<span class="h-2.5 w-2.5 rounded-full bg-secondary"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">ECMWF AIFS v1.2</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Deep Graph Neural Network trained on ERA5 reanalysis and operational IFS states.</p>
+<div class="mt-space-md space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Inference Latency:</span>
+<span class="text-on-surface font-semibold">124 ms</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Spatial Resolution:</span>
+<span class="text-on-surface font-semibold">~28 km Latent Spherical</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Forecast Horizon:</span>
+<span class="text-on-surface font-semibold">+48h Lead</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Last Output Sync:</span>
+<span class="text-primary font-semibold">22:18 IST</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t-0">
+<a class="inline-flex items-center gap-1 font-label-caps text-label-caps uppercase font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+              Inspect Model Intelligence <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Deep Card 2: ECMWF IFS -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-[11px] font-semibold">PRIMITIVE NWP</span>
+<span class="h-2.5 w-2.5 rounded-full bg-secondary"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">ECMWF IFS (HRES)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Deterministic spectral primitive equations solver with advanced non-hydrostatic dynamics.</p>
+<div class="mt-space-md space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Inference Latency:</span>
+<span class="text-on-surface font-semibold">312 ms</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Spatial Resolution:</span>
+<span class="text-on-surface font-semibold">9.0 km High-Res</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Forecast Horizon:</span>
+<span class="text-on-surface font-semibold">+48h Lead</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Last Output Sync:</span>
+<span class="text-primary font-semibold">22:16 IST</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t-0">
+<a class="inline-flex items-center gap-1 font-label-caps text-label-caps uppercase font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+              Inspect Model Intelligence <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Deep Card 3: NOAA GFS -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-[11px] font-semibold">GLOBAL NWP</span>
+<span class="h-2.5 w-2.5 rounded-full bg-secondary"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">NOAA GFS (FV3)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Finite-volume atmospheric dynamical core with unified physics parameterization suites.</p>
+<div class="mt-space-md space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Inference Latency:</span>
+<span class="text-on-surface font-semibold">284 ms</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Spatial Resolution:</span>
+<span class="text-on-surface font-semibold">13.0 km Mesh</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Forecast Horizon:</span>
+<span class="text-on-surface font-semibold">+48h Lead</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Last Output Sync:</span>
+<span class="text-primary font-semibold">22:12 IST</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t-0">
+<a class="inline-flex items-center gap-1 font-label-caps text-label-caps uppercase font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+              Inspect Model Intelligence <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Deep Card 4: NOAA GEFS -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between" id="gefs-diag-card">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-[11px] font-semibold">STOCHASTIC ENSEMBLE</span>
+<span class="h-2.5 w-2.5 rounded-full bg-secondary" id="gefs-dot"></span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">NOAA GEFS</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Multi-member stochastic ensemble capturing probability distributions and convective uncertainty.</p>
+<div class="mt-space-md space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Inference Latency:</span>
+<span class="text-on-surface font-semibold" id="gefs-latency-val">410 ms</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Spatial Resolution:</span>
+<span class="text-on-surface font-semibold">25.0 km Multi-Perturb</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Forecast Horizon:</span>
+<span class="text-on-surface font-semibold">+48h Lead</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Last Output Sync:</span>
+<span class="text-primary font-semibold" id="gefs-sync-val">22:08 IST</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm border-t-0">
+<a class="inline-flex items-center gap-1 font-label-caps text-label-caps uppercase font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+              Inspect Model Intelligence <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Adaptive Blending & Model Agreement Matrix -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left: Adaptive Blending Visualization -->
+<div class="lg:col-span-6 bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">DYNAMIC SKILL WEIGHTING</span>
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold">Consensus Synthesis</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Adaptive Blending Convergence</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Visual depiction of four multi-paradigm feeds flowing through real-time skill gating weights into unified SAMVAYA consensus.
+          </p>
+<!-- Flowing Streams Diagram -->
+<div class="mt-space-lg space-y-3">
+<!-- Feed 1 Stream -->
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="h-2 w-2 rounded-full bg-primary"></span> ECMWF AIFS v1.2 (Spherical Graph)
+                </span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-primary" id="blend-aifs-val">41% weight</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" id="blend-aifs-bar" style="width: 41%"></div>
+</div>
+</div>
+<!-- Feed 2 Stream -->
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="h-2 w-2 rounded-full bg-secondary"></span> ECMWF IFS (High-Res NWP)
+                </span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-secondary" id="blend-ecmwf-val">32% weight</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full transition-all duration-500" id="blend-ecmwf-bar" style="width: 32%"></div>
+</div>
+</div>
+<!-- Feed 3 Stream -->
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="h-2 w-2 rounded-full bg-tertiary"></span> NOAA GFS (FV3 Core)
+                </span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-tertiary" id="blend-gfs-val">18% weight</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full transition-all duration-500" id="blend-gfs-bar" style="width: 18%"></div>
+</div>
+</div>
+<!-- Feed 4 Stream -->
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="h-2 w-2 rounded-full bg-outline"></span> NOAA GEFS (Stochastic 31-M)
+                </span>
+<span class="font-telemetry-num text-telemetry-num font-bold text-outline" id="blend-gefs-val">9% weight</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-outline rounded-full transition-all duration-500" id="blend-gefs-bar" style="width: 9%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Consensus Output Reservoir -->
+<div class="mt-space-lg p-space-md bg-surface-container rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="h-10 w-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">thermostat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">SAMVAYA Output Consensus</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">29.2°C <span class="font-body-sm text-body-sm font-normal text-on-surface">· Deccan Convective Cell</span></span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-bold">87% ENGINE CONFIDENCE</span>
+<span class="block font-body-sm text-[11px] text-on-surface-variant">Uncertainty Bounds ±0.6°C</span>
+</div>
+</div>
+</div>
+<!-- Right: Model Agreement Spectrum & Explanatory Synthesis -->
+<div class="lg:col-span-6 bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">MULTI-MODEL DISPERSION</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container font-label-caps text-label-caps text-primary font-bold">
+              MODERATE AGREEMENT (SPREAD: 1.5°C)
+            </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Model Agreement Spectrum</h2>
+<!-- Variable Selectors -->
+<div class="flex items-center gap-1.5 mt-space-sm p-1 bg-surface-container rounded-xl">
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps bg-surface text-primary shadow-xs">Temperature (°C)</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface">Precipitation (mm)</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface">Wind Vectors</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface">Pressure (hPa)</button>
+</div>
+<!-- Dispersion Range Bar Visual -->
+<div class="mt-space-lg p-space-md bg-surface-container/60 rounded-xl flex flex-col gap-space-sm">
+<div class="flex justify-between items-center text-body-sm">
+<span class="font-medium text-on-surface">Temperature Spread Range</span>
+<span class="font-telemetry-num text-telemetry-num font-semibold text-primary">28.7°C — 30.2°C</span>
+</div>
+<!-- Graphic Dispersion Bar -->
+<div class="relative w-full h-8 bg-surface-container rounded-lg flex items-center px-4">
+<!-- Span Range -->
+<div class="absolute left-1/4 right-1/4 h-2.5 bg-primary/20 rounded-full"></div>
+<!-- Individual Model Markers -->
+<div class="absolute left-[30%] -top-1 flex flex-col items-center group cursor-pointer" title="GFS: 28.7°C">
+<span class="h-4 w-1 bg-tertiary rounded-full"></span>
+<span class="text-[9px] font-label-caps text-tertiary mt-0.5">GFS</span>
+</div>
+<div class="absolute left-[45%] -top-1 flex flex-col items-center group cursor-pointer" title="ECMWF IFS: 29.1°C">
+<span class="h-4 w-1 bg-secondary rounded-full"></span>
+<span class="text-[9px] font-label-caps text-secondary mt-0.5">IFS</span>
+</div>
+<div class="absolute left-[54%] -top-1 flex flex-col items-center group cursor-pointer" title="SAMVAYA BLEND: 29.2°C">
+<span class="h-5 w-1.5 bg-primary rounded-full ring-2 ring-primary-fixed"></span>
+<span class="text-[9px] font-label-caps text-primary font-bold mt-0.5">FUSION</span>
+</div>
+<div class="absolute left-[62%] -top-1 flex flex-col items-center group cursor-pointer" title="AIFS: 29.5°C">
+<span class="h-4 w-1 bg-primary-container rounded-full"></span>
+<span class="text-[9px] font-label-caps text-primary-container mt-0.5">AIFS</span>
+</div>
+<div class="absolute left-[72%] -top-1 flex flex-col items-center group cursor-pointer" title="GEFS Mean: 30.2°C">
+<span class="h-4 w-1 bg-outline rounded-full"></span>
+<span class="text-[9px] font-label-caps text-outline mt-0.5">GEFS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Synthesis Prose Box -->
+<div class="mt-space-md p-space-md bg-surface-container rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-tertiary mt-0.5">psychology</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Models strongly converge on thermodynamic boundary layer temperature (28.7°C – 30.2°C), but exhibit localized timing dispersion (+2h) on evening convective precipitation along Nilgiri foothills. AIFS demonstrates reduced false-alarm tendency compared to deterministic IFS.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Extreme Weather Engine & Verification Latency -->
+<section class="w-full px-space-lg py-space-md">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left: Extreme Event Monitoring Deck -->
+<div class="lg:col-span-6 bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">ANOMALY SURVEILLANCE</span>
+<span class="px-space-sm py-0.5 rounded-full bg-error-container text-on-error-container font-label-caps text-label-caps font-bold">1 ACTIVE WATCH</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Extreme Weather Engine Deck</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Real-time threshold probabilistic triggers computed across synoptic boundary vectors.
+          </p>
+<!-- 4 Extreme Metrics -->
+<div class="mt-space-md space-y-space-sm">
+<!-- Event 1 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-primary">rainy</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-bold text-on-surface">Heavy Rainfall Plume</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Western Ghats Moisture Influx</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-telemetry-num text-telemetry-num font-bold text-primary">64% Prob</span>
+<span class="block font-label-caps text-[10px] text-on-surface-variant">CONF: MODERATE</span>
+</div>
+<span class="h-2.5 w-2.5 rounded-full bg-primary"></span>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-secondary">sunny</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-bold text-on-surface">Extreme Heat Threshold</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Deccan Plateau Surface Cap</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">18% Prob</span>
+<span class="block font-label-caps text-[10px] text-secondary font-semibold">CONF: HIGH</span>
+</div>
+<span class="h-2.5 w-2.5 rounded-full bg-secondary"></span>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-tertiary">air</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-bold text-on-surface">Strong Shear Gusts</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Nilgiri Micro-orographic Shear</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">31% Prob</span>
+<span class="block font-label-caps text-[10px] text-on-surface-variant">CONF: MODERATE</span>
+</div>
+<span class="h-2.5 w-2.5 rounded-full bg-tertiary"></span>
+</div>
+</div>
+<!-- Event 4 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">thunderstorm</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-bold text-on-surface">Severe Convective Storm</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Mysuru-Mandya Corridor</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="text-right">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">12% Prob</span>
+<span class="block font-label-caps text-[10px] text-on-surface-variant">CONF: LOW</span>
+</div>
+<span class="h-2.5 w-2.5 rounded-full bg-secondary"></span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0">
+<a class="inline-flex items-center gap-1 font-label-caps text-label-caps uppercase font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+            Open Extreme Weather Center <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Right: Verification Diagnostics Deck -->
+<div class="lg:col-span-6 bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">EMPIRICAL GROUND TRUTH</span>
+<span class="flex items-center gap-1 text-[11px] font-semibold text-secondary">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> IMD AWS #43285 Anchor
+            </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Verification Diagnostics Deck</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Real-time error analysis anchoring forecast outputs against validated ground automated weather station observations.
+          </p>
+<!-- Metric Cards Grid -->
+<div class="mt-space-md grid grid-cols-3 gap-space-sm">
+<div class="bg-surface-container p-space-sm rounded-xl text-center">
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant">MAE</span>
+<span class="block font-telemetry-num text-telemetry-num font-bold text-on-surface mt-0.5">0.42°C</span>
+<span class="text-[10px] text-secondary font-medium">-0.08 vs Baseline</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded-xl text-center">
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant">RMSE</span>
+<span class="block font-telemetry-num text-telemetry-num font-bold text-on-surface mt-0.5">0.68°C</span>
+<span class="text-[10px] text-secondary font-medium">Nominal Bound</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded-xl text-center">
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant">BIAS</span>
+<span class="block font-telemetry-num text-telemetry-num font-bold text-on-surface mt-0.5">+0.12°C</span>
+<span class="text-[10px] text-on-surface-variant font-medium">Mild Warm Bias</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded-xl text-center">
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant">CORRELATION</span>
+<span class="block font-telemetry-num text-telemetry-num font-bold text-on-surface mt-0.5">0.94</span>
+<span class="text-[10px] text-secondary font-medium">R² Pearson</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded-xl text-center">
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant">POD (RAIN)</span>
+<span class="block font-telemetry-num text-telemetry-num font-bold text-on-surface mt-0.5">0.88</span>
+<span class="text-[10px] text-secondary font-medium">Hit Rate</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded-xl text-center">
+<span class="font-label-caps text-[10px] uppercase text-on-surface-variant">FAR (RAIN)</span>
+<span class="block font-telemetry-num text-telemetry-num font-bold text-on-surface mt-0.5">0.12</span>
+<span class="text-[10px] text-secondary font-medium">Low False Alarm</span>
+</div>
+</div>
+<!-- Real-Time Sync Callout -->
+<div class="mt-space-md p-space-sm bg-surface-container/60 rounded-xl flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Obs Anchor Latency:</span>
+<span class="font-semibold text-secondary">Synced 2 min ago (06:02 UTC)</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm border-t-0">
+<a class="inline-flex items-center gap-1 font-label-caps text-label-caps uppercase font-semibold text-primary hover:text-primary-container transition-colors" href="#">
+            Open Verification Lab <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Degraded State Resilience & System Events Stream -->
+<section class="w-full px-space-lg py-space-md mb-space-lg">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-md">
+<!-- Fallback Architecture Resilience Banner -->
+<div class="bg-secondary-container text-on-secondary-container p-space-md rounded-2xl flex items-center justify-between gap-space-md shadow-xs" id="resilience-banner">
+<div class="flex items-center gap-space-md">
+<div class="h-10 w-10 rounded-xl bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase tracking-wider font-bold">AUTOMATIC FAULT TOLERANCE READY</span>
+<span class="font-body-sm text-body-sm">
+              If GEFS or GFS is delayed, Adaptive Gating automatically normalizes remaining weights without system disruption.
+            </span>
+</div>
+</div>
+<span class="hidden sm:inline-block px-space-sm py-1 bg-surface/50 rounded-full font-label-caps text-[10px] uppercase font-bold tracking-wider">
+          ZERO-OUTAGE ASSURANCE
+        </span>
+</div>
+<!-- Recent System Events Log Header -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl shadow-[0_4px_16px_rgba(74,53,37,0.05)]">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">CHRONOLOGICAL AUDIT</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Recent Operational System Events</h2>
+</div>
+<!-- Event Filter Chips -->
+<div class="flex items-center gap-1 overflow-x-auto pb-1">
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps bg-primary text-on-primary shadow-xs">All Events</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface bg-surface-container">Data Ingest</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface bg-surface-container">Model Runs</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface bg-surface-container hidden md:inline-block">Adaptive Blend</button>
+<button class="px-space-sm py-1 rounded-lg text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface bg-surface-container hidden md:inline-block">Verification</button>
+</div>
+</div>
+<!-- Events List -->
+<div class="space-y-space-xs">
+<!-- Log 1 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between flex-wrap gap-2 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">22:20 IST</span>
+<span class="h-2 w-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Forecast run #26081-D completed</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant hidden sm:inline">— Consensus model published to dissemination API</span>
+</div>
+<span class="font-label-caps text-[10px] uppercase px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant">SYSTEM PIPELINE</span>
+</div>
+<!-- Log 2 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between flex-wrap gap-2 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">22:18 IST</span>
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">AIFS spherical graph tensor received</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant hidden sm:inline">— Assigned dominant 41% gating weight</span>
+</div>
+<span class="font-label-caps text-[10px] uppercase px-space-xs py-0.5 rounded bg-primary-fixed text-on-primary-fixed">ADAPTIVE BLEND</span>
+</div>
+<!-- Log 3 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between flex-wrap gap-2 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">22:16 IST</span>
+<span class="h-2 w-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">ECMWF IFS 9km boundary field projected</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant hidden sm:inline">— Resampled to 0.05° quad-mesh</span>
+</div>
+<span class="font-label-caps text-[10px] uppercase px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant">ALIGNMENT</span>
+</div>
+<!-- Log 4 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between flex-wrap gap-2 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">22:14 IST</span>
+<span class="h-2 w-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Ground AWS telemetry assimilated</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant hidden sm:inline">— Mysuru (#43285) &amp; Bengaluru stations verified</span>
+</div>
+<span class="font-label-caps text-[10px] uppercase px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant">DATA INGEST</span>
+</div>
+<!-- Log 5 -->
+<div class="p-space-sm bg-surface-container rounded-xl flex items-center justify-between flex-wrap gap-2 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="font-telemetry-num text-telemetry-num font-bold text-on-surface">22:10 IST</span>
+<span class="h-2 w-2 rounded-full bg-tertiary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">GFS dry-bias boundary dampening factor applied</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant hidden sm:inline">— Correction factor δ=0.91</span>
+</div>
+<span class="font-label-caps text-[10px] uppercase px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant">FEATURE EXTRACTION</span>
+</div>
+</div>
+<!-- Collapsible Technical Drawer Toggle -->
+<div class="mt-space-md pt-space-sm border-t-0 flex flex-col items-center">
+<button class="px-space-md py-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface rounded-xl font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-2 transition-all" id="tech-drawer-toggle">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span id="tech-drawer-label">Technical Specifications Drawer [Expand]</span>
+</button>
+<!-- Drawer Content (Hidden by default) -->
+<div class="hidden w-full mt-space-md p-space-md bg-surface-container-lowest rounded-xl shadow-inner text-left font-telemetry-num text-[12px] text-on-surface-variant space-y-2" id="tech-drawer-content">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<div>
+<strong class="text-on-surface block">AI Engine Architecture:</strong>
+                Spherical Graph Neural Tensor Network (PyTorch Geometric L4)
+              </div>
+<div>
+<strong class="text-on-surface block">File Ingestion Adapters:</strong>
+                NetCDF-4 / GRIB2 Unified Stream Parser (v2.8)
+              </div>
+<div>
+<strong class="text-on-surface block">Interpolation Core:</strong>
+                Conservative Bicubic Spline (0.05° Lat-Lon Grid)
+              </div>
+<div>
+<strong class="text-on-surface block">In-Situ Ground Reference:</strong>
+                IMD Synop Hub #43285 (Mysuru, KA - 12.2958N, 76.6394E)
+              </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Educational Explainer Dialog Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden flex items-center justify-center p-space-md" id="explainer-modal">
+<div class="bg-surface p-space-xl rounded-3xl max-w-xl w-full shadow-[0_20px_50px_rgba(43,30,22,0.15)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="h-9 w-9 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">System Transparency</span>
+</div>
+<button class="p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container" id="close-explainer-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Understanding SAMVAYA Forecast Status</h3>
+<div class="space-y-space-sm font-body-md text-body-md text-on-surface-variant">
+<p>
+          SAMVAYA unifies four distinct meteorological paradigms: cutting-edge graph neural weather predictions (ECMWF AIFS), high-resolution European primitive equations (ECMWF IFS), American global forecast dynamics (NOAA GFS), and stochastic 31-member ensembles (NOAA GEFS).
+        </p>
+<p>
+          The <strong>Operational</strong> status indicates that all primary atmospheric feeds have synced within their nominal freshness limits (under 30 minutes). When weather regimes transition from dry air to active convection over Southern India, our <strong>Adaptive Gating</strong> layer automatically redistributes weights without requiring manual intervention.
+        </p>
+</div>
+<div class="pt-space-sm border-t-0 flex justify-end">
+<button class="px-space-lg py-2 rounded-xl bg-primary text-on-primary font-label-caps text-label-caps uppercase font-semibold hover:bg-primary/90 transition-all" id="close-explainer-btn-2">
+          Understood
+        </button>
+</div>
+</div>
+</div>
+<!-- Interactive Simulation Script -->
+<script>
+    (function initOperationsCockpit() {
+      // Prototype State Switcher elements
+      const btnState1 = document.getElementById('scenario-1');
+      const btnState2 = document.getElementById('scenario-2');
+      const btnState3 = document.getElementById('scenario-3');
+      
+      const systemStatus = document.getElementById('system-status-indicator');
+      const modelAvailMetric = document.getElementById('model-avail-metric');
+      const gefsFeedCard = document.getElementById('gefs-feed-card');
+      const gefsStatusPill = document.getElementById('gefs-status-pill');
+      const gefsFreshnessVal = document.getElementById('gefs-freshness-val');
+      const gefsDot = document.getElementById('gefs-dot');
+      const gefsLatencyVal = document.getElementById('gefs-latency-val');
+      const gefsSyncVal = document.getElementById('gefs-sync-val');
+      
+      const blendAifsVal = document.getElementById('blend-aifs-val');
+      const blendAifsBar = document.getElementById('blend-aifs-bar');
+      const blendEcmwfVal = document.getElementById('blend-ecmwf-val');
+      const blendEcmwfBar = document.getElementById('blend-ecmwf-bar');
+      const blendGfsVal = document.getElementById('blend-gfs-val');
+      const blendGfsBar = document.getElementById('blend-gfs-bar');
+      const blendGefsVal = document.getElementById('blend-gefs-val');
+      const blendGefsBar = document.getElementById('blend-gefs-bar');
+      const resilienceBanner = document.getElementById('resilience-banner');
+
+      // State 1: Nominal
+      btnState1.addEventListener('click', () => {
+        resetButtons();
+        btnState1.className = 'px-space-md py-1 rounded-full text-label-caps font-label-caps bg-primary text-on-primary shadow-sm transition-all flex items-center gap-1';
+        
+        systemStatus.textContent = '● OPERATIONAL';
+        systemStatus.className = 'font-headline-sm text-headline-sm font-bold text-primary leading-tight';
+        modelAvailMetric.textContent = '4 / 4 Synced';
+        
+        gefsStatusPill.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available';
+        gefsStatusPill.className = 'flex items-center gap-1 text-[11px] font-semibold text-secondary';
+        gefsFreshnessVal.textContent = '22 min ago';
+        gefsDot.className = 'h-2.5 w-2.5 rounded-full bg-secondary';
+        gefsLatencyVal.textContent = '410 ms';
+        gefsSyncVal.textContent = '22:08 IST';
+
+        blendAifsVal.textContent = '41% weight';
+        blendAifsBar.style.width = '41%';
+        blendEcmwfVal.textContent = '32% weight';
+        blendEcmwfBar.style.width = '32%';
+        blendGfsVal.textContent = '18% weight';
+        blendGfsBar.style.width = '18%';
+        blendGefsVal.textContent = '9% weight';
+        blendGefsBar.style.width = '9%';
+
+        resilienceBanner.className = 'bg-secondary-container text-on-secondary-container p-space-md rounded-2xl flex items-center justify-between gap-space-md shadow-xs';
+      });
+
+      // State 2: Degraded State (GEFS Partial)
+      btnState2.addEventListener('click', () => {
+        resetButtons();
+        btnState2.className = 'px-space-md py-1 rounded-full text-label-caps font-label-caps bg-primary text-on-primary shadow-sm transition-all flex items-center gap-1';
+        
+        systemStatus.textContent = '● DEGRADED RESILIENCE';
+        systemStatus.className = 'font-headline-sm text-headline-sm font-bold text-tertiary leading-tight';
+        modelAvailMetric.textContent = '3 / 4 Synced (1 Delayed)';
+
+        gefsStatusPill.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span> Ingest Latency';
+        gefsStatusPill.className = 'flex items-center gap-1 text-[11px] font-semibold text-tertiary';
+        gefsFreshnessVal.textContent = '54 min ago (Delayed)';
+        gefsDot.className = 'h-2.5 w-2.5 rounded-full bg-tertiary';
+        gefsLatencyVal.textContent = 'Fallback Inactive';
+        gefsSyncVal.textContent = 'Pending Upstream';
+
+        // Rebalance weights autonomously
+        blendAifsVal.textContent = '48% (Normalized)';
+        blendAifsBar.style.width = '48%';
+        blendEcmwfVal.textContent = '35% (Normalized)';
+        blendEcmwfBar.style.width = '35%';
+        blendGfsVal.textContent = '17% (Normalized)';
+        blendGfsBar.style.width = '17%';
+        blendGefsVal.textContent = '0% (Bypassed)';
+        blendGefsBar.style.width = '0%';
+
+        resilienceBanner.className = 'bg-tertiary-fixed text-on-tertiary-fixed p-space-md rounded-2xl flex items-center justify-between gap-space-md shadow-xs';
+      });
+
+      // State 3: Data Quality Review (In-Situ Gap)
+      btnState3.addEventListener('click', () => {
+        resetButtons();
+        btnState3.className = 'px-space-md py-1 rounded-full text-label-caps font-label-caps bg-primary text-on-primary shadow-sm transition-all flex items-center gap-1';
+        
+        systemStatus.textContent = '● QA REVIEW';
+        systemStatus.className = 'font-headline-sm text-headline-sm font-bold text-primary-container leading-tight';
+        modelAvailMetric.textContent = '4 / 4 Synced (AWS QC)';
+
+        gefsStatusPill.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Available';
+        gefsStatusPill.className = 'flex items-center gap-1 text-[11px] font-semibold text-secondary';
+        gefsFreshnessVal.textContent = '22 min ago';
+        gefsDot.className = 'h-2.5 w-2.5 rounded-full bg-secondary';
+
+        blendAifsVal.textContent = '45% weight';
+        blendAifsBar.style.width = '45%';
+        blendEcmwfVal.textContent = '35% weight';
+        blendEcmwfBar.style.width = '35%';
+        blendGfsVal.textContent = '12% weight';
+        blendGfsBar.style.width = '12%';
+        blendGefsVal.textContent = '8% weight';
+        blendGefsBar.style.width = '8%';
+      });
+
+      function resetButtons() {
+        const inactiveClass = 'px-space-md py-1 rounded-full text-label-caps font-label-caps bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all';
+        btnState1.className = inactiveClass;
+        btnState2.className = inactiveClass;
+        btnState3.className = inactiveClass;
+      }
+
+      // Technical Drawer Toggle
+      const techToggle = document.getElementById('tech-drawer-toggle');
+      const techContent = document.getElementById('tech-drawer-content');
+      const techLabel = document.getElementById('tech-drawer-label');
+      
+      techToggle.addEventListener('click', () => {
+        const isHidden = techContent.classList.contains('hidden');
+        if (isHidden) {
+          techContent.classList.remove('hidden');
+          techLabel.textContent = 'Technical Specifications Drawer [Collapse]';
+        } else {
+          techContent.classList.add('hidden');
+          techLabel.textContent = 'Technical Specifications Drawer [Expand]';
+        }
+      });
+
+      // Explainer Modal Handlers
+      const openExplainerBtn = document.getElementById('open-explainer-btn');
+      const explainerModal = document.getElementById('explainer-modal');
+      const closeExplainerBtn = document.getElementById('close-explainer-btn');
+      const closeExplainerBtn2 = document.getElementById('close-explainer-btn-2');
+
+      openExplainerBtn.addEventListener('click', () => {
+        explainerModal.classList.remove('hidden');
+      });
+
+      [closeExplainerBtn, closeExplainerBtn2].forEach(btn => {
+        btn.addEventListener('click', () => {
+          explainerModal.classList.add('hidden');
+        });
+      });
+
+      explainerModal.addEventListener('click', (e) => {
+        if (e.target === explainerModal) {
+          explainerModal.classList.add('hidden');
+        }
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-md shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]"><div class="w-full px-space-lg flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm text-center md:text-left"><span class="font-body-sm text-body-sm text-on-surface-variant">SAMVAYA Synoptic Network • © 2025 SAMVAYA Atmospheric Labs. Autonomous Meso-Scale Weather Diagnostics.</span></div><div class="flex items-center gap-space-md flex-wrap justify-center"><span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">DATA PRECISION: GROUND SYNOP L4 • TELEMETRY ACTIVE • RUN #26081-SEP28</span></div></div></footer></body></html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed":"#ffdbca","surface-dim":"#e2d8d2","background":"#fff8f5","tertiary-fixed":"#ffdcc3","secondary-fixed-dim":"#c2cba1","surface-tint":"#9c4400","error":"#ba1a1a","surface-container":"#f6ece6","secondary-container":"#dce4b9","inverse-primary":"#ffb68e","on-secondary-container":"#5e6644","on-background":"#1f1b17","inverse-surface":"#342f2b","on-error-container":"#93000a","on-secondary-fixed":"#181e04","surface-container-highest":"#eae1da","on-tertiary":"#ffffff","error-container":"#ffdad6","on-tertiary-fixed":"#2f1500","tertiary":"#8d4b00","secondary-fixed":"#dee7bc","tertiary-container":"#b15f00","surface-container-lowest":"#ffffff","on-primary-fixed":"#331200","surface":"#fff8f5","on-tertiary-container":"#fffbff","surface-bright":"#fff8f5","primary-container":"#ba5814","primary":"#984300","surface-container-low":"#fcf2eb","on-primary-fixed-variant":"#773300","outline-variant":"#ddc1b3","on-primary-container":"#fffbff","on-primary":"#ffffff","on-secondary-fixed-variant":"#424a2a","on-surface-variant":"#564339","on-tertiary-fixed-variant":"#6e3900","primary-fixed-dim":"#ffb68e","outline":"#897267","secondary":"#5a6240","tertiary-fixed-dim":"#ffb77d","inverse-on-surface":"#f9efe8","on-surface":"#1f1b17","on-secondary":"#ffffff","on-error":"#ffffff","surface-variant":"#eae1da","surface-container-high":"#f0e6e0"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-md":"1rem","margin-mobile":"1rem","space-sm":"0.5rem","margin":"2.5rem","gutter":"1.5rem","gutter-mobile":"0.75rem","space-xs":"0.25rem","space-lg":"1.5rem","space-xl":"2.5rem"},fontFamily:{"display-lg":["Plus Jakarta Sans"],"label-caps":["Inter"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"body-lg":["Inter"],"body-md":["Inter"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Inter"],"headline-lg-mobile":["Plus Jakarta Sans"],"telemetry-num":["Inter"]},fontSize:{"display-lg":["52px",{"lineHeight":"60px","letterSpacing":"-0.03em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"600"}],"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"telemetry-num":["15px",{"lineHeight":"20px","letterSpacing":"-0.01em","fontWeight":"500"}]}}}}</script>
+  <!-- CesiumJS 1.124 Atmospheric 3D Engine -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+
+  <!-- Leaflet 2D Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- SAMVAYA Engine Assets -->
+  <script src="../globe-map-engine.js"></script>
+  <script src="../globe-runtime.js"></script>
+  <style>
+    .cesium-viewer-bottom, .cesium-widget-credits { display: none !important; }
+    .cesium-viewer { width: 100% !important; height: 100% !important; }
+    * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+    *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+  </style>
+
+</head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(74,53,37,0.06)]"><div class="h-20 w-full px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-[#984300] to-[#C25E1A] flex items-center justify-center text-white shadow-md shrink-0 mr-1">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+        <path d="M2 12h20"></path>
+      </svg>
+    </div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">SAMVAYA</span><span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-caps text-label-caps uppercase tracking-wider">SIH26081 • HYBRID AI-NWP</span></div><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Adaptive Atmospheric Forecast Engine</span></div></div></div><nav class="hidden xl:flex items-center gap-1 bg-surface-container-low p-1 rounded-xl shadow-[inset_0_1px_2px_rgba(43,30,22,0.05)]" data-active-classes="bg-primary-container text-on-primary-container rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_4px_12px_rgba(194,94,26,0.25)] font-medium"><a class="px-space-md py-1.5 rounded-lg text-primary font-bold hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="../cockpit.html">Cockpit</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="model_lab.html" data-path="forecast">Forecast</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="location_explorer.html" data-path="explore">Explore</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="extreme_weather.html" data-path="intelligence">Intelligence</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="forecast_replay.html" data-path="history">History</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="operations_status.html" data-path="operations">Operations</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="daily_briefing.html" data-path="briefing">Briefing</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container-high transition-all" href="comparison.html" data-path="compare">Compare</a><a aria-current="page" class="px-space-md py-1.5 transition-all bg-primary-container text-on-primary-container rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_4px_12px_rgba(194,94,26,0.25)] font-medium" href="temporal_intelligence.html" data-path="timeline">Timeline</a></nav><div class="flex items-center gap-space-md shrink-0"><div class="hidden md:flex items-center gap-space-xs px-space-md py-1 rounded-xl bg-surface-container shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_3px_rgba(43,30,22,0.04)]"><span class="material-symbols-outlined text-tertiary text-[18px]">pin_drop</span><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Synoptic Anchor</span><span class="font-body-sm text-body-sm text-on-surface font-medium">Mysuru, Karnataka</span></div></div><div class="hidden lg:flex items-center gap-space-xs px-space-md py-1 rounded-xl bg-surface-container shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_3px_rgba(43,30,22,0.04)]"><span class="h-2 w-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface font-semibold tracking-wider">L4 INGESTION ACTIVE</span></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="h-9 w-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><a href="settings.html" class="w-9 h-9 rounded-xl flex items-center justify-center bg-surface-container-high/80 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]" title="Settings"><span class="material-symbols-outlined text-[20px]">settings</span></a></div><a href="settings.html" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:opacity-90 transition-opacity" title="Control Center & Personalization"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></a></div></div></header><main class="w-full pt-32 bg-background flex-1"><div class="flex flex-col w-full">
+<!-- Dynamic Atmospheric Noise & Mist Layer -->
+<div class="relative w-full px-margin py-space-lg flex flex-col gap-space-xl">
+<!-- Top Sub-Bar & Synoptic Telemetry Breadcrumb -->
+<div class="w-full flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md p-space-md rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)]">
+<div class="flex flex-wrap items-center gap-space-md min-w-0">
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container-lowest shadow-[inset_0_1px_2px_rgba(43,30,22,0.04)]">
+<span class="material-symbols-outlined text-primary text-[20px]">explore</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Synoptic Anchor</span>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">Mysuru, Karnataka</span>
+</div>
+</div>
+<div class="hidden sm:flex flex-col border-l-0 pl-0">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Coordinates &amp; Topography</span>
+<span class="font-telemetry-num text-body-sm text-on-surface font-medium">12.2958° N, 76.6394° E • 770m MSL</span>
+</div>
+<div class="hidden md:flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Ephemeris &amp; Assimilation Cycle</span>
+<span class="font-telemetry-num text-body-sm text-on-surface font-medium">28 Sep 2026 • 06:00Z Valid Run</span>
+</div>
+</div>
+<!-- Prototype Scenario & Dynamic Temporal State Selector -->
+<div class="flex flex-wrap items-center gap-space-sm w-full xl:w-auto justify-start xl:justify-end">
+<div class="flex items-center bg-surface-container-low p-1 rounded-xl shadow-[inset_0_1px_2px_rgba(43,30,22,0.06)] overflow-x-auto max-w-full">
+<button class="scen-btn px-space-sm py-1 rounded-lg text-on-surface-variant font-label-caps text-label-caps uppercase transition-all hover:text-on-surface" id="btn-scen-A" onclick="setScenario('A')" type="button">State A: -12h Past</button>
+<button class="scen-btn px-space-sm py-1 rounded-lg bg-surface-container-lowest text-primary font-label-caps text-label-caps uppercase shadow-[0_2px_8px_rgba(74,53,37,0.08)] transition-all font-semibold" id="btn-scen-B" onclick="setScenario('B')" type="button">State B: NOW</button>
+<button class="scen-btn px-space-sm py-1 rounded-lg text-on-surface-variant font-label-caps text-label-caps uppercase transition-all hover:text-on-surface" id="btn-scen-C" onclick="setScenario('C')" type="button">State C: +24h Projection</button>
+<button class="scen-btn px-space-sm py-1 rounded-lg text-on-surface-variant font-label-caps text-label-caps uppercase transition-all hover:text-on-surface" id="btn-scen-D" onclick="setScenario('D')" type="button">State D: 20:00 Revision</button>
+<button class="scen-btn px-space-sm py-1 rounded-lg text-on-surface-variant font-label-caps text-label-caps uppercase transition-all hover:text-on-surface" id="btn-scen-E" onclick="setScenario('E')" type="button">State E: Disagreement</button>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-primary-container text-on-primary-container shadow-[0_4px_12px_rgba(186,88,20,0.22)] shrink-0">
+<span class="w-2.5 h-2.5 rounded-full bg-surface animate-ping"></span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider font-semibold" id="temporal-badge">NOW • 28 Sep 2026 • 22:00 IST</span>
+</div>
+</div>
+</div>
+<!-- Central Spatial Hero Deck (3D Earth Atmospheric Scene & Cockpit Overlay) -->
+<div class="relative w-full rounded-2xl bg-surface-container overflow-hidden shadow-[0_12px_32px_-4px_rgba(74,53,37,0.1),inset_0_1px_0_rgba(255,255,255,0.9)]">
+<!-- 3D ThreeJS Atmospheric Engine Canvas -->
+
+        <div id="globe_viewport_ANIMATION_57" class="w-full h-full relative overflow-hidden bg-[#040609] select-none" data-globe-container="true" data-lat="20.5937" data-lon="78.9629" data-alt="5200000" data-location-name="INDIA • ATMOSPHERIC DOMAIN">
+          <!-- 3D Cesium Viewport -->
+          <div id="globe_viewport_ANIMATION_57-cesium" class="w-full h-full absolute inset-0 z-0"></div>
+          
+          <!-- 2D Leaflet Viewport -->
+          <div id="globe_viewport_ANIMATION_57-leaflet" class="w-full h-full absolute inset-0 z-0" style="display: none;"></div>
+
+          <!-- 3D Globe / 2D Map Toggle Button -->
+          <div id="globe_viewport_ANIMATION_57-mode-pill" class="absolute top-4 left-4 z-40 flex items-center bg-[#0B111B]/95 backdrop-blur-2xl border border-[#C25E1A]/40 p-1 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6)] pointer-events-auto">
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_57', '3d')" id="globe_viewport_ANIMATION_57-toggle-3d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all bg-[#C25E1A] text-white shadow-md">
+              <span>🌐</span><span>3D GLOBE</span>
+            </button>
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_57', '2d')" id="globe_viewport_ANIMATION_57-toggle-2d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold transition-all text-slate-300 hover:text-white">
+              <span>🗺️</span><span>2D MAP</span>
+            </button>
+          </div>
+        </div>
+        
+<!-- Spatial HUD Layer: Top Floating Pill Indicators -->
+<div class="absolute top-4 left-4 right-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm pointer-events-none">
+<!-- Top-Left Ingestion Paradigm Chip -->
+<div class="pointer-events-auto flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface/90 backdrop-blur-md shadow-[0_4px_16px_rgba(43,30,22,0.12),inset_0_1px_0_rgba(255,255,255,0.8)]">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" id="hud-status-indicator"></span>
+<span class="font-label-caps text-label-caps text-on-surface font-semibold tracking-wider uppercase" id="hud-mode-text">NOW: Real-Time Synoptic Ingestion</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">• IMD AWS #43285 L4 Matrix</span>
+</div>
+<!-- Top-Right Synoptic Layer Field Selectors -->
+<div class="pointer-events-auto flex items-center gap-1 p-1 rounded-xl bg-surface/90 backdrop-blur-md shadow-[0_4px_16px_rgba(43,30,22,0.12),inset_0_1px_0_rgba(255,255,255,0.8)] overflow-x-auto max-w-full">
+<button class="px-3 py-1 rounded-lg bg-surface-container text-primary font-label-caps text-label-caps font-semibold shadow-sm" type="button">Temperature °C</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all" type="button">Precipitation mm</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all" type="button">Wind Streamlines</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all" type="button">Pressure hPa</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all" type="button">Confidence</button>
+<button class="px-3 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all" type="button">Extreme Risk</button>
+</div>
+</div>
+<!-- Spatial HUD Layer: Bottom Floating Telemetry Snapshot & Grid Topology -->
+<div class="absolute bottom-4 left-4 right-4 flex flex-col md:flex-row items-end md:items-end justify-between gap-space-md pointer-events-none">
+<!-- Bottom-Left Active Synoptic Snapshot Pod -->
+<div class="pointer-events-auto p-space-md rounded-2xl bg-surface/92 backdrop-blur-lg shadow-[0_8px_24px_rgba(43,30,22,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] max-w-md w-full">
+<div class="flex items-center justify-between pb-2 mb-2 bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">thermostat</span>
+<span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">Mysuru Ground Station Pod</span>
+</div>
+<span class="font-telemetry-num text-body-sm text-secondary font-medium">Valid T+00:00</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm mb-space-sm">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Air Temp</span>
+<div class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">28.1<span class="text-headline-sm font-normal text-on-surface-variant">°C</span></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Feels 29.4°C</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Rain Prob</span>
+<div class="font-headline-md text-headline-md text-primary font-bold tracking-tight">18<span class="text-headline-sm font-normal text-on-surface-variant">%</span></div>
+<span class="font-body-sm text-body-sm text-secondary">0.0 mm/hr</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Barometer</span>
+<div class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">1008.4</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">hPa • Steady</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-2 bg-surface-container-low px-space-sm py-1 rounded-xl">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-tertiary">air</span> 14 km/h WSW</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">filter_drama</span> Stratum 58%</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-secondary">water_drop</span> RH 72%</span>
+</div>
+</div>
+<!-- Bottom-Right Dispersion & Boundary Layer Badge -->
+<div class="pointer-events-auto flex flex-col items-end gap-1 p-space-sm rounded-xl bg-surface/90 backdrop-blur-md shadow-[0_4px_16px_rgba(43,30,22,0.1)]">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[16px]">grid_4x4</span>
+<span class="font-label-caps text-label-caps text-on-surface font-semibold uppercase">Deccan Lee Boundary Layer</span>
+</div>
+<span class="font-telemetry-num text-body-sm text-on-surface-variant">0.05° Quad-Mesh Grid Active • 5.5km Cell</span>
+</div>
+</div>
+</div>
+<!-- Master Continuous Temporal Scrubbing Timeline (Centerpiece Interactive Control) -->
+<div class="w-full p-space-lg rounded-2xl bg-surface-container shadow-[0_8px_24px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col gap-space-lg">
+<!-- Timeline Control Header & Transport Controls -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md pb-space-sm bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold tracking-widest">4D Chrono-Assimilation Console</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps">Continuous L4 Re-run</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight font-semibold mt-0.5">Atmospheric Time Machine &amp; Trajectory</h2>
+</div>
+<!-- Transport Buttons & Playback Speed -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center bg-surface-container-low p-1 rounded-xl shadow-inner">
+<button class="h-9 px-space-md rounded-lg bg-primary-container text-on-primary-container font-body-sm text-body-sm font-semibold flex items-center gap-1 shadow-md hover:bg-primary transition-all" id="btn-play" onclick="togglePlay()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="play-icon">play_arrow</span>
+<span id="play-text">Play Temporal Scrub</span>
+</button>
+<button class="h-9 px-space-sm rounded-lg hover:bg-surface-container-high text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1 transition-all" onclick="resetToNow()" title="Reset to NOW" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Reset NOW</span>
+</button>
+</div>
+<div class="flex items-center bg-surface-container-low p-1 rounded-xl shadow-inner text-on-surface-variant font-label-caps text-label-caps">
+<button class="speed-btn px-2 py-1 rounded text-on-surface-variant hover:text-on-surface" onclick="setSpeed(0.5)" type="button">0.5x</button>
+<button class="speed-btn px-2 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-sm" onclick="setSpeed(1.0)" type="button">1.0x</button>
+<button class="speed-btn px-2 py-1 rounded text-on-surface-variant hover:text-on-surface" onclick="setSpeed(2.0)" type="button">2.0x</button>
+<button class="speed-btn px-2 py-1 rounded text-on-surface-variant hover:text-on-surface" onclick="setSpeed(4.0)" type="button">4.0x</button>
+</div>
+</div>
+</div>
+<!-- Chronological Interactive Track Container -->
+<div class="relative w-full flex flex-col gap-space-sm pt-4">
+<!-- Top Horizon Sector Annotation Badges -->
+<div class="w-full grid grid-cols-12 text-center font-label-caps text-label-caps uppercase tracking-wider mb-1">
+<div class="col-span-5 flex items-center justify-start gap-1 text-secondary">
+<span class="material-symbols-outlined text-[15px]">history</span>
+<span>OBSERVED GROUND REALITY (-24h to -1h)</span>
+</div>
+<div class="col-span-2 flex items-center justify-center gap-1 text-primary font-bold">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>SYNOPTIC NOW</span>
+</div>
+<div class="col-span-5 flex items-center justify-end gap-1 text-tertiary">
+<span>FUSED ADAPTIVE PROJECTIONS (+1h to +72h)</span>
+<span class="material-symbols-outlined text-[15px]">auto_graph</span>
+</div>
+</div>
+<!-- The Physical Scrub Slider Track & Interactive Range Elements -->
+<div class="relative w-full py-4 flex items-center">
+<!-- Background Well Track -->
+<div class="relative w-full h-4 rounded-full bg-surface-container-highest shadow-[inset_0_2px_4px_rgba(43,30,22,0.08),inset_0_-1px_2px_rgba(255,255,255,0.8)] overflow-hidden flex">
+<!-- Past Zone Shading -->
+<div class="w-[42%] h-full bg-secondary-container/40"></div>
+<!-- NOW Divider Notch -->
+<div class="w-[2%] h-full bg-primary-container"></div>
+<!-- Forecast Zone Shading -->
+<div class="w-[56%] h-full bg-primary-fixed/30"></div>
+</div>
+<!-- HTML5 Range Input Overlay (invisible track, custom styled thumb) -->
+<input class="absolute inset-0 w-full opacity-0 cursor-ew-resize z-30" id="temporal-scrubber" max="72" min="-24" oninput="updateTimeScrub(this.value)" step="1" type="range" value="0"/>
+<!-- Dynamic Thumb Indicator (Positioned via JS) -->
+<div class="absolute left-[42%] -top-1 pointer-events-none transform -translate-x-1/2 flex flex-col items-center z-20 transition-all duration-75" id="scrub-thumb">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest shadow-[0_4px_12px_rgba(152,67,0,0.35),0_1px_3px_rgba(43,30,22,0.2)] flex items-center justify-center ring-4 ring-primary">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+</div>
+<div class="mt-1 px-2 py-0.5 rounded-md bg-inverse-surface text-inverse-on-surface font-telemetry-num text-body-sm shadow font-semibold" id="scrub-label">
+              NOW (22:00)
+            </div>
+</div>
+<!-- Notable Event Revision Nodes Directly on Track -->
+<!-- Event 1: Convective Onset at -4h (Past) -->
+<div class="absolute left-[35%] -top-6 transform -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10" onclick="updateTimeScrub(-4)">
+<span class="px-2 py-0.5 rounded bg-surface text-secondary shadow-sm font-label-caps text-label-caps font-semibold whitespace-nowrap hover:scale-105 transition-transform flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 18:00 Convective Onset
+            </span>
+<div class="w-0.5 h-3 bg-secondary/50 mt-0.5"></div>
+</div>
+<!-- Event 2: Forecast Revision at +2h -->
+<div class="absolute left-[47%] -bottom-7 transform -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10" onclick="updateTimeScrub(2)">
+<div class="w-0.5 h-3 bg-primary/50 mb-0.5"></div>
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed shadow-sm font-label-caps text-label-caps font-semibold whitespace-nowrap hover:scale-105 transition-transform flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">published_with_changes</span> 20:00 Revision +13% Rain
+            </span>
+</div>
+<!-- Event 3: Model Disagreement at +5h -->
+<div class="absolute left-[54%] -top-6 transform -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10" onclick="updateTimeScrub(5)">
+<span class="px-2 py-0.5 rounded bg-surface text-tertiary shadow-sm font-label-caps text-label-caps font-semibold whitespace-nowrap hover:scale-105 transition-transform flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">warning</span> 21:00 Model Spread Spike
+            </span>
+<div class="w-0.5 h-3 bg-tertiary/50 mt-0.5"></div>
+</div>
+</div>
+<!-- Major Tick Mark Grid -->
+<div class="w-full flex justify-between items-center px-1 text-on-surface-variant font-label-caps text-label-caps pt-2">
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(-24)">-24H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(-18)">-18H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(-12)">-12H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(-6)">-6H</span>
+<span class="cursor-pointer font-bold text-primary transition-colors scale-110" onclick="updateTimeScrub(0)">NOW</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(6)">+6H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(12)">+12H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(24)">+24H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(48)">+48H</span>
+<span class="cursor-pointer hover:text-primary transition-colors" onclick="updateTimeScrub(72)">+72H</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Section: Trajectory Evolution & Signature Revision Tracker -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left 7-Cols: 'Weather Evolution' Multi-Variable Trajectory Graph -->
+<div class="lg:col-span-7 p-space-lg rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm pb-space-sm bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Continuous Multi-Variable Trajectory</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Weather Parameter Evolution &amp; Uncertainty Envelope</h3>
+</div>
+<!-- Variable Metric Tabs -->
+<div class="flex items-center gap-1 bg-surface-container-low p-1 rounded-xl shadow-inner">
+<button class="px-2.5 py-1 rounded-lg bg-surface-container-lowest text-primary font-label-caps text-label-caps font-semibold shadow-sm" type="button">Temp (°C)</button>
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps" type="button">Precip (mm)</button>
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps" type="button">Wind</button>
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps" type="button">Barometer</button>
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps" type="button">Cloud</button>
+</div>
+</div>
+<!-- Informational Legend Bar -->
+<div class="flex flex-wrap items-center gap-space-md mt-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-secondary rounded-full"></span> Observed Ground AWS</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-0.5 bg-primary rounded-full"></span> SAMVAYA Fused Forecast</span>
+<span class="flex items-center gap-1.5"><span class="w-3 h-2 bg-primary/20 rounded"></span> ±1.4°C Uncertainty Spread</span>
+<span class="ml-auto text-primary font-telemetry-num">Node: 28.1°C at T=0</span>
+</div>
+</div>
+<!-- Custom Precision Vector Chart Rendering -->
+<div class="relative w-full h-64 bg-surface-container-lowest rounded-xl p-space-sm shadow-inner flex flex-col justify-end">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 700 220">
+<defs>
+<lineargradient id="uncertaintyGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#ba5814" stop-opacity="0.08"></stop>
+<stop offset="50%" stop-color="#ba5814" stop-opacity="0.22"></stop>
+<stop offset="100%" stop-color="#ba5814" stop-opacity="0.35"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines (Horizontal) -->
+<line class="text-outline-variant/30" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="700" y1="40" y2="40"></line>
+<line class="text-outline-variant/30" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="700" y1="90" y2="90"></line>
+<line class="text-outline-variant/30" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="700" y1="140" y2="140"></line>
+<line class="text-outline-variant/30" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1" x1="0" x2="700" y1="190" y2="190"></line>
+<!-- Vertical Separator Line at NOW (x=300) -->
+<line class="text-primary" stroke="currentColor" stroke-dasharray="4,2" stroke-width="1.5" x1="300" x2="300" y1="10" y2="210"></line>
+<!-- Uncertainty Spread Envelope (Forecast Future Only) -->
+<polygon fill="url(#uncertaintyGradient)" points="300,105 370,85 450,75 540,65 620,80 700,95 700,150 620,135 540,120 450,125 370,130 300,105"></polygon>
+<!-- Observed Solid Curve (Past x: 20 to 300) -->
+<path class="text-secondary" d="M 20 160 Q 90 175 160 145 T 230 115 T 300 105" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+<!-- Fused Forecast Dashed Line (Future x: 300 to 690) -->
+<path class="text-primary" d="M 300 105 Q 380 95 460 98 T 580 92 T 690 118" fill="none" stroke="currentColor" stroke-dasharray="6,4" stroke-linecap="round" stroke-width="3"></path>
+<!-- Individual Member Forecast Ghost Traces -->
+<path class="text-tertiary-container/40" d="M 300 105 Q 390 85 480 88 T 600 82 T 690 100" fill="none" stroke="currentColor" stroke-dasharray="2,2" stroke-width="1.5"></path>
+<path class="text-outline/40" d="M 300 105 Q 370 120 450 115 T 570 110 T 690 135" fill="none" stroke="currentColor" stroke-dasharray="2,2" stroke-width="1.5"></path>
+<!-- Current Node Intersect Pin -->
+<circle class="fill-primary" cx="300" cy="105" r="5"></circle>
+<circle class="stroke-primary fill-none animate-ping" cx="300" cy="105" r="9" stroke-width="1.5"></circle>
+</svg>
+<!-- Graph X-Axis Labels -->
+<div class="w-full flex justify-between text-on-surface-variant font-label-caps text-label-caps pt-2 border-t border-surface-container">
+<span>-24h (22:00)</span>
+<span>-12h (10:00)</span>
+<span class="text-primary font-bold">NOW (22:00 IST)</span>
+<span>+12h (10:00)</span>
+<span>+24h (22:00)</span>
+<span>+48h</span>
+<span>+72h</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
+<span>DECCAN STATION ID: #43285 • HIGH-RESOLUTION SOUNDING MATRIX</span>
+<span class="text-secondary font-semibold">PEAK DIURNAL AMPLITUDE: 31.8°C</span>
+</div>
+</div>
+<!-- Right 5-Cols: 'Forecast Revision Track: How The Forecast Changed' -->
+<div class="lg:col-span-5 p-space-lg rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between pb-space-sm bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">published_with_changes</span>
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Run-to-Run Convergence</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Forecast Revision Track</h3>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps">Target: 23:00 IST</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm">
+            Analysis of consecutive assimilation cycles showing how probability of evening precipitation adjusted as local convective triggers materialized.
+          </p>
+</div>
+<!-- Stepped Run-to-Run Cards -->
+<div class="flex flex-col gap-space-sm">
+<!-- Run 1: 12:00 Run -->
+<div class="p-space-sm rounded-xl bg-surface-container-lowest flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center font-telemetry-num text-body-sm font-bold text-on-surface-variant">
+                12Z
+              </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">12:00 Initial Ingestion</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Low Inflow Signature Detected</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-telemetry-num text-body-sm font-bold text-on-surface">38% Rain</span>
+<span class="block font-label-caps text-label-caps text-secondary">CAPE 820 J/kg</span>
+</div>
+</div>
+<!-- Run 2: 16:00 Run -->
+<div class="p-space-sm rounded-xl bg-surface-container-lowest flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center font-telemetry-num text-body-sm font-bold text-on-surface-variant">
+                16Z
+              </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">16:00 Intermediate Assimilation</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">ECMWF &amp; AIFS Boundary Alignment</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-telemetry-num text-body-sm font-bold text-on-surface">51% Rain</span>
+<span class="block font-label-caps text-label-caps text-primary">CAPE 1140 J/kg</span>
+</div>
+</div>
+<!-- Run 3: 20:00 Run (Current Primary) -->
+<div class="p-space-sm rounded-xl bg-primary-fixed/40 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-telemetry-num text-body-sm font-bold">
+                20Z
+              </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-body-sm text-body-sm text-on-surface font-bold">20:00 Current Valid Run</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">AWS Nilgiri Moisture Surge Assimilated</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-telemetry-num text-body-sm font-bold text-primary">64% Rain</span>
+<span class="block font-label-caps text-label-caps text-primary font-bold">CAPE 1480 J/kg</span>
+</div>
+</div>
+</div>
+<!-- Narrative Synthesis Well -->
+<div class="p-space-sm rounded-xl bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-label-caps text-label-caps uppercase text-primary font-bold block mb-1">Synthesizer Digest</span>
+          Latest forecast revision: Evening precipitation probability escalated (+26% over 8 hours) as newer model cycles integrated Nilgiri windward flux and validated higher CAPE signatures.
+        </div>
+<button class="w-full py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high text-primary font-label-caps text-label-caps uppercase tracking-wider font-semibold shadow-sm transition-all flex items-center justify-center gap-1" type="button">
+<span>View Forecast Replay Archive</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Triple Pod Matrix: Model Trajectory, Confidence Decay, and Extreme Weather Evolution -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Pod 1: 'Model Evolution & Weight Trajectory' -->
+<div class="p-space-lg rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between pb-2 bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Sub-Model Ensembles</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">Adaptive Weighting</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1">What Did The Models Think?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Dynamic weighting calibrated by empirical ground-truth error minimization.
+          </p>
+</div>
+<!-- Model Breakdown Bars -->
+<div class="flex flex-col gap-space-sm">
+<!-- ECMWF AIFS v1.2 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">ECMWF AIFS v1.2 (AI Neural)</span>
+<span class="font-telemetry-num text-primary font-bold">29.4°C • 41% Wt</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 41%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Shifted +9% from -12h (Lowered bias)</span>
+</div>
+<!-- ECMWF IFS -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">ECMWF IFS (9km NWP)</span>
+<span class="font-telemetry-num text-on-surface font-bold">28.7°C • 32% Wt</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 32%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Shifted -3% from -12h</span>
+</div>
+<!-- NOAA GFS -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">NOAA GFS (13km Global)</span>
+<span class="font-telemetry-num text-on-surface font-bold">30.2°C • 18% Wt</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 18%"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Shifted -3% due to inland warmth bias</span>
+</div>
+<!-- NOAA GEFS -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">NOAA GEFS (31 Ens)</span>
+<span class="font-telemetry-num text-on-surface font-bold">29.1°C • 9% Wt</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-outline rounded-full" style="width: 9%"></div>
+</div>
+</div>
+</div>
+<div class="pt-2 border-t border-surface-container-high flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SAMVAYA Fused</span>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">29.2°C <span class="text-body-sm font-normal text-secondary">(82% Conf)</span></div>
+</div>
+<button class="text-primary hover:text-primary-container font-label-caps text-label-caps uppercase font-bold flex items-center gap-0.5" type="button">
+            Why Weights Changed? <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Pod 2: 'Confidence Evolution & Disagreement Timeline' -->
+<div class="p-space-lg rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between pb-2 bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Reliability Horizon</span>
+<span class="font-label-caps text-label-caps text-primary font-bold">Uncertainty Metrics</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1">Confidence Decay Matrix</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Empirical confidence gracefully declines with extended temporal projection.
+          </p>
+</div>
+<!-- Confidence Decay Metric Table -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-bold">NOW (T=0)</span>
+<span class="font-telemetry-num text-body-sm text-secondary font-bold">82% High Confidence</span>
+<span class="w-16 h-2 rounded-full bg-secondary"></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-bold">+12H Ahead</span>
+<span class="font-telemetry-num text-body-sm text-secondary font-bold">79% Moderate</span>
+<span class="w-16 h-2 rounded-full bg-secondary/80"></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-bold">+24H Ahead</span>
+<span class="font-telemetry-num text-body-sm text-primary font-bold">74% Nominal</span>
+<span class="w-16 h-2 rounded-full bg-primary/70"></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-bold">+48H Ahead</span>
+<span class="font-telemetry-num text-body-sm text-tertiary font-bold">68% Divergent</span>
+<span class="w-16 h-2 rounded-full bg-tertiary/60"></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-bold">+72H Ahead</span>
+<span class="font-telemetry-num text-body-sm text-outline font-bold">61% Ensemble Spread</span>
+<span class="w-16 h-2 rounded-full bg-outline/50"></span>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-1 text-tertiary font-label-caps text-label-caps font-bold uppercase">
+<span class="material-symbols-outlined text-[16px]">sync_problem</span>
+<span>Disagreement Window Flagged</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+            21:00 IST: GFS models predict persistent storm cell, whereas ECMWF AIFS projects rapid dissipating stratiform.
+          </span>
+</div>
+</div>
+<!-- Pod 3: 'Extreme Weather Evolution & Forecast vs Reality Check' -->
+<div class="p-space-lg rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between pb-2 bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent bg-[length:100%_1px] bg-no-repeat bg-bottom">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Hindcast Validation</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">Hit Rate: 92%</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1">Extreme Risks &amp; Benchmark</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Historical validation against ground AWS paired with peak hazard triggers.
+          </p>
+</div>
+<!-- Risk Probability Indicators -->
+<div class="grid grid-cols-3 gap-space-sm">
+<div class="p-2 rounded-xl bg-surface-container-lowest text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Heavy Rain</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">64%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Peak 19:00</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-lowest text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Wind Shear</span>
+<span class="font-headline-sm text-headline-sm text-tertiary font-bold">31%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">28 km/h Gust</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-lowest text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block">Heat Stress</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">18%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Low Index</span>
+</div>
+</div>
+<!-- Forecast vs Reality Benchmark Pill -->
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-caps text-label-caps uppercase">
+<span class="text-on-surface-variant font-semibold">-6H Reality Check (16:00 IST)</span>
+<span class="text-secondary font-bold">IMD Verified</span>
+</div>
+<div class="flex items-center justify-between text-on-surface font-telemetry-num text-body-sm">
+<span>Forecast: <strong>27.8°C</strong></span>
+<span>Observed: <strong>28.1°C</strong></span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-caps text-label-caps">Δ +0.3°C</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>Continuous Brier Score: 0.12</span>
+<span class="text-primary font-semibold font-label-caps text-label-caps uppercase">Verification Lab →</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Deck: 'What Changed?' Dynamic Summary & 'Ask SAMVAYA' Natural Language Query -->
+<div class="w-full p-space-lg rounded-2xl bg-surface-container shadow-[0_4px_20px_-2px_rgba(74,53,37,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] flex flex-col xl:flex-row items-stretch justify-between gap-space-lg">
+<!-- Real-Time Delta Panel -->
+<div class="flex-1 flex flex-col justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">change_circle</span>
+<span class="font-label-caps text-label-caps uppercase text-primary font-bold tracking-wider">Dynamic Delta Summary</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-0.5">What Changed in This Revision?</h3>
+</div>
+<!-- Delta Chips Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm my-2">
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Temperature Δ</span>
+<span class="font-telemetry-num text-headline-sm text-on-surface font-bold">+1.2°C</span>
+<span class="font-body-sm text-body-sm text-secondary">Higher solar insolation</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Precipitation Δ</span>
+<span class="font-telemetry-num text-headline-sm text-primary font-bold">+13%</span>
+<span class="font-body-sm text-body-sm text-primary">Moisture flux trigger</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Wind Speed Δ</span>
+<span class="font-telemetry-num text-headline-sm text-on-surface font-bold">+4 km/h</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">WSW gust surge</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Confidence Δ</span>
+<span class="font-telemetry-num text-headline-sm text-tertiary font-bold">-5%</span>
+<span class="font-body-sm text-body-sm text-tertiary">Convective volatility</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Assimilation cycle 20:00 captured sudden localized orographic uplift along the Chamundi foothills, escalating convective available potential energy.
+        </p>
+</div>
+<!-- Natural Language Query & Quick Deep Links -->
+<div class="flex-1 flex flex-col justify-between gap-space-sm xl:border-l-0 xl:pl-0">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-secondary font-bold tracking-wider">Natural Language Ingestion</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-0.5">Ask SAMVAYA Engine</h3>
+</div>
+<!-- Suggested Prompt Chips -->
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm shadow-sm transition-all flex items-center gap-1" onclick="setQuery('Why did the forecast change at 20:00?')" type="button">
+<span class="material-symbols-outlined text-[15px] text-primary">help_outline</span>
+<span>Why did the forecast change at 20:00?</span>
+</button>
+<button class="px-3 py-1 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm shadow-sm transition-all flex items-center gap-1" onclick="setQuery('Which models diverged on evening rain?')" type="button">
+<span class="material-symbols-outlined text-[15px] text-primary">call_split</span>
+<span>Which models diverged on evening rain?</span>
+</button>
+<button class="px-3 py-1 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm shadow-sm transition-all flex items-center gap-1" onclick="setQuery('How accurate was the 12:00 run for Mysuru?')" type="button">
+<span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+<span>How accurate was the 12:00 run for Mysuru?</span>
+</button>
+</div>
+<!-- Interactive Search Well -->
+<div class="relative w-full flex items-center">
+<input class="w-full px-space-md py-2.5 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="nl-query-input" placeholder="Query synoptic trajectories, hindcast bias, or physics divergence..." type="text"/>
+<button class="absolute right-2 px-space-sm py-1 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary font-label-caps text-label-caps uppercase font-semibold transition-all" type="button">
+            Inquire
+          </button>
+</div>
+<!-- Quick Deep Navigation Links -->
+<div class="flex items-center gap-space-md pt-2 text-on-surface-variant font-label-caps text-label-caps uppercase">
+<a class="hover:text-primary transition-colors" href="#">Forecast Intelligence</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Extreme Weather Center</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Verification Lab</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Transparency Center</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Dynamic Temporal Interactivity Script -->
+<script>
+    let isPlaying = false;
+    let playInterval = null;
+    let playSpeed = 1.0;
+
+    function updateTimeScrub(val) {
+      val = parseInt(val, 10);
+      const thumb = document.getElementById('scrub-thumb');
+      const label = document.getElementById('scrub-label');
+      const badge = document.getElementById('temporal-badge');
+      const hudText = document.getElementById('hud-mode-text');
+      const hudIndicator = document.getElementById('hud-status-indicator');
+
+      // Calculate percentage along -24 to +72 (span = 96)
+      const pct = ((val + 24) / 96) * 100;
+      if (thumb) {
+        thumb.style.left = `${pct}%`;
+      }
+
+      if (val < 0) {
+        const hr = 22 + val;
+        const displayHr = hr >= 0 ? hr : 24 + hr;
+        if (label) label.innerText = `${val}H (${displayHr}:00)`;
+        if (badge) badge.innerText = `OBSERVED • 28 Sep • ${displayHr}:00 IST`;
+        if (hudText) hudText.innerText = `OBSERVED: IMD AWS #43285 Ground Truth (${val}H)`;
+        if (hudIndicator) {
+          hudIndicator.className = 'w-2.5 h-2.5 rounded-full bg-secondary';
+        }
+      } else if (val === 0) {
+        if (label) label.innerText = 'NOW (22:00)';
+        if (badge) badge.innerText = 'NOW • 28 Sep 2026 • 22:00 IST';
+        if (hudText) hudText.innerText = 'NOW: Real-Time Synoptic Ingestion';
+        if (hudIndicator) {
+          hudIndicator.className = 'w-2.5 h-2.5 rounded-full bg-primary animate-pulse';
+        }
+      } else {
+        const hr = (22 + val) % 24;
+        if (label) label.innerText = `+${val}H (${hr}:00)`;
+        if (badge) badge.innerText = `FORECAST • 29 Sep • +${val}H Ahead`;
+        if (hudText) hudText.innerText = `FORECAST: Adaptive Gated Physics (+${val}H)`;
+        if (hudIndicator) {
+          hudIndicator.className = 'w-2.5 h-2.5 rounded-full bg-tertiary';
+        }
+      }
+    }
+
+    function togglePlay() {
+      const scrubber = document.getElementById('temporal-scrubber');
+      const btn = document.getElementById('btn-play');
+      const icon = document.getElementById('play-icon');
+      const txt = document.getElementById('play-text');
+
+      isPlaying = !isPlaying;
+
+      if (isPlaying) {
+        if (icon) icon.innerText = 'pause';
+        if (txt) txt.innerText = 'Pause Scrub';
+        playInterval = setInterval(() => {
+          let curr = parseInt(scrubber.value, 10);
+          if (curr >= 72) {
+            curr = -24;
+          } else {
+            curr += 1;
+          }
+          scrubber.value = curr;
+          updateTimeScrub(curr);
+        }, 1000 / playSpeed);
+      } else {
+        if (icon) icon.innerText = 'play_arrow';
+        if (txt) txt.innerText = 'Play Temporal Scrub';
+        clearInterval(playInterval);
+      }
+    }
+
+    function resetToNow() {
+      const scrubber = document.getElementById('temporal-scrubber');
+      if (scrubber) {
+        scrubber.value = 0;
+        updateTimeScrub(0);
+      }
+      if (isPlaying) {
+        togglePlay();
+      }
+    }
+
+    function setSpeed(speed) {
+      playSpeed = speed;
+      document.querySelectorAll('.speed-btn').forEach(btn => {
+        btn.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-bold', 'shadow-sm');
+        btn.classList.add('text-on-surface-variant');
+      });
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('bg-surface-container-lowest', 'text-primary', 'font-bold', 'shadow-sm');
+        event.currentTarget.classList.remove('text-on-surface-variant');
+      }
+      if (isPlaying) {
+        clearInterval(playInterval);
+        playInterval = setInterval(() => {
+          const scrubber = document.getElementById('temporal-scrubber');
+          let curr = parseInt(scrubber.value, 10);
+          if (curr >= 72) {
+            curr = -24;
+          } else {
+            curr += 1;
+          }
+          scrubber.value = curr;
+          updateTimeScrub(curr);
+        }, 1000 / playSpeed);
+      }
+    }
+
+    function setScenario(scen) {
+      document.querySelectorAll('.scen-btn').forEach(btn => {
+        btn.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-[0_2px_8px_rgba(74,53,37,0.08)]');
+        btn.classList.add('text-on-surface-variant');
+      });
+      const targetBtn = document.getElementById(`btn-scen-${scen}`);
+      if (targetBtn) {
+        targetBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-semibold', 'shadow-[0_2px_8px_rgba(74,53,37,0.08)]');
+        targetBtn.classList.remove('text-on-surface-variant');
+      }
+
+      const scrubber = document.getElementById('temporal-scrubber');
+      if (!scrubber) return;
+
+      if (scen === 'A') {
+        scrubber.value = -12;
+        updateTimeScrub(-12);
+      } else if (scen === 'B') {
+        scrubber.value = 0;
+        updateTimeScrub(0);
+      } else if (scen === 'C') {
+        scrubber.value = 24;
+        updateTimeScrub(24);
+      } else if (scen === 'D') {
+        scrubber.value = 2;
+        updateTimeScrub(2);
+      } else if (scen === 'E') {
+        scrubber.value = 5;
+        updateTimeScrub(5);
+      }
+    }
+
+    function setQuery(text) {
+      const input = document.getElementById('nl-query-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(43,30,22,0.03)] z-40"><div class="h-12 w-full px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-[16px]">satellite_alt</span><span>EPHEMERIS: INSAT-3DR VIS/IR (T+00:04:12)</span></div><div class="hidden sm:flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant"><span class="material-symbols-outlined text-tertiary text-[16px]">sync</span><span>NWP CYCLE: 06:00Z RUN SYNCED</span></div><div class="hidden md:flex items-center gap-space-xs font-telemetry-num text-body-sm text-on-surface"><span class="text-on-surface-variant font-label-caps text-label-caps">UTC:</span><span>11:42:08 UTC</span></div></div><div class="flex items-center gap-space-md"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">© 2025 SAMVAYA METEOROLOGICAL INTELLIGENCE</span><span class="hidden lg:inline font-label-caps text-label-caps text-on-surface-variant">• SOVEREIGN ATMOSPHERIC STACK</span></div></div></footer></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+</style>
+
+  <!-- CesiumJS 1.124 Atmospheric 3D Engine -->
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.124/Build/Cesium/Cesium.js"></script>
+
+  <!-- Leaflet 2D Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- SAMVAYA Engine Assets -->
+  <script src="../globe-map-engine.js"></script>
+  <script src="../globe-runtime.js"></script>
+  <style>
+    .cesium-viewer-bottom, .cesium-widget-credits { display: none !important; }
+    .cesium-viewer { width: 100% !important; height: 100% !important; }
+    * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+    *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+  </style>
+
+</head>
+<body>
+
+        <div id="globe_viewport_ANIMATION_TRANSPARENCY" class="w-full h-full relative overflow-hidden bg-[#040609] select-none" data-globe-container="true" data-lat="20.5937" data-lon="78.9629" data-alt="5200000" data-location-name="INDIA • ATMOSPHERIC DOMAIN">
+          <!-- 3D Cesium Viewport -->
+          <div id="globe_viewport_ANIMATION_TRANSPARENCY-cesium" class="w-full h-full absolute inset-0 z-0"></div>
+          
+          <!-- 2D Leaflet Viewport -->
+          <div id="globe_viewport_ANIMATION_TRANSPARENCY-leaflet" class="w-full h-full absolute inset-0 z-0" style="display: none;"></div>
+
+          <!-- 3D Globe / 2D Map Toggle Button -->
+          <div id="globe_viewport_ANIMATION_TRANSPARENCY-mode-pill" class="absolute top-4 left-4 z-40 flex items-center bg-[#0B111B]/95 backdrop-blur-2xl border border-[#C25E1A]/40 p-1 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6)] pointer-events-auto">
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_TRANSPARENCY', '3d')" id="globe_viewport_ANIMATION_TRANSPARENCY-toggle-3d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all bg-[#C25E1A] text-white shadow-md">
+              <span>🌐</span><span>3D GLOBE</span>
+            </button>
+            <button onclick="window.toggleGlobeEngineMode('globe_viewport_ANIMATION_TRANSPARENCY', '2d')" id="globe_viewport_ANIMATION_TRANSPARENCY-toggle-2d" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold transition-all text-slate-300 hover:text-white">
+              <span>🗺️</span><span>2D MAP</span>
+            </button>
+          </div>
+        </div>
+        
+</body>
+</html>

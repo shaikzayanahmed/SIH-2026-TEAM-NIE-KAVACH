@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_63 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_63" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_63');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  // SAMVAYA — Clear / Sunny Atmospheric State: 3D Solar Illumination Globe
+// Features: Interactive Three.js Earth with dynamic diurnal solar lighting, Rayleigh golden rim scattering,
+// solar elevation tracking (Morning / Midday / Sunset), sparse micro-dust motes, and Mysuru synoptic anchor.
+// Exposes public window API for bidirectional solar cycle & transition simulation.
+
+const container = document.getElementById('threejs-container-ANIMATION_SUNNY') || document.querySelector('threejs-scene') || document.body;
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
+camera.position.set(-0.35, 0.65, 11.2);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Warm solar scientific lighting matching SAMVAYA palette
+const ambientLight = new THREE.AmbientLight(0xfff5ea, 1.85);
+scene.add(ambientLight);
+
+// Primary Sun Directional Light (Dynamic Solar Elevation)
+const sunLight = new THREE.DirectionalLight(0xffecd2, 3.6);
+sunLight.position.set(18, 14, 16);
+scene.add(sunLight);
+
+// Subtle warm terrestrial back-fill
+const warmFill = new THREE.DirectionalLight(0xd97706, 1.25);
+warmFill.position.set(-16, -5, -8);
+scene.add(warmFill);
+
+// Main Planetary Earth Group
+const earthGroup = new THREE.Group();
+earthGroup.position.set(-0.1, -0.05, 0);
+scene.add(earthGroup);
+
+// Canvas procedural texture for Earth under Clear High Insolation
+const canvas = document.createElement('canvas');
+canvas.width = 2048;
+canvas.height = 1024;
+const ctx = canvas.getContext('2d');
+
+function toCanvasX(lon) { return ((lon + 180) / 360) * 2048; }
+function toCanvasY(lat) { return ((90 - lat) / 180) * 1024; }
+
+let currentSolarPhase = 'midday'; // 'morning', 'midday', 'sunset', 'twilight'
+let currentSolarIntensity = 'balanced'; // 'minimal', 'balanced', 'immersive'
+
+function drawSunnyEarth(phase) {
+  // Clear oceanic base with warm solar gradient
+  const oceanGrad = ctx.createLinearGradient(0, 0, 0, 1024);
+  if (phase === 'sunset') {
+    oceanGrad.addColorStop(0, '#0a0d14');
+    oceanGrad.addColorStop(0.5, '#181b24');
+    oceanGrad.addColorStop(1, '#0c0f16');
+  } else if (phase === 'morning') {
+    oceanGrad.addColorStop(0, '#08101a');
+    oceanGrad.addColorStop(0.5, '#122232');
+    oceanGrad.addColorStop(1, '#08101a');
+  } else {
+    // Midday brilliant clear deep waters
+    oceanGrad.addColorStop(0, '#09131f');
+    oceanGrad.addColorStop(0.5, '#142538');
+    oceanGrad.addColorStop(1, '#09131f');
+  }
+  ctx.fillStyle = oceanGrad;
+  ctx.fillRect(0, 0, 2048, 1024);
+
+  // Continental landmasses (Warm terracotta-ochre under bright sun)
+  ctx.fillStyle = (phase === 'sunset') ? '#422818' : '#3d2e20';
+
+  // Indian Subcontinent & South Asia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(68), toCanvasY(24));
+  ctx.lineTo(toCanvasX(73), toCanvasY(35));
+  ctx.lineTo(toCanvasX(80), toCanvasY(33));
+  ctx.lineTo(toCanvasX(92), toCanvasY(27));
+  ctx.lineTo(toCanvasX(91), toCanvasY(20));
+  ctx.lineTo(toCanvasX(82), toCanvasY(13));
+  ctx.lineTo(toCanvasX(77.5), toCanvasY(8));
+  ctx.lineTo(toCanvasX(72.5), toCanvasY(16));
+  ctx.lineTo(toCanvasX(68), toCanvasY(24));
+  ctx.closePath();
+  ctx.fill();
+
+  // Highlight India (Golden Terracotta Bedrock under solar flux)
+  ctx.fillStyle = (phase === 'sunset') ? '#8e3f16' : (phase === 'morning') ? '#7d3f18' : '#884319';
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(70), toCanvasY(23));
+  ctx.lineTo(toCanvasX(74), toCanvasY(32));
+  ctx.lineTo(toCanvasX(86), toCanvasY(27));
+  ctx.lineTo(toCanvasX(80), toCanvasY(14));
+  ctx.lineTo(toCanvasX(77.5), toCanvasY(9));
+  ctx.lineTo(toCanvasX(74), toCanvasY(17));
+  ctx.closePath();
+  ctx.fill();
+
+  // Sri Lanka
+  ctx.beginPath();
+  ctx.arc(toCanvasX(80.5), toCanvasY(7.5), 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Arabian Peninsula
+  ctx.fillStyle = '#4c3725';
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(35), toCanvasY(32));
+  ctx.lineTo(toCanvasX(55), toCanvasY(31));
+  ctx.lineTo(toCanvasX(60), toCanvasY(24));
+  ctx.lineTo(toCanvasX(54), toCanvasY(15));
+  ctx.lineTo(toCanvasX(44), toCanvasY(12));
+  ctx.lineTo(toCanvasX(42), toCanvasY(25));
+  ctx.closePath();
+  ctx.fill();
+
+  // Africa
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(12), toCanvasY(36));
+  ctx.lineTo(toCanvasX(32), toCanvasY(32));
+  ctx.lineTo(toCanvasX(51), toCanvasY(12));
+  ctx.lineTo(toCanvasX(42), toCanvasY(-10));
+  ctx.lineTo(toCanvasX(30), toCanvasY(-34));
+  ctx.lineTo(toCanvasX(17), toCanvasY(-34));
+  ctx.lineTo(toCanvasX(8), toCanvasY(4));
+  ctx.lineTo(toCanvasX(-16), toCanvasY(12));
+  ctx.lineTo(toCanvasX(0), toCanvasY(35));
+  ctx.closePath();
+  ctx.fill();
+
+  // Eurasia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(60), toCanvasY(35));
+  ctx.lineTo(toCanvasX(125), toCanvasY(42));
+  ctx.lineTo(toCanvasX(145), toCanvasY(65));
+  ctx.lineTo(toCanvasX(55), toCanvasY(68));
+  ctx.lineTo(toCanvasX(-8), toCanvasY(58));
+  ctx.lineTo(toCanvasX(12), toCanvasY(45));
+  ctx.closePath();
+  ctx.fill();
+
+  // Southeast Asia & Australia
+  ctx.beginPath();
+  ctx.moveTo(toCanvasX(96), toCanvasY(20));
+  ctx.lineTo(toCanvasX(108), toCanvasY(11));
+  ctx.lineTo(toCanvasX(102), toCanvasY(1));
+  ctx.lineTo(toCanvasX(98), toCanvasY(10));
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.ellipse(toCanvasX(134), toCanvasY(-25), 115, 78, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Atmospheric Insolation footprint centered over Mysuru & Deccan
+  const fX = toCanvasX(76.6394); // Mysuru Lon
+  const fY = toCanvasY(12.2958); // Mysuru Lat
+
+  // Subtle warm solar radiation envelope
+  const rad = (phase === 'sunset') ? 260 : 210;
+  const sGrad = ctx.createRadialGradient(fX, fY, 15, fX, fY, rad);
+  if (phase === 'sunset') {
+    sGrad.addColorStop(0, 'rgba(234, 88, 12, 0.65)'); // Deep amber terracotta
+    sGrad.addColorStop(0.5, 'rgba(180, 83, 9, 0.25)');
+    sGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  } else if (phase === 'morning') {
+    sGrad.addColorStop(0, 'rgba(245, 158, 11, 0.50)'); // Soft morning golden amber
+    sGrad.addColorStop(0.5, 'rgba(217, 119, 6, 0.20)');
+    sGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  } else {
+    // Midday crisp solar flux
+    sGrad.addColorStop(0, 'rgba(217, 119, 6, 0.55)');
+    sGrad.addColorStop(0.5, 'rgba(245, 158, 11, 0.22)');
+    sGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  }
+  ctx.fillStyle = sGrad;
+  ctx.beginPath();
+  ctx.arc(fX, fY, rad, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Stable consensus ring around Mysuru Anchor
+  ctx.strokeStyle = (phase === 'sunset') ? 'rgba(249, 115, 22, 0.75)' : 'rgba(217, 119, 6, 0.65)';
+  ctx.lineWidth = 1.8;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.arc(fX, fY, 80, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Coordinate grid lines (delicate white)
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.lineWidth = 1.1;
+  for (let lat = -80; lat <= 80; lat += 20) {
+    ctx.beginPath();
+    ctx.moveTo(0, toCanvasY(lat));
+    ctx.lineTo(2048, toCanvasY(lat));
+    ctx.stroke();
+  }
+  for (let lon = -180; lon <= 180; lon += 30) {
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(lon), 0);
+    ctx.lineTo(toCanvasX(lon), 1024);
+    ctx.stroke();
+  }
+}
+
+drawSunnyEarth(currentSolarPhase);
+const earthTexture = new THREE.CanvasTexture(canvas);
+earthTexture.wrapS = THREE.RepeatWrapping;
+
+// Globe Sphere Mesh
+const globeRadius = 4.65;
+const globeGeometry = new THREE.SphereGeometry(globeRadius, 64, 64);
+const globeMaterial = new THREE.MeshPhongMaterial({
+  map: earthTexture,
+  bumpScale: 0.06,
+  specular: new THREE.Color(0x3e4a5b),
+  shininess: 22,
+  emissive: new THREE.Color(0x1a120b),
+  emissiveIntensity: 0.20
+});
+const globeMesh = new THREE.Mesh(globeGeometry, globeMaterial);
+earthGroup.add(globeMesh);
+
+// Sparse, Translucent Cumulus Layer (Clear Sky = Extremely minimal clouds)
+const cloudCanvas = document.createElement('canvas');
+cloudCanvas.width = 1024;
+cloudCanvas.height = 512;
+const cCtx = cloudCanvas.getContext('2d');
+cCtx.fillStyle = 'rgba(0,0,0,0)';
+cCtx.fillRect(0, 0, 1024, 512);
+cCtx.fillStyle = 'rgba(255, 250, 242, 0.24)';
+// Only a few sparse fair-weather cumulus puffs
+for (let i = 0; i < 14; i++) {
+  const cx = Math.random() * 1024;
+  const cy = 120 + Math.random() * 260;
+  const rx = 25 + Math.random() * 60;
+  const ry = 6 + Math.random() * 16;
+  cCtx.beginPath();
+  cCtx.ellipse(cx, cy, rx, ry, (Math.random() - 0.5) * 0.3, 0, Math.PI * 2);
+  cCtx.fill();
+}
+const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
+const cloudGeo = new THREE.SphereGeometry(globeRadius + 0.08, 64, 64);
+const cloudMat = new THREE.MeshLambertMaterial({
+  map: cloudTexture,
+  transparent: true,
+  opacity: 0.32,
+  blending: THREE.NormalBlending
+});
+const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+earthGroup.add(cloudMesh);
+
+// Warm Rayleigh Golden Halo Shader
+const haloGeo = new THREE.SphereGeometry(globeRadius + 0.48, 48, 48);
+const haloMat = new THREE.ShaderMaterial({
+  vertexShader: `
+    varying vec3 vNormal;
+    void main() {
+      vNormal = normalize(normalMatrix * normal);
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    varying vec3 vNormal;
+    void main() {
+      float intensity = pow(0.68 - dot(vNormal, vec3(0, 0, 1.0)), 2.8);
+      // Soft golden-saffron atmospheric glow
+      vec3 atmosphericColor = mix(vec3(0.92, 0.58, 0.18), vec3(0.99, 0.92, 0.82), intensity * 0.75);
+      gl_FragColor = vec4(atmosphericColor, intensity * 0.85);
+    }
+  `,
+  blending: THREE.AdditiveBlending,
+  side: THREE.BackSide,
+  transparent: true
+});
+const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+earthGroup.add(haloMesh);
+
+// Synoptic Mysuru Anchor Pin (12.2958° N, 76.6394° E)
+function calculatePinPos(lat, lon, rOffset = 0.12) {
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+  const pinR = globeRadius + rOffset;
+  return new THREE.Vector3(
+    -pinR * Math.sin(phi) * Math.cos(theta),
+    pinR * Math.cos(phi),
+    pinR * Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+const pinsGroup = new THREE.Group();
+earthGroup.add(pinsGroup);
+
+const posMysuru = calculatePinPos(12.2958, 76.6394);
+const pGroup = new THREE.Group();
+pGroup.position.copy(posMysuru);
+
+// Core beacon point
+const cGeo = new THREE.SphereGeometry(0.13, 16, 16);
+const cMat = new THREE.MeshBasicMaterial({ color: 0xc25e1a });
+const cMesh = new THREE.Mesh(cGeo, cMat);
+pGroup.add(cMesh);
+
+// Inner pulsing solar ring
+const rGeo = new THREE.RingGeometry(0.18, 0.32, 32);
+const rMat = new THREE.MeshBasicMaterial({ color: 0xd97706, side: THREE.DoubleSide, transparent: true, opacity: 0.85 });
+const rMesh = new THREE.Mesh(rGeo, rMat);
+rMesh.lookAt(posMysuru.clone().normalize());
+pGroup.add(rMesh);
+
+// Outer solar aura ring
+const dGeo = new THREE.RingGeometry(0.55, 0.80, 48);
+const dMat = new THREE.MeshBasicMaterial({ color: 0xc25e1a, side: THREE.DoubleSide, transparent: true, opacity: 0.45 });
+const dMesh = new THREE.Mesh(dGeo, dMat);
+dMesh.lookAt(posMysuru.clone().normalize());
+pGroup.add(dMesh);
+
+pinsGroup.add(pGroup);
+
+// Initial Camera Orientation centered over South Asia
+earthGroup.rotation.y = -1.80;
+earthGroup.rotation.x = 0.20;
+
+// Interactive Drag Rotation
+let isDragging = false;
+let prevMouse = { x: 0, y: 0 };
+let targetRotY = earthGroup.rotation.y;
+let targetRotX = earthGroup.rotation.x;
+
+function onPointerDown(e) {
+  isDragging = true;
+  prevMouse = { x: e.clientX || (e.touches && e.touches[0].clientX), y: e.clientY || (e.touches && e.touches[0].clientY) };
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return;
+  const x = e.clientX || (e.touches && e.touches[0].clientX);
+  const y = e.clientY || (e.touches && e.touches[0].clientY);
+  const dx = x - prevMouse.x;
+  const dy = y - prevMouse.y;
+  targetRotY += dx * 0.005;
+  targetRotX += dy * 0.005;
+  targetRotX = Math.max(-0.85, Math.min(0.85, targetRotX));
+  prevMouse = { x, y };
+}
+
+function onPointerUp() { isDragging = false; }
+
+window.addEventListener('mousedown', onPointerDown);
+window.addEventListener('mousemove', onPointerMove);
+window.addEventListener('mouseup', onPointerUp);
+window.addEventListener('touchstart', onPointerDown, { passive: true });
+window.addEventListener('touchmove', onPointerMove, { passive: true });
+window.addEventListener('touchend', onPointerUp);
+
+// Public API hook for daytime progression & transition testing
+window.samvayaSetSolarPhase = function(phase) {
+  currentSolarPhase = phase;
+  drawSunnyEarth(currentSolarPhase);
+  earthTexture.needsUpdate = true;
+
+  if (phase === 'morning') {
+    sunLight.position.set(22, 8, 12);
+    sunLight.intensity = 2.9;
+    ambientLight.color.setHex(0xfff6ec);
+  } else if (phase === 'sunset') {
+    sunLight.position.set(12, 4, 18);
+    sunLight.intensity = 3.8;
+    sunLight.color.setHex(0xff9944);
+    ambientLight.color.setHex(0xfaece0);
+  } else {
+    // Midday
+    sunLight.position.set(18, 14, 16);
+    sunLight.intensity = 3.6;
+    sunLight.color.setHex(0xffecd2);
+    ambientLight.color.setHex(0xfff5ea);
+  }
+};
+
+window.samvayaSetSolarIntensity = function(lvl) {
+  currentSolarIntensity = lvl;
+  if (lvl === 'minimal') {
+    cloudMat.opacity = 0.15;
+    haloMesh.visible = false;
+  } else if (lvl === 'balanced') {
+    cloudMat.opacity = 0.32;
+    haloMesh.visible = true;
+  } else {
+    cloudMat.opacity = 0.45;
+    haloMesh.visible = true;
+  }
+};
+
+function handleResize() {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', handleResize);
+
+let clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  earthGroup.rotation.y += (targetRotY - earthGroup.rotation.y) * 0.08;
+  earthGroup.rotation.x += (targetRotX - earthGroup.rotation.x) * 0.08;
+
+  // Extremely slow peaceful atmospheric cloud drift
+  cloudMesh.rotation.y += 0.0004;
+
+  // Gentle solar pulse on the Mysuru anchor
+  const s = 1.0 + Math.sin(t * 2.4) * 0.18;
+  rMesh.scale.set(s, s, s);
+  const dS = 1.0 + Math.sin(t * 1.5) * 0.10;
+  dMesh.scale.set(dS, dS, dS);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_63 -->
+</body>
+</html>

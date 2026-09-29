@@ -1,6 +1,6 @@
 {
   "name": "bird-view-platform",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Bird View - Hybrid AI-NWP Meteorological Forecast Fusion Platform | SIH 2026 TEAM NIE KAVACH",
   "type": "module",
   "scripts": {
